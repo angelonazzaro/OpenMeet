@@ -1,3 +1,7 @@
+# OS hidden files
+.*
+!/.gitignore
+
 # Built application files
 *.apk
 *.aar
