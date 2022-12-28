@@ -1,6 +1,7 @@
 package com.openmeet
 
 import Meeter
+import Report
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,10 +12,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.Button
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.openmeet.ui.theme.OpenMeetTheme
 
@@ -31,7 +28,9 @@ class MainActivity : ComponentActivity() {
                     //Greeting("Android | IOS")
                     val meeter = Meeter()
                     meeter.name = "Franceschino"
-                    MessageCard(Message("//Autore: Francesco Granozio", meeter.toString()))
+                    val segn = Report()
+                    segn.reason = "Non ha fatto nulla"
+                    MessageCard(Message("//Autore: Francesco Granozio", segn.toString()))
 
 
 
