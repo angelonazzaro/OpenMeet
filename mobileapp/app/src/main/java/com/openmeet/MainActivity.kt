@@ -1,5 +1,6 @@
 package com.openmeet
 
+import Meeter
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -28,7 +29,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     //Greeting("Android | IOS")
-                    MessageCard(Message("//Autore: Francesco Granozio", "Test bellissimo"))
+                    val meeter = Meeter()
+                    meeter.name = "Franceschino"
+                    MessageCard(Message("//Autore: Francesco Granozio", meeter.toString()))
+
+
+
                 }
             }
         }
