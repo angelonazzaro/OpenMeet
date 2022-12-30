@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/mid_purple</item>
+        <item name="colorSecondary">@color/magenta</item>
+        <item name="android:statusBarColor">@color/material_on_primary_emphasis_medium</item>
+
+    </style>
+</resources>
