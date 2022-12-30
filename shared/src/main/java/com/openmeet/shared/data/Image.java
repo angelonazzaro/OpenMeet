@@ -1,3 +1,5 @@
+package com.openmeet.shared.data;
+
 public class Image {
 
     private int id;

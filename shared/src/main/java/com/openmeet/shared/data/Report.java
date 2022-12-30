@@ -1,3 +1,5 @@
+package com.openmeet.shared.data;
+
 import java.sql.Timestamp;
 
 public class Report {
