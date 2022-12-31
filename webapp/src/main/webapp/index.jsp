@@ -28,7 +28,7 @@
                 <div class="card rounded py-md-3 py-lg-4 px-lg-4 px-xl-5">
                     <div class="card-body">
                         <h1 class="py-2 pb-lg-3 mb-3">Sign in to OpenMeet</h1>
-                        <form action="#">
+                        <form action="" method="POST">
                             <div class="row pb-3 mb-4">
                                 <div class="input-group input-group-lg">
                                     <span class="input-group-text" id="email-addon"><i class="fa-solid fa-envelope"></i></span>
@@ -61,6 +61,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 <!-- fontawesome kit v6 -->
 <script src="https://kit.fontawesome.com/bedafbbe2b.js" crossorigin="anonymous"></script>
+<!-- main script -->
+<script src="<%= request.getContextPath() %>/assets/js/main.js"></script>
 <!-- custom js -->
 <script>
     const passwordInputElement = $("input[type='password']");
@@ -87,6 +89,18 @@
          */
         eyeIcon.removeClass(eyeIcon.attr("class").split(" ")[1]).addClass(iconClass);
     });
+
+    $("form").on('submit', function (e) {
+        e.preventDefault(); // stop form from submitting
+
+        $.ajax({
+            url: getBaseURL() + "login",
+            type: "POST",
+            data: $(this).serialize()
+        }).done((response) => {
+            console.log(response);
+        });
+    })
 </script>
 </body>
 </html>
