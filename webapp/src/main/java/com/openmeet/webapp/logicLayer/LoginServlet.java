@@ -1,11 +1,11 @@
-package com.openmeet.openmeetwebapp.logicLayer;
+package com.openmeet.webapp.logicLayer;
 
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,28 +38,35 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         Gson gson = new Gson();
         PrintWriter out = resp.getWriter();
+        Map<String, String> response = new HashMap();
 
-        System.out.println(email == null);
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
 
         // Check if all required parameters are initialized, if not send back an error message
-        if (email == null || password == null) {
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("UTF-8");
+        if (email == null || password == null || email.length() == 0 || password.length() == 0) {
 
-            Map<String, String> response = new HashMap();
-            response.put("type", "error");
-            response.put("msg", "One or more required fields are missing.");
+            response.put("status", "error");
+            response.put("message", "One or more required fields are missing.");
 
-            // Serialization: json -> {"type: "error", "msg": "One or more required fields are missing."}
+            // Serialization: json -> {"status: "error", "message": "One or more required fields are missing."}
             out.write(gson.toJson(response));
             out.flush();
             return;
         }
 
-        resp.sendRedirect(req.getContextPath() + "/");
+        // DAO logic here
+
+        // Response
+        response.put("status", "success");
+        response.put("redirectTo", req.getContextPath() + "/");
+        out.write(gson.toJson(response));
+        out.flush();
     }
 
     private boolean isLogged(HttpServletRequest req) {
-        return req.getSession(false) != null;
+        HttpSession currentUserSession = req.getSession(false);
+
+        return currentUserSession != null && currentUserSession.getAttribute("user") != null;
     }
 }

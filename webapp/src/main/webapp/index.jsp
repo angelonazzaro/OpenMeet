@@ -28,24 +28,33 @@
                 <div class="card rounded py-md-3 py-lg-4 px-lg-4 px-xl-5">
                     <div class="card-body">
                         <h1 class="py-2 pb-lg-3 mb-3">Sign in to OpenMeet</h1>
-                        <form action="" method="POST">
+                        <form class="needs-validation" novalidate>
                             <div class="row pb-3 mb-4">
-                                <div class="input-group input-group-lg">
+                                <div class="input-group input-group-lg has-validation">
                                     <span class="input-group-text" id="email-addon"><i class="fa-solid fa-envelope"></i></span>
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" aria-label="Email address" aria-describedby="email-addon"/>
+                                    <input type="email" name="email" id="email" required class="form-control" placeholder="Email address" aria-label="Email address" aria-describedby="email-addon"/>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid email address.
+                                    </div>
                                 </div>
                             </div>
                             <div class="row pb-3 mb-4">
-                                <div class="input-group input-group-lg">
+                                <div class="input-group input-group-lg has-validation">
                                     <span class="input-group-text" id="password-addon"><i class="fa-solid fa-lock"></i></span>
-                                    <input type="password" name="password" id="password" style="border-right: 0;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon"/>
+                                    <input type="password" name="password" id="password" required style="border-right: 0;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon"/>
                                     <span class="input-group-text" id="toggle-pwd"><i class="fa-solid fa-eye"></i></span>
+                                    <div class="valid-feedback"></div>
+                                    <div class="invalid-feedback">
+                                        Please provide a password.
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-check pb-3 mb-4">
                                 <input type="checkbox" name="keep-me-signed-in" id="keep-me-signed-in-checkbox" class="form-check-input">
                                 <label for="keep-me-signed-in-checkbox" class="form-check-label">Keep in me signed in</label>
                             </div>
+                            <p id="error-msg" class="text-danger d-none"></p>
                             <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">Sign in</button>
                         </form>
                     </div>
@@ -90,15 +99,32 @@
         eyeIcon.removeClass(eyeIcon.attr("class").split(" ")[1]).addClass(iconClass);
     });
 
+    const errorMsgParagraph = $("#error-msg");
+    const submitBtn = $("button[type='submit']");
+
     $("form").on('submit', function (e) {
         e.preventDefault(); // stop form from submitting
+
+        // disable submit button so the user can't submit the form multiple times while the request is being processed
+        submitBtn.attr("disabled", true);
 
         $.ajax({
             url: getBaseURL() + "login",
             type: "POST",
             data: $(this).serialize()
         }).done((response) => {
-            console.log(response);
+
+            if (response.status === "error") {
+                errorMsgParagraph.show().text(response.message);
+            } else {
+                // redirect to dashboard
+                window.location.assign(response.redirectTo);
+            }
+
+        }).fail(() => {
+            errorMsgParagraph.show().text("An error occurred. Please try again later.");
+        }).always(() => {
+            submitBtn.attr("disabled", false); // restore submit button
         });
     })
 </script>

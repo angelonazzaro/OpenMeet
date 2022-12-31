@@ -1,7 +1,6 @@
-package com.openmeet.openmeetwebapp.logicLayer;
+package com.openmeet.webapp.logicLayer;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +17,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession currentUserSession = req.getSession(false);
 
         // Destroy current user session if not null
-        if (currentUserSession != null)
+        if (currentUserSession != null && currentUserSession.getAttribute("user") != null)
             currentUserSession.invalidate();
 
         // Redirect to login page

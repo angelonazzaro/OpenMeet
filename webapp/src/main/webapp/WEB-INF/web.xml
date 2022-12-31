@@ -7,7 +7,7 @@
     <!-- Login Servlet Mapping -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.openmeet.openmeetwebapp.logicLayer.LoginServlet</servlet-class>
+        <servlet-class>com.openmeet.webapp.logicLayer.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -18,7 +18,7 @@
     <!-- Logout Servlet Mapping -->
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.openmeet.openmeetwebapp.logicLayer.LogoutServlet</servlet-class>
+        <servlet-class>com.openmeet.webapp.logicLayer.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
