@@ -19,7 +19,7 @@ public interface DAO<T> {
 
     List<T> doRetrieveByCondition(String condition) throws SQLException;
 
-    T doRetrieveByKey(String... key) throws SQLException, InvalidPrimaryKeyException;
+    T doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException;
 
     List<T> doRetrieveAll() throws SQLException;
 

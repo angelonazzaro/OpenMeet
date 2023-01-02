@@ -11,4 +11,9 @@ public class InvalidPrimaryKeyException extends RuntimeException {
 
         super(message);
     }
+
+    public InvalidPrimaryKeyException(String message, String key) {
+
+        super(message + ": " + key);
+    }
 }
