@@ -1,9 +1,13 @@
-package com.openmeet.shared.data;
+package com.openmeet.shared.data.meeter;
+
+import com.openmeet.shared.data.storage.IEntity;
 
 import java.util.Date;
+import java.util.HashMap;
 
-public class Meeter {
+public class Meeter implements IEntity {
 
+    public static final String MEETER = "Meeter";
     private int id;
     private String email;
     private String name;
@@ -17,9 +21,23 @@ public class Meeter {
 
     }
 
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("id", id);
+                put("email", email);
+                put("name", name);
+                put("surname", surname);
+                put("password", password);
+                put("birthDate", birthDate.toString());
+            }
+        };
+    }
+
     @Override
     public String toString() {
-        return "Meeter{" +
+        return "Meeter.Meeter{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +

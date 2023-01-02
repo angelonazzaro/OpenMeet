@@ -1,7 +1,12 @@
-package com.openmeet.shared.data;
+package com.openmeet.shared.data.image;
 
-public class Image {
+import com.openmeet.shared.data.storage.IEntity;
 
+import java.util.HashMap;
+
+public class Image implements IEntity {
+
+    public static final String IMAGE = "Image";
     private int id;
     private String path;
     private int meeterId;
@@ -11,8 +16,20 @@ public class Image {
     }
 
     @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("id", id);
+                put("path", path);
+                put("meeterId", meeterId);
+            }
+        };
+    }
+
+    @Override
     public String toString() {
-        return "Image{" +
+        return "Image.Image{" +
                 "id=" + id +
                 ", path='" + path + '\'' +
                 ", meeterId=" + meeterId +

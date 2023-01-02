@@ -1,9 +1,13 @@
-package com.openmeet.shared.data;
+package com.openmeet.shared.data.ban;
+
+import com.openmeet.shared.data.storage.IEntity;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 
-public class Ban {
+public class Ban implements IEntity {
 
+    public static final String BAN = "Ban";
     private int id;
     private int moderatorId;
     private String description;
@@ -16,8 +20,23 @@ public class Ban {
     }
 
     @Override
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("id", id);
+                put("moderatorId", moderatorId);
+                put("description", description);
+                put("startTime", startTime.toString());
+                put("endTime", endTime.toString());
+                put("meeterId", meeterId);
+            }
+        };
+    }
+
+    @Override
     public String toString() {
-        return "Ban{" +
+        return "Ban.Ban{" +
                 "id=" + id +
                 ", moderatorId=" + moderatorId +
                 ", description='" + description + '\'' +
