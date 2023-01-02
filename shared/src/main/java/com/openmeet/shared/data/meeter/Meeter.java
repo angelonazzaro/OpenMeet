@@ -1,9 +1,15 @@
-package com.openmeet.shared.data;
+package com.openmeet.shared.data.meeter;
 
+import com.openmeet.shared.data.storage.IEntity;
+import com.openmeet.shared.utils.PasswordEncrypter;
+
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.HashMap;
 
-public class Meeter {
+public class Meeter implements IEntity {
 
+    public static final String MEETER = "Meeter";
     private int id;
     private String email;
     private String name;
@@ -17,9 +23,23 @@ public class Meeter {
 
     }
 
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("id", id);
+                put("email", email);
+                put("name", name);
+                put("surname", surname);
+                put("password", password);
+                put("birthDate", birthDate.toString());
+            }
+        };
+    }
+
     @Override
     public String toString() {
-        return "Meeter{" +
+        return "Meeter.Meeter{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
@@ -67,7 +87,15 @@ public class Meeter {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+
+        try {
+
+            this.password = PasswordEncrypter.sha1(password);
+
+        } catch (NoSuchAlgorithmException e) {
+
+            e.printStackTrace();
+        }
     }
 
     public String getBiography() {

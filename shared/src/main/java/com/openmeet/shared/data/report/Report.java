@@ -1,8 +1,13 @@
-package com.openmeet.shared.data;
+package com.openmeet.shared.data.report;
+
+import com.openmeet.shared.data.storage.IEntity;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 
-public class Report {
+public class Report implements IEntity {
+
+    public static final String REPORT = "Report";
 
     private int id;
     private int meeterReporter;
@@ -14,9 +19,22 @@ public class Report {
 
     }
 
+    public HashMap<String, ?> toHashMap() {
+
+        return new HashMap<>() {
+            {
+                put("id", id);
+                put("meeterReporter", meeterReporter);
+                put("meeterReported", meeterReported);
+                put("reason", reason);
+                put("creationDate", creationDate.toString());
+            }
+        };
+    }
+
     @Override
     public String toString() {
-        return "Report{" +
+        return "Report.Report{" +
                 "id=" + id +
                 ", meeterReporter=" + meeterReporter +
                 ", meeterReported=" + meeterReported +
