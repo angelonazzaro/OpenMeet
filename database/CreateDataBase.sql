@@ -95,7 +95,7 @@ CREATE TABLE Moderator (
 	`profilePic` VARCHAR(2048)
 ); 
 
-INSERT INTO Moderator (email, name, surname, password) VALUES ('prova@email.com', 'Angelo', 'Bello', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3'); /*SHA1 di 'test'*/
+INSERT INTO Moderator (email, name, surname, password) VALUES ('prova@email.com', 'Angelo', 'Bello', SHA1('test')); /*SHA1 di 'test'*/
 
 CREATE TABLE Ban (
 
