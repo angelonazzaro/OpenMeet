@@ -24,7 +24,7 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
     public Meeter doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {
-            throw new InvalidPrimaryKeyException(key.toString());
+            throw new InvalidPrimaryKeyException(key);
         }
         List<Meeter> meeter = doRetrieveByCondition(
                 String.format("%s.id = '%s'", Meeter.MEETER, key)

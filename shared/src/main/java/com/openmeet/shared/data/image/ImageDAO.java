@@ -26,7 +26,7 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
     public Image doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {
-            throw new InvalidPrimaryKeyException(key.toString());
+            throw new InvalidPrimaryKeyException(key);
         }
         List<Image> image = doRetrieveByCondition(
                 String.format("%s.id = '%s'", Image.IMAGE, key)

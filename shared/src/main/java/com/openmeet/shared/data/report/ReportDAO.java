@@ -23,7 +23,7 @@ public class ReportDAO extends SQLDAO implements DAO<Report> {
     public Report doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {
-            throw new InvalidPrimaryKeyException(key.toString());
+            throw new InvalidPrimaryKeyException(key);
         }
         List<Report> report = doRetrieveByCondition(
                 String.format("%s.id = '%s'", Report.REPORT, key)
