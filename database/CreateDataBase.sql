@@ -49,7 +49,7 @@ CREATE TABLE Interest (
 
 CREATE TABLE Meeter_Interest (
 
-    `interestId` INT, 
+    `id` INT, 
     `meeterId` INT, 
 
     FOREIGN KEY (`interestId`) REFERENCES Interest (`id`) ON UPDATE CASCADE ON DELETE NO ACTION, 
