@@ -8,7 +8,12 @@ import java.security.NoSuchAlgorithmException;
  */
 public class PasswordEncrypter {
 
-    //SHA1 algorithm implementation
+    /**
+     * SHA1 Algorithm implementation
+     *
+     * @param password The password to encrypt
+     * @return the encrypyed password
+     * */
     public static String sha1(String password) throws NoSuchAlgorithmException {
 
         MessageDigest mDigest = MessageDigest.getInstance("SHA1");

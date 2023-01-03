@@ -13,6 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * It contains all the methods that should be implemented
+ * by the DAOs.
+ * */
 public interface DAO<T> {
 
     Logger logger = Logger.getLogger(DAO.class.getName());
