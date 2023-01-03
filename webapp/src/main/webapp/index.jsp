@@ -30,7 +30,7 @@
                         <h1 class="py-2 pb-lg-3 mb-3">Sign in to OpenMeet</h1>
                         <form class="needs-validation" novalidate>
                             <div class="row pb-3 mb-4">
-                                <div class="input-group input-group-lg has-validation">
+                                <div class="input-group input-group-md has-validation">
                                     <span class="input-group-text" id="email-addon"><i class="fa-solid fa-envelope"></i></span>
                                     <input type="email" name="email" id="email" required class="form-control" placeholder="Email address" aria-label="Email address" aria-describedby="email-addon"/>
                                     <div class="valid-feedback"></div>
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="row pb-3 mb-4">
-                                <div class="input-group input-group-lg has-validation">
+                                <div class="input-group input-group-md has-validation">
                                     <span class="input-group-text" id="password-addon"><i class="fa-solid fa-lock"></i></span>
                                     <input type="password" name="password" id="password" required style="border-right: 0;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon"/>
                                     <span class="input-group-text" id="toggle-pwd"><i class="fa-solid fa-eye"></i></span>
