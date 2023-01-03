@@ -1,4 +1,4 @@
-package com.openmeet
+package com.openmeet.logic
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
+import com.openmeet.R
 import java.security.InvalidParameterException
 
 var backBtnLastPress = 0L
