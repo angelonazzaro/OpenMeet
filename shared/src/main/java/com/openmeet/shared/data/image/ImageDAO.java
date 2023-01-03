@@ -1,7 +1,7 @@
 package com.openmeet.shared.data.image;
 
-import com.openmeet.shared.data.Image.IMAGE;
-import com.openmeet.shared.data.Image.IMAGEExtractor;
+import com.openmeet.shared.data.image.Image;
+import com.openmeet.shared.data.image.ImageExtractor;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;

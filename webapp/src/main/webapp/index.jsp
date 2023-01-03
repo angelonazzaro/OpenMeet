@@ -116,7 +116,7 @@
 
             if (response.status === "error") {
                 errorMsgParagraph.show().text(response.message);
-            } else {
+             } else {
                 // redirect to dashboard
                 window.location.assign(response.redirectTo);
             }

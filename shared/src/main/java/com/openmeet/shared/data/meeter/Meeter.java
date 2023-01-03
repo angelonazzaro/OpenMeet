@@ -15,7 +15,7 @@ public class Meeter implements IEntity {
     private String name;
     private String surname;
     //TODO: Hash Password
-    private String password;
+    private String pwd;
     private String biography;
     private Date birthDate;
 
@@ -31,7 +31,7 @@ public class Meeter implements IEntity {
                 put("email", email);
                 put("name", name);
                 put("surname", surname);
-                put("password", password);
+                put("pwd", pwd);
                 put("birthDate", birthDate.toString());
             }
         };
@@ -44,7 +44,7 @@ public class Meeter implements IEntity {
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + pwd + '\'' +
                 ", biography='" + biography + '\'' +
                 ", birthDate=" + birthDate +
                 '}';
@@ -82,15 +82,15 @@ public class Meeter implements IEntity {
         this.surname = surname;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPwd() {
+        return pwd;
     }
 
-    public void setPassword(String password) {
+    public void setPwd(String pwd) {
 
         try {
 
-            this.password = PasswordEncrypter.sha1(password);
+            this.pwd = PasswordEncrypter.sha1(pwd);
 
         } catch (NoSuchAlgorithmException e) {
 
