@@ -12,5 +12,4 @@
     <%@ include file="scripts/top_scripts.jsp" %>
 </head>
 <body>
-<%@ include file="navigation/navigation.jsp" %>
 

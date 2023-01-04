@@ -107,4 +107,8 @@ public class Moderator implements IEntity {
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }
+
+    public String getFullName() {
+        return name + " " + surname;
+    }
 }
