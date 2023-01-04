@@ -4,7 +4,7 @@
 
     </footer>
 
-    <%@ include file="scripts/bottom_scripts.jsp"% >
+    <%@ include file="scripts/bottom_scripts.jsp" %>
     </body>
 </html>
 
