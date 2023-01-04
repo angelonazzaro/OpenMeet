@@ -84,19 +84,14 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", moderators.get(0));
 
         } catch (SQLException e) {
-
-            e.printStackTrace();
-            return;
-
-
             // Logging (?)
 
-//            response.put("status", "error");
-//            response.put("message", "An errour occurred, please try again later.");
-//
-//            out.write(gson.toJson(response));
-//            out.flush();
-//            return;
+            jsonResponse.addPair("status", "error");
+            jsonResponse.addPair("message", "An errour occurred, please try again later.");
+
+            out.write(gson.toJson(jsonResponse.getResponse()));
+            out.flush();
+            return;
         }
 
         // Response

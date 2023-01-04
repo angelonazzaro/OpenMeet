@@ -26,7 +26,7 @@ $("form").on('submit', function (e) {
     e.preventDefault(); // stop form from submitting
     // disable submit button so the user can't submit the form multiple times while the request is being processed
     submitBtn.attr("disabled", true);
-    // start spinner animation 
+    // start spinner animation
     submitBtnSpan.hide();
     submitBtnSpinner.show();
 
@@ -39,7 +39,7 @@ $("form").on('submit', function (e) {
             errorMsgParagraph.show().text(response.message);
         } else {
             // redirect to dashboard
-            window.location.assign(response.redirectTo);
+            window.location.replace(response.redirectTo);
         }
     }).fail(() => {
         errorMsgParagraph.show().text("An error occurred. Please try again later.");
