@@ -27,7 +27,11 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        req.setAttribute("view", "login.jsp");
+        req.setAttribute("title", "Login");
+        req.setAttribute("scripts", new String[]{"login.js"});
+
+        req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
 
     @Override
