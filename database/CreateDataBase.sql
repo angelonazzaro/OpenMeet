@@ -13,7 +13,7 @@ CREATE TABLE Meeter (
     `email` VARCHAR(320) UNIQUE, 
     `name` VARCHAR(35) NOT NULL, 
     `surname` VARCHAR(35) NOT NULL, 
-    `password` CHAR(40) NOT NULL, /* SHA1(PSW) = 160 bits / 4 = 40 chars*/
+    `pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`biography` VARCHAR(255), 
     `birthDate` DATE NOT NULL,
     `publicKey` BINARY(128) /*Key Pair da 1024 bit*/
@@ -91,11 +91,11 @@ CREATE TABLE Moderator (
     `email` VARCHAR(320) UNIQUE, 
     `name` VARCHAR(35) NOT NULL, 
     `surname` VARCHAR(35) NOT NULL, 
-	`password` CHAR(40) NOT NULL, /* SHA1(PSW) = 160 bits / 4 = 40 chars*/
+	`pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`profilePic` VARCHAR(2048)
 ); 
 
-INSERT INTO Moderator (email, name, surname, password) VALUES ('prova@email.com', 'Angelo', 'Bello', SHA1('test')); /*SHA1 di 'test'*/
+INSERT INTO Moderator (email, name, surname, pwd) VALUES ('prova@email.com', 'Angelo', 'Bello', SHA1('test')); /*SHA1 di 'test'*/
 
 CREATE TABLE Ban (
 
