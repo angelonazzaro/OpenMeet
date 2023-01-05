@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.openmeet.webapp.JSONResponse;
 import com.openmeet.webapp.dataLayer.moderator.Moderator;
 import com.openmeet.webapp.dataLayer.moderator.ModeratorDAO;
+import com.openmeet.webapp.helpers.ResponseHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.*;
@@ -15,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
@@ -36,20 +39,14 @@ public class SettingsServlet extends HttpServlet {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
 
-        JSONResponse jsonResponse = new JSONResponse();
         Gson gson = new Gson();
         PrintWriter out = resp.getWriter();
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        if (name == null || surname == null || name.length() == 0 || surname.length() == 0) {
-            jsonResponse.addPair("status", "error");
-            jsonResponse.addPair("message", "One or more required fields are missing.");
-
-
-            out.write(gson.toJson(jsonResponse.getResponse()));
-            out.flush();
+        if (ResponseHelper.checkStringFields(new String[] {name, surname})) {
+            ResponseHelper.sendCustomError(out, gson, "One or more required fields are missing.");
             return;
         }
 
@@ -65,11 +62,7 @@ public class SettingsServlet extends HttpServlet {
         if (password != null && password.length() > 0) {
 
             if (!password.matches("(?=.*\\\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}")) {
-                jsonResponse.addPair("status", "error");
-                jsonResponse.addPair("message", "The password does not meet the specified criteria.");
-
-                out.write(gson.toJson(jsonResponse.getResponse()));
-                out.flush();
+                ResponseHelper.sendCustomError(out, gson, "The password does not meet the specified criteria.");
                 return;
             }
 
@@ -90,23 +83,13 @@ public class SettingsServlet extends HttpServlet {
 
                 // Check if the file uploaded is an img
                 if (!fileExtension.equals("jpeg") && !fileExtension.equals("jpg") && !fileExtension.equals("png")) {
-
-                    jsonResponse.addPair("status", "error");
-                    jsonResponse.addPair("message", "The file uploaded is not an image.");
-
-                    out.write(gson.toJson(jsonResponse.getResponse()));
-                    out.flush();
+                    ResponseHelper.sendCustomError(out, gson, "The file uploaded is not an image.");
                     return;
                 }
 
                 // Checking that the file size does not exceed 1MB
                 if (profilePicPart.getSize() > 1048576) {
-
-                    jsonResponse.addPair("status", "error");
-                    jsonResponse.addPair("message", "The file uploaded's size exceeds 1MB.");
-
-                    out.write(gson.toJson(jsonResponse.getResponse()));
-                    out.flush();
+                    ResponseHelper.sendCustomError(out, gson, "The file uploaded's size exceeds 1MB.");
                     return;
                 }
 
@@ -120,12 +103,7 @@ public class SettingsServlet extends HttpServlet {
                 if (!userProfilePicFolder.exists()) {
 
                     if (!userProfilePicFolder.mkdir()) {
-
-                        jsonResponse.addPair("status", "error");
-                        jsonResponse.addPair("message", "An error occurred while trying to upload your file. Try again later.");
-
-                        out.write(gson.toJson(jsonResponse.getResponse()));
-                        out.flush();
+                        ResponseHelper.sendCustomError(out, gson, "An error occurred while trying to upload your file. Try again later.");
                         return;
                     }
                     // Save image for the first time
@@ -136,11 +114,7 @@ public class SettingsServlet extends HttpServlet {
             }
 
         } catch (ServletException e) {
-            jsonResponse.addPair("status", "error");
-            jsonResponse.addPair("message", "An error occurred, please try again later.");
-
-            out.write(gson.toJson(jsonResponse.getResponse()));
-            out.flush();
+            ResponseHelper.sendGenericError(out, gson);
             return;
         }
 
@@ -151,16 +125,10 @@ public class SettingsServlet extends HttpServlet {
 
                 session.setAttribute("user", user);
 
-                jsonResponse.addPair("status", "success");
-                out.write(gson.toJson(jsonResponse.getResponse()));
-                out.flush();
+                ResponseHelper.sendGenericResponse(out, gson, (HashMap<String, String>) Map.of("status", "success"));
             }
         } catch (SQLException e) {
-            jsonResponse.addPair("status", "error");
-            jsonResponse.addPair("message", "An error occurred, please try again later.");
-
-            out.write(gson.toJson(jsonResponse.getResponse()));
-            out.flush();
+            ResponseHelper.sendGenericError(out, gson);
         }
     }
 }
