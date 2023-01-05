@@ -11,8 +11,8 @@ CREATE TABLE Meeter (
  
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
     `email` VARCHAR(320) UNIQUE, 
-    `name` VARCHAR(35) NOT NULL, 
-    `surname` VARCHAR(35) NOT NULL, 
+    `meeterName` VARCHAR(35) NOT NULL, 
+    `meeterSurname` VARCHAR(35) NOT NULL, 
     `pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`biography` VARCHAR(255), 
     `birthDate` DATE NOT NULL,
@@ -89,13 +89,13 @@ CREATE TABLE Moderator (
 
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
     `email` VARCHAR(320) UNIQUE, 
-    `name` VARCHAR(35) NOT NULL, 
-    `surname` VARCHAR(35) NOT NULL, 
+    `moderatorName` VARCHAR(35) NOT NULL, 
+    `moderatorSurname` VARCHAR(35) NOT NULL, 
 	`pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`profilePic` VARCHAR(2048)
 ); 
 
-INSERT INTO Moderator (email, name, surname, pwd) VALUES ('prova@email.com', 'Angelo', 'Bello', SHA1('test')); /*SHA1 di 'test'*/
+INSERT INTO Moderator (email, moderatorName, moderatorSurname, pwd) VALUES ('prova@email.com', 'Angelo', 'Bello', SHA1('test')); /*SHA1 di 'test'*/
 
 CREATE TABLE Ban (
 
