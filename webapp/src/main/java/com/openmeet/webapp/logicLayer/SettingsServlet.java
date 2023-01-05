@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Map;
 
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
