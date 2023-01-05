@@ -25,5 +25,8 @@ main {
 }
 
 .toggle-pwd-icon {
+    background: transparent !important;
+    cursor: pointer;
 
+    border-left: none;
 }

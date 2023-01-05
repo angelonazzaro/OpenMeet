@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         if (isLogged(req)) {
             resp.sendRedirect(req.getContextPath() + "/");
@@ -87,7 +87,7 @@ public class LoginServlet extends HttpServlet {
             // Logging (?)
 
             jsonResponse.addPair("status", "error");
-            jsonResponse.addPair("message", "An errour occurred, please try again later.");
+            jsonResponse.addPair("message", "An error occurred, please try again later.");
 
             out.write(gson.toJson(jsonResponse.getResponse()));
             out.flush();

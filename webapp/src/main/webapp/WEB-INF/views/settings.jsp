@@ -23,8 +23,8 @@
     <div class="h-100 row align-items-center justify-content-center">
         <div class="col-12 mb-5 mb-md-0 row">
             <h1 class="py-2 pb-lg-3 mb-3">Settings</h1>
-            <form class="needs-validation col-12 row" no-validate>
-                <div class="col-md-6 col-sm-12">
+            <form class="needs-validation col-12 row flex-column align-items-center" no-validate>
+                <div class="col-md-6 col-sm-12 mb-4">
                     <div class="form-group d-flex flex-column align-items-center">
                         <img src="<%= profilePic %>" alt="profile pic preview" class="mb-1" id="preview">
                         <div style="flex-basis: 100%; width: 100%">
@@ -33,7 +33,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-12">
+                <div class="col-md-6 col-sm-12 mb-4">
+                    <h4 class="pb-2">Account Info</h4>
                     <div class="row pb-3 mb-4">
                         <div class="input-group input-group-md has-validation col">
                             <span class="input-group-text" id="name-addon"><i class="fa-solid fa-user-astronaut"></i></span>
@@ -61,20 +62,14 @@
                     <div class="row pb-3 mb-4">
                         <div class="input-group input-group-md has-validation col">
                             <span class="input-group-text" id="lock-addon"><i class="fa-solid fa-lock"></i></span>
-                            <input type="text" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="lock-addon"  required/>
-                            <span class="input-group-text toggle-pwd-icon"><i class="fa-solid fa-eye"></i></span>
+                            <input type="text" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="passwordHelpBlock" />
+                            <span class="input-group-text toggle-pwd-icon" id="password-toggle"><i class="fa-solid fa-eye"></i></span>
+                            <div id="passwordHelpBlock" class="form-text">
+                                Your password must be 8-16 characters long, contain letters and numbers, special characters and must not contain spaces or emoji.
+                            </div>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">
                                 The password does not meet the specified criterias.
-                            </div>
-                        </div>
-                        <div class="input-group input-group-md has-validation col">
-                            <span class="input-group-text" id="confirm-lock-addon"><i class="fa-solid fa-lock"></i></span>
-                            <input type="text" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="confirm-lock-addon"/>
-                            <span class="input-group-text toggle-pwd-icon"><i class="fa-solid fa-eye"></i></span>
-                            <div class="valid-feedback"></div>
-                            <div class="invalid-feedback">
-                                The passwords do not match.
                             </div>
                         </div>
                     </div>
@@ -90,29 +85,3 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    togglePasswordIcon($(".toggle-pwd-icon:first-of-type"), $(".toggle-pwd-icon:first-of-type > i"), $("input[name='password']"));
-    togglePasswordIcon($(".toggle-pwd-icon:last-of-type"), $(".toggle-pwd-icon:last-of-type > i"), $("input[name='confirm-password']"));
-
-    const preview = document.getElementById("preview");
-    const fileUploader = document.querySelector("input[type='file']");
-    const userProfilePicSrc = "<%= profilePic %>";
-
-    fileUploader.addEventListener('change', function () {
-
-        // Restore preview to user profile pic in case the
-        // user does not upload anything
-        if (this.files.length === 0) {
-
-            if (preview.src !== userProfilePicSrc) {
-                preview.src = userProfilePicSrc;
-            }
-
-            return;
-        }
-
-        preview.src = URL.createObjectURL(this.files[0]);
-    });
-</script>
