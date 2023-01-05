@@ -38,7 +38,7 @@
                     <div class="row pb-3 mb-4">
                         <div class="input-group input-group-md has-validation col">
                             <span class="input-group-text" id="name-addon"><i class="fa-solid fa-user-astronaut"></i></span>
-                            <input type="text" name="name" id="name" value="<%= user.getName() %>" required class="form-control" placeholder="Name" aria-label="Name" aria-describedby="name-addon" maxlength="35" required/>
+                            <input type="text" name="name" id="name" value="<%= user.getModeratorName() %>" required class="form-control" placeholder="Name" aria-label="Name" aria-describedby="name-addon" maxlength="35" required/>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">
                                 Your name cannot exceed 35 characters.
@@ -46,7 +46,7 @@
                         </div>
                         <div class="input-group input-group-md has-validation col">
                             <span class="input-group-text" id="surname-addon"><i class="fa-solid fa-user-astronaut"></i></span>
-                            <input type="text" name="surname" id="surname" value="<%= user.getSurname() %>" required class="form-control" placeholder="Surname" aria-label="Surname" aria-describedby="name-addon" maxlength="35" required/>
+                            <input type="text" name="surname" id="surname" value="<%= user.getModeratorSurname() %>" required class="form-control" placeholder="Surname" aria-label="Surname" aria-describedby="name-addon" maxlength="35" required/>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">
                                 Your surname cannot exceed 35 characters.

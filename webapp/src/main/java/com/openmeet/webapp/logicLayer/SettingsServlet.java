@@ -52,8 +52,8 @@ public class SettingsServlet extends HttpServlet {
         Moderator user = (Moderator) session.getAttribute("user");
         HashMap<String, String> valuesToUpdate = new HashMap<>();
 
-        user.setName(name);
-        user.setSurname(surname);
+        user.setModeratorName(name);
+        user.setModeratorSurname(surname);
 
         valuesToUpdate.put("name", name);
         valuesToUpdate.put("surname", surname);
