@@ -27,11 +27,13 @@ public class AuthenticationFilter implements Filter {
 
         if (!requestURI.endsWith("logout") && !requestURI.endsWith("login") && !requestURI.contains("assets")) {
             // If the user is not logged, redirect to the login page
-            if (currentUserSession == null || currentUserSession.getAttribute("user") == null)
-                requestURI = request.getContextPath() + "/login";
-            response.sendRedirect(requestURI);
-        } else
-            chain.doFilter(request, response); // pass the request along the filter chain
+            if (currentUserSession == null || currentUserSession.getAttribute("user") == null) {
+                response.sendRedirect(request.getContextPath() + "/login");
+                return;
+            }
+        }
+
+        chain.doFilter(request, response); // pass the request along the filter chain
     }
 
     public void destroy() {

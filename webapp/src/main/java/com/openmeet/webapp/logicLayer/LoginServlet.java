@@ -27,9 +27,9 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        req.setAttribute("view", "login.jsp");
+        req.setAttribute("view", "login");
         req.setAttribute("title", "Login");
-        req.setAttribute("scripts", new String[]{"login.js"});
+        req.setAttribute("scripts", new String[]{"login"});
 
         req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
@@ -84,19 +84,14 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", moderators.get(0));
 
         } catch (SQLException e) {
-
-            e.printStackTrace();
-            return;
-
-
             // Logging (?)
 
-//            response.put("status", "error");
-//            response.put("message", "An errour occurred, please try again later.");
-//
-//            out.write(gson.toJson(response));
-//            out.flush();
-//            return;
+            jsonResponse.addPair("status", "error");
+            jsonResponse.addPair("message", "An errour occurred, please try again later.");
+
+            out.write(gson.toJson(jsonResponse.getResponse()));
+            out.flush();
+            return;
         }
 
         // Response

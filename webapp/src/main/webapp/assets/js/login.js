@@ -20,10 +20,16 @@ $("#toggle-pwd").on('click', function () {
 });
 const errorMsgParagraph = $("#error-msg");
 const submitBtn = $("button[type='submit']");
+const submitBtnSpan = $("button[type='submit'] > span");
+const submitBtnSpinner = $("button[type='submit'] .spinner-border");
 $("form").on('submit', function (e) {
     e.preventDefault(); // stop form from submitting
     // disable submit button so the user can't submit the form multiple times while the request is being processed
     submitBtn.attr("disabled", true);
+    // start spinner animation
+    submitBtnSpan.hide();
+    submitBtnSpinner.show();
+
     $.ajax({
         url: getBaseURL() + "login",
         type: "POST",
@@ -33,11 +39,15 @@ $("form").on('submit', function (e) {
             errorMsgParagraph.show().text(response.message);
         } else {
             // redirect to dashboard
-            window.location.assign(response.redirectTo);
+            window.location.replace(response.redirectTo);
         }
     }).fail(() => {
         errorMsgParagraph.show().text("An error occurred. Please try again later.");
     }).always(() => {
-        submitBtn.attr("disabled", false); // restore submit button
+        // end spinner animation
+        submitBtnSpinner.hide();
+        submitBtnSpan.show();
+        // restore submit button
+        submitBtn.attr("disabled", false);
     });
 })

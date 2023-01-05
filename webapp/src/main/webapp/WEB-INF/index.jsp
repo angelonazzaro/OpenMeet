@@ -14,10 +14,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<% String view = "views/" + (String) request.getAttribute("view"); %>
+<% String view = "views/" + (String) request.getAttribute("view") + ".jsp"; %>
 <% String[] scripts = (String[]) request.getAttribute("scripts"); %>
 
+<%-- Login view does not need the navigation bar --%>
 <%@ include file="templates/header.jsp" %>
+
+<% if (!view.contains("login.jsp")) { %>
+    <%@ include file="templates/navigation/navigation.jsp" %>
+<% } %>
 
     <jsp:include page="<%= view %>" />
 
@@ -25,7 +30,7 @@
 
 <% if (scripts != null && scripts.length > 0) { %>
     <% for (String script : scripts) { %>
-        <script src="<%= request.getContextPath() %>/assets/js/<%= script %>"></script>
+        <script src="<%= request.getContextPath() %>/assets/js/<%= script %>.js"></script>
     <% } %>
 <% } %>
 

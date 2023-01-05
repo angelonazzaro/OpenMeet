@@ -34,7 +34,12 @@
                                 <label for="keep-me-signed-in-checkbox" class="form-check-label">Keep in me signed in</label>
                             </div>
                             <p id="error-msg" class="text-danger" style="display: none"></p>
-                            <button type="submit" class="btn btn-lg btn-primary w-100 mb-4">Sign in</button>
+                            <button type="submit" class="text-center btn btn-lg btn-primary w-100 mb-4">
+                                <span>Sign in</span>
+                                <div class="spinner-border text-light" style="display: none" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </button>
                         </form>
                     </div>
                 </div>
