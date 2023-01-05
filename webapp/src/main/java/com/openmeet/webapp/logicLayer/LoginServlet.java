@@ -1,9 +1,9 @@
 package com.openmeet.webapp.logicLayer;
 
 import com.google.gson.Gson;
-import com.openmeet.webapp.JSONResponse;
 import com.openmeet.webapp.dataLayer.moderator.Moderator;
 import com.openmeet.webapp.dataLayer.moderator.ModeratorDAO;
+import com.openmeet.webapp.helpers.ResponseHelper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +14,9 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class LoginServlet extends HttpServlet {
@@ -35,7 +37,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         if (isLogged(req)) {
             resp.sendRedirect(req.getContextPath() + "/");
@@ -46,20 +48,13 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         Gson gson = new Gson();
         PrintWriter out = resp.getWriter();
-        JSONResponse jsonResponse = new JSONResponse();
 
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
         // Check if all required parameters are initialized, if not send back an error message
         if (email == null || password == null || email.length() == 0 || password.length() == 0) {
-
-            jsonResponse.addPair("status", "error");
-            jsonResponse.addPair("message", "One or more required fields are missing.");
-
-            // Serialization: json -> {"status: "error", "message": "One or more required fields are missing."}
-            out.write(gson.toJson(jsonResponse.getResponse()));
-            out.flush();
+            ResponseHelper.sendCustomError(out, gson, "One or more required fields are missing.");
             return;
         }
 
@@ -71,11 +66,7 @@ public class LoginServlet extends HttpServlet {
                             Moderator.MODERATOR, email, Moderator.MODERATOR, password));
 
             if (moderators.isEmpty()) {
-                jsonResponse.addPair("status", "error");
-                jsonResponse.addPair("message", "The email or the password are incorrect. Please try again.");
-
-                out.write(gson.toJson(jsonResponse.getResponse()));
-                out.flush();
+                ResponseHelper.sendCustomError(out, gson, "The email or the password are incorrect. Please try again.");
                 return;
             }
 
@@ -84,21 +75,15 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", moderators.get(0));
 
         } catch (SQLException e) {
-            // Logging (?)
-
-            jsonResponse.addPair("status", "error");
-            jsonResponse.addPair("message", "An errour occurred, please try again later.");
-
-            out.write(gson.toJson(jsonResponse.getResponse()));
-            out.flush();
+            ResponseHelper.sendGenericError(out, gson);
             return;
         }
 
         // Response
-        jsonResponse.addPair("status", "success");
-        jsonResponse.addPair("redirectTo", req.getContextPath() + "/");
-        out.write(gson.toJson(jsonResponse.getResponse()));
-        out.flush();
+        HashMap<String, String> values = new HashMap<>();
+        values.put("status", "success");
+        values.put("redirectTo", req.getContextPath() + "/");
+        ResponseHelper.sendGenericResponse(out, gson, values);
     }
 
     private boolean isLogged(HttpServletRequest req) {

@@ -12,7 +12,7 @@ public class LogoutServlet extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         HttpSession currentUserSession = req.getSession(false);
 

@@ -18,3 +18,15 @@ ul {
 a, li {
     text-decoration: none;
 }
+
+main {
+    flex-basis: calc(100% - 220px);
+    width: 100;
+}
+
+.toggle-pwd-icon {
+    background: transparent !important;
+    cursor: pointer;
+
+    border-left: none;
+}

@@ -16,7 +16,7 @@
     justify-content: stretch;
 
     width: 75px;
-    height: 100vh;
+    min-height: 100vh;
 
     position: sticky;
     left: 0;
@@ -160,7 +160,7 @@
 }
 
 .sidebar.open {
-    width: 200px;
+    width: 220px;
 }
 
 .your-channel {

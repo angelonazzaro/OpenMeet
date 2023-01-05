@@ -20,11 +20,19 @@
 <%-- Login view does not need the navigation bar --%>
 <%@ include file="templates/header.jsp" %>
 
+
 <% if (!view.contains("login.jsp")) { %>
-    <%@ include file="templates/navigation/navigation.jsp" %>
+    <div class="d-flex">
+        <%@ include file="templates/navigation/navigation.jsp" %>
+        <main>
 <% } %>
 
     <jsp:include page="<%= view %>" />
+
+<% if (!view.contains("login.jsp")) { %>
+        </main>
+    </div>
+<% } %>
 
 <%@ include file="templates/footer.jsp" %>
 
