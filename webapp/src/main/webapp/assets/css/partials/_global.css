@@ -18,3 +18,8 @@ ul {
 a, li {
     text-decoration: none;
 }
+
+main {
+    flex-basis: calc(100% - 220px);
+    width: 100;
+}

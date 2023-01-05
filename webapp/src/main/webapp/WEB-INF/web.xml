@@ -37,6 +37,17 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
+    <!-- Settings Servlet Mapping -->
+    <servlet>
+        <servlet-name>SettingsServlet</servlet-name>
+        <servlet-class>com.openmeet.webapp.logicLayer.SettingsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SettingsServlet</servlet-name>
+        <url-pattern>/settings</url-pattern>
+    </servlet-mapping>
+
     <!-- Static files: css, js, images etc. -->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
