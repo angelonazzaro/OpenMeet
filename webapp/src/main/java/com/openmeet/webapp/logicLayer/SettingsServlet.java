@@ -1,7 +1,6 @@
 package com.openmeet.webapp.logicLayer;
 
 import com.google.gson.Gson;
-import com.openmeet.webapp.JSONResponse;
 import com.openmeet.webapp.dataLayer.moderator.Moderator;
 import com.openmeet.webapp.dataLayer.moderator.ModeratorDAO;
 import com.openmeet.webapp.helpers.ResponseHelper;
@@ -52,12 +51,15 @@ public class SettingsServlet extends HttpServlet {
 
         HttpSession session = req.getSession(false);
         Moderator user = (Moderator) session.getAttribute("user");
+        HashMap<String, String> valuesToUpdate = new HashMap<>();
 
         user.setName(name);
         user.setSurname(surname);
 
+        valuesToUpdate.put("name", name);
+        valuesToUpdate.put("surname", surname);
+
         String password = req.getParameter("password");
-        System.out.println("password" + password);
         // Regex check
         if (password != null && password.length() > 0) {
 
@@ -67,8 +69,7 @@ public class SettingsServlet extends HttpServlet {
             }
 
             user.setPwd(password);
-            System.out.println("in");
-
+            valuesToUpdate.put("name", name);
         }
 
         // File Upload if any
@@ -110,6 +111,7 @@ public class SettingsServlet extends HttpServlet {
                     BufferedImage bufferedImage = ImageIO.read(profilePicPart.getInputStream());
                     ImageIO.write(bufferedImage, fileExtension, new File(uploadPath));
                     user.setProfilePic(uploadPath);
+                    valuesToUpdate.put("profilePic", uploadPath);
                 }
             }
 
@@ -121,11 +123,13 @@ public class SettingsServlet extends HttpServlet {
         ModeratorDAO moderatorDAO = new ModeratorDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
-            if (moderatorDAO.doSaveOrUpdate(user)) {
+            if (moderatorDAO.doUpdate(valuesToUpdate, Moderator.MODERATOR + ".id=" + user.getId())) {
 
                 session.setAttribute("user", user);
+                HashMap<String, String> values = new HashMap<>();
+                values.put("status", "success");
 
-                ResponseHelper.sendGenericResponse(out, gson, (HashMap<String, String>) Map.of("status", "success"));
+                ResponseHelper.sendGenericResponse(out, gson, values);
             }
         } catch (SQLException e) {
             ResponseHelper.sendGenericError(out, gson);

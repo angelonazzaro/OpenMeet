@@ -34,6 +34,14 @@ public class ResponseHelper {
         writeResponse(out, gson);
     }
 
+    public static void sendCustomSuccess(PrintWriter out, Gson gson, String value) {
+
+        jsonResponse.addPair("status", "success");
+        jsonResponse.addPair("message", value);
+
+        writeResponse(out, gson);
+    }
+
     public static void sendGenericResponse(PrintWriter out, Gson gson, HashMap<String, String> pairs) {
 
         pairs.entrySet().forEach(entry -> {

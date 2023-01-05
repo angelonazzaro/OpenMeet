@@ -80,7 +80,10 @@ public class LoginServlet extends HttpServlet {
         }
 
         // Response
-        ResponseHelper.sendGenericResponse(out, gson, (HashMap<String, String>) Map.of("status", "success", "redirectTo", "/"));
+        HashMap<String, String> values = new HashMap<>();
+        values.put("status", "success");
+        values.put("redirectTo", req.getContextPath() + "/");
+        ResponseHelper.sendGenericResponse(out, gson, values);
     }
 
     private boolean isLogged(HttpServletRequest req) {
