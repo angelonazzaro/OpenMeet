@@ -22,7 +22,7 @@
                                 <div class="input-group input-group-md has-validation">
                                     <span class="input-group-text" id="password-addon"><i class="fa-solid fa-lock"></i></span>
                                     <input type="password" name="password" id="password" required style="border-right: 0;" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon"/>
-                                    <span class="input-group-text" id="toggle-pwd"><i class="fa-solid fa-eye"></i></span>
+                                    <span class="input-group-text toggle-pwd-icon"><i class="fa-solid fa-eye"></i></span>
                                     <div class="valid-feedback"></div>
                                     <div class="invalid-feedback">
                                         Please provide a password.

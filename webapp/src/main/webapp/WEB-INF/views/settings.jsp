@@ -61,7 +61,8 @@
                     <div class="row pb-3 mb-4">
                         <div class="input-group input-group-md has-validation col">
                             <span class="input-group-text" id="lock-addon"><i class="fa-solid fa-lock"></i></span>
-                            <input type="text" name="password" id="password" required class="form-control" placeholder="Password" aria-label="Password" aria-describedby="lock-addon"  required/>
+                            <input type="text" name="password" id="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="lock-addon"  required/>
+                            <span class="input-group-text toggle-pwd-icon"><i class="fa-solid fa-eye"></i></span>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">
                                 The password does not meet the specified criterias.
@@ -69,7 +70,8 @@
                         </div>
                         <div class="input-group input-group-md has-validation col">
                             <span class="input-group-text" id="confirm-lock-addon"><i class="fa-solid fa-lock"></i></span>
-                            <input type="text" name="confirm-password" id="confirm-password" required class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="confirm-lock-addon"/>
+                            <input type="text" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="confirm-lock-addon"/>
+                            <span class="input-group-text toggle-pwd-icon"><i class="fa-solid fa-eye"></i></span>
                             <div class="valid-feedback"></div>
                             <div class="invalid-feedback">
                                 The passwords do not match.
@@ -90,6 +92,10 @@
 </div>
 
 <script>
+
+    togglePasswordIcon($(".toggle-pwd-icon:first-of-type"), $(".toggle-pwd-icon:first-of-type > i"), $("input[name='password']"));
+    togglePasswordIcon($(".toggle-pwd-icon:last-of-type"), $(".toggle-pwd-icon:last-of-type > i"), $("input[name='confirm-password']"));
+
     const preview = document.getElementById("preview");
     const fileUploader = document.querySelector("input[type='file']");
     const userProfilePicSrc = "<%= profilePic %>";

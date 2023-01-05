@@ -18,7 +18,11 @@
         })
 })()
 
-// Get webapp base url which is the same as the one return by request.getContextPath()
+/**
+ * Get webapp base url which is the same as the one return by request.getContextPath()
+ *
+ * @return the base url
+ * */
 function getBaseURL() {
     /**
      * Gets the origin url.
@@ -29,4 +33,45 @@ function getBaseURL() {
     const explodedURL = window.location.pathname.split("/")[1];
 
     return originURL + "/" + explodedURL + "/";
+}
+
+
+// Toggles the Loading Animation on forms
+function toggleLoadingAnimation(start = true) {
+    const submitBtn = $("button[type='submit']");
+    const submitBtnSpan = $("button[type='submit'] > span");
+    const submitBtnSpinner = $("button[type='submit'] .spinner-border");
+
+    if (start) {
+        submitBtn.attr('disabled', true);
+        submitBtnSpan.hide();
+        submitBtnSpinner.show();
+    } else {
+        submitBtn.attr('disabled', false);
+        submitBtnSpinner.hide();
+        submitBtnSpan.show();
+    }
+}
+
+// Makes the password visible or not visible when clicking on the eye icon
+function togglePasswordIcon(toggleElement, icon, passwordElement) {
+    let togglePWD = false;
+
+    toggleElement.on('click', function () {
+        togglePWD = !togglePWD;
+        let iconClass = "fa-eye-slash", inputType = "text";
+        if (!togglePWD) {
+            iconClass = "fa-eye";
+            inputType = "password";
+        }
+        passwordElement.attr('type', inputType);
+        /**
+         * eyeIcon.attr("class") returns the element's class attribute value. Each class is separated
+         * by a white space.
+         * eyeIcon.attr("class").split(" ") returns an array of strings, the class we need is the second string
+         * which can be fa-eye or fa-eye-slash.
+         * We toggle between fa-eye or fa-eye-slash to display if the password is visible or not
+         */
+        icon.removeClass(icon.attr("class").split(" ")[1]).addClass(iconClass);
+    });
 }
