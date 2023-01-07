@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.apache.tomcat:tomcat-jdbc:10.0.20'
     implementation 'mysql:mysql-connector-java:8.0.31'
     implementation 'com.google.code.gson:gson:2.10'
+    implementation 'com.google.guava:guava:31.1-jre'
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

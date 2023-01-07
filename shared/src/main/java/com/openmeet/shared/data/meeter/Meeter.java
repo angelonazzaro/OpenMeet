@@ -124,4 +124,8 @@ public class Meeter implements IEntity {
     public void setPublicKey(byte[] publicKey) {
         this.publicKey = publicKey;
     }
+
+    public String getFullName() {
+        return meeterName + " " + meeterSurname;
+    }
 }
