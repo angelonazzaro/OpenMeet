@@ -408,15 +408,16 @@ public class QueryBuilder {
 
     private static String encode(Object value) {
 
-        if (value instanceof String string) {
+        if (value instanceof String) {
+            //(value instanceof String str) was not supported by JDK 11
+            String str = (String) value;
+            if (str.startsWith(":") || str.equals("?")) {
 
-            if (string.startsWith(":") || string.equals("?")) {
-
-                return string;
+                return str;
             } else {
 
                 return "'" +
-                        string.replace("'", "''") +
+                        str.replace("'", "''") +
                         "'";
             }
         } else {
