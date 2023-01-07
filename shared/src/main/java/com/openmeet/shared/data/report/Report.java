@@ -13,6 +13,8 @@ public class Report implements IEntity {
     private int meeterReporter;
     private int meeterReported;
     private String reason;
+
+    private int status;
     private Timestamp creationDate;
 
     public Report(){
@@ -74,6 +76,10 @@ public class Report implements IEntity {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    public int getStatus() { return status; }
+
+    public void setStatus(int status) { this.status = status; }
 
     public Timestamp getCreationDate() {
         return creationDate;

@@ -48,6 +48,17 @@
         <url-pattern>/settings</url-pattern>
     </servlet-mapping>
 
+    <!-- Reports Servlet Mapping -->
+    <servlet>
+        <servlet-name>ReportsServlet</servlet-name>
+        <servlet-class>com.openmeet.webapp.logicLayer.ReportsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReportsServlet</servlet-name>
+        <url-pattern>/reports</url-pattern>
+    </servlet-mapping>
+
     <!-- Static files: css, js, images etc. -->
     <servlet-mapping>
         <servlet-name>default</servlet-name>

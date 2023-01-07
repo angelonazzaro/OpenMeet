@@ -1,0 +1,19 @@
+.search-bar-container {
+    background: white;
+
+    padding: 1rem 0;
+}
+
+.search-bar-input-group {
+    padding: 0 2rem;
+}
+
+.search-bar-input-group > .input-group-text, .search-bar-input-group > input.form-control  {
+    background: transparent !important;
+
+    border: none !important;
+}
+
+.search-bar-input-group > input.form-control:focus {
+    outline: none !important;
+}

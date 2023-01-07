@@ -14,9 +14,9 @@ public class Moderator implements IEntity {
 
     private String email;
 
-    private String name;
+    private String moderatorName;
 
-    private String surname;
+    private String moderatorSurname;
 
     private String pwd;
 
@@ -33,8 +33,8 @@ public class Moderator implements IEntity {
             {
                 put("id", id);
                 put("email", email);
-                put("name", name);
-                put("surname", surname);
+                put("moderatorName", moderatorName);
+                put("moderatorSurname", moderatorSurname);
                 put("pwd", pwd);
                 put("profilePic", profilePic);
             }
@@ -46,8 +46,8 @@ public class Moderator implements IEntity {
         return "Moderator{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", moderatorName='" + moderatorName + '\'' +
+                ", moderatorSurname='" + moderatorSurname + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", profilePic='" + profilePic + '\'' +
                 '}';
@@ -69,20 +69,20 @@ public class Moderator implements IEntity {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getModeratorName() {
+        return moderatorName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModeratorName(String moderatorName) {
+        this.moderatorName = moderatorName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getModeratorSurname() {
+        return moderatorSurname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setModeratorSurname(String moderatorSurname) {
+        this.moderatorSurname = moderatorSurname;
     }
 
     public String getPwd() {
@@ -109,6 +109,6 @@ public class Moderator implements IEntity {
     }
 
     public String getFullName() {
-        return name + " " + surname;
+        return moderatorName + " " + moderatorSurname;
     }
 }

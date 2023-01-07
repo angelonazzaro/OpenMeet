@@ -24,7 +24,7 @@
 <% if (!view.contains("login.jsp")) { %>
     <div class="d-flex">
         <%@ include file="templates/navigation/navigation.jsp" %>
-        <main>
+        <main style="padding: 4rem 0 2rem 0; background-color: #F5F6F8">
 <% } %>
 
     <jsp:include page="<%= view %>" />
@@ -35,6 +35,16 @@
 <% } %>
 
 <%@ include file="templates/footer.jsp" %>
+
+<% if (!view.equals("settings") && !view.equals("dashboard") && !view.equals("login")) { %>
+    <script>
+        $(document).ready(() => {
+            $("#dataTable").DataTable({
+                searching: false
+            });
+        })
+    </script>
+<% } %>
 
 <% if (scripts != null && scripts.length > 0) { %>
     <% for (String script : scripts) { %>
