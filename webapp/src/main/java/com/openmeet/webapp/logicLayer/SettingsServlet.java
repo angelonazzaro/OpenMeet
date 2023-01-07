@@ -99,7 +99,7 @@ public class SettingsServlet extends HttpServlet {
                 File userProfilePicFolder = new File(basePath);
 
                 // If the folder does not exist, it means this is the first upload by the user
-                // so the folder needs to bcreated
+                // so the folder needs to be created
                 if (!userProfilePicFolder.exists()) {
 
                     if (!userProfilePicFolder.mkdir()) {
