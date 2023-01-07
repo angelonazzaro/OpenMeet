@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 package com.openmeet.shared.utils;
-=======
-package org.example;
->>>>>>> main
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -26,13 +22,10 @@ public class MultiMapList<K, V> {
         return data.toString();
     }
 
-<<<<<<< HEAD
     public int getRowsNumber() {
         return this.data.size();
     }
 
-=======
->>>>>>> main
     public Collection<V> get(K key, int row) throws IndexOutOfBoundsException {
 
         if (row < 0 || row >= data.size()) {
