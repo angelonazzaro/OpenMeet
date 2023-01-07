@@ -15,6 +15,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% String view = "views/" + (String) request.getAttribute("view") + ".jsp"; %>
+<% String heading = (String) request.getAttribute("heading"); %>
 <% String[] scripts = (String[]) request.getAttribute("scripts"); %>
 
 <%-- Login view does not need the navigation bar --%>
@@ -25,11 +26,32 @@
     <div class="d-flex">
         <%@ include file="templates/navigation/navigation.jsp" %>
         <main style="padding: 4rem 0 2rem 0; background-color: #F5F6F8">
+            <% if (!view.contains("settings") && !view.contains("dashboard")) { %>
+                <div class="container h-100">
+                    <div class="h-100 row align-items-center justify-content-center">
+                        <div class="col-12 mb-5 mb-md-0 row">
+                            <h1 class="py-2 pb-lg-3 mb-3"><%= heading %></h1>
+
+                            <div class="w-100 search-bar-container mb-4">
+                                <div class="search-bar-input-group input-group input-group-md">
+                                    <span class="input-group-text" id="search-addon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                                    <input type="text" name="q" class="form-control" placeholder="Search..." aria-describedby="search-addon">
+                                </div>
+                            </div>
+
+                            <table class="w-100" id="dataTable">
+            <% } %>
 <% } %>
 
     <jsp:include page="<%= view %>" />
 
 <% if (!view.contains("login.jsp")) { %>
+            <% if (!view.contains("settings") && !view.contains("dashboard")) { %>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
         </main>
     </div>
 <% } %>

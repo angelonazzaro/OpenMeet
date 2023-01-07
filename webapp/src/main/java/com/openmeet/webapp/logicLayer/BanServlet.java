@@ -13,19 +13,20 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class ReportsServlet extends HttpServlet {
+public class BanServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-       req.setAttribute("view", "reports");
-       req.setAttribute("title", "Reports");
-       req.setAttribute("heading", "Reports");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("view", "bans");
+        req.setAttribute("title", "Bans");
+        req.setAttribute("heading", "Bans");
 
-       // Get Data
+        // Get Data
         QueryJoinExecutor qjx = new QueryJoinExecutor((DataSource) getServletContext().getAttribute("DataSource"));
         MultiMapList<String, String> data = new MultiMapList<>();
 
         try {
-            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.status = 0",
+            // TODO:
+            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.status = 1",
                     Report.REPORT,  Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT,  Meeter.MEETER,  Meeter.MEETER, Report.REPORT, Report.REPORT));
 
         } catch (SQLException ignored) {}

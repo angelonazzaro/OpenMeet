@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 dependencies {
     compileOnly('jakarta.servlet:jakarta.servlet-api:5.0.0')
 
-    implementation files('../shared/out/artifacts/shared_jar/shared.jar')
+    implementation files('../shared/artifacts/shared_jar/shared.jar')
     implementation 'org.apache.tomcat:tomcat-jdbc:10.0.20'
     implementation 'mysql:mysql-connector-java:8.0.31'
     implementation 'com.google.code.gson:gson:2.10'
