@@ -36,4 +36,4 @@ You can contribute to this software by following the guide lines specified here 
 
 
 ## License
-The software is distributed under the [MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) License. 
+This software is distributed under the [GNU General Public License v3.0](LICENSE.md). 
