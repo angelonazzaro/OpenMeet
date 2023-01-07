@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//Autore: Francesco Granozio
-//(per il meme)
 public class MultiMapList<K, V> {
 
     private List<Multimap<K, V>> data;
