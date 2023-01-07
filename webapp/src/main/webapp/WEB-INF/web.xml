@@ -81,6 +81,17 @@
         <url-pattern>/ban</url-pattern>
     </servlet-mapping>
 
+    <!-- Android Dispatcher Servlet Mapping -->
+    <servlet>
+        <servlet-name>AndroidRequest</servlet-name>
+        <servlet-class>com.openmeet.webapp.AndroidLogic.AndroidRequestDispatcher</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AndroidRequest</servlet-name>
+        <url-pattern>/androidReq</url-pattern>
+    </servlet-mapping>
+
     <!-- Static files: css, js, images etc. -->
     <servlet-mapping>
         <servlet-name>default</servlet-name>
