@@ -37,6 +37,7 @@ CREATE TABLE Report (
 	`meeterReporter` INT,
     `meeterReported` INT,
 	`reason` VARCHAR(50) NOT NULL, 
+    `status` TINYINT(1) NOT NULL DEFAULT 0, /* status = 0 -> not archived | status = 1 -> archived */
     `creationDate` DATETIME NOT NULL, 
     
     FOREIGN KEY (`meeterReporter`) REFERENCES Meeter (`id`) ON UPDATE CASCADE ON DELETE NO ACTION,
