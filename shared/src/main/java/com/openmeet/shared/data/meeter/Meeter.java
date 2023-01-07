@@ -15,7 +15,6 @@ public class Meeter implements IEntity {
     private String email;
     private String meeterName;
     private String meeterSurname;
-    //TODO: Hash Password
     private String pwd;
     private String biography;
     private Date birthDate;
