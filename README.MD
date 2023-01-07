@@ -24,6 +24,14 @@
 
  Documentation regarding the engineering process can be found in the `deliverables` folder. 
 
+ ## To Compile
+
+To compile use the following JDK versions:
+
+- For the **Mobile App** use Android Studio default JDK as Gladle JDK.
+- For the `shared` folder compile with the same version as the Mobile App.
+- For the **Web App** you can compile with latest JDK.
+
 ## Authors
 
  - **Angelo Nazzaro**   - Developer     - [sl1mSha4dey](https://github.com/sl1mSha4dey/)
@@ -36,4 +44,4 @@ You can contribute to this software by following the guide lines specified here 
 
 
 ## License
-The software is distributed under the [MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) License. 
+This software is distributed under the [GNU General Public License v3.0](LICENSE.md). 
