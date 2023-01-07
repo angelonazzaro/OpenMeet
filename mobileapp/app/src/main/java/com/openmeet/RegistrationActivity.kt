@@ -2,16 +2,14 @@ package com.openmeet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
-import kotlin.math.log
 
-class PersonaDataRegistrationActivity : AppCompatActivity() {
+class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_persona_data_registration)
+        setContentView(R.layout.activity_auth_registration)
 
         val birthday = findViewById<TextInputLayout>(R.id.birthdayField)
 
@@ -21,7 +19,7 @@ class PersonaDataRegistrationActivity : AppCompatActivity() {
             .setInputMode(MaterialDatePicker.INPUT_MODE_TEXT)
             .build()
 
-        datePicker.show(supportFragmentManager,"")
+        datePicker.show(supportFragmentManager,"birth_picker")
 
         datePicker.addOnPositiveButtonClickListener {
             Toast.makeText(this, "" + datePicker.selection + "",  Toast.LENGTH_LONG).show()
@@ -38,4 +36,6 @@ class PersonaDataRegistrationActivity : AppCompatActivity() {
         //TODO: set onClickListener on birthdayField, so in this way datepicker will be shown
 
     }
+
+
 }
