@@ -79,14 +79,14 @@
                                            aria-describedby="passwordHelpBlock"/>
                                     <span class="input-group-text toggle-pwd-icon" id="password-toggle"><i
                                             class="fa-solid fa-eye"></i></span>
-                                    <div id="passwordHelpBlock" class="form-text">
-                                        Your password must be 8-16 characters long, contain letters and numbers, special
-                                        characters and must not contain spaces or emoji.
-                                    </div>
                                     <div class="valid-feedback"></div>
                                     <div class="invalid-feedback">
                                         The password does not meet the specified criterias.
                                     </div>
+                                </div>
+                                <div id="passwordHelpBlock" class="form-text text-start">
+                                    Your password must be 8-16 characters long, contain letters and numbers, special
+                                    characters and must not contain spaces or emoji.
                                 </div>
                             </div>
                         </div>

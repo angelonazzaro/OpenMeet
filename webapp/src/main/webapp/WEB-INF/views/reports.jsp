@@ -6,16 +6,18 @@
 <% int rows = data.getRowsNumber(); %>
 
 <thead>
-<th>Full Name</th>
-<th>Email</th>
-<th>Reason</th>
-<th>Date</th>
-<th>Actions</th>
+    <tr>
+        <th class="text-center">Full Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Reason</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">Actions</th>
+    </tr>
 </thead>
 <tbody>
 <% HashMap<String, String> rowData = new HashMap<>(); %>
 <% for (int i = 0; i < rows; i++) { %>
-<tr>
+<tr class="text-center">
     <td><%= data.get("meeterfullName", i).toArray()[0] %>
     </td>
     <td><%= data.get("email", i).toArray()[0] %>
@@ -29,8 +31,8 @@
             <i class="fa-solid fa-ellipsis-vertical" style="cursor:pointer;" data-bs-toggle="dropdown"
                aria-expanded="false"></i>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" data-report-id="<%= data.get("id", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
-                <li><a class="dropdown-item" data-ban-meeterId="<%= data.get("meeterReported", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#ban-modal" >Ban Meeter</a></li>
+                <li style="cursor: pointer"><a class="dropdown-item" data-report-id="<%= data.get("id", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
+                <li style="cursor: pointer"><a class="dropdown-item" data-meeter-id="<%= data.get("meeterReported", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#ban-modal" >Ban Meeter</a></li>
             </ul>
         </div>
     </td>
@@ -60,29 +62,7 @@
     </div>
 </div>
 
-<%-- Ban Modal --%>
-<div class="modal fade" id="ban-modal" tabindex="-1" aria-labelledby="ban-modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="ban-modal-label">Ban Meeter</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="<%= request.getContextPath() %>/archivedReports" method="POST">
-                <div class="modal-body text-center">
-
-
-
-                    <input type="hidden" name="meeterId" id="meeter-to-ban">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Archive</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<%@include file="../templates/modals/banModal.jsp" %>
 
 <script>
 
