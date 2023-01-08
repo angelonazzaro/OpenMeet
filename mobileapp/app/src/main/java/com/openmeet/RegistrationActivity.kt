@@ -40,7 +40,6 @@ class RegistrationActivity : AppCompatActivity() {
             .build()
 
         confirmButton.setOnClickListener {
-            confirmButton.setText("CACCA PUPU'")
             val result = checkForm(name, surname, datePicker.selection, email, password, confirmPassword)
             if (result)
                 Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
