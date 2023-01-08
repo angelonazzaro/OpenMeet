@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults: 
       run: 
-        working-directory: ./webapp
+        working-directory: webapp
 
     steps:
     - uses: actions/checkout@v3
@@ -31,9 +31,10 @@ jobs:
       with:
         java-version: '19'
         distribution: 'temurin'
+        cache: gradle
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: build --stacktrace --info
+        arguments: build --stacktrace --info --debug --no-daemon
         gradle-version: 7.6
         
