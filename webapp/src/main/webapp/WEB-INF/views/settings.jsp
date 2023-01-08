@@ -92,7 +92,7 @@
                         </div>
                         <p id="error-msg" class="text-danger" style="display: none"></p>
                         <button type="submit" class="text-center btn btn-lg btn-primary w-100 mb-4">
-                            <span>Sign in</span>
+                            <span>Update settings</span>
                             <div class="spinner-border text-light" style="display: none" role="status">
                                 <span class="visually-hidden">Loading...</span>
                             </div>

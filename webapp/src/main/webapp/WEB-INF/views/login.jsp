@@ -6,7 +6,7 @@
             <div class="col-md-6 mb-5 mb-md-0">
                 <div class="card rounded py-md-3 py-lg-4 px-lg-4 px-xl-5">
                     <div class="card-body">
-                        <h1 class="py-2 pb-lg-3 mb-3">Sign in to OpenMeet</h1>
+                        <h1 class="py-2 pb-lg-3 mb-3">Sign in to OpenMeet AdminPanel</h1>
                         <form class="needs-validation" novalidate>
                             <div class="row pb-3 mb-4">
                                 <div class="input-group input-group-md has-validation">
