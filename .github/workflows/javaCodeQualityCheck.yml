@@ -1,0 +1,24 @@
+name: Java Code Quality Check
+
+on: 
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs: 
+  checkstyle: 
+    runs-on: ${{ matrix.os }}
+    strategy: 
+      matrix:
+        os: [ubuntu-latest]
+        
+    steps:
+      - uses: actions/checkout@v2
+      - uses: dbelyaev/action-checkstyle@v0.5.1
+        with:
+          workdir: ./webapp
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
