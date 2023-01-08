@@ -36,7 +36,9 @@ public class Moderator implements IEntity {
                 put("moderatorName", moderatorName);
                 put("moderatorSurname", moderatorSurname);
                 put("pwd", pwd);
-                put("profilePic", profilePic);
+
+                if (profilePic != null)
+                    put("profilePic", profilePic);
             }
         };
     }

@@ -32,9 +32,15 @@ public class Meeter implements IEntity {
                 put("email", email);
                 put("meeterName", meeterName);
                 put("meeterSurname", meeterSurname);
+
+                if (biography != null)
+                    put("biography", biography);
+
                 put("pwd", pwd);
                 put("birthDate", birthDate.toString());
-                put("publicKey", publicKey);
+
+                if (publicKey != null && publicKey.length > 0)
+                    put("publicKey", publicKey);
             }
         };
     }
