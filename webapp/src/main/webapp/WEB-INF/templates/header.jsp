@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" href="<%= request.getContextPath() %>/assets/imgs/special/icon/logo.png">
+
     <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/style.css">
 
     <title><%= title %> | OpenMeet</title>
