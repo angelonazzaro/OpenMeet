@@ -28,7 +28,7 @@
 
 To compile use the following JDK versions:
 
-- For the **Mobile App** use Android Studio default JDK as Gladle JDK.
+- For the **Mobile App** use Android Studio default JDK as Gradle JDK.
 - For the `shared` folder compile with the same version as the Mobile App.
 - For the **Web App** you can compile with latest JDK.
 
