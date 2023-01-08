@@ -10,7 +10,6 @@
 <th>Email</th>
 <th>Reason</th>
 <th>Date</th>
-<th>Account Status</th>
 <th>Actions</th>
 </thead>
 <tbody>
@@ -25,14 +24,13 @@
     </td>
     <td><%= data.get("creationDate", i).toArray()[0] %>
     </td>
-    <td>--</td>
     <td>
         <div class="btn-group dropend">
             <i class="fa-solid fa-ellipsis-vertical" style="cursor:pointer;" data-bs-toggle="dropdown"
                aria-expanded="false"></i>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" data-report-id="<%= data.get("id", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
-                <li><a class="dropdown-item" href="#">Ban Meeter</a></li>
+                <li><a class="dropdown-item" data-ban-meeterId="<%= data.get("meeterReported", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#ban-modal" >Ban Meeter</a></li>
             </ul>
         </div>
     </td>
@@ -62,12 +60,43 @@
     </div>
 </div>
 
+<%-- Ban Modal --%>
+<div class="modal fade" id="ban-modal" tabindex="-1" aria-labelledby="ban-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ban-modal-label">Ban Meeter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="<%= request.getContextPath() %>/archivedReports" method="POST">
+                <div class="modal-body text-center">
+
+
+
+                    <input type="hidden" name="meeterId" id="meeter-to-ban">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Archive</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
+
+    function addFunctionality(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute) {
+        document.querySelector(modalBtnToggleSelector).addEventListener("click", function () {
+            inputElement.value = this.getAttribute(attribute);
+        });
+
+        document.querySelector(modalBtnDismissSelector).addEventListener("click", () => inputElement.value = "");
+    }
+
     const reportId = document.getElementById("report-to-archive");
+    const meeterId = document.getElementById("meeter-to-ban");
 
-    document.querySelector("a[data-bs-target='#archive-modal']").addEventListener("click", function () {
-        reportId.value = this.getAttribute("data-report-id");
-    });
-
-    document.querySelector("button[data-bs-dismiss]").addEventListener("click", () => reportId.value = "" );
+    addFunctionality(reportId, "a[data-bs-target='#archive-modal']", "#archive-modal button[data-bs-dismiss]", "data-report-id");
+    addFunctionality(meeterId, "a[data-bs-target='#ban-modal']", "#ban-modal button[data-bs-dismiss]", "data-meeter-id");
 </script>
