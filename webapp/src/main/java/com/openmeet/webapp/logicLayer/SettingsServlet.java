@@ -27,7 +27,7 @@ public class SettingsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("view", "settings");
         req.setAttribute("title", "Settings");
-        req.setAttribute("scripts", new String[]{"settings"});
+        req.setAttribute("scripts", new String[]{"settings.js"});
 
         req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
@@ -55,8 +55,8 @@ public class SettingsServlet extends HttpServlet {
         user.setModeratorName(name);
         user.setModeratorSurname(surname);
 
-        valuesToUpdate.put("name", name);
-        valuesToUpdate.put("surname", surname);
+        valuesToUpdate.put("moderatorName", name);
+        valuesToUpdate.put("moderatorSurname", surname);
 
         String password = req.getParameter("password");
         // Regex check
@@ -68,7 +68,7 @@ public class SettingsServlet extends HttpServlet {
             }
 
             user.setPwd(password);
-            valuesToUpdate.put("name", name);
+            valuesToUpdate.put("pwd", user.getPwd());
         }
 
         // File Upload if any
