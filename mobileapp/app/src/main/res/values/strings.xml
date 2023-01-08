@@ -9,8 +9,12 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="email_null_error">"Email non inserita!"</string>
-    <string name="email_format_error">"Formato email non valido!"</string>
-    <string name="email_local_toolong_error">"Parte locale Email troppo lunga!"</string>
-    <string name="email_domain_toolong_error">"Parte dominio Email troppo lunga!"</string>
+    <string name="email_null_error">Email non inserita!</string>
+    <string name="email_format_error">Formato email non valido!</string>
+    <string name="email_local_toolong_error">Parte locale Email troppo lunga!</string>
+    <string name="email_domain_toolong_error">Parte dominio Email troppo lunga!</string>
+
+    <string name="homescreen_chat_title">Chats</string>
+    <string name="homescreen_discover_title">Discover</string>
+    <string name="homescreen_user_title">User</string>
 </resources>

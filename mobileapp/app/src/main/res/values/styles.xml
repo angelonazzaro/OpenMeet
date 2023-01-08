@@ -8,4 +8,10 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="MaterialCardView_noBottomRadius">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
 </resources>

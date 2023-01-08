@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/chat_Tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_chat_bubble_outline_24"
+        android:title="@string/homescreen_chat_title"/>
+    <item
+        android:id="@+id/discover_Tab"
+        android:enabled="true"
+        android:icon="@drawable/openmeet_blank_logo"
+        android:title="@string/homescreen_discover_title"/>
+    <item
+        android:id="@+id/user_Tab"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_email_24"
+        android:title="@string/homescreen_user_title"/>
+</menu>
