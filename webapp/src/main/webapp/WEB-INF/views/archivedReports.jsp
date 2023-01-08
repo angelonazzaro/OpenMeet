@@ -9,7 +9,6 @@
     <th>Email</th>
     <th>Reason</th>
     <th>Date</th>
-    <th>Account Status</th>
   </thead>
   <tbody>
     <% for (int i = 0; i < rows; i++) { %>
@@ -18,7 +17,6 @@
         <td><%= data.get("email", i).toArray()[0] %></td>
         <td><%= data.get("reason", i).toArray()[0] %></td>
         <td><%= data.get("creationDate", i).toArray()[0] %></td>
-        <td>--</td>
       </tr>
     <% } %>
   </tbody>

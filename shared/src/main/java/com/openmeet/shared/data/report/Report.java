@@ -14,7 +14,7 @@ public class Report implements IEntity {
     private int meeterReported;
     private String reason;
 
-    private int status;
+    private boolean isArchived;
     private Timestamp creationDate;
 
     public Report(){
@@ -29,6 +29,7 @@ public class Report implements IEntity {
                 put("meeterReporter", meeterReporter);
                 put("meeterReported", meeterReported);
                 put("reason", reason);
+                put("isArchived", isArchived);
                 put("creationDate", creationDate.toString());
             }
         };
@@ -41,6 +42,7 @@ public class Report implements IEntity {
                 ", meeterReporter=" + meeterReporter +
                 ", meeterReported=" + meeterReported +
                 ", reason='" + reason + '\'' +
+                ", isArchived='" + isArchived + '\'' +
                 ", creationDate=" + creationDate +
                 '}';
     }
@@ -77,9 +79,9 @@ public class Report implements IEntity {
         this.reason = reason;
     }
 
-    public int getStatus() { return status; }
+    public boolean isArchived() { return isArchived; }
 
-    public void setStatus(int status) { this.status = status; }
+    public void setIsArchived(boolean isArchived) { this.isArchived = isArchived; }
 
     public Timestamp getCreationDate() {
         return creationDate;

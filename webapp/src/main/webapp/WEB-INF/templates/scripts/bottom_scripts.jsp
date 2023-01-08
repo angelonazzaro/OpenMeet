@@ -8,6 +8,6 @@
 <%-- datatables scripts cdn --%>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <%-- chartjs cdn --%>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.1.2/dist/chart.umd.min.js"></script>
 <%-- core functions --%>
 <script src="<%= request.getContextPath() %>/assets/js/main.js"></script>

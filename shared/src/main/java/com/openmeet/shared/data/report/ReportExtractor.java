@@ -16,7 +16,7 @@ public class ReportExtractor implements ResultSetExtractor<Report> {
         report.setMeeterReporter(resultSet.getInt(Report.REPORT + ".meeterReporter"));
         report.setMeeterReported(resultSet.getInt(Report.REPORT + ".meeterReported"));
         report.setReason(resultSet.getString(Report.REPORT + ".reason"));
-        report.setStatus(resultSet.getInt(Report.REPORT + ".status"));
+        report.setIsArchived(resultSet.getBoolean(Report.REPORT + ".isArchived"));
         report.setCreationDate(resultSet.getTimestamp(Report.REPORT + ".creationDate"));
 
         return report;

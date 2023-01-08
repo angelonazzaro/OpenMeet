@@ -42,7 +42,6 @@ form.addEventListener('submit', function (e) {
         if (response.status === "error") {
             errorMsgParagraph.show().text(response.message);
         } else {
-            // redirect to dashboard
             window.location.reload();
         }
     }).fail(() => {
