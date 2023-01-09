@@ -15,36 +15,36 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class HomeServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("view", "dashboard");
-        req.setAttribute("title", "Dashboard");
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    req.setAttribute("view", "dashboard");
+    req.setAttribute("title", "Dashboard");
 
-        DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
-        ReportDAO reportDAO = new ReportDAO(dataSource);
-        Gson gson = new Gson();
+    DataSource dataSource = (DataSource) getServletContext().getAttribute("DataSource");
+    ReportDAO reportDAO = new ReportDAO(dataSource);
+    Gson gson = new Gson();
 
-        try {
-            // Get Report Ratio data (Archived vs Unarchived)
-            List<Report> unarchivedReports = reportDAO.doRetrieveByCondition(String.format("%s.isArchived = false", Report.REPORT));
-            List<Report> archivedReports = reportDAO.doRetrieveByCondition(String.format("%s.isArchived = true", Report.REPORT));
+    try {
+      // Get Report Ratio data (Archived vs Unarchived)
+      List<Report> unarchivedReports = reportDAO.doRetrieveByCondition(String.format("%s.isArchived = false", Report.REPORT));
+      List<Report> archivedReports = reportDAO.doRetrieveByCondition(String.format("%s.isArchived = true", Report.REPORT));
 
-            // Calculate Percentages
-            int totalReports = unarchivedReports.size() + archivedReports.size();
-            float unarchivedReportsPcg = ((float) unarchivedReports.size() / totalReports) * 100;
-            float archivedReportsPcg = ((float) archivedReports.size() / totalReports) * 100;
+      // Calculate Percentages
+      int totalReports = unarchivedReports.size() + archivedReports.size();
+      float unarchivedReportsPcg = ((float) unarchivedReports.size() / totalReports) * 100;
+      float archivedReportsPcg = ((float) archivedReports.size() / totalReports) * 100;
 
-            JSONResponse reportsData = new JSONResponse();
-            reportsData.addPair("unarchivedReportsPcg", String.valueOf(unarchivedReportsPcg));
-            reportsData.addPair("archivedReportsPcg", String.valueOf(archivedReportsPcg));
+      JSONResponse reportsData = new JSONResponse();
+      reportsData.addPair("unarchivedReportsPcg", String.valueOf(unarchivedReportsPcg));
+      reportsData.addPair("archivedReportsPcg", String.valueOf(archivedReportsPcg));
 
-            req.setAttribute("reportsData", gson.toJson(reportsData.getResponse()));
+      req.setAttribute("reportsData", gson.toJson(reportsData.getResponse()));
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e); // handle error
-        }
-
-
-        req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
+    } catch (SQLException e) {
+      throw new RuntimeException(e); // handle error
     }
+
+
+    req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
+  }
 }

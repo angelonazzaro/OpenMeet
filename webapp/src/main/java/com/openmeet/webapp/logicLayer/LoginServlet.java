@@ -20,74 +20,74 @@ import java.util.List;
 
 public class LoginServlet extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (isLogged(req)) {
-            resp.sendRedirect(req.getContextPath() + "/");
-            return;
-        }
-
-        req.setAttribute("view", "login");
-        req.setAttribute("title", "Login");
-        req.setAttribute("scripts", new String[]{"login"});
-
-        req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
+    if (isLogged(req)) {
+      resp.sendRedirect(req.getContextPath() + "/");
+      return;
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    req.setAttribute("view", "login");
+    req.setAttribute("title", "Login");
+    req.setAttribute("scripts", new String[]{"login"});
 
-        if (isLogged(req)) {
-            resp.sendRedirect(req.getContextPath() + "/");
-            return;
-        }
+    req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
+  }
 
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        Gson gson = new Gson();
-        PrintWriter out = resp.getWriter();
+  @Override
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-
-        // Check if all required parameters are initialized, if not send back an error message
-        if (email == null || password == null || email.length() == 0 || password.length() == 0) {
-            ResponseHelper.sendCustomError(out, gson, "One or more required fields are missing.");
-            return;
-        }
-
-        ModeratorDAO moderatorDAO = new ModeratorDAO((DataSource) getServletContext().getAttribute("DataSource"));
-        // Check if user exists
-        try {
-            List<Moderator> moderators = moderatorDAO
-                    .doRetrieveByCondition(String.format("%s.email = '%s' AND %s.pwd=SHA1('%s')",
-                            Moderator.MODERATOR, email, Moderator.MODERATOR, password));
-
-            if (moderators.isEmpty()) {
-                ResponseHelper.sendCustomError(out, gson, "The email or the password are incorrect. Please try again.");
-                return;
-            }
-
-            // User has been found. Log in the user
-            HttpSession session = req.getSession();
-            session.setAttribute("user", moderators.get(0));
-
-        } catch (SQLException e) {
-            ResponseHelper.sendGenericError(out, gson);
-            return;
-        }
-
-        // Response
-        HashMap<String, String> values = new HashMap<>();
-        values.put("status", "success");
-        values.put("redirectTo", req.getContextPath() + "/");
-        ResponseHelper.sendGenericResponse(out, gson, values);
+    if (isLogged(req)) {
+      resp.sendRedirect(req.getContextPath() + "/");
+      return;
     }
 
-    private boolean isLogged(HttpServletRequest req) {
-        HttpSession currentUserSession = req.getSession(false);
+    String email = req.getParameter("email");
+    String password = req.getParameter("password");
+    Gson gson = new Gson();
+    PrintWriter out = resp.getWriter();
 
-        return currentUserSession != null && currentUserSession.getAttribute("user") != null;
+    resp.setContentType("application/json");
+    resp.setCharacterEncoding("UTF-8");
+
+    // Check if all required parameters are initialized, if not send back an error message
+    if (email == null || password == null || email.length() == 0 || password.length() == 0) {
+      ResponseHelper.sendCustomError(out, gson, "One or more required fields are missing.");
+      return;
     }
+
+    ModeratorDAO moderatorDAO = new ModeratorDAO((DataSource) getServletContext().getAttribute("DataSource"));
+    // Check if user exists
+    try {
+      List<Moderator> moderators = moderatorDAO
+          .doRetrieveByCondition(String.format("%s.email = '%s' AND %s.pwd=SHA1('%s')",
+              Moderator.MODERATOR, email, Moderator.MODERATOR, password));
+
+      if (moderators.isEmpty()) {
+        ResponseHelper.sendCustomError(out, gson, "The email or the password are incorrect. Please try again.");
+        return;
+      }
+
+      // User has been found. Log in the user
+      HttpSession session = req.getSession();
+      session.setAttribute("user", moderators.get(0));
+
+    } catch (SQLException e) {
+      ResponseHelper.sendGenericError(out, gson);
+      return;
+    }
+
+    // Response
+    HashMap<String, String> values = new HashMap<>();
+    values.put("status", "success");
+    values.put("redirectTo", req.getContextPath() + "/");
+    ResponseHelper.sendGenericResponse(out, gson, values);
+  }
+
+  private boolean isLogged(HttpServletRequest req) {
+    HttpSession currentUserSession = req.getSession(false);
+
+    return currentUserSession != null && currentUserSession.getAttribute("user") != null;
+  }
 }

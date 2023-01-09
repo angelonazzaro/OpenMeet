@@ -10,16 +10,16 @@ import java.io.IOException;
 public class LogoutServlet extends HttpServlet {
 
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+  @Override
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        HttpSession currentUserSession = req.getSession(false);
+    HttpSession currentUserSession = req.getSession(false);
 
-        // Destroy current user session if not null
-        if (currentUserSession != null && currentUserSession.getAttribute("user") != null)
-            currentUserSession.invalidate();
+    // Destroy current user session if not null
+    if (currentUserSession != null && currentUserSession.getAttribute("user") != null)
+      currentUserSession.invalidate();
 
-        // Redirect to login page
-        resp.sendRedirect(req.getContextPath() + "/login");
-    }
+    // Redirect to login page
+    resp.sendRedirect(req.getContextPath() + "/login");
+  }
 }

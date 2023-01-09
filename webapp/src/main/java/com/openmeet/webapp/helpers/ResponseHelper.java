@@ -8,54 +8,54 @@ import java.util.HashMap;
 
 public class ResponseHelper {
 
-    private static final JSONResponse jsonResponse = new JSONResponse();
+  private static final JSONResponse jsonResponse = new JSONResponse();
 
-    public static boolean checkStringFields(String[] parameters) {
+  public static boolean checkStringFields(String[] parameters) {
 
-        for (String parameter : parameters) {
-            if (parameter == null || parameter.length() == 0) return true;
-        }
-
-        return false;
+    for (String parameter : parameters) {
+      if (parameter == null || parameter.length() == 0) return true;
     }
 
-    public static void sendGenericError(PrintWriter out, Gson gson) {
+    return false;
+  }
 
-        jsonResponse.addPair("status", "error");
-        jsonResponse.addPair("message", "An error occurred, please try again later.");
+  public static void sendGenericError(PrintWriter out, Gson gson) {
 
-        writeResponse(out, gson);
-    }
+    jsonResponse.addPair("status", "error");
+    jsonResponse.addPair("message", "An error occurred, please try again later.");
 
-    public static void sendCustomError(PrintWriter out, Gson gson, String value) {
+    writeResponse(out, gson);
+  }
 
-        jsonResponse.addPair("status", "error");
-        jsonResponse.addPair("message", value);
+  public static void sendCustomError(PrintWriter out, Gson gson, String value) {
 
-        writeResponse(out, gson);
-    }
+    jsonResponse.addPair("status", "error");
+    jsonResponse.addPair("message", value);
 
-    public static void sendCustomSuccess(PrintWriter out, Gson gson, String value) {
+    writeResponse(out, gson);
+  }
 
-        jsonResponse.addPair("status", "success");
-        jsonResponse.addPair("message", value);
+  public static void sendCustomSuccess(PrintWriter out, Gson gson, String value) {
 
-        writeResponse(out, gson);
-    }
+    jsonResponse.addPair("status", "success");
+    jsonResponse.addPair("message", value);
 
-    public static void sendGenericResponse(PrintWriter out, Gson gson, HashMap<String, String> pairs) {
+    writeResponse(out, gson);
+  }
 
-        pairs.entrySet().forEach(entry -> {
-            jsonResponse.addPair(entry.getKey(), entry.getValue());
-        });
+  public static void sendGenericResponse(PrintWriter out, Gson gson, HashMap<String, String> pairs) {
 
-        writeResponse(out, gson);
-    }
+    pairs.entrySet().forEach(entry -> {
+      jsonResponse.addPair(entry.getKey(), entry.getValue());
+    });
 
-    private static void writeResponse(PrintWriter out, Gson gson) {
-        out.write(gson.toJson(jsonResponse.getResponse()));
-        out.flush();
-        jsonResponse.clear();
-    }
+    writeResponse(out, gson);
+  }
+
+  private static void writeResponse(PrintWriter out, Gson gson) {
+    out.write(gson.toJson(jsonResponse.getResponse()));
+    out.flush();
+    jsonResponse.clear();
+  }
 
 }
