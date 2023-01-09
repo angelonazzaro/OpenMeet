@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
             // Calculate Percentages
             int totalReports = unarchivedReports.size() + archivedReports.size();
             float unarchivedReportsPcg = ((float) unarchivedReports.size() / totalReports) * 100;
-            float archivedReportsPcg = ((float ) archivedReports.size() / totalReports) * 100;
+            float archivedReportsPcg = ((float) archivedReports.size() / totalReports) * 100;
 
             JSONResponse reportsData = new JSONResponse();
             reportsData.addPair("unarchivedReportsPcg", String.valueOf(unarchivedReportsPcg));

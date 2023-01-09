@@ -21,5 +21,5 @@ public class ModeratorExtractor implements ResultSetExtractor<Moderator> {
 
         return moderator;
     }
-    
+
 }

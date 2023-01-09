@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 /**
  * Class for building a JSON Response
- * */
+ */
 public class JSONResponse {
     private HashMap<String, String> response;
 
@@ -40,10 +40,10 @@ public class JSONResponse {
      * The returned string would look like:
      * <p>
      * {
-     *     "status": error,
-     *     "msg": "something went wrong",
+     * "status": error,
+     * "msg": "something went wrong",
      * }
-     * */
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

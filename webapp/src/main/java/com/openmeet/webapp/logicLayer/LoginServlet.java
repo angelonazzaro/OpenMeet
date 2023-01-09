@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class LoginServlet extends HttpServlet {

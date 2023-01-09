@@ -37,22 +37,16 @@ public class Moderator implements IEntity {
                 put("moderatorSurname", moderatorSurname);
                 put("pwd", pwd);
 
-                if (profilePic != null)
+                if (profilePic != null) {
                     put("profilePic", profilePic);
+                }
             }
         };
     }
 
     @Override
     public String toString() {
-        return "Moderator{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", moderatorName='" + moderatorName + '\'' +
-                ", moderatorSurname='" + moderatorSurname + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", profilePic='" + profilePic + '\'' +
-                '}';
+        return "Moderator{" + "id=" + id + ", email='" + email + '\'' + ", moderatorName='" + moderatorName + '\'' + ", moderatorSurname='" + moderatorSurname + '\'' + ", pwd='" + pwd + '\'' + ", profilePic='" + profilePic + '\'' + '}';
     }
 
     public int getId() {

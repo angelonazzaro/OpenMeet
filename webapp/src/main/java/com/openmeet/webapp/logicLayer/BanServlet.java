@@ -29,10 +29,10 @@ public class BanServlet extends HttpServlet {
         MultiMapList<String, String> data = new MultiMapList<>();
 
         try {
-            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.status = 1",
-                    Report.REPORT,  Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT,  Meeter.MEETER,  Meeter.MEETER, Report.REPORT, Report.REPORT));
+            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.status = 1", Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
 
-        } catch (SQLException ignored) {}
+        } catch (SQLException ignored) {
+        }
 
         req.setAttribute("data", data);
 
@@ -60,8 +60,7 @@ public class BanServlet extends HttpServlet {
         ban.setMeeterId(meeterId);
         ban.setStartTime(new Timestamp(System.currentTimeMillis()));
 
-        if (endTime != null)
-            ban.setEndTime(endTime);
+        if (endTime != null) ban.setEndTime(endTime);
 
         try {
             if (banDAO.doSave(ban)) {

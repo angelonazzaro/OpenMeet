@@ -24,7 +24,7 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
     public Moderator doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {
-            throw new InvalidPrimaryKeyException(key.toString());
+            throw new InvalidPrimaryKeyException(key);
         }
         List<Moderator> moderator = doRetrieveByCondition(
                 String.format("%s.id = '%s'", Moderator.MODERATOR, key)

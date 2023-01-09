@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class ResponseHelper {
 
     private static final JSONResponse jsonResponse = new JSONResponse();
+
     public static boolean checkStringFields(String[] parameters) {
 
         for (String parameter : parameters) {

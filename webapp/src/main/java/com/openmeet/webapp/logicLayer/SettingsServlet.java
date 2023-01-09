@@ -43,7 +43,7 @@ public class SettingsServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        if (ResponseHelper.checkStringFields(new String[] {name, surname})) {
+        if (ResponseHelper.checkStringFields(new String[]{name, surname})) {
             ResponseHelper.sendCustomError(out, gson, "One or more required fields are missing.");
             return;
         }
@@ -95,7 +95,7 @@ public class SettingsServlet extends HttpServlet {
 
                 String appPath = req.getServletContext().getRealPath("/");
                 String basePath = appPath + "assets/uploads/moderators/" + user.getId();
-                String uploadPath = basePath + "/profilePic." + fileExtension ;
+                String uploadPath = basePath + "/profilePic." + fileExtension;
                 File userProfilePicFolder = new File(basePath);
 
                 // If the folder does not exist, it means this is the first upload by the user
