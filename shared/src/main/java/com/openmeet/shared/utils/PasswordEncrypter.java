@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Class for password encryption
+ * Class for password encryption.
  *
  * @author Francesco Granozio
  * @author Angelo Nazzaro
@@ -12,10 +12,10 @@ import java.security.NoSuchAlgorithmException;
 public class PasswordEncrypter {
 
     /**
-     * SHA1 Algorithm implementation
+     * SHA1 Algorithm implementation.
      *
-     * @param password The password to encrypt
-     * @return the encrypted password
+     * @param password The password to encrypt.
+     * @return the encrypted password.
      *
      * @author Francesco Granozio
      * @author Angelo Nazzaro

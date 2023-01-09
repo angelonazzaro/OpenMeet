@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * This class is used to filter all requests and check if the user is authenticated
+ * This class is used to filter all requests and check if the user is authenticated.
  *
  * @author Angelo Nazzaro
  * */

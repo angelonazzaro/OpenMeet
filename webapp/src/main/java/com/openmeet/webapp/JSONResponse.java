@@ -3,7 +3,7 @@ package com.openmeet.webapp;
 import java.util.HashMap;
 
 /**
- * Class for building a JSON Response
+ * Class for building a JSON Response.
  *
  * @author Angelo Nazzaro
  */
@@ -15,9 +15,9 @@ public class JSONResponse {
   }
 
   /**
-   * Returns the response
+   * Returns the response.
    *
-   * @return the response
+   * @return the response.
    *
    * @author Angelo Nazzaro
    * */
@@ -26,10 +26,10 @@ public class JSONResponse {
   }
 
   /**
-   * Adds a pair to the response
+   * Adds a pair to the response.
    *
-   * @param key The key of the pair
-   * @param value The value of the pair
+   * @param key The key of the pair.
+   * @param value The value of the pair.
    *
    * @author Angelo Nazzaro
    * */
@@ -39,10 +39,10 @@ public class JSONResponse {
 
 
   /**
-   * Returns the value of the key
+   * Returns the value of the key.
    *
-   * @param key The JSON object key
-   * @return The value of the key
+   * @param key The JSON object key.
+   * @return The value of the key.
    *
    * @author Angelo Nazzaro
    * */
@@ -53,7 +53,7 @@ public class JSONResponse {
   }
 
   /**
-   * Clears the response
+   * Clears the response.
    *
    * @author Angelo Nazzaro
    * */
@@ -62,9 +62,9 @@ public class JSONResponse {
   }
 
   /**
-   * Returns the response as a JSON string
+   * Returns the response as a JSON string.
    *
-   * @return this object in a JSON-like format
+   * @return this object in a JSON-like format.
    *
    * @author Angelo Nazzaro
    */
