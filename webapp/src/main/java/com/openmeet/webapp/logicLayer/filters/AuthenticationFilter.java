@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * This class is used to filter all requests and check if the user is authenticated
+ * This class is used to filter all requests and check if the user is authenticated.
  *
  * @author Angelo Nazzaro
  * */
@@ -36,7 +36,7 @@ public class AuthenticationFilter implements Filter {
     // We assume the user is logged
     String requestURI = request.getRequestURI();
 
-    if (!requestURI.endsWith("logout") && !requestURI.endsWith("login") && !requestURI.contains("assets")) {
+    if (!requestURI.endsWith("logout") && !requestURI.endsWith("login") && !requestURI.contains("assets") && !requestURI.contains("error")) {
       // If the user is not logged, redirect to the login page
       if (currentUserSession == null || currentUserSession.getAttribute("user") == null) {
         response.sendRedirect(request.getContextPath() + "/login");

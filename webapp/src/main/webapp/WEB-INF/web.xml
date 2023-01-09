@@ -59,7 +59,7 @@
         <url-pattern>/reports</url-pattern>
     </servlet-mapping>
 
-    <!-- Reports Archived Reports Servlet Mapping -->
+    <!-- Archived Reports Servlet Mapping -->
     <servlet>
         <servlet-name>ArchivedReportsServlet</servlet-name>
         <servlet-class>com.openmeet.webapp.logicLayer.ArchivedReportsServlet</servlet-class>
@@ -70,7 +70,7 @@
         <url-pattern>/archivedReports</url-pattern>
     </servlet-mapping>
 
-    <!-- Reports Servlet Mapping -->
+    <!-- Ban Servlet Mapping -->
     <servlet>
         <servlet-name>BanServlet</servlet-name>
         <servlet-class>com.openmeet.webapp.logicLayer.BanServlet</servlet-class>
@@ -81,16 +81,27 @@
         <url-pattern>/ban</url-pattern>
     </servlet-mapping>
 
-    <!-- Android Dispatcher Servlet Mapping -->
+    <!-- Error Servlet Mapping -->
     <servlet>
-        <servlet-name>AndroidRequest</servlet-name>
-        <servlet-class>com.openmeet.webapp.AndroidLogic.AndroidRequestDispatcher</servlet-class>
+        <servlet-name>ErrorServlet</servlet-name>
+        <servlet-class>com.openmeet.webapp.logicLayer.ErrorServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>AndroidRequest</servlet-name>
-        <url-pattern>/androidReq</url-pattern>
+        <servlet-name>ErrorServlet</servlet-name>
+        <url-pattern>/error</url-pattern>
     </servlet-mapping>
+
+    <!-- Errors -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error</location>
+    </error-page>
 
     <!-- Static files: css, js, images etc. -->
     <servlet-mapping>

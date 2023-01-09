@@ -41,7 +41,7 @@ public class HomeServlet extends HttpServlet {
       req.setAttribute("reportsData", gson.toJson(reportsData.getResponse()));
 
     } catch (SQLException e) {
-      throw new RuntimeException(e); // handle error
+      resp.sendError(500, "Internal Server Error");
     }
 
 

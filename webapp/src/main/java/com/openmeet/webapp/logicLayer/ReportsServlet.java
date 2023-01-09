@@ -28,7 +28,8 @@ public class ReportsServlet extends HttpServlet {
       data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.isArchived = false",
           Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
 
-    } catch (SQLException ignored) {
+    } catch (SQLException e) {
+      resp.sendError(500, "Internal Server error");
     }
 
     req.setAttribute("data", data);

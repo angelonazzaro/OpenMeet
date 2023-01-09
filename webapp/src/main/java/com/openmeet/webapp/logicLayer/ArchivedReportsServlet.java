@@ -32,7 +32,8 @@ public class ArchivedReportsServlet extends HttpServlet {
       data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.isArchived = true",
           Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
 
-    } catch (SQLException ignored) {
+    } catch (SQLException e) {
+      resp.sendError(500, "Internal Server Error");
     }
 
     req.setAttribute("data", data);
@@ -47,7 +48,8 @@ public class ArchivedReportsServlet extends HttpServlet {
     Gson gson = new Gson();
 
     if (reportId <= 0) {
-      return; // handle error
+      resp.sendError(500, "Internal Server Error");
+      return;
     }
 
     ReportDAO reportDAO = new ReportDAO((DataSource) getServletContext().getAttribute("DataSource"));
@@ -60,7 +62,7 @@ public class ArchivedReportsServlet extends HttpServlet {
         return;
       }
     } catch (SQLException e) {
-      // handle error
+      resp.sendError(500, "Internal Server Error");
     }
 
   }
