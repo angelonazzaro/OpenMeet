@@ -6,6 +6,9 @@ import java.util.Map;
 
 /**
  * Class for programmatically constructing a SQL query.
+ *
+ * @author Francesco Granozio
+ * @author Angelo Nazzaro
  */
 public class QueryBuilder {
 
@@ -21,6 +24,9 @@ public class QueryBuilder {
      *
      * @param columns The column names.
      * @return The new {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public static QueryBuilder SELECT(String... columns) {
@@ -43,6 +49,9 @@ public class QueryBuilder {
      *
      * @param tables The table names.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder FROM(String... tables) {
@@ -63,6 +72,9 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder JOIN(String table) {
@@ -83,6 +95,9 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder LEFT_JOIN(String table) {
@@ -103,6 +118,9 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder RIGHT_JOIN(String table) {
@@ -123,6 +141,9 @@ public class QueryBuilder {
      *
      * @param predicate The predicate.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder ON(String predicate) {
@@ -143,6 +164,9 @@ public class QueryBuilder {
      *
      * @param predicate The predicate.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder WHERE(String predicate) {
@@ -163,6 +187,9 @@ public class QueryBuilder {
      *
      * @param columns The column names.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder ORDER_BY(String... columns) {
@@ -183,6 +210,9 @@ public class QueryBuilder {
      *
      * @param row_count The limit count.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder LIMIT(int row_count) {
@@ -204,6 +234,9 @@ public class QueryBuilder {
      * @param offset    Starting offset
      * @param row_count Ending offset
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
     public QueryBuilder LIMIT(int offset, int row_count) {
 
@@ -224,6 +257,9 @@ public class QueryBuilder {
      * Appends a "for update" clause to a query.
      *
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder FOR_UPDATE() {
@@ -238,6 +274,9 @@ public class QueryBuilder {
      *
      * @param queryBuilder The query builder to append.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder UNION(QueryBuilder queryBuilder) {
@@ -254,6 +293,9 @@ public class QueryBuilder {
      * @param table  The table name.
      * @param values The values to insert.
      * @return The new {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public static QueryBuilder INSERT_INTO(String table, Map<String, ?> values) {
@@ -320,6 +362,9 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The new {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public static QueryBuilder UPDATE(String table) {
@@ -342,6 +387,9 @@ public class QueryBuilder {
      *
      * @param values The values to update.
      * @return The {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public QueryBuilder SET(Map<String, ?> values) {
@@ -388,6 +436,9 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The new {@link QueryBuilder} instance.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      */
 
     public static QueryBuilder DELETE_FROM(String table) {

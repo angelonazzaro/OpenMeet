@@ -7,6 +7,11 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+/**
+ * This class is used to filter all requests and check if the user is authenticated
+ *
+ * @author Angelo Nazzaro
+ * */
 public class AuthenticationFilter implements Filter {
 
   private ServletContext context;
@@ -16,6 +21,12 @@ public class AuthenticationFilter implements Filter {
     this.context.log("AuthenticationFilter initialized");
   }
 
+  /**
+   * Checks if the user is authenticated.
+   * If not, the user will be redirected to the login page.
+   *
+   * @author Angelo Nazzaro
+   * */
   public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
 
     HttpServletRequest request = (HttpServletRequest) req;
@@ -37,7 +48,6 @@ public class AuthenticationFilter implements Filter {
   }
 
   public void destroy() {
-    // we can close resources here
     this.context.log("AuthenticationFilter removed");
   }
 

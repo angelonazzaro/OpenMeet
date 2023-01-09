@@ -16,6 +16,9 @@ import java.util.logging.Logger;
 /**
  * It contains all the methods that should be implemented
  * by the DAOs.
+ *
+ * @author Francesco Granozio
+ * @author Angelo Nazzaro
  * */
 public interface DAO<T> {
 
