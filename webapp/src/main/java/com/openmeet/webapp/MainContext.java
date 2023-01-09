@@ -20,26 +20,26 @@ import java.util.logging.Logger;
 @WebListener
 public class MainContext implements ServletContextListener {
 
-    private static final Logger logger = Logger.getLogger(MainContext.class.getName());
+  private static final Logger logger = Logger.getLogger(MainContext.class.getName());
 
-    public void contextInitialized(ServletContextEvent sce) {
-        ServletContext sc = sce.getServletContext();
-        DataSource ds;
-        Context initCtx;
+  public void contextInitialized(ServletContextEvent sce) {
+    ServletContext sc = sce.getServletContext();
+    DataSource ds;
+    Context initCtx;
 
-        try {
-            initCtx = new InitialContext();
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");
-            ds = (DataSource) envCtx.lookup("jdbc/OpenMeet");
-            sc.setAttribute("DataSource", ds);
-        } catch (NamingException e) {
-            logger.log(Level.SEVERE, e.getMessage());
-        }
+    try {
+      initCtx = new InitialContext();
+      Context envCtx = (Context) initCtx.lookup("java:comp/env");
+      ds = (DataSource) envCtx.lookup("jdbc/OpenMeet");
+      sc.setAttribute("DataSource", ds);
+    } catch (NamingException e) {
+      logger.log(Level.SEVERE, e.getMessage());
     }
+  }
 
-    public void contextDestroyed(ServletContextEvent sce) {
+  public void contextDestroyed(ServletContextEvent sce) {
 
-        ServletContext cont = sce.getServletContext();
-        cont.removeAttribute("DataSource");
-    }
+    ServletContext cont = sce.getServletContext();
+    cont.removeAttribute("DataSource");
+  }
 }

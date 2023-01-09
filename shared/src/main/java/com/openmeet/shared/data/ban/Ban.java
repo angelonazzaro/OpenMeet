@@ -28,7 +28,10 @@ public class Ban implements IEntity {
                 put("moderatorId", moderatorId);
                 put("description", description);
                 put("startTime", startTime.toString());
-                put("endTime", endTime.toString());
+
+                if (endTime != null)
+                    put("endTime", endTime.toString());
+
                 put("meeterId", meeterId);
             }
         };
