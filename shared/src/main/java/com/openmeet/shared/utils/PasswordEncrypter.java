@@ -3,8 +3,11 @@ package com.openmeet.shared.utils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/*
+/**
  * Class for password encryption
+ *
+ * @author Francesco Granozio
+ * @author Angelo Nazzaro
  */
 public class PasswordEncrypter {
 
@@ -12,7 +15,10 @@ public class PasswordEncrypter {
      * SHA1 Algorithm implementation
      *
      * @param password The password to encrypt
-     * @return the encrypyed password
+     * @return the encrypted password
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
      * */
     public static String sha1(String password) throws NoSuchAlgorithmException {
 

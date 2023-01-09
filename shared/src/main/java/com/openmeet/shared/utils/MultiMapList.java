@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * A collection that maps keys to values, similar to Map, but in which each key may be associated with multiple values.
+ *
+ * @see java.util.Map
+ *
+ * @author Francesco Granozio
+ * @author Angelo Nazzaro
+ * */
 public class MultiMapList<K, V> {
 
     private List<Multimap<K, V>> data;
