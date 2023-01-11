@@ -24,7 +24,7 @@ public class QueryJoinExecutor extends SQLDAO {
      * Returns a MultiMapList object that can be used to handle Result Set objects
      * made up of different Beans.
      *
-     * @param query The query join to be executed.
+     * @param query the query join to be executed.
      * @return the query results as a MultiMapList.
      *
      * @see ResultSet

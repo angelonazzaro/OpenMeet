@@ -27,7 +27,9 @@ public interface DAO<T> {
     /**
      * Returns a list of objects from the database that match a given condition.
      *
+     * @param condition the condition to be matched.
      * @return the query results as a list of objects.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -36,7 +38,9 @@ public interface DAO<T> {
     /**
      * Returns an object from the database that match a given condition.
      *
+     * @param key the primary key of the object to be retrieved.
      * @return the query result as a single object
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -46,6 +50,7 @@ public interface DAO<T> {
      * Returns a list of all objects from the database.
      *
      * @return the query results as a list of objects.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -55,7 +60,9 @@ public interface DAO<T> {
      * Returns a list of objects from the database,
      * limiting the result set to the specified number of rows.
      *
+     * @param row_count the number of rows to be returned.
      * @return the query results as a list of objects.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -65,7 +72,10 @@ public interface DAO<T> {
      * Returns a list of objects from the database, starting at a specified offset
      * and limiting the result set to the specified number of rows.
      *
+     * @param offset the offset to start the query from.
+     * @param row_count the number of rows to be returned.
      * @return the query results as a list of objects.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -74,7 +84,9 @@ public interface DAO<T> {
     /**
      * Saves an object in the database.
      *
+     * @param obj the object to be saved.
      * @return a boolean value that indicates if the operation was successful or not.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -84,7 +96,10 @@ public interface DAO<T> {
      * Updates database objects that match a given condition,
      * using only the values contained in the HashMap
      *
+     * @param values the values to be updated.
+     * @param condition the condition to be matched.
      * @return a boolean value that indicates if the operation was successful or not.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -93,7 +108,9 @@ public interface DAO<T> {
     /**
      * Saves an object to the database if it does not already exist, or updates it if it does.
      *
+     * @param obj the object to be saved or updated.
      * @return a boolean value that indicates if the operation was successful or not.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -102,7 +119,9 @@ public interface DAO<T> {
     /**
      * Deletes objects from the database that match a given condition.
      *
+     * @param condition the condition to be matched.
      * @return a boolean value that indicates if the operation was successful or not.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
