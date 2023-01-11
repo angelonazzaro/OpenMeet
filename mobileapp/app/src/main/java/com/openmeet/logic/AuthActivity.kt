@@ -28,7 +28,7 @@ class AuthActivity : AppCompatActivity() {
          */
         loginBtn.setOnClickListener {
 
-            val email = emailFld.editText?.text.toString()
+            val email = emailFld.editText?.text.toString().lowercase()
 
             if (email.isBlank() || email.isEmpty())
             //Toast.makeText(this, "email non inserita", Toast.LENGTH_LONG).show()
