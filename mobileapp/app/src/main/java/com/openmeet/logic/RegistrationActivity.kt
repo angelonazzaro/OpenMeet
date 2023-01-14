@@ -1,4 +1,4 @@
-package com.openmeet
+package com.openmeet.logic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,11 +7,9 @@ import android.widget.Toast
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.textfield.TextInputLayout
+import com.openmeet.R
 import java.security.InvalidParameterException
 import java.text.SimpleDateFormat
-import java.time.Duration
-import java.time.LocalDate
-import java.time.Period
 import java.util.*
 import com.google.android.material.datepicker.MaterialDatePicker as DatepickerMaterialDatePicker
 
@@ -40,33 +38,43 @@ class RegistrationActivity : AppCompatActivity() {
             .build()
 
         confirmButton.setOnClickListener {
-            val result = checkForm(name, surname, datePicker.selection, email, password, confirmPassword)
+            val result =
+                checkForm(name, surname, datePicker.selection, email, password, confirmPassword)
             if (result)
                 Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(this, "NOT SUCCESS", Toast.LENGTH_SHORT).show()
         }
 
-        birthday.editText?.setOnClickListener{
-            datePicker.show(supportFragmentManager,"birth_picker")
+        birthday.editText?.setOnClickListener {
+            datePicker.show(supportFragmentManager, "birth_picker")
         }
 
         datePicker.addOnPositiveButtonClickListener {
             birthday.editText?.setText(getDate(datePicker.selection, "dd/MM/yyyy"))
         }
 
-        datePicker.addOnNegativeButtonClickListener{
-            Toast.makeText(this,"Ricorda di inserire sempre la data di nascita", Toast.LENGTH_LONG).show()
+        datePicker.addOnNegativeButtonClickListener {
+            Toast.makeText(this, "Ricorda di inserire sempre la data di nascita", Toast.LENGTH_LONG)
+                .show()
         }
 
     }
 
-    fun getDate(millis: Long?,format: String): String? {
+    fun getDate(millis: Long?, format: String): String? {
         val formatter = SimpleDateFormat(format)
         return formatter.format(millis)
     }
+
     //this function if all values are correct
-    fun checkForm(name: TextInputLayout, surname: TextInputLayout, birthday: Long?, email: TextInputLayout, password: TextInputLayout, confirmPassword: TextInputLayout): Boolean {
+    fun checkForm(
+        name: TextInputLayout,
+        surname: TextInputLayout,
+        birthday: Long?,
+        email: TextInputLayout,
+        password: TextInputLayout,
+        confirmPassword: TextInputLayout
+    ): Boolean {
 
         var nameText = name.editText?.text.toString()
         var surnameText = surname.editText?.text.toString()
@@ -93,7 +101,7 @@ class RegistrationActivity : AppCompatActivity() {
             diff.timeInMillis = now - birthday
             if (diff.get(Calendar.YEAR) - 1970 < 18)
                 Toast.makeText(this, "Hai meno di 18 anni", Toast.LENGTH_LONG).show()
-                flag = false
+            flag = false
 
         }
         //check mail
@@ -102,20 +110,17 @@ class RegistrationActivity : AppCompatActivity() {
             if (!emailText.matches(Regex("^[a-z0-9!#$%&'*+=?^_`{|}~/-]+([.][a-z0-9!#$%&'*+=?^_`{|}~/-]+)*@([a-z0-9-]+[.])+[a-z]+$"))) {
                 Toast.makeText(this, "Formato mail non valido", Toast.LENGTH_LONG).show()
                 flag = false
-            }
-            else {
+            } else {
                 val splittedEmail = splitEmail(emailText)
                 if (splittedEmail.first.length > 64) {
                     Toast.makeText(this, "Parte locale TROPPO lunga", Toast.LENGTH_LONG).show()
                     flag = false
-                }
-                else if (splittedEmail.second.length > 255) {
+                } else if (splittedEmail.second.length > 255) {
                     Toast.makeText(this, "Parte dominio TROPPO lunga", Toast.LENGTH_LONG).show()
                     flag = false
                 }
             }
-        }
-        else {
+        } else {
             Toast.makeText(this, "Non hai inserito la mail", Toast.LENGTH_LONG).show()
             flag = false
         }

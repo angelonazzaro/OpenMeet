@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".AuthActivity">
+    tools:context="logic.AuthActivity"> <!-- in case of error change to .AuthActivity -->
 
     <ImageView
         android:id="@+id/imageView"
@@ -25,12 +25,12 @@
         android:id="@+id/emailField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_baseline_email_24"
         android:layout_marginTop="80dp"
         android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle">
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
+        app:startIconDrawable="@drawable/ic_baseline_email_24">
 
 
         <com.google.android.material.textfield.TextInputEditText

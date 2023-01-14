@@ -25,12 +25,12 @@
         android:id="@+id/emailFixedField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:startIconDrawable="@drawable/ic_baseline_email_24"
         android:layout_marginTop="80dp"
         android:hint="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle">
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
+        app:startIconDrawable="@drawable/ic_baseline_email_24">
 
 
         <com.google.android.material.textfield.TextInputEditText

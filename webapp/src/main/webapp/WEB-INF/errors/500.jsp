@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isErrorPage="true" %>
 
-<%@ include file="../templates/header.jsp"%>
+<%@ include file="../templates/header.jsp" %>
 
 <style>
     div > img {
@@ -23,4 +23,4 @@
     <h2>Sorry, We need to reschedule our date &#10083;</h2>
 </main>
 
-<%@include file="../templates/scripts/bottom_scripts.jsp"%>
+<%@include file="../templates/scripts/bottom_scripts.jsp" %>

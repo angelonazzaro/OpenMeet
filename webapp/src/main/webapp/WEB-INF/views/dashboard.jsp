@@ -10,14 +10,18 @@
                 <div class="card col-lg-5 col-sm-12">
                     <div class="card-body">
                         <div class="card-title">Meeter Distribution</div>
-                        <div><canvas id="meeters-ratio"></canvas></div>
+                        <div>
+                            <canvas id="meeters-ratio"></canvas>
+                        </div>
                     </div>
                 </div>
 
                 <div class="card col-lg-5 col-sm-12">
                     <div class="card-body">
                         <div class="card-title">Reports Ratio</div>
-                        <div><canvas id="reports-ratio"></canvas></div>
+                        <div>
+                            <canvas id="reports-ratio"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>

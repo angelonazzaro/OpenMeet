@@ -6,13 +6,13 @@
 <% int rows = data.getRowsNumber(); %>
 
 <thead>
-    <tr>
-        <th class="text-center">Full Name</th>
-        <th class="text-center">Email</th>
-        <th class="text-center">Reason</th>
-        <th class="text-center">Date</th>
-        <th class="text-center">Actions</th>
-    </tr>
+<tr>
+    <th class="text-center">Full Name</th>
+    <th class="text-center">Email</th>
+    <th class="text-center">Reason</th>
+    <th class="text-center">Date</th>
+    <th class="text-center">Actions</th>
+</tr>
 </thead>
 <tbody>
 <% HashMap<String, String> rowData = new HashMap<>(); %>
@@ -31,8 +31,12 @@
             <i class="fa-solid fa-ellipsis-vertical" style="cursor:pointer;" data-bs-toggle="dropdown"
                aria-expanded="false"></i>
             <ul class="dropdown-menu">
-                <li style="cursor: pointer"><a class="dropdown-item" data-report-id="<%= data.get("id", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
-                <li style="cursor: pointer"><a class="dropdown-item" data-meeter-id="<%= data.get("meeterReported", i).toArray()[0] %>" data-bs-toggle="modal" data-bs-target="#ban-modal" >Ban Meeter</a></li>
+                <li style="cursor: pointer"><a class="dropdown-item"
+                                               data-report-id="<%= data.get("id", i).toArray()[0] %>"
+                                               data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
+                <li style="cursor: pointer"><a class="dropdown-item"
+                                               data-meeter-id="<%= data.get("meeterReported", i).toArray()[0] %>"
+                                               data-bs-toggle="modal" data-bs-target="#ban-modal">Ban Meeter</a></li>
             </ul>
         </div>
     </td>

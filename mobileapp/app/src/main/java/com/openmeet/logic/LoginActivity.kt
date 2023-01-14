@@ -39,10 +39,15 @@ class LoginActivity : AppCompatActivity() {
                 Request.Method.GET, url,
                 Response.Listener<String> { response ->
                     // Display the first 500 characters of the response string.
-                    Toast.makeText(this,  "Response is: ${response.substring(0, 500)}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Response is: ${response.substring(0, 500)}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 },
                 Response.ErrorListener { error ->
-                    Toast.makeText(this,  "Errore nella volley request" + error, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Errore nella volley request" + error, Toast.LENGTH_LONG)
+                        .show()
                     System.err.println(error);
                 })
 

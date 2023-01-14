@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".RegistrationActivity">
+    tools:context=".logic.RegistrationActivity">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
