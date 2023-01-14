@@ -11,64 +11,64 @@ import java.util.List;
 
 public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
 
-  public ModeratorDAO(DataSource source) {
-    super(source);
-  }
-
-  @Override
-  public List<Moderator> doRetrieveByCondition(String condition) throws SQLException {
-    return genericDoRetrieveByCondition(Moderator.MODERATOR, condition, new ModeratorExtractor(), source);
-  }
-
-  @Override
-  public Moderator doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
-
-    if (key == null) {
-      throw new InvalidPrimaryKeyException(key);
+    public ModeratorDAO(DataSource source) {
+        super(source);
     }
-    List<Moderator> moderator = doRetrieveByCondition(
-        String.format("%s.id = '%s'", Moderator.MODERATOR, key)
-    );
-    return moderator.isEmpty() ? null : moderator.get(0);
-  }
 
-  @Override
-  public List<Moderator> doRetrieveAll() throws SQLException {
-    return doRetrieveByCondition("TRUE");
-  }
+    @Override
+    public List<Moderator> doRetrieveByCondition(String condition) throws SQLException {
+        return genericDoRetrieveByCondition(Moderator.MODERATOR, condition, new ModeratorExtractor(), source);
+    }
 
-  @Override
-  public List<Moderator> doRetrieveAll(int row_count) throws SQLException {
-    return doRetrieveByCondition("TRUE LIMIT " + row_count);
-  }
+    @Override
+    public Moderator doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
-  @Override
-  public List<Moderator> doRetrieveAll(int offset, int row_count) throws SQLException {
-    return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
-  }
+        if (key == null) {
+            throw new InvalidPrimaryKeyException(key);
+        }
+        List<Moderator> moderator = doRetrieveByCondition(
+                String.format("%s.id = '%s'", Moderator.MODERATOR, key)
+        );
+        return moderator.isEmpty() ? null : moderator.get(0);
+    }
 
-  @Override
-  public boolean doSave(Moderator obj) throws SQLException {
-    return genericDoSave(Moderator.MODERATOR, obj.toHashMap(), this.source);
-  }
+    @Override
+    public List<Moderator> doRetrieveAll() throws SQLException {
+        return doRetrieveByCondition("TRUE");
+    }
 
-  @Override
-  public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-    return genericDoUpdate(Moderator.MODERATOR, condition, values, this.source);
-  }
+    @Override
+    public List<Moderator> doRetrieveAll(int row_count) throws SQLException {
+        return doRetrieveByCondition("TRUE LIMIT " + row_count);
+    }
 
-  @Override
-  public boolean doSaveOrUpdate(Moderator obj) throws SQLException {
+    @Override
+    public List<Moderator> doRetrieveAll(int offset, int row_count) throws SQLException {
+        return doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
+    }
 
-    if (doRetrieveByKey(String.valueOf(obj.getId())) == null)
-      return doSave(obj);
+    @Override
+    public boolean doSave(Moderator obj) throws SQLException {
+        return genericDoSave(Moderator.MODERATOR, obj.toHashMap(), this.source);
+    }
 
-    return doUpdate(obj.toHashMap(),
-        String.format("%s.id = '%s'", Moderator.MODERATOR, obj.getId()));
-  }
+    @Override
+    public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
+        return genericDoUpdate(Moderator.MODERATOR, condition, values, this.source);
+    }
 
-  @Override
-  public boolean doDelete(String condition) throws SQLException {
-    return genericDoDelete(Moderator.MODERATOR, condition, this.source);
-  }
+    @Override
+    public boolean doSaveOrUpdate(Moderator obj) throws SQLException {
+
+        if (doRetrieveByKey(String.valueOf(obj.getId())) == null)
+            return doSave(obj);
+
+        return doUpdate(obj.toHashMap(),
+                String.format("%s.id = '%s'", Moderator.MODERATOR, obj.getId()));
+    }
+
+    @Override
+    public boolean doDelete(String condition) throws SQLException {
+        return genericDoDelete(Moderator.MODERATOR, condition, this.source);
+    }
 }

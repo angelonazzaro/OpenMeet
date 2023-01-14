@@ -14,26 +14,26 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class ReportsServlet extends HttpServlet {
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-    req.setAttribute("view", "reports");
-    req.setAttribute("title", "Reports");
-    req.setAttribute("heading", "Reports");
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        req.setAttribute("view", "reports");
+        req.setAttribute("title", "Reports");
+        req.setAttribute("heading", "Reports");
 
-    // Get Data
-    QueryJoinExecutor qjx = new QueryJoinExecutor((DataSource) getServletContext().getAttribute("DataSource"));
-    MultiMapList<String, String> data = new MultiMapList<>();
+        // Get Data
+        QueryJoinExecutor qjx = new QueryJoinExecutor((DataSource) getServletContext().getAttribute("DataSource"));
+        MultiMapList<String, String> data = new MultiMapList<>();
 
-    try {
-      data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.isArchived = false",
-          Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
+        try {
+            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.isArchived = false",
+                    Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
 
-    } catch (SQLException e) {
-      resp.sendError(500, "Internal Server error");
+        } catch (SQLException e) {
+            resp.sendError(500, "Internal Server error");
+        }
+
+        req.setAttribute("data", data);
+
+        req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
-
-    req.setAttribute("data", data);
-
-    req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
-  }
 }

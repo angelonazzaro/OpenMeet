@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isErrorPage="true" %>
 
-<%@ include file="../templates/header.jsp"%>
+<%@ include file="../templates/header.jsp" %>
 
 <style>
     div > img {
@@ -24,4 +24,4 @@
     <a href="<%= request.getContextPath() %>/" class="btn btn-danger mt-3">Find Match <i class="fa-solid fa-heart"></i></a>
 </main>
 
-<%@include file="../templates/scripts/bottom_scripts.jsp"%>
+<%@include file="../templates/scripts/bottom_scripts.jsp" %>

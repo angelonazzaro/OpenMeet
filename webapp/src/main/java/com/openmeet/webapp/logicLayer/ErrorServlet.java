@@ -23,7 +23,7 @@ public class ErrorServlet extends HttpServlet {
      * Processes 404 and 500 errors by displaying the corresponding jsp files.
      *
      * @author Angelo Nazzaro
-     * */
+     */
     private void processError(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String errorCode = (String) req.getAttribute("jakarta.servlet.error.status_code");
 

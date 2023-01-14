@@ -8,7 +8,7 @@
     padding: 0 2rem;
 }
 
-.search-bar-input-group > .input-group-text, .search-bar-input-group > input.form-control  {
+.search-bar-input-group > .input-group-text, .search-bar-input-group > input.form-control {
     background: transparent !important;
 
     border: none !important;
