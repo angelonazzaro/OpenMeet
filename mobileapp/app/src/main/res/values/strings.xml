@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">OpenMeet</string>
     <string name="title_activity_auth">AuthActivity</string>
+    <string name="request_server_address">192.168.1.33:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
+    <string name="connection_error">Errore di connessione. Controlla la tua connessione ad Internet o riprova più tardi.</string>
+
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -8,11 +11,15 @@
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+
     <string name="email_null_error">Email non inserita!</string>
     <string name="email_format_error">Formato email non valido!</string>
     <string name="email_local_toolong_error">Parte locale Email troppo lunga!</string>
     <string name="email_domain_toolong_error">Parte dominio Email troppo lunga!</string>
+
+    <string name="login_failed">"Accesso fallito: credenziali errate."</string>
+    <string name="login_failed_email">Controlla che l\'email sia corretta.</string>
+    <string name="login_failed_password">Controlla che la password sia corretta.</string>
 
     <string name="homescreen_chat_title">Chats</string>
     <string name="homescreen_discover_title">Discover</string>
