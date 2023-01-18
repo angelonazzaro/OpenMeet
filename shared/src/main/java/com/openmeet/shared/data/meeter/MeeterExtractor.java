@@ -11,14 +11,14 @@ public class MeeterExtractor implements ResultSetExtractor<Meeter> {
 
         Meeter meeter = new Meeter();
 
-        meeter.setId(resultSet.getInt(Meeter.MEETER + ".id"));
-        meeter.setEmail(resultSet.getString(Meeter.MEETER + ".email"));
-        meeter.setMeeterName(resultSet.getString(Meeter.MEETER + ".meeterName"));
-        meeter.setMeeterSurname(resultSet.getString(Meeter.MEETER + ".meeterSurname"));
-        meeter.setPwd(resultSet.getString(Meeter.MEETER + ".pwd"));
-        meeter.setBiography(resultSet.getString(Meeter.MEETER + ".biography"));
-        meeter.setBirthDate(resultSet.getDate(Meeter.MEETER + ".birthDate"));
-        meeter.setPublicKey(resultSet.getBytes(Meeter.MEETER + ".publicKey"));
+        meeter.setId(resultSet.getInt(Meeter.MEETER_ID));
+        meeter.setEmail(resultSet.getString(Meeter.MEETER_EMAIL));
+        meeter.setMeeterName(resultSet.getString(Meeter.MEETER_MEETER_NAME));
+        meeter.setMeeterSurname(resultSet.getString(Meeter.MEETER_MEETER_SURNAME));
+        meeter.setPwd(resultSet.getString(Meeter.MEETER_PWD));
+        meeter.setBiography(resultSet.getString(Meeter.MEETER_BIOGRAPHY));
+        meeter.setBirthDate(resultSet.getDate(Meeter.MEETER_BIRTH_DATE));
+        meeter.setPublicKey(resultSet.getBytes(Meeter.MEETER_PUBLIC_KEY));
 
         return meeter;
     }

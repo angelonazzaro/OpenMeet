@@ -16,6 +16,13 @@ data class Message(
 
     companion object {
         const val MESSAGE = "Message"
+        const val MESSAGE_ID = "$MESSAGE.id"
+        const val MESSAGE_TEXT = "$MESSAGE.text"
+        const val MESSAGE_SENT_TIME = "$MESSAGE.sentTime"
+        const val MESSAGE_DELIVERED_TIME = "$MESSAGE.deliveredTime"
+        const val MESSAGE_READ_TIME = "$MESSAGE.readTime"
+        const val MESSAGE_MEETER_SENDER = "$MESSAGE.meeterSender"
+        const val MESSAGE_MEETER_RECEIVER = "$MESSAGE.meeterReceiver"
     }
 
     override fun toHashMap(): HashMap<String, *> {

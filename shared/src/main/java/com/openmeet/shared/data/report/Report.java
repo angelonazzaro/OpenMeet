@@ -8,12 +8,16 @@ import java.util.HashMap;
 public class Report implements IEntity {
 
     public static final String REPORT = "Report";
-
+    public static final String REPORT_ID = REPORT + ".id";
+    public static final String REPORT_MEETER_REPORTER = REPORT + ".meeterReporter";
+    public static final String REPORT_MEETER_REPORTED = REPORT + ".meeterReported";
+    public static final String REPORT_REASON = REPORT + ".reason";
+    public static final String REPORT_IS_ARCHIVED = REPORT + ".isArchived";
+    public static final String REPORT_CREATION_DATE = REPORT + ".creationDate";
     private int id;
     private int meeterReporter;
     private int meeterReported;
     private String reason;
-
     private boolean isArchived;
     private Timestamp creationDate;
 

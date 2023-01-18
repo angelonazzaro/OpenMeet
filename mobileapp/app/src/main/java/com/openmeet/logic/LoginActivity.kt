@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
 // Request a string response from the provided URL.
             val stringRequest = StringRequest(
                 Request.Method.GET, url,
-                Response.Listener<String> { response ->
+                { response ->
                     // Display the first 500 characters of the response string.
                     Toast.makeText(
                         this,
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     ).show()
                 },
-                Response.ErrorListener { error ->
+                { error ->
                     Toast.makeText(this, "Errore nella volley request" + error, Toast.LENGTH_LONG)
                         .show()
                     System.err.println(error);

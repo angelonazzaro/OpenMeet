@@ -11,6 +11,14 @@ import java.util.HashMap;
 public class Meeter implements IEntity {
 
     public static final String MEETER = "Meeter";
+    public static final String MEETER_ID = MEETER + ".id";
+    public static final String MEETER_EMAIL = MEETER + ".email";
+    public static final String MEETER_MEETER_NAME = MEETER + ".meeterName";
+    public static final String MEETER_MEETER_SURNAME = MEETER + ".meeterSurname";
+    public static final String MEETER_PWD = MEETER + ".pwd";
+    public static final String MEETER_BIOGRAPHY = MEETER + ".biography";
+    public static final String MEETER_BIRTH_DATE = MEETER + ".birthDate";
+    public static final String MEETER_PUBLIC_KEY = MEETER + ".publicKey";
     private int id;
     private String email;
     private String meeterName;

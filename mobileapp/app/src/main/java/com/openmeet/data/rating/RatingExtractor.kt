@@ -9,11 +9,11 @@ class RatingExtractor : ResultSetExtractor<Rating> {
 
         val rating = Rating()
 
-        rating.id = resultSet.getInt(Rating.RATING + ".id")
-        rating.meeterRater = resultSet.getInt(Rating.RATING + ".meeterRater")
-        rating.meeterRated = resultSet.getInt(Rating.RATING + ".meeterRated")
-        rating.type = resultSet.getBoolean(Rating.RATING + ".type")
-        rating.creationDate = resultSet.getTimestamp(Rating.RATING + ".creationDate")
+        rating.id = resultSet.getInt(Rating.RATING_ID)
+        rating.meeterRater = resultSet.getInt(Rating.RATING_MEETER_RATER)
+        rating.meeterRated = resultSet.getInt(Rating.RATING_MEETER_RATED)
+        rating.type = resultSet.getBoolean(Rating.RATING_TYPE)
+        rating.creationDate = resultSet.getTimestamp(Rating.RATING_CREATION_DATE)
 
         return rating
     }

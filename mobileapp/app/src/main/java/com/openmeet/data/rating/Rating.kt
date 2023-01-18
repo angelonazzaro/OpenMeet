@@ -14,6 +14,11 @@ data class Rating(
 
     companion object {
         const val RATING = "Rating"
+        const val RATING_ID = "$RATING.id"
+        const val RATING_MEETER_RATER = "$RATING.meeterRater"
+        const val RATING_MEETER_RATED = "$RATING.meeterRated"
+        const val RATING_TYPE = "$RATING.type"
+        const val RATING_CREATION_DATE = "$RATING.creationDate"
     }
 
     override fun toHashMap(): HashMap<String, *> {

@@ -7,6 +7,9 @@ import java.util.HashMap;
 public class Image implements IEntity {
 
     public static final String IMAGE = "Image";
+    public static final String IMAGE_ID = IMAGE + ".id";
+    public static final String IMAGE_PATH = IMAGE + ".path";
+    public static final String IMAGE_MEETER_ID = IMAGE + ".meeterId";
     private int id;
     private String path;
     private int meeterId;

@@ -9,13 +9,13 @@ class MessageExtractor : ResultSetExtractor<Message> {
 
         val message = Message()
 
-        message.id = resultSet.getInt(Message.MESSAGE + ".id")
-        message.text = resultSet.getString(Message.MESSAGE + ".text")
-        message.sentTime = resultSet.getTimestamp(Message.MESSAGE + ".sentTime")
-        message.deliveredTime = resultSet.getTimestamp(Message.MESSAGE + ".deliveredTime")
-        message.readTime = resultSet.getTimestamp(Message.MESSAGE + ".readTime")
-        message.meeterSender = resultSet.getInt(Message.MESSAGE + ".meeterSender")
-        message.meeterReceiver = resultSet.getInt(Message.MESSAGE + ".meeterReceiver")
+        message.id = resultSet.getInt(Message.MESSAGE_ID)
+        message.text = resultSet.getString(Message.MESSAGE_TEXT)
+        message.sentTime = resultSet.getTimestamp(Message.MESSAGE_SENT_TIME)
+        message.deliveredTime = resultSet.getTimestamp(Message.MESSAGE_DELIVERED_TIME)
+        message.readTime = resultSet.getTimestamp(Message.MESSAGE_READ_TIME)
+        message.meeterSender = resultSet.getInt(Message.MESSAGE_MEETER_SENDER)
+        message.meeterReceiver = resultSet.getInt(Message.MESSAGE_MEETER_RECEIVER)
 
         return message
     }

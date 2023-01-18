@@ -8,6 +8,13 @@ import java.util.HashMap;
 public class Ban implements IEntity {
 
     public static final String BAN = "Ban";
+    public static final String BAN_ID = BAN + ".id";
+    public static final String BAN_MODERATOR_ID = BAN + ".moderatorId";
+    public static final String BAN_DESCRIPTION = BAN + ".description";
+    public static final String BAN_START_TIME = BAN + ".startTime";
+    public static final String BAN_END_TIME = BAN + ".endTime";
+    public static final String BAN_MEETER_ID = BAN + ".meeterId";
+
     private int id;
     private int moderatorId;
     private String description;
