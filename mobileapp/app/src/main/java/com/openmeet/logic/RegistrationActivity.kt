@@ -76,11 +76,11 @@ class RegistrationActivity : AppCompatActivity() {
         confirmPassword: TextInputLayout
     ): Boolean {
 
-        var nameText = name.editText?.text.toString()
-        var surnameText = surname.editText?.text.toString()
-        var emailText = email.editText?.text.toString()
-        var passText = password.editText?.text.toString()
-        var confPassText = confirmPassword.editText?.text.toString()
+        val nameText = name.editText?.text.toString()
+        val surnameText = surname.editText?.text.toString()
+        val emailText = email.editText?.text.toString()
+        val passText = password.editText?.text.toString()
+        val confPassText = confirmPassword.editText?.text.toString()
         var flag = true
 
 
@@ -97,7 +97,7 @@ class RegistrationActivity : AppCompatActivity() {
         //check if birthday date inserted has more 18 years old
         if (birthday != null) {
             val now = Calendar.getInstance().timeInMillis
-            var diff = Calendar.getInstance()
+            val diff = Calendar.getInstance()
             diff.timeInMillis = now - birthday
             if (diff.get(Calendar.YEAR) - 1970 < 18)
                 Toast.makeText(this, "Hai meno di 18 anni", Toast.LENGTH_LONG).show()

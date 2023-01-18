@@ -93,6 +93,18 @@ public interface DAO<T> {
     boolean doSave(T obj) throws SQLException;
 
     /**
+     * Saves an object in the database populating only the fields contained
+     * in values.
+     *
+     * @param values the values to be updated.
+     * @return a boolean value that indicates if the operation was successful or not.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
+     */
+    boolean doSave(HashMap<String, ?> values) throws SQLException;
+
+    /**
      * Updates database objects that match a given condition,
      * using only the values contained in the HashMap
      *

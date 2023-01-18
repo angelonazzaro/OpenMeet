@@ -22,7 +22,7 @@ class MessageDAO(source: DataSource) : SQLDAO(source), DAO<Message> {
             throw IllegalArgumentException("null")
         }
 
-        val message = doRetrieveByCondition("${Message.MESSAGE}.id = '$key'")
+        val message = doRetrieveByCondition("$Message.MESSAGE_ID = '$key'")
 
         return if (message.isEmpty()) null else message[0]
     }
@@ -43,6 +43,10 @@ class MessageDAO(source: DataSource) : SQLDAO(source), DAO<Message> {
         return genericDoSave(Message.MESSAGE, obj?.toHashMap(), source)
     }
 
+    override fun doSave(values: HashMap<String, *>?): Boolean {
+        return genericDoSave(Message.MESSAGE, values, source)
+    }
+
     override fun doUpdate(values: HashMap<String, *>?, condition: String?): Boolean {
         return genericDoUpdate(Message.MESSAGE, condition, values, source)
     }
@@ -52,7 +56,7 @@ class MessageDAO(source: DataSource) : SQLDAO(source), DAO<Message> {
         if (doRetrieveByKey(obj?.id.toString()) == null) {
             return doSave(obj)
         }
-        return doUpdate(obj?.toHashMap(), "${Message.MESSAGE}.id = '${obj?.id}'")
+        return doUpdate(obj?.toHashMap(), "$Message.MESSAGE_ID = '${obj?.id}'")
     }
 
     override fun doDelete(condition: String?): Boolean {

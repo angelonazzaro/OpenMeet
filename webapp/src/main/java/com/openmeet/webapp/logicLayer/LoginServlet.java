@@ -61,8 +61,10 @@ public class LoginServlet extends HttpServlet {
         // Check if user exists
         try {
             List<Moderator> moderators = moderatorDAO
-                    .doRetrieveByCondition(String.format("%s.email = '%s' AND %s.pwd=SHA1('%s')",
-                            Moderator.MODERATOR, email, Moderator.MODERATOR, password));
+                    .doRetrieveByCondition(
+                            String.format(
+                                    "%s = '%s' AND %s=SHA1('%s')",
+                            Moderator.MODERATOR_EMAIL, email, Moderator.MODERATOR_PWD, password));
 
             if (moderators.isEmpty()) {
                 ResponseHelper.sendCustomError(out, "The email or the password are incorrect. Please try again.");

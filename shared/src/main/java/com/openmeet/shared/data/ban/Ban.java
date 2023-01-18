@@ -8,6 +8,13 @@ import java.util.HashMap;
 public class Ban implements IEntity {
 
     public static final String BAN = "Ban";
+    public static final String BAN_ID = BAN + ".id";
+    public static final String BAN_MODERATOR_ID = BAN + ".moderatorId";
+    public static final String BAN_DESCRIPTION = BAN + ".description";
+    public static final String BAN_START_TIME = BAN + ".startTime";
+    public static final String BAN_END_TIME = BAN + ".endTime";
+    public static final String BAN_MEETER_ID = BAN + ".meeterId";
+
     private int id;
     private int moderatorId;
     private String description;
@@ -15,7 +22,7 @@ public class Ban implements IEntity {
     private Timestamp endTime;
     private int meeterId;
 
-    public Ban(){
+    public Ban() {
 
     }
 
@@ -29,10 +36,44 @@ public class Ban implements IEntity {
                 put("description", description);
                 put("startTime", startTime.toString());
 
-                if (endTime != null)
+                if (endTime != null) {
                     put("endTime", endTime.toString());
+                }
 
                 put("meeterId", meeterId);
+            }
+        };
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>() {
+            {
+                for (String field : fields) {
+                    switch (field) {
+                        case BAN_ID:
+                            put("id", id);
+                            break;
+                        case BAN_MODERATOR_ID:
+                            put("moderatorId", moderatorId);
+                            break;
+                        case BAN_DESCRIPTION:
+                            put("description", description);
+                            break;
+                        case BAN_START_TIME:
+                            put("startTime", startTime.toString());
+                            break;
+                        case BAN_END_TIME:
+                            if (endTime != null) {
+                                put("endTime", endTime.toString());
+                            }
+                            break;
+                        case BAN_MEETER_ID:
+                            put("meeterId", meeterId);
+                            break;
+                    }
+                }
             }
         };
     }

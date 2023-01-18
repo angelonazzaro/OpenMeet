@@ -12,12 +12,12 @@ public class ModeratorExtractor implements ResultSetExtractor<Moderator> {
 
         Moderator moderator = new Moderator();
 
-        moderator.setId(resultSet.getInt(Moderator.MODERATOR + ".id"));
-        moderator.setEmail(resultSet.getString(Moderator.MODERATOR + ".email"));
-        moderator.setModeratorName(resultSet.getString(Moderator.MODERATOR + ".moderatorName"));
-        moderator.setModeratorSurname(resultSet.getString(Moderator.MODERATOR + ".moderatorSurname"));
-        moderator.setPwd(resultSet.getString(Moderator.MODERATOR + ".pwd"));
-        moderator.setProfilePic(resultSet.getString(Moderator.MODERATOR + ".profilePic"));
+        moderator.setId(resultSet.getInt(Moderator.MODERATOR_ID));
+        moderator.setEmail(resultSet.getString(Moderator.MODERATOR_EMAIL));
+        moderator.setModeratorName(resultSet.getString(Moderator.MODERATOR_MODERATOR_NAME));
+        moderator.setModeratorSurname(resultSet.getString(Moderator.MODERATOR_MODERATOR_SURNAME));
+        moderator.setPwd(resultSet.getString(Moderator.MODERATOR_PWD));
+        moderator.setProfilePic(resultSet.getString(Moderator.MODERATOR_PROFILE_PIC));
 
         return moderator;
     }

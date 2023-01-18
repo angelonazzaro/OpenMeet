@@ -10,12 +10,12 @@ public class BanExtractor implements ResultSetExtractor<Ban> {
     public Ban extract(ResultSet resultSet) throws SQLException {
 
         Ban ban = new Ban();
-        ban.setId(resultSet.getInt(Ban.BAN + ".id"));
-        ban.setModeratorId(resultSet.getInt(Ban.BAN + ".moderatorId"));
-        ban.setDescription(resultSet.getString(Ban.BAN + ".description"));
-        ban.setStartTime(resultSet.getTimestamp(Ban.BAN + ".startTime"));
-        ban.setEndTime(resultSet.getTimestamp(Ban.BAN + ".endTime"));
-        ban.setMeeterId(resultSet.getInt(Ban.BAN + ".meeterId"));
+        ban.setId(resultSet.getInt(Ban.BAN_ID));
+        ban.setModeratorId(resultSet.getInt(Ban.BAN_MODERATOR_ID));
+        ban.setDescription(resultSet.getString(Ban.BAN_DESCRIPTION));
+        ban.setStartTime(resultSet.getTimestamp(Ban.BAN_START_TIME));
+        ban.setEndTime(resultSet.getTimestamp(Ban.BAN_END_TIME));
+        ban.setMeeterId(resultSet.getInt(Ban.BAN_MEETER_ID));
 
         return ban;
     }

@@ -12,12 +12,12 @@ public class ReportExtractor implements ResultSetExtractor<Report> {
 
         Report report = new Report();
 
-        report.setId(resultSet.getInt(Report.REPORT + ".id"));
-        report.setMeeterReporter(resultSet.getInt(Report.REPORT + ".meeterReporter"));
-        report.setMeeterReported(resultSet.getInt(Report.REPORT + ".meeterReported"));
-        report.setReason(resultSet.getString(Report.REPORT + ".reason"));
-        report.setIsArchived(resultSet.getBoolean(Report.REPORT + ".isArchived"));
-        report.setCreationDate(resultSet.getTimestamp(Report.REPORT + ".creationDate"));
+        report.setId(resultSet.getInt(Report.REPORT_ID));
+        report.setMeeterReporter(resultSet.getInt(Report.REPORT_MEETER_REPORTER));
+        report.setMeeterReported(resultSet.getInt(Report.REPORT_MEETER_REPORTED));
+        report.setReason(resultSet.getString(Report.REPORT_REASON));
+        report.setIsArchived(resultSet.getBoolean(Report.REPORT_IS_ARCHIVED));
+        report.setCreationDate(resultSet.getTimestamp(Report.REPORT_CREATION_DATE));
 
         return report;
     }
