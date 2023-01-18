@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
             );
 
             if (meeters.isEmpty()) {
-                ResponseHelper.sendCustomError(out, "The email or the password are incorrect. Please try again.");
+                ResponseHelper.sendCustomError(out, "incorrect_credentials");
                 return;
             }
 
