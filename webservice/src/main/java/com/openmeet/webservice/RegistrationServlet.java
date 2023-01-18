@@ -73,16 +73,23 @@ public class RegistrationServlet extends HttpServlet {
         meeter.setMeeterSurname(meeterSurname);
 
         try {
-            meeter.setBirthDate(new SimpleDateFormat("MM/dd/yyyy").parse(birthDate));
+            meeter.setBirthDate(new SimpleDateFormat("yyyy-dd-MM").parse(birthDate));
         } catch (ParseException e) {
-            ResponseHelper.sendCustomError(out, "Invalid date format " + birthDate + ". Format should be [MM/dd/yyyy]. Please try again.");
+            ResponseHelper.sendCustomError(out, "Invalid date format " + birthDate + ". Format should be [yyyy-dd-MM]. Please try again.");
             return;
         }
 
         boolean success;
 
+        HashMap<String, String> met = new HashMap<>();
+        met.put("email", email);
+        met.put("pwd", pwd);
+        met.put("meeterName", meeterName);
+        met.put("meeterSurname", meeterSurname);
+        met.put("birthDate", birthDate);
+
         try {
-            success = meeterDAO.doSave(meeter);
+            success = meeterDAO.doSavePartial(met);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             ResponseHelper.sendGenericError(out);

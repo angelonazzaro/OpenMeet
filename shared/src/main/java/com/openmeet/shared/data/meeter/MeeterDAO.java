@@ -52,6 +52,11 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
         return genericDoSave(Meeter.MEETER, obj.toHashMap(), this.source);
     }
 
+    public boolean doSavePartial(HashMap<String, ?> values) throws SQLException {
+        return genericDoSave(Meeter.MEETER, values, this.source);
+    }
+
+
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
         return genericDoUpdate(Meeter.MEETER, condition, values, this.source);
