@@ -26,11 +26,11 @@ public class LoginServlet extends HttpServlet {
         logger.log(Level.INFO, "LoginServlet:doPost()");
 
         String email = request.getParameter("email");
-        String password = request.getParameter("pwd");
+        String pwd = request.getParameter("pwd");
 
         PrintWriter out = response.getWriter();
 
-        if (!ResponseHelper.checkStringFields(new String[]{email, password})) {
+        if (!ResponseHelper.checkStringFields(new String[]{email, pwd})) {
             ResponseHelper.sendGenericError(out);
             logger.log(Level.SEVERE, "LoginServlet:doPost() - Error: missing parameters");
             return;
@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                             "%s.email = '%s' " +
                                     "AND " +
                                     "%s.pwd=SHA1('%s')"
-                            , Meeter.MEETER, email, Meeter.MEETER, password
+                            , Meeter.MEETER, email, Meeter.MEETER, pwd
                     )
             );
 
@@ -56,7 +56,6 @@ public class LoginServlet extends HttpServlet {
 
         }
         catch (Exception e) {
-            System.out.println("Errore nella query");
             ResponseHelper.sendGenericError(out);
             logger.log(Level.SEVERE, "LoginServlet:doPost() - Error: " + e.getMessage());
             return;
