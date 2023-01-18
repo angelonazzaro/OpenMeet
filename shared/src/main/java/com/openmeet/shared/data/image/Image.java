@@ -14,47 +14,43 @@ public class Image implements IEntity {
     private String path;
     private int meeterId;
 
-    public Image(){
+    public Image() {
 
     }
 
     @Override
     public HashMap<String, ?> toHashMap() {
 
-        return new HashMap<>() {
-            {
-                put("id", id);
-                put("path", path);
-                put("meeterId", meeterId);
-            }
-        };
+        return new HashMap<>() {{
+            put("id", id);
+            put("path", path);
+            put("meeterId", meeterId);
+        }};
     }
 
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
-        return new HashMap<>() {
-            {
-                for (String field : fields) {
-                    switch (field) {
-                        case IMAGE_ID:
-                            put("id", id);
-                            break;
-                        case IMAGE_PATH:
-                            put("path", path);
-                            break;
-                        case IMAGE_MEETER_ID:
-                            put("meeterId", meeterId);
-                            break;
-                    }
+        return new HashMap<>() {{
+            for (String field : fields) {
+                switch (field) {
+                    case IMAGE_ID:
+                        put("id", id);
+                        break;
+                    case IMAGE_PATH:
+                        put("path", path);
+                        break;
+                    case IMAGE_MEETER_ID:
+                        put("meeterId", meeterId);
+                        break;
                 }
             }
-        };
+        }};
     }
 
     @Override
     public String toString() {
-        return "Image.Image{" +
+        return "Image{" +
                 "id=" + id +
                 ", path='" + path + '\'' +
                 ", meeterId=" + meeterId +

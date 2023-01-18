@@ -17,31 +17,27 @@ public class Interest implements IEntity {
     @Override
     public HashMap<String, Object> toHashMap() {
 
-        return new HashMap<>() {
-            {
-                put("id", id);
-                put("description", description);
-            }
-        };
+        return new HashMap<>() {{
+            put("id", id);
+            put("description", description);
+        }};
     }
 
     @Override
     public HashMap<String, Object> toHashMap(String... fields) {
 
-        return new HashMap<>() {
-            {
-                for (String field : fields) {
-                    switch (field) {
-                        case INTEREST_ID:
-                            put("id", id);
-                            break;
-                        case INTEREST_DESCRIPTION:
-                            put("description", description);
-                            break;
-                    }
+        return new HashMap<>() {{
+            for (String field : fields) {
+                switch (field) {
+                    case INTEREST_ID:
+                        put("id", id);
+                        break;
+                    case INTEREST_DESCRIPTION:
+                        put("description", description);
+                        break;
                 }
             }
-        };
+        }};
     }
 
     @Override
