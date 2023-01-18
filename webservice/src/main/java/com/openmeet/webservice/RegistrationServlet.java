@@ -73,15 +73,6 @@ public class RegistrationServlet extends HttpServlet {
 
         boolean success;
 
-//        HashMap<String, String> data = new HashMap<>();
-//        data.put("email", email);
-//        data.put("pwd", pwd);
-//        data.put("meeterName", meeterName);
-//        data.put("meeterSurname", meeterSurname);
-//        data.put("birthDate", birthDate);
-//        System.out.println("BirthDate: " + birthDate);
-//        System.out.println("Meeter birth date: " + meeter.getBirthDate().toString());
-
         try {
             success = meeterDAO.doSave(meeter.toHashMap
                     (Meeter.MEETER_EMAIL,
