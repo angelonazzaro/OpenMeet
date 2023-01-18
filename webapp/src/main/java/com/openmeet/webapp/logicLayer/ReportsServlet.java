@@ -25,8 +25,19 @@ public class ReportsServlet extends HttpServlet {
         MultiMapList<String, String> data = new MultiMapList<>();
 
         try {
-            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.isArchived = false",
-                    Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
+            /*
+            SELECT Report.*, CONCAT(Meeter.meeterName, ' ', Meeter.meeterSurname) AS meeterfullName, Meeter.email
+            FROM Report JOIN Meeter ON Meeter.id = Report.meeterReported
+            WHERE Report.isArchived = FALSE
+            */
+            data = qjx.doRetrivedByJoin(
+                    String.format(
+                            "SELECT %s.*, CONCAT(%s, ' ', %s) AS meeterfullName, %s " +
+                                    "FROM %s JOIN %s ON %s = %s " +
+                                    "WHERE %s = FALSE",
+                            Report.REPORT, Meeter.MEETER_MEETER_NAME, Meeter.MEETER_MEETER_SURNAME, Meeter.MEETER_EMAIL,
+                            Report.REPORT, Meeter.MEETER, Meeter.MEETER_ID, Report.REPORT_MEETER_REPORTED,
+                            Report.REPORT_IS_ARCHIVED));
 
         } catch (SQLException e) {
             resp.sendError(500, "Internal Server error");

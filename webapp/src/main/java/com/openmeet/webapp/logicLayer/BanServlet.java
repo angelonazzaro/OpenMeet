@@ -29,7 +29,19 @@ public class BanServlet extends HttpServlet {
         MultiMapList<String, String> data = new MultiMapList<>();
 
         try {
-            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.status = 1", Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
+            /*
+            SELECT Report.*, CONCAT(Meeter.meeterName, ' ', Meeter.meeterSurname) AS meeterfullName, Meeter.email
+            FROM Report JOIN Meeter ON Meeter.id = Report.meeterReported
+            WHERE Report.isArchived = FALSE
+            */
+            data = qjx.doRetrivedByJoin(
+                    String.format(
+                            "SELECT %s.*, CONCAT(%s, ' ', %s) AS meeterfullName, %s " +
+                                    "FROM %s JOIN %s ON %s = %s " +
+                                    "WHERE %s = FALSE",
+                            Report.REPORT, Meeter.MEETER_MEETER_NAME, Meeter.MEETER_MEETER_SURNAME, Meeter.MEETER_EMAIL,
+                            Report.REPORT, Meeter.MEETER, Meeter.MEETER_ID, Report.REPORT_MEETER_REPORTED,
+                            Report.REPORT_IS_ARCHIVED));
 
         } catch (SQLException e) {
             resp.sendError(500, "Internal Server Error");
@@ -41,7 +53,7 @@ public class BanServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String description = req.getParameter("description");
         String strEndTime = req.getParameter("endTime");
         int meeterId = Integer.parseInt(req.getParameter("meeterId"));

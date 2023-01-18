@@ -9,17 +9,17 @@ import java.util.HashMap;
 public class Moderator implements IEntity {
 
     public static final String MODERATOR = "Moderator";
-
+    public static final String MODERATOR_ID = MODERATOR + ".id";
+    public static final String MODERATOR_EMAIL = MODERATOR + ".email";
+    public static final String MODERATOR_MODERATOR_NAME = MODERATOR + ".moderatorName";
+    public static final String MODERATOR_MODERATOR_SURNAME = MODERATOR + ".moderatorSurname";
+    public static final String MODERATOR_PWD = MODERATOR + ".pwd";
+    public static final String MODERATOR_PROFILE_PIC = MODERATOR + ".profilePic";
     private int id;
-
     private String email;
-
     private String moderatorName;
-
     private String moderatorSurname;
-
     private String pwd;
-
     private String profilePic;
 
     public Moderator() {
@@ -46,7 +46,14 @@ public class Moderator implements IEntity {
 
     @Override
     public String toString() {
-        return "Moderator{" + "id=" + id + ", email='" + email + '\'' + ", moderatorName='" + moderatorName + '\'' + ", moderatorSurname='" + moderatorSurname + '\'' + ", pwd='" + pwd + '\'' + ", profilePic='" + profilePic + '\'' + '}';
+        return "Moderator{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", moderatorName='" + moderatorName + '\'' +
+                ", moderatorSurname='" + moderatorSurname + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", profilePic='" + profilePic + '\'' +
+                '}';
     }
 
     public int getId() {
