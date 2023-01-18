@@ -22,7 +22,7 @@ class InterestDAO(source: DataSource) : SQLDAO(source), DAO<Interest> {
             throw IllegalArgumentException("null")
         }
 
-        val interest = doRetrieveByCondition("${Interest.INTEREST}.id = '$key'")
+        val interest = doRetrieveByCondition("$Interest.INTEREST_ID = '$key'")
 
         return if (interest.isEmpty()) null else interest[0]
     }
@@ -43,6 +43,10 @@ class InterestDAO(source: DataSource) : SQLDAO(source), DAO<Interest> {
         return genericDoSave(Interest.INTEREST, obj?.toHashMap(), source)
     }
 
+    override fun doSave(values: HashMap<String, *>?): Boolean {
+        return genericDoSave(Interest.INTEREST, values, source)
+    }
+
     override fun doUpdate(values: HashMap<String, *>?, condition: String?): Boolean {
         return genericDoUpdate(Interest.INTEREST, condition, values, source)
     }
@@ -52,7 +56,7 @@ class InterestDAO(source: DataSource) : SQLDAO(source), DAO<Interest> {
         if (doRetrieveByKey(obj?.id.toString()) == null) {
             return doSave(obj)
         }
-        return doUpdate(obj?.toHashMap(), "${Interest.INTEREST}.id = '${obj?.id}'")
+        return doUpdate(obj?.toHashMap(), "$Interest.INTEREST_ID = '${obj?.id}'")
 
     }
 

@@ -122,7 +122,7 @@ public class SettingsServlet extends HttpServlet {
         ModeratorDAO moderatorDAO = new ModeratorDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         try {
-            if (moderatorDAO.doUpdate(valuesToUpdate, Moderator.MODERATOR + ".id=" + user.getId())) {
+            if (moderatorDAO.doUpdate(valuesToUpdate, Moderator.MODERATOR_ID + "=" + user.getId())) {
 
                 session.setAttribute("user", user);
                 HashMap<String, String> values = new HashMap<>();

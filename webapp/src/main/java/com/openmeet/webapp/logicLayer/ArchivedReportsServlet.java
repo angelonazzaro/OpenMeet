@@ -29,8 +29,19 @@ public class ArchivedReportsServlet extends HttpServlet {
         MultiMapList<String, String> data = new MultiMapList<>();
 
         try {
-            data = qjx.doRetrivedByJoin(String.format("SELECT %s.*, CONCAT(%s.meeterName, ' ', %s.meeterSurname) AS meeterfullName, %s.email FROM %s JOIN %s ON %s.id = %s.meeterReported WHERE %s.isArchived = true",
-                    Report.REPORT, Meeter.MEETER, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Meeter.MEETER, Meeter.MEETER, Report.REPORT, Report.REPORT));
+            /*
+            SELECT Report.*, CONCAT(Meeter.meeterName, ' ', Meeter.meeterSurname) AS meeterfullName, Meeter.email
+            FROM Report JOIN Meeter ON Meeter.id = Report.meeterReported
+            WHERE Report.isArchived = TRUE
+            */
+            data = qjx.doRetrivedByJoin(
+                    String.format(
+                            "SELECT %s.*, CONCAT(%s, ' ', %s) AS meeterfullName, %s " +
+                                    "FROM %s JOIN %s ON %s = %s " +
+                                    "WHERE %s = TRUE",
+                            Report.REPORT, Meeter.MEETER_MEETER_NAME, Meeter.MEETER_MEETER_SURNAME, Meeter.MEETER_EMAIL,
+                            Report.REPORT, Meeter.MEETER, Meeter.MEETER_ID, Report.REPORT_MEETER_REPORTED,
+                            Report.REPORT_IS_ARCHIVED));
 
         } catch (SQLException e) {
             resp.sendError(500, "Internal Server Error");
@@ -55,7 +66,7 @@ public class ArchivedReportsServlet extends HttpServlet {
         values.put("isArchived", true);
 
         try {
-            if (reportDAO.doUpdate(values, String.format("%s.id = %d", Report.REPORT, reportId))) {
+            if (reportDAO.doUpdate(values, String.format("%s = %d", Report.REPORT_ID, reportId))) {
                 resp.sendRedirect(req.getContextPath() + "/reports");
             }
         } catch (SQLException e) {

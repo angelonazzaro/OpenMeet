@@ -8,16 +8,20 @@ import java.util.HashMap;
 public class Report implements IEntity {
 
     public static final String REPORT = "Report";
-
+    public static final String REPORT_ID = REPORT + ".id";
+    public static final String REPORT_MEETER_REPORTER = REPORT + ".meeterReporter";
+    public static final String REPORT_MEETER_REPORTED = REPORT + ".meeterReported";
+    public static final String REPORT_REASON = REPORT + ".reason";
+    public static final String REPORT_IS_ARCHIVED = REPORT + ".isArchived";
+    public static final String REPORT_CREATION_DATE = REPORT + ".creationDate";
     private int id;
     private int meeterReporter;
     private int meeterReported;
     private String reason;
-
     private boolean isArchived;
     private Timestamp creationDate;
 
-    public Report(){
+    public Report() {
 
     }
 
@@ -31,6 +35,37 @@ public class Report implements IEntity {
                 put("reason", reason);
                 put("isArchived", isArchived);
                 put("creationDate", creationDate.toString());
+            }
+        };
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>() {
+            {
+                for (String field : fields) {
+                    switch (field) {
+                        case REPORT_ID:
+                            put("id", id);
+                            break;
+                        case REPORT_MEETER_REPORTER:
+                            put("meeterReporter", meeterReporter);
+                            break;
+                        case REPORT_MEETER_REPORTED:
+                            put("meeterReported", meeterReported);
+                            break;
+                        case REPORT_REASON:
+                            put("reason", reason);
+                            break;
+                        case REPORT_IS_ARCHIVED:
+                            put("isArchived", isArchived);
+                            break;
+                        case REPORT_CREATION_DATE:
+                            put("creationDate", creationDate.toString());
+                            break;
+                    }
+                }
             }
         };
     }
@@ -79,9 +114,13 @@ public class Report implements IEntity {
         this.reason = reason;
     }
 
-    public boolean isArchived() { return isArchived; }
+    public boolean isArchived() {
+        return isArchived;
+    }
 
-    public void setIsArchived(boolean isArchived) { this.isArchived = isArchived; }
+    public void setIsArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+    }
 
     public Timestamp getCreationDate() {
         return creationDate;

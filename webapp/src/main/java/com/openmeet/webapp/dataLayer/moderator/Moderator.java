@@ -9,17 +9,17 @@ import java.util.HashMap;
 public class Moderator implements IEntity {
 
     public static final String MODERATOR = "Moderator";
-
+    public static final String MODERATOR_ID = MODERATOR + ".id";
+    public static final String MODERATOR_EMAIL = MODERATOR + ".email";
+    public static final String MODERATOR_MODERATOR_NAME = MODERATOR + ".moderatorName";
+    public static final String MODERATOR_MODERATOR_SURNAME = MODERATOR + ".moderatorSurname";
+    public static final String MODERATOR_PWD = MODERATOR + ".pwd";
+    public static final String MODERATOR_PROFILE_PIC = MODERATOR + ".profilePic";
     private int id;
-
     private String email;
-
     private String moderatorName;
-
     private String moderatorSurname;
-
     private String pwd;
-
     private String profilePic;
 
     public Moderator() {
@@ -45,8 +45,48 @@ public class Moderator implements IEntity {
     }
 
     @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>(){
+            {
+                for(String field : fields){
+                    switch (field){
+                        case MODERATOR_ID:
+                            put("id", id);
+                            break;
+                        case MODERATOR_EMAIL:
+                            put("email", email);
+                            break;
+                        case MODERATOR_MODERATOR_NAME:
+                            put("moderatorName", moderatorName);
+                            break;
+                        case MODERATOR_MODERATOR_SURNAME:
+                            put("moderatorSurname", moderatorSurname);
+                            break;
+                        case MODERATOR_PWD:
+                            put("pwd", pwd);
+                            break;
+                        case MODERATOR_PROFILE_PIC:
+                            if (profilePic != null) {
+                                put("profilePic", profilePic);
+                            }
+                            break;
+                    }
+                }
+            }
+        };
+    }
+
+    @Override
     public String toString() {
-        return "Moderator{" + "id=" + id + ", email='" + email + '\'' + ", moderatorName='" + moderatorName + '\'' + ", moderatorSurname='" + moderatorSurname + '\'' + ", pwd='" + pwd + '\'' + ", profilePic='" + profilePic + '\'' + '}';
+        return "Moderator{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", moderatorName='" + moderatorName + '\'' +
+                ", moderatorSurname='" + moderatorSurname + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", profilePic='" + profilePic + '\'' +
+                '}';
     }
 
     public int getId() {

@@ -26,8 +26,8 @@ public class HomeServlet extends HttpServlet {
 
         try {
             // Get Report Ratio data (Archived vs Unarchived)
-            List<Report> unarchivedReports = reportDAO.doRetrieveByCondition(String.format("%s.isArchived = false", Report.REPORT));
-            List<Report> archivedReports = reportDAO.doRetrieveByCondition(String.format("%s.isArchived = true", Report.REPORT));
+            List<Report> unarchivedReports = reportDAO.doRetrieveByCondition(String.format("%s = FALSE", Report.REPORT_IS_ARCHIVED));
+            List<Report> archivedReports = reportDAO.doRetrieveByCondition(String.format("%s = TRUE", Report.REPORT_IS_ARCHIVED));
 
             // Calculate Percentages
             int totalReports = unarchivedReports.size() + archivedReports.size();

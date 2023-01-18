@@ -9,8 +9,8 @@ class InterestExtractor : ResultSetExtractor<Interest> {
 
         val interest = Interest()
 
-        interest.id = resultSet.getInt(Interest.INTEREST + ".id")
-        interest.description = resultSet.getString(Interest.INTEREST + ".description")
+        interest.id = resultSet.getInt(Interest.INTEREST_ID)
+        interest.description = resultSet.getString(Interest.INTEREST_DESCRIPTION)
 
         return interest
     }

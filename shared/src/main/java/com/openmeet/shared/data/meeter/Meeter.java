@@ -5,12 +5,20 @@ import com.openmeet.shared.utils.PasswordEncrypter;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 
 public class Meeter implements IEntity {
 
     public static final String MEETER = "Meeter";
+    public static final String MEETER_ID = MEETER + ".id";
+    public static final String MEETER_EMAIL = MEETER + ".email";
+    public static final String MEETER_MEETER_NAME = MEETER + ".meeterName";
+    public static final String MEETER_MEETER_SURNAME = MEETER + ".meeterSurname";
+    public static final String MEETER_PWD = MEETER + ".pwd";
+    public static final String MEETER_BIOGRAPHY = MEETER + ".biography";
+    public static final String MEETER_BIRTH_DATE = MEETER + ".birthDate";
+    public static final String MEETER_PUBLIC_KEY = MEETER + ".publicKey";
     private int id;
     private String email;
     private String meeterName;
@@ -20,7 +28,7 @@ public class Meeter implements IEntity {
     private Date birthDate;
     private byte[] publicKey = new byte[128];
 
-    public Meeter(){
+    public Meeter() {
 
     }
 
@@ -33,14 +41,56 @@ public class Meeter implements IEntity {
                 put("meeterName", meeterName);
                 put("meeterSurname", meeterSurname);
 
-                if (biography != null)
+                if (biography != null) {
                     put("biography", biography);
-
+                }
                 put("pwd", pwd);
                 put("birthDate", birthDate.toString());
 
-                if (publicKey != null && publicKey.length > 0)
+                if (publicKey != null && publicKey.length > 0) {
                     put("publicKey", publicKey);
+                }
+            }
+        };
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>() {
+            {
+                for (String field : fields) {
+                    switch (field) {
+                        case MEETER_ID:
+                            put("id", id);
+                            break;
+                        case MEETER_EMAIL:
+                            put("email", email);
+                            break;
+                        case MEETER_MEETER_NAME:
+                            put("meeterName", meeterName);
+                            break;
+                        case MEETER_MEETER_SURNAME:
+                            put("meeterSurname", meeterSurname);
+                            break;
+                        case MEETER_PWD:
+                            put("pwd", pwd);
+                            break;
+                        case MEETER_BIOGRAPHY:
+                            if (biography != null) {
+                                put("biography", biography);
+                            }
+                            break;
+                        case MEETER_BIRTH_DATE:
+                            put("birthDate", birthDate.toString());
+                            break;
+                        case MEETER_PUBLIC_KEY:
+                            if (publicKey != null && publicKey.length > 0) {
+                                put("publicKey", publicKey);
+                            }
+                            break;
+                    }
+                }
             }
         };
     }

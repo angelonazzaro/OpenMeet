@@ -1,7 +1,6 @@
 package com.openmeet.shared.data.image;
 
-import com.openmeet.shared.data.image.Image;
-import com.openmeet.shared.data.image.ImageExtractor;
+
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
@@ -29,7 +28,7 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
             throw new InvalidPrimaryKeyException(key);
         }
         List<Image> image = doRetrieveByCondition(
-                String.format("%s.id = '%s'", Image.IMAGE, key)
+                String.format("%s = '%s'", Image.IMAGE_ID, key)
         );
         return image.isEmpty() ? null : image.get(0);
     }
@@ -55,6 +54,11 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
     }
 
     @Override
+    public boolean doSave(HashMap<String, ?> values) throws SQLException {
+        return genericDoSave(Image.IMAGE, values, this.source);
+    }
+
+    @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
         return genericDoUpdate(Image.IMAGE, condition, values, this.source);
     }
@@ -66,7 +70,7 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
             return doSave(obj);
 
         return doUpdate(obj.toHashMap(),
-                String.format("%s.id = '%s'", Image.IMAGE, obj.getId()));
+                String.format("%s = '%s'", Image.IMAGE_ID, obj.getId()));
     }
 
     @Override

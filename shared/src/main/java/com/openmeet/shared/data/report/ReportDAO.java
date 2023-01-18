@@ -26,7 +26,7 @@ public class ReportDAO extends SQLDAO implements DAO<Report> {
             throw new InvalidPrimaryKeyException(key);
         }
         List<Report> report = doRetrieveByCondition(
-                String.format("%s.id = '%s'", Report.REPORT, key)
+                String.format("%s = '%s'", Report.REPORT_ID, key)
         );
         return report.isEmpty() ? null : report.get(0);
     }
@@ -52,6 +52,11 @@ public class ReportDAO extends SQLDAO implements DAO<Report> {
     }
 
     @Override
+    public boolean doSave(HashMap<String, ?> values) throws SQLException {
+        return genericDoSave(Report.REPORT, values, this.source);
+    }
+
+    @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
         return genericDoUpdate(Report.REPORT, condition, values, this.source);
     }
@@ -63,7 +68,7 @@ public class ReportDAO extends SQLDAO implements DAO<Report> {
             return doSave(obj);
 
         return doUpdate(obj.toHashMap(),
-                String.format("%s.id = '%s'", Report.REPORT, obj.getId()));
+                String.format("%s = '%s'", Report.REPORT_ID, obj.getId()));
     }
 
     @Override

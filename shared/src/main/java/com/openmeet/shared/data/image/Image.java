@@ -7,6 +7,9 @@ import java.util.HashMap;
 public class Image implements IEntity {
 
     public static final String IMAGE = "Image";
+    public static final String IMAGE_ID = IMAGE + ".id";
+    public static final String IMAGE_PATH = IMAGE + ".path";
+    public static final String IMAGE_MEETER_ID = IMAGE + ".meeterId";
     private int id;
     private String path;
     private int meeterId;
@@ -23,6 +26,28 @@ public class Image implements IEntity {
                 put("id", id);
                 put("path", path);
                 put("meeterId", meeterId);
+            }
+        };
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>() {
+            {
+                for (String field : fields) {
+                    switch (field) {
+                        case IMAGE_ID:
+                            put("id", id);
+                            break;
+                        case IMAGE_PATH:
+                            put("path", path);
+                            break;
+                        case IMAGE_MEETER_ID:
+                            put("meeterId", meeterId);
+                            break;
+                    }
+                }
             }
         };
     }

@@ -1,6 +1,5 @@
 package com.openmeet.data.rating
 
-import com.openmeet.shared.data.image.Image
 import com.openmeet.shared.data.storage.DAO
 import com.openmeet.shared.data.storage.SQLDAO
 import java.util.HashMap
@@ -23,7 +22,7 @@ class RatingDAO(source: DataSource) : SQLDAO(source), DAO<Rating> {
             throw IllegalArgumentException("null")
         }
 
-        val rating = doRetrieveByCondition("${Rating.RATING}.id = '$key'")
+        val rating = doRetrieveByCondition("$Rating.RATING_ID = '$key'")
 
         return if (rating.isEmpty()) null else rating[0]
     }
@@ -44,6 +43,10 @@ class RatingDAO(source: DataSource) : SQLDAO(source), DAO<Rating> {
         return genericDoSave(Rating.RATING, obj?.toHashMap(), source)
     }
 
+    override fun doSave(values: HashMap<String, *>?): Boolean {
+        return genericDoSave(Rating.RATING, values, source)
+    }
+
     override fun doUpdate(values: HashMap<String, *>?, condition: String?): Boolean {
         return genericDoUpdate(Rating.RATING, condition, values, source)
     }
@@ -53,7 +56,7 @@ class RatingDAO(source: DataSource) : SQLDAO(source), DAO<Rating> {
         if (doRetrieveByKey(obj?.id.toString()) == null) {
             return doSave(obj)
         }
-        return doUpdate(obj?.toHashMap(), "${Rating.RATING}.id = '${obj?.id}'")
+        return doUpdate(obj?.toHashMap(), "$Rating.RATING_ID = '${obj?.id}'")
 
     }
 

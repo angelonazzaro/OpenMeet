@@ -22,7 +22,7 @@ class Meeter_InterestDAO(source: DataSource) : SQLDAO(source), DAO<Meeter_Intere
             throw IllegalArgumentException("null")
         }
 
-        val meeterInterest = doRetrieveByCondition("${Meeter_Interest.MEETER_INTEREST}.id = '$key'")
+        val meeterInterest = doRetrieveByCondition("$Meeter_Interest.MEETER_INTEREST_MEETER_ID = '$key'")
 
         return if (meeterInterest.isEmpty()) null else meeterInterest[0]
     }
@@ -43,6 +43,10 @@ class Meeter_InterestDAO(source: DataSource) : SQLDAO(source), DAO<Meeter_Intere
         return genericDoSave(Meeter_Interest.MEETER_INTEREST, obj?.toHashMap(), source)
     }
 
+    override fun doSave(values: HashMap<String, *>?): Boolean {
+        return genericDoSave(Meeter_Interest.MEETER_INTEREST, values, source)
+    }
+
     override fun doUpdate(values: HashMap<String, *>?, condition: String?): Boolean {
         return genericDoUpdate(Meeter_Interest.MEETER_INTEREST, condition, values, source)
     }
@@ -52,7 +56,7 @@ class Meeter_InterestDAO(source: DataSource) : SQLDAO(source), DAO<Meeter_Intere
         if (doRetrieveByKey(obj?.id.toString()) == null) {
             return doSave(obj)
         }
-        return doUpdate(obj?.toHashMap(), "${Meeter_Interest.MEETER_INTEREST}.id = '${obj?.id}'")
+        return doUpdate(obj?.toHashMap(), "$Meeter_Interest.MEETER_INTEREST_MEETER_ID = '${obj?.id}'")
     }
 
     override fun doDelete(condition: String?): Boolean {

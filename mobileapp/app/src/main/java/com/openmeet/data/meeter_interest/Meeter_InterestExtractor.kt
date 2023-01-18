@@ -9,8 +9,8 @@ class Meeter_InterestExtractor : ResultSetExtractor<Meeter_Interest> {
 
         val meeterInterest = Meeter_Interest()
 
-        meeterInterest.id = resultSet.getInt(Meeter_Interest.MEETER_INTEREST + ".id")
-        meeterInterest.meeterId = resultSet.getInt(Meeter_Interest.MEETER_INTEREST + ".meeterId")
+        meeterInterest.id = resultSet.getInt(Meeter_Interest.MEETER_INTEREST_ID)
+        meeterInterest.meeterId = resultSet.getInt(Meeter_Interest.MEETER_INTEREST_MEETER_ID)
 
         return meeterInterest
     }
