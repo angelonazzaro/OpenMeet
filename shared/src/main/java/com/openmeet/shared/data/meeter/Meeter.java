@@ -5,7 +5,7 @@ import com.openmeet.shared.utils.PasswordEncrypter;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 
 public class Meeter implements IEntity {

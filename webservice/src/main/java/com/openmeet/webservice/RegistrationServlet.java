@@ -10,10 +10,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -64,32 +63,34 @@ public class RegistrationServlet extends HttpServlet {
             logger.log(Level.SEVERE, "RegistrationServlet:doPost() - Error: " + e.getMessage());
             return;
         }
-
         //create the new meeter
         Meeter meeter = new Meeter();
         meeter.setEmail(email);
         meeter.setPwd(pwd);
         meeter.setMeeterName(meeterName);
         meeter.setMeeterSurname(meeterSurname);
-
-        try {
-            meeter.setBirthDate(new SimpleDateFormat("yyyy-dd-MM").parse(birthDate));
-        } catch (ParseException e) {
-            ResponseHelper.sendCustomError(out, "Invalid date format " + birthDate + ". Format should be [yyyy-dd-MM]. Please try again.");
-            return;
-        }
+        meeter.setBirthDate(Date.valueOf(birthDate));
 
         boolean success;
 
-        HashMap<String, String> met = new HashMap<>();
-        met.put("email", email);
-        met.put("pwd", pwd);
-        met.put("meeterName", meeterName);
-        met.put("meeterSurname", meeterSurname);
-        met.put("birthDate", birthDate);
+//        HashMap<String, String> data = new HashMap<>();
+//        data.put("email", email);
+//        data.put("pwd", pwd);
+//        data.put("meeterName", meeterName);
+//        data.put("meeterSurname", meeterSurname);
+//        data.put("birthDate", birthDate);
+//        System.out.println("BirthDate: " + birthDate);
+//        System.out.println("Meeter birth date: " + meeter.getBirthDate().toString());
 
         try {
-            success = meeterDAO.doSavePartial(met);
+            success = meeterDAO.doSave(meeter.toHashMap
+                    (Meeter.MEETER_EMAIL,
+                            Meeter.MEETER_PWD,
+                            Meeter.MEETER_MEETER_NAME,
+                            Meeter.MEETER_MEETER_SURNAME,
+                            Meeter.MEETER_BIRTH_DATE)
+            );
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             ResponseHelper.sendGenericError(out);
