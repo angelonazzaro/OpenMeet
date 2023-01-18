@@ -45,6 +45,39 @@ public class Moderator implements IEntity {
     }
 
     @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>(){
+            {
+                for(String field : fields){
+                    switch (field){
+                        case MODERATOR_ID:
+                            put("id", id);
+                            break;
+                        case MODERATOR_EMAIL:
+                            put("email", email);
+                            break;
+                        case MODERATOR_MODERATOR_NAME:
+                            put("moderatorName", moderatorName);
+                            break;
+                        case MODERATOR_MODERATOR_SURNAME:
+                            put("moderatorSurname", moderatorSurname);
+                            break;
+                        case MODERATOR_PWD:
+                            put("pwd", pwd);
+                            break;
+                        case MODERATOR_PROFILE_PIC:
+                            if (profilePic != null) {
+                                put("profilePic", profilePic);
+                            }
+                            break;
+                    }
+                }
+            }
+        };
+    }
+
+    @Override
     public String toString() {
         return "Moderator{" +
                 "id=" + id +

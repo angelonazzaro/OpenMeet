@@ -31,6 +31,28 @@ public class Image implements IEntity {
     }
 
     @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>() {
+            {
+                for (String field : fields) {
+                    switch (field) {
+                        case IMAGE_ID:
+                            put("id", id);
+                            break;
+                        case IMAGE_PATH:
+                            put("path", path);
+                            break;
+                        case IMAGE_MEETER_ID:
+                            put("meeterId", meeterId);
+                            break;
+                    }
+                }
+            }
+        };
+    }
+
+    @Override
     public String toString() {
         return "Image.Image{" +
                 "id=" + id +

@@ -36,8 +36,9 @@ public class Ban implements IEntity {
                 put("description", description);
                 put("startTime", startTime.toString());
 
-                if (endTime != null)
+                if (endTime != null) {
                     put("endTime", endTime.toString());
+                }
 
                 put("meeterId", meeterId);
             }
@@ -47,33 +48,34 @@ public class Ban implements IEntity {
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
-        HashMap<String, Object> map = new HashMap<>();
-
-        for (String field : fields) {
-            switch (field) {
-                case BAN_ID:
-                    map.put("id", id);
-                    break;
-                case BAN_MODERATOR_ID:
-                    map.put("moderatorId", moderatorId);
-                    break;
-                case BAN_DESCRIPTION:
-                    map.put("description", description);
-                    break;
-                case BAN_START_TIME:
-                    map.put("startTime", startTime.toString());
-                    break;
-                case BAN_END_TIME:
-                    if (endTime != null)
-                        map.put("endTime", endTime.toString());
-                    break;
-                case BAN_MEETER_ID:
-                    map.put("meeterId", meeterId);
-                    break;
+        return new HashMap<>() {
+            {
+                for (String field : fields) {
+                    switch (field) {
+                        case BAN_ID:
+                            put("id", id);
+                            break;
+                        case BAN_MODERATOR_ID:
+                            put("moderatorId", moderatorId);
+                            break;
+                        case BAN_DESCRIPTION:
+                            put("description", description);
+                            break;
+                        case BAN_START_TIME:
+                            put("startTime", startTime.toString());
+                            break;
+                        case BAN_END_TIME:
+                            if (endTime != null) {
+                                put("endTime", endTime.toString());
+                            }
+                            break;
+                        case BAN_MEETER_ID:
+                            put("meeterId", meeterId);
+                            break;
+                    }
+                }
             }
-        }
-
-        return map;
+        };
     }
 
     @Override

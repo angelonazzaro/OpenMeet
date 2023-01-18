@@ -21,7 +21,7 @@ public class Report implements IEntity {
     private boolean isArchived;
     private Timestamp creationDate;
 
-    public Report(){
+    public Report() {
 
     }
 
@@ -35,6 +35,37 @@ public class Report implements IEntity {
                 put("reason", reason);
                 put("isArchived", isArchived);
                 put("creationDate", creationDate.toString());
+            }
+        };
+    }
+
+    @Override
+    public HashMap<String, ?> toHashMap(String... fields) {
+
+        return new HashMap<>() {
+            {
+                for (String field : fields) {
+                    switch (field) {
+                        case REPORT_ID:
+                            put("id", id);
+                            break;
+                        case REPORT_MEETER_REPORTER:
+                            put("meeterReporter", meeterReporter);
+                            break;
+                        case REPORT_MEETER_REPORTED:
+                            put("meeterReported", meeterReported);
+                            break;
+                        case REPORT_REASON:
+                            put("reason", reason);
+                            break;
+                        case REPORT_IS_ARCHIVED:
+                            put("isArchived", isArchived);
+                            break;
+                        case REPORT_CREATION_DATE:
+                            put("creationDate", creationDate.toString());
+                            break;
+                    }
+                }
             }
         };
     }
@@ -83,9 +114,13 @@ public class Report implements IEntity {
         this.reason = reason;
     }
 
-    public boolean isArchived() { return isArchived; }
+    public boolean isArchived() {
+        return isArchived;
+    }
 
-    public void setIsArchived(boolean isArchived) { this.isArchived = isArchived; }
+    public void setIsArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+    }
 
     public Timestamp getCreationDate() {
         return creationDate;
