@@ -27,7 +27,7 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
             throw new InvalidPrimaryKeyException(key);
         }
         List<Moderator> moderator = doRetrieveByCondition(
-                String.format("%s.id = '%s'", Moderator.MODERATOR, key)
+                String.format("%s = '%s'", Moderator.MODERATOR_ID, key)
         );
         return moderator.isEmpty() ? null : moderator.get(0);
     }
@@ -53,6 +53,11 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
     }
 
     @Override
+    public boolean doSave(HashMap<String, ?> values) throws SQLException {
+        return genericDoSave(Moderator.MODERATOR, values, this.source);
+    }
+
+    @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
         return genericDoUpdate(Moderator.MODERATOR, condition, values, this.source);
     }
@@ -64,7 +69,7 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
             return doSave(obj);
 
         return doUpdate(obj.toHashMap(),
-                String.format("%s.id = '%s'", Moderator.MODERATOR, obj.getId()));
+                String.format("%s = '%s'", Moderator.MODERATOR_ID, obj.getId()));
     }
 
     @Override
