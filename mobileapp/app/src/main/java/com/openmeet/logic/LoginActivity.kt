@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun doHttpLogin(email : String, pwd : String){
 
-        val url = "http://" + getString(R.string.request_server_address)
+        val url = "http://" + getString(R.string.request_server_address) + "LoginServlet"
         val snackbarView = findViewById<View>(R.id.auth_login_container)
 
         // Request a string response from the provided URL.
