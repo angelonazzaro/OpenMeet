@@ -39,4 +39,21 @@ data class Message(
 
         return map
     }
+
+    override fun toHashMap(vararg fields: String?): HashMap<String, *> {
+
+        val map = HashMap<String, Any>()
+        for (field in fields) {
+            when (field) {
+                MESSAGE_ID -> map["id"] = id
+                MESSAGE_TEXT -> map["text"] = text!!
+                MESSAGE_SENT_TIME -> map["sentTime"] = sentTime!!
+                MESSAGE_DELIVERED_TIME -> map["deliveredTime"] = deliveredTime!!
+                MESSAGE_READ_TIME -> map["readTime"] = readTime!!
+                MESSAGE_MEETER_SENDER -> map["meeterSender"] = meeterSender
+                MESSAGE_MEETER_RECEIVER -> map["meeterReceiver"] = meeterReceiver
+            }
+        }
+        return map
+    }
 }

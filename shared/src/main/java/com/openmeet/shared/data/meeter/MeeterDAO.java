@@ -27,7 +27,7 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
             throw new InvalidPrimaryKeyException(key);
         }
         List<Meeter> meeter = doRetrieveByCondition(
-                String.format("%s.id = '%s'", Meeter.MEETER, key)
+                String.format("%s = '%s'", Meeter.MEETER_ID, key)
         );
         return meeter.isEmpty() ? null : meeter.get(0);
     }
@@ -52,7 +52,8 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
         return genericDoSave(Meeter.MEETER, obj.toHashMap(), this.source);
     }
 
-    public boolean doSavePartial(HashMap<String, ?> values) throws SQLException {
+    @Override
+    public boolean doSave(HashMap<String, ?> values) throws SQLException {
         return genericDoSave(Meeter.MEETER, values, this.source);
     }
 
@@ -69,7 +70,7 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
             return doSave(obj);
 
         return doUpdate(obj.toHashMap(),
-                String.format("%s.id = '%s'", Meeter.MEETER, obj.getId()));
+                String.format("%s = '%s'", Meeter.MEETER_ID, obj.getId()));
     }
 
     @Override

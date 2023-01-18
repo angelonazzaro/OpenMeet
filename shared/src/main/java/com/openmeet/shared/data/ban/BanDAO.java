@@ -3,6 +3,7 @@ package com.openmeet.shared.data.ban;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
+
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class BanDAO extends SQLDAO implements DAO<Ban> {
             throw new InvalidPrimaryKeyException(key);
         }
         List<Ban> ban = doRetrieveByCondition(
-                String.format("%s.id = '%s'", Ban.BAN, key)
+                String.format("%s = '%s'", Ban.BAN_ID, key)
         );
         return ban.isEmpty() ? null : ban.get(0);
     }
@@ -52,6 +53,11 @@ public class BanDAO extends SQLDAO implements DAO<Ban> {
     }
 
     @Override
+    public boolean doSave(HashMap<String, ?> values) throws SQLException {
+        return genericDoSave(Ban.BAN, values, this.source);
+    }
+
+    @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
         return genericDoUpdate(Ban.BAN, condition, values, this.source);
     }
@@ -63,7 +69,7 @@ public class BanDAO extends SQLDAO implements DAO<Ban> {
             return doSave(obj);
 
         return doUpdate(obj.toHashMap(),
-                String.format("%s.id = '%s'", Ban.BAN, obj.getId()));
+                String.format("%s = '%s'", Ban.BAN_ID, obj.getId()));
     }
 
     @Override

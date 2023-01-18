@@ -18,4 +18,16 @@ data class Meeter_Interest(var id: Int = 0, var meeterId: Int = 0) : IEntity {
 
         return map
     }
+
+    override fun toHashMap(vararg fields: String?): java.util.HashMap<String, *> {
+
+        val map = HashMap<String, Any>()
+        for (field in fields) {
+            when (field) {
+                MEETER_INTEREST_ID -> map["id"] = id
+                MEETER_INTEREST_MEETER_ID -> map["meeterId"] = meeterId
+            }
+        }
+        return map
+    }
 }

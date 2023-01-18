@@ -19,4 +19,16 @@ data class Interest(var id: Int = 0, var description: String? = null) : IEntity 
 
         return map
     }
+
+    override fun toHashMap(vararg fields: String?): HashMap<String, *> {
+
+        val map = HashMap<String, Any>()
+        for (field in fields) {
+            when (field) {
+                INTEREST_ID -> map["id"] = id
+                INTEREST_DESCRIPTION -> map["description"] = description!!
+            }
+        }
+        return map
+    }
 }

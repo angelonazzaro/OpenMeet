@@ -26,11 +26,26 @@ data class Rating(
         val map = HashMap<String, Any>()
 
         map["id"] = id
-        map["meeter_rater"] = meeterRater
-        map["meeter_rated"] = meeterRated
+        map["meeterRater"] = meeterRater
+        map["meeterRated"] = meeterRated
         map["type"] = type
-        map["creation_date"] = creationDate!!
+        map["creationDate"] = creationDate!!
 
+        return map
+    }
+
+    override fun toHashMap(vararg fields: String?): HashMap<String, *> {
+
+        val map = HashMap<String, Any>()
+        for (field in fields) {
+            when (field) {
+                RATING_ID -> map["id"] = id
+                RATING_MEETER_RATER -> map["meeterRater"] = meeterRater
+                RATING_MEETER_RATED -> map["meeterRated"] = meeterRated
+                RATING_TYPE -> map["type"] = type
+                RATING_CREATION_DATE -> map["creationDate"] = creationDate!!
+            }
+        }
         return map
     }
 }
