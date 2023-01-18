@@ -1,17 +1,12 @@
 package com.openmeet.logic
 
 import android.os.Bundle
-
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.toolbox.StringRequest
 import com.google.android.material.snackbar.Snackbar
-
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import org.json.JSONObject
@@ -25,6 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         val emailFld = findViewById<TextInputLayout>(R.id.emailFixedField)
+        val pswFld = findViewById<TextInputLayout>(R.id.pswField)
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
@@ -42,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
             doHttpLogin(email, pwd)
 
         }
-
     }
 
     override fun onBackPressed() {
