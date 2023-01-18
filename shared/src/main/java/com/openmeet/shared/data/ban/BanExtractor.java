@@ -10,6 +10,7 @@ public class BanExtractor implements ResultSetExtractor<Ban> {
     public Ban extract(ResultSet resultSet) throws SQLException {
 
         Ban ban = new Ban();
+
         ban.setId(resultSet.getInt(Ban.BAN_ID));
         ban.setModeratorId(resultSet.getInt(Ban.BAN_MODERATOR_ID));
         ban.setDescription(resultSet.getString(Ban.BAN_DESCRIPTION));
