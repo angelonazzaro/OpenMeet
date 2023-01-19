@@ -9,6 +9,7 @@ import com.android.volley.toolbox.StringRequest
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.utils.VolleyRequestSender
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
@@ -46,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    fun doHttpLogin(email: String, pwd: String) {
+    fun doHttpLogin(email : String, pwd : String){
 
         val url = "http://" + getString(R.string.request_server_address) + "LoginServlet"
         val snackbarView = findViewById<View>(R.id.auth_login_container)
@@ -57,16 +58,14 @@ class LoginActivity : AppCompatActivity() {
             { response ->
                 val snackbarView = findViewById<View>(R.id.auth_login_container)
                 val jsonResp = JSONObject(response)
-                if (jsonResp.getString("status") == "success") {
+                if(jsonResp.getString("status") == "success"){
                     Toast.makeText(this, "Success: $response", Toast.LENGTH_LONG).show()
-                } else {
-                    if (jsonResp.getString("message") == "incorrect_credentials") {
-                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_LONG)
-                            .show()
-                        findViewById<TextInputLayout>(R.id.emailFixedField).error =
-                            getString(R.string.login_failed_email)
-                        findViewById<TextInputLayout>(R.id.pswField).error =
-                            getString(R.string.login_failed_password)
+                }
+                else{
+                    if(jsonResp.getString("message") == "incorrect_credentials"){
+                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_LONG).show()
+                        findViewById<TextInputLayout>(R.id.emailFixedField).error = getString(R.string.login_failed_email)
+                        findViewById<TextInputLayout>(R.id.pswField).error = getString(R.string.login_failed_password)
                     }
                 }
             },
@@ -79,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
 
             }) {
             override fun getParams(): MutableMap<String, String> {
-                val params = HashMap<String, String>()
+                val params = HashMap<String,String>()
                 params["email"] = email
                 params["pwd"] = pwd
                 return params
@@ -88,6 +87,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Add the request to the RequestQueue with Singleton Design Pattern.
-        VolleyReqSender.getInstance(this).addToRequestQueue(stringRequest)
+        VolleyRequestSender.getInstance(this).addToRequestQueue(stringRequest)
     }
 }
