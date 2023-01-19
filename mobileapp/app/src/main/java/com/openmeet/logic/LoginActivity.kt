@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.utils.VolleyRequestSender
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
@@ -98,6 +99,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Add the request to the RequestQueue with Singleton Design Pattern.
-        VolleyReqSender.getInstance(this).addToRequestQueue(stringRequest)
+        VolleyRequestSender.getInstance(this).addToRequestQueue(stringRequest)
     }
 }

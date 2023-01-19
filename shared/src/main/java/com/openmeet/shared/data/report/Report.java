@@ -27,52 +27,48 @@ public class Report implements IEntity {
 
     public HashMap<String, ?> toHashMap() {
 
-        return new HashMap<>() {
-            {
-                put("id", id);
-                put("meeterReporter", meeterReporter);
-                put("meeterReported", meeterReported);
-                put("reason", reason);
-                put("isArchived", isArchived);
-                put("creationDate", creationDate.toString());
-            }
-        };
+        return new HashMap<>() {{
+            put("id", id);
+            put("meeterReporter", meeterReporter);
+            put("meeterReported", meeterReported);
+            put("reason", reason);
+            put("isArchived", isArchived);
+            put("creationDate", creationDate.toString());
+        }};
     }
 
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
-        return new HashMap<>() {
-            {
-                for (String field : fields) {
-                    switch (field) {
-                        case REPORT_ID:
-                            put("id", id);
-                            break;
-                        case REPORT_MEETER_REPORTER:
-                            put("meeterReporter", meeterReporter);
-                            break;
-                        case REPORT_MEETER_REPORTED:
-                            put("meeterReported", meeterReported);
-                            break;
-                        case REPORT_REASON:
-                            put("reason", reason);
-                            break;
-                        case REPORT_IS_ARCHIVED:
-                            put("isArchived", isArchived);
-                            break;
-                        case REPORT_CREATION_DATE:
-                            put("creationDate", creationDate.toString());
-                            break;
-                    }
+        return new HashMap<>() {{
+            for (String field : fields) {
+                switch (field) {
+                    case REPORT_ID:
+                        put("id", id);
+                        break;
+                    case REPORT_MEETER_REPORTER:
+                        put("meeterReporter", meeterReporter);
+                        break;
+                    case REPORT_MEETER_REPORTED:
+                        put("meeterReported", meeterReported);
+                        break;
+                    case REPORT_REASON:
+                        put("reason", reason);
+                        break;
+                    case REPORT_IS_ARCHIVED:
+                        put("isArchived", isArchived);
+                        break;
+                    case REPORT_CREATION_DATE:
+                        put("creationDate", creationDate.toString());
+                        break;
                 }
             }
-        };
+        }};
     }
 
     @Override
     public String toString() {
-        return "Report.Report{" +
+        return "Report{" +
                 "id=" + id +
                 ", meeterReporter=" + meeterReporter +
                 ", meeterReported=" + meeterReported +

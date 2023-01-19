@@ -1,11 +1,11 @@
-package com.openmeet.logic
+package com.openmeet.utils
 
 import android.content.Context
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 
-class VolleyReqSender private constructor(context: Context){
+class VolleyRequestSender private constructor(context: Context){
     /*
         A key concept is that the RequestQueue must be instantiated with the Application context,
         not an Activity context. This ensures that the RequestQueue will last for the lifetime of your app,
@@ -14,11 +14,11 @@ class VolleyReqSender private constructor(context: Context){
 
     companion object {
         @Volatile
-        private var INSTANCE: VolleyReqSender? = null
+        private var INSTANCE: VolleyRequestSender? = null
 
         fun getInstance(context: Context) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: VolleyReqSender(context).also { INSTANCE = it }
+                INSTANCE ?: VolleyRequestSender(context).also { INSTANCE = it }
             }
 
     }

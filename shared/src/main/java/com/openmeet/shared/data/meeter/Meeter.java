@@ -34,65 +34,61 @@ public class Meeter implements IEntity {
 
     public HashMap<String, ?> toHashMap() {
 
-        return new HashMap<>() {
-            {
-                put("id", id);
-                put("email", email);
-                put("meeterName", meeterName);
-                put("meeterSurname", meeterSurname);
+        return new HashMap<>() {{
+            put("id", id);
+            put("email", email);
+            put("meeterName", meeterName);
+            put("meeterSurname", meeterSurname);
 
-                if (biography != null) {
-                    put("biography", biography);
-                }
-                put("pwd", pwd);
-                put("birthDate", birthDate.toString());
-
-                if (publicKey != null && publicKey.length > 0) {
-                    put("publicKey", publicKey);
-                }
+            if (biography != null) {
+                put("biography", biography);
             }
-        };
+            put("pwd", pwd);
+            put("birthDate", birthDate.toString());
+
+            if (publicKey != null && publicKey.length > 0) {
+                put("publicKey", publicKey);
+            }
+        }};
     }
 
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
-        return new HashMap<>() {
-            {
-                for (String field : fields) {
-                    switch (field) {
-                        case MEETER_ID:
-                            put("id", id);
-                            break;
-                        case MEETER_EMAIL:
-                            put("email", email);
-                            break;
-                        case MEETER_MEETER_NAME:
-                            put("meeterName", meeterName);
-                            break;
-                        case MEETER_MEETER_SURNAME:
-                            put("meeterSurname", meeterSurname);
-                            break;
-                        case MEETER_PWD:
-                            put("pwd", pwd);
-                            break;
-                        case MEETER_BIOGRAPHY:
-                            if (biography != null) {
-                                put("biography", biography);
-                            }
-                            break;
-                        case MEETER_BIRTH_DATE:
-                            put("birthDate", birthDate.toString());
-                            break;
-                        case MEETER_PUBLIC_KEY:
-                            if (publicKey != null && publicKey.length > 0) {
-                                put("publicKey", publicKey);
-                            }
-                            break;
-                    }
+        return new HashMap<>() {{
+            for (String field : fields) {
+                switch (field) {
+                    case MEETER_ID:
+                        put("id", id);
+                        break;
+                    case MEETER_EMAIL:
+                        put("email", email);
+                        break;
+                    case MEETER_MEETER_NAME:
+                        put("meeterName", meeterName);
+                        break;
+                    case MEETER_MEETER_SURNAME:
+                        put("meeterSurname", meeterSurname);
+                        break;
+                    case MEETER_PWD:
+                        put("pwd", pwd);
+                        break;
+                    case MEETER_BIOGRAPHY:
+                        if (biography != null) {
+                            put("biography", biography);
+                        }
+                        break;
+                    case MEETER_BIRTH_DATE:
+                        put("birthDate", birthDate.toString());
+                        break;
+                    case MEETER_PUBLIC_KEY:
+                        if (publicKey != null && publicKey.length > 0) {
+                            put("publicKey", publicKey);
+                        }
+                        break;
                 }
             }
-        };
+        }};
     }
 
     @Override

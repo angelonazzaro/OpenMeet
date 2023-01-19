@@ -29,58 +29,54 @@ public class Ban implements IEntity {
     @Override
     public HashMap<String, ?> toHashMap() {
 
-        return new HashMap<>() {
-            {
-                put("id", id);
-                put("moderatorId", moderatorId);
-                put("description", description);
-                put("startTime", startTime.toString());
+        return new HashMap<>() {{
+            put("id", id);
+            put("moderatorId", moderatorId);
+            put("description", description);
+            put("startTime", startTime.toString());
 
-                if (endTime != null) {
-                    put("endTime", endTime.toString());
-                }
-
-                put("meeterId", meeterId);
+            if (endTime != null) {
+                put("endTime", endTime.toString());
             }
-        };
+
+            put("meeterId", meeterId);
+        }};
     }
 
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
-        return new HashMap<>() {
-            {
-                for (String field : fields) {
-                    switch (field) {
-                        case BAN_ID:
-                            put("id", id);
-                            break;
-                        case BAN_MODERATOR_ID:
-                            put("moderatorId", moderatorId);
-                            break;
-                        case BAN_DESCRIPTION:
-                            put("description", description);
-                            break;
-                        case BAN_START_TIME:
-                            put("startTime", startTime.toString());
-                            break;
-                        case BAN_END_TIME:
-                            if (endTime != null) {
-                                put("endTime", endTime.toString());
-                            }
-                            break;
-                        case BAN_MEETER_ID:
-                            put("meeterId", meeterId);
-                            break;
-                    }
+        return new HashMap<>() {{
+            for (String field : fields) {
+                switch (field) {
+                    case BAN_ID:
+                        put("id", id);
+                        break;
+                    case BAN_MODERATOR_ID:
+                        put("moderatorId", moderatorId);
+                        break;
+                    case BAN_DESCRIPTION:
+                        put("description", description);
+                        break;
+                    case BAN_START_TIME:
+                        put("startTime", startTime.toString());
+                        break;
+                    case BAN_END_TIME:
+                        if (endTime != null) {
+                            put("endTime", endTime.toString());
+                        }
+                        break;
+                    case BAN_MEETER_ID:
+                        put("meeterId", meeterId);
+                        break;
                 }
             }
-        };
+        }};
     }
 
     @Override
     public String toString() {
-        return "Ban.Ban{" +
+        return "Ban{" +
                 "id=" + id +
                 ", moderatorId=" + moderatorId +
                 ", description='" + description + '\'' +
