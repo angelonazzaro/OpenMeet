@@ -25,6 +25,7 @@ class VolleyRequestSender private constructor(context: Context) {
                 INSTANCE ?: VolleyRequestSender(context).also { INSTANCE = it }
             }
 
+
     }
 
 
@@ -39,7 +40,7 @@ class VolleyRequestSender private constructor(context: Context) {
     }
 
 
-    fun doHttpPostRequest(url: String, params: Map<String, String>): String? {
+    fun doHttpPostRequest(url: String, params: HashMap<String, String>): String? {
 
         var returnObj = ""
         var isSuccesful = false
@@ -49,27 +50,24 @@ class VolleyRequestSender private constructor(context: Context) {
         val stringRequest = object : StringRequest(
             Method.POST, url, { response ->
 
-                returnObj = response
+                /*returnObj = response
                 isSuccesful = true
-                println("CI ARRIVO SUCCESSO $response $returnObj $isSuccesful")
+                println("CI ARRIVO SUCCESSO $response $returnObj $isSuccesful")*/
+
             },
             { error ->
 
-                returnObj = error.networkResponse.statusCode.toString()
-                error.toString()
+                /*returnObj = error.toString()
                 isSuccesful = false
-                println("CI ARRIVO ERRORE $error $returnObj $isSuccesful")
-            }) {
+                println("CI ARRIVO ERRORE $error $returnObj $isSuccesful")*/
+                throw InvalidVolleyRequestException(error.toString())
 
+
+            }) {
 
 //            override fun getParams() = params
 
-            override fun getParams(): MutableMap<String, String> {
-                val parametri = HashMap<String, String>()
-                parametri["operation"] = "doRetrieveByCondition"
-                parametri["condition"] = "TRUE"
-                return parametri
-            }
+            override fun getParams() = params
 
         }
         println("PARAMETRI: $params")
@@ -81,7 +79,8 @@ class VolleyRequestSender private constructor(context: Context) {
             println("IO RETURNO $returnObj")
             return returnObj
         }
-        return null
-//        throw InvalidVolleyRequestException(returnObj)
+        else
+            throw InvalidVolleyRequestException(returnObj)
     }
+    
 }

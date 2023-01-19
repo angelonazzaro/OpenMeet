@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
+import com.openmeet.utils.InvalidVolleyRequestException
 import com.openmeet.utils.VolleyRequestSender
 import org.json.JSONObject
 
@@ -28,6 +29,8 @@ class LoginActivity : AppCompatActivity() {
         val pswFld = findViewById<TextInputLayout>(R.id.pswField)
         val loginBtn = findViewById<Button>(R.id.loginBtn)
         val registrationTxt = findViewById<TextView>(R.id.registrationTxt)
+
+        val snackbarView = findViewById<View>(R.id.auth_login_container)
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
@@ -48,6 +51,13 @@ class LoginActivity : AppCompatActivity() {
             //doHttpLogin(email, pwd)
 
             MeeterProxyDAO(this).doRetrieveByCondition("TRUE"/*Meeter.MEETER_EMAIL + " = '$email'"*/)
+            /*try{
+                MeeterProxyDAO(this).doRetrieveByCondition("TRUE"/*Meeter.MEETER_EMAIL + " = '$email'"*/)
+            }
+            catch (e : InvalidVolleyRequestException){
+                Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
+            }*/
+
         }
 
         registrationTxt.setOnClickListener {
