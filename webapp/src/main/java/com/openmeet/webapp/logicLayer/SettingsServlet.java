@@ -43,7 +43,7 @@ public class SettingsServlet extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
 
-        if (!ResponseHelper.checkStringFields(new String[]{name, surname})) {
+        if (!ResponseHelper.checkStringFields(name, surname)) {
             ResponseHelper.sendCustomError(out, "One or more required fields are missing.");
             return;
         }
