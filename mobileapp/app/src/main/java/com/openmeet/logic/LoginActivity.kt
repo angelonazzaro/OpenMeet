@@ -11,6 +11,8 @@ import com.android.volley.toolbox.StringRequest
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.data.meeter.MeeterProxyDAO
+import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.utils.VolleyRequestSender
 import org.json.JSONObject
 
@@ -24,13 +26,15 @@ class LoginActivity : AppCompatActivity() {
 
         val emailFld = findViewById<TextInputLayout>(R.id.emailFixedField)
         val pswFld = findViewById<TextInputLayout>(R.id.pswField)
-        val loginBtn =  findViewById<Button>(R.id.loginBtn)
-        val registrationTxt =  findViewById<TextView>(R.id.registrationTxt)
+        val loginBtn = findViewById<Button>(R.id.loginBtn)
+        val registrationTxt = findViewById<TextView>(R.id.registrationTxt)
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
         Toast.makeText(this, str, Toast.LENGTH_LONG).show()
 
+
+        pswFld.editText?.setText("test")
 
         /*
             roberto.st@gmail.com; test
@@ -41,8 +45,9 @@ class LoginActivity : AppCompatActivity() {
 
             val pwd = pswFld.editText?.text.toString()
 
-            doHttpLogin(email, pwd)
+            //doHttpLogin(email, pwd)
 
+            MeeterProxyDAO(this).doRetrieveByCondition("TRUE"/*Meeter.MEETER_EMAIL + " = '$email'"*/)
         }
 
         registrationTxt.setOnClickListener {
@@ -59,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    fun doHttpLogin(email : String, pwd : String){
+    fun doHttpLogin(email: String, pwd: String) {
 
         val url = "http://" + getString(R.string.request_server_address) + "LoginServlet"
         val snackbarView = findViewById<View>(R.id.auth_login_container)
@@ -70,14 +75,16 @@ class LoginActivity : AppCompatActivity() {
             { response ->
                 val snackbarView = findViewById<View>(R.id.auth_login_container)
                 val jsonResp = JSONObject(response)
-                if(jsonResp.getString("status") == "success"){
+                if (jsonResp.getString("status") == "success") {
                     Toast.makeText(this, "Success: $response", Toast.LENGTH_LONG).show()
-                }
-                else{
-                    if(jsonResp.getString("message") == "incorrect_credentials"){
-                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_LONG).show()
-                        findViewById<TextInputLayout>(R.id.emailFixedField).error = getString(R.string.login_failed_email)
-                        findViewById<TextInputLayout>(R.id.pswField).error = getString(R.string.login_failed_password)
+                } else {
+                    if (jsonResp.getString("message") == "incorrect_credentials") {
+                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_LONG)
+                            .show()
+                        findViewById<TextInputLayout>(R.id.emailFixedField).error =
+                            getString(R.string.login_failed_email)
+                        findViewById<TextInputLayout>(R.id.pswField).error =
+                            getString(R.string.login_failed_password)
                     }
                 }
             },
@@ -90,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
 
             }) {
             override fun getParams(): MutableMap<String, String> {
-                val params = HashMap<String,String>()
+                val params = HashMap<String, String>()
                 params["email"] = email
                 params["pwd"] = pwd
                 return params

@@ -21,6 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/openmeet_blank_logo" />
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailField"
         android:layout_width="match_parent"
@@ -39,7 +40,6 @@
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <TextView
         android:id="@+id/pageTitle"
