@@ -1,13 +1,10 @@
 package com.openmeet.utils
 
 import android.content.Context
-import android.util.Log
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.openmeet.utils.InvalidVolleyRequestException
-import java.lang.System.console
 
 class VolleyRequestSender private constructor(context: Context) {
     /*
@@ -40,47 +37,33 @@ class VolleyRequestSender private constructor(context: Context) {
     }
 
 
-    fun doHttpPostRequest(url: String, params: HashMap<String, String>): String? {
+    fun doHttpPostRequest(
+        url: String,
+        params: HashMap<String, String>,
+        callbackForSuccess: (String) -> Unit,
+        callbackForError: (String) -> Unit
+    ) {
 
-        var returnObj = ""
-        var isSuccesful = false
-
-        println("CI ARRIVO 1")
+        //create a string request and use a success callback in case of success
+        //but in case of failure, use a failure callback
 
         val stringRequest = object : StringRequest(
-            Method.POST, url, { response ->
+            Method.POST, url,
+            { response ->
 
-                /*returnObj = response
-                isSuccesful = true
-                println("CI ARRIVO SUCCESSO $response $returnObj $isSuccesful")*/
-
+                println("Sto per chimare il callback di successo")
+                callbackForSuccess(response)
             },
             { error ->
 
-                /*returnObj = error.toString()
-                isSuccesful = false
-                println("CI ARRIVO ERRORE $error $returnObj $isSuccesful")*/
-                throw InvalidVolleyRequestException(error.toString())
-
+                println("Sto per chimare il callback di errore")
+                callbackForError(error.toString())
 
             }) {
-
-//            override fun getParams() = params
 
             override fun getParams() = params
 
         }
-        println("PARAMETRI: $params")
         this.addToRequestQueue(stringRequest)
-
-        println("CI ARRIVO SONO USCITO")
-
-        if (isSuccesful) {
-            println("IO RETURNO $returnObj")
-            return returnObj
-        }
-        else
-            throw InvalidVolleyRequestException(returnObj)
     }
-    
 }

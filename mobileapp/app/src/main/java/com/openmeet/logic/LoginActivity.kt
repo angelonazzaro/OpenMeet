@@ -48,15 +48,12 @@ class LoginActivity : AppCompatActivity() {
 
             val pwd = pswFld.editText?.text.toString()
 
-            //doHttpLogin(email, pwd)
-
-            MeeterProxyDAO(this).doRetrieveByCondition("TRUE"/*Meeter.MEETER_EMAIL + " = '$email'"*/)
-            /*try{
+            try {
                 MeeterProxyDAO(this).doRetrieveByCondition("TRUE"/*Meeter.MEETER_EMAIL + " = '$email'"*/)
-            }
-            catch (e : InvalidVolleyRequestException){
+            } catch (e: InvalidVolleyRequestException) {
                 Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
-            }*/
+            }
+
 
         }
 
@@ -72,50 +69,5 @@ class LoginActivity : AppCompatActivity() {
         super.onBackPressed()
         overridePendingTransition(0, 0)
 
-    }
-
-    fun doHttpLogin(email: String, pwd: String) {
-
-        val url = "http://" + getString(R.string.request_server_address) + "LoginServlet"
-        val snackbarView = findViewById<View>(R.id.auth_login_container)
-
-        // Request a string response from the provided URL.
-        val stringRequest = object : StringRequest(
-            Method.POST, url,
-            { response ->
-                val snackbarView = findViewById<View>(R.id.auth_login_container)
-                val jsonResp = JSONObject(response)
-                if (jsonResp.getString("status") == "success") {
-                    Toast.makeText(this, "Success: $response", Toast.LENGTH_LONG).show()
-                } else {
-                    if (jsonResp.getString("message") == "incorrect_credentials") {
-                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_LONG)
-                            .show()
-                        findViewById<TextInputLayout>(R.id.emailFixedField).error =
-                            getString(R.string.login_failed_email)
-                        findViewById<TextInputLayout>(R.id.pswField).error =
-                            getString(R.string.login_failed_password)
-                    }
-                }
-            },
-            { error ->
-
-                Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
-
-                //Toast.makeText(this, "Errore nella volley request: " + error, Toast.LENGTH_LONG).show()
-                System.err.println("Volley request error: $error")
-
-            }) {
-            override fun getParams(): MutableMap<String, String> {
-                val params = HashMap<String, String>()
-                params["email"] = email
-                params["pwd"] = pwd
-                return params
-            }
-
-        }
-
-        // Add the request to the RequestQueue with Singleton Design Pattern.
-        VolleyRequestSender.getInstance(this).addToRequestQueue(stringRequest)
     }
 }
