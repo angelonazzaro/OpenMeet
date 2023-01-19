@@ -4,18 +4,20 @@
     <string name="request_server_address">192.168.1.8:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
     <string name="connection_error">Errore di connessione. Controlla la tua connessione ad Internet o riprova più tardi.</string>
 
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="registration_TextView">Non hai un account? <u>Registrati</u></string>
+    <string name="login_TextView">Hai già un account? <u>Accedi</u></string>
 
     <string name="email_null_error">Email non inserita!</string>
     <string name="email_format_error">Formato email non valido!</string>
     <string name="email_local_toolong_error">Parte locale Email troppo lunga!</string>
     <string name="email_domain_toolong_error">Parte dominio Email troppo lunga!</string>
+
+    <string name="name_null_error">Nome non inserito!</string>
+    <string name="surname_null_error">Cognome non inserito!</string>
+    <string name="underage_error">Sei troppo piccino, ma potresti far iscrivere tua mamma.</string>
+    <string name="password_null_error">Password non inserita!</string>
+    <string name="password_conf_null_error">Devi confermare la password!</string>
+    <string name="password_unmatch_error">Le password devono essere uguali!</string>
 
     <string name="login_failed">"Accesso fallito: credenziali errate."</string>
     <string name="login_failed_email">Controlla che l\'email sia corretta.</string>
