@@ -23,7 +23,7 @@ public class ResponseHelper {
      *
      * @author Angelo Nazzaro
      **/
-    public static boolean checkStringFields(String[] parameters) {
+    public static boolean checkStringFields(String... parameters) {
 
         for (String parameter : parameters) {
             if (parameter == null || parameter.length() == 0) return false;

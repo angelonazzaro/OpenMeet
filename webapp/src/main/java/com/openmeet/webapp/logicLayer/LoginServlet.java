@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         // Check if all required parameters are initialized, if not send back an error message
-        if (!ResponseHelper.checkStringFields(new String[]{email, password})) {
+        if (!ResponseHelper.checkStringFields(email, password)) {
             ResponseHelper.sendCustomError(out, "One or more required fields are missing.");
             return;
         }
