@@ -3,6 +3,7 @@ package com.openmeet.logic
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.Toast
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
@@ -18,13 +19,13 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth_registration)
 
-        val birthday = findViewById<TextInputLayout>(R.id.birthdayField)
-        val name = findViewById<TextInputLayout>(R.id.nameField)
-        val surname = findViewById<TextInputLayout>(R.id.surnameField)
-        val email = findViewById<TextInputLayout>(R.id.emailField)
-        val password = findViewById<TextInputLayout>(R.id.passwordField)
-        val confirmPassword = findViewById<TextInputLayout>(R.id.confirmPasswordField)
-        val confirmButton = findViewById<Button>(R.id.registrationBtn)
+        val birthdayFld = findViewById<TextInputLayout>(R.id.birthdayField)
+        val nameFld = findViewById<TextInputLayout>(R.id.nameField)
+        val surnameFld = findViewById<TextInputLayout>(R.id.surnameField)
+        val emailFld = findViewById<TextInputLayout>(R.id.emailField)
+        val passwordFld = findViewById<TextInputLayout>(R.id.passwordField)
+        val confirmPasswordFld = findViewById<TextInputLayout>(R.id.confirmPasswordField)
+        val confirmButtonFld = findViewById<Button>(R.id.registrationBtn)
 
         val datePicker = DatepickerMaterialDatePicker.Builder.datePicker()
             .setTitleText("Seleziona la data di nascita")
@@ -37,27 +38,30 @@ class RegistrationActivity : AppCompatActivity() {
             )
             .build()
 
-        confirmButton.setOnClickListener {
+        confirmButtonFld.setOnClickListener {
             val result =
-                checkForm(name, surname, datePicker.selection, email, password, confirmPassword)
+                checkForm(nameFld, surnameFld, datePicker.selection, birthdayFld, emailFld, passwordFld, confirmPasswordFld)
             if (result)
                 Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
             else
                 Toast.makeText(this, "NOT SUCCESS", Toast.LENGTH_SHORT).show()
         }
 
-        birthday.editText?.setOnClickListener {
+        birthdayFld.editText?.setOnClickListener {
             datePicker.show(supportFragmentManager, "birth_picker")
         }
 
         datePicker.addOnPositiveButtonClickListener {
-            birthday.editText?.setText(getDate(datePicker.selection, "dd/MM/yyyy"))
+            birthdayFld.editText?.setText(getDate(datePicker.selection, "dd/MM/yyyy"))
         }
 
-        datePicker.addOnNegativeButtonClickListener {
-            Toast.makeText(this, "Ricorda di inserire sempre la data di nascita", Toast.LENGTH_LONG)
-                .show()
-        }
+    }
+
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(0, 0)
 
     }
 
@@ -70,7 +74,8 @@ class RegistrationActivity : AppCompatActivity() {
     fun checkForm(
         name: TextInputLayout,
         surname: TextInputLayout,
-        birthday: Long?,
+        birthdayMillis: Long?,
+        birthday: TextInputLayout,
         email: TextInputLayout,
         password: TextInputLayout,
         confirmPassword: TextInputLayout
@@ -86,21 +91,21 @@ class RegistrationActivity : AppCompatActivity() {
 
         //check if name is blanck or empty
         if (nameText.isBlank() || nameText.isEmpty()) {
-            Toast.makeText(this, "Non hai inserito il nome", Toast.LENGTH_LONG).show()
+            name.error = getString(R.string.name_null_error)
             flag = false
         }
         //check if name is blanck or empty
         if (surnameText.isBlank() || surnameText.isEmpty()) {
-            Toast.makeText(this, "Non hai inserito il cognome", Toast.LENGTH_LONG).show()
+            surname.error = getString(R.string.surname_null_error)
             flag = false
         }
         //check if birthday date inserted has more 18 years old
-        if (birthday != null) {
+        if (birthdayMillis != null) {
             val now = Calendar.getInstance().timeInMillis
             val diff = Calendar.getInstance()
-            diff.timeInMillis = now - birthday
+            diff.timeInMillis = now - birthdayMillis
             if (diff.get(Calendar.YEAR) - 1970 < 18)
-                Toast.makeText(this, "Hai meno di 18 anni", Toast.LENGTH_LONG).show()
+                birthday.error = getString(R.string.underage_error)
             flag = false
 
         }
@@ -108,32 +113,32 @@ class RegistrationActivity : AppCompatActivity() {
         if (!(emailText.isEmpty() || emailText.isBlank())) {
 
             if (!emailText.matches(Regex("^[a-z0-9!#$%&'*+=?^_`{|}~/-]+([.][a-z0-9!#$%&'*+=?^_`{|}~/-]+)*@([a-z0-9-]+[.])+[a-z]+$"))) {
-                Toast.makeText(this, "Formato mail non valido", Toast.LENGTH_LONG).show()
+                email.error = getString(R.string.email_format_error)
                 flag = false
             } else {
                 val splittedEmail = splitEmail(emailText)
                 if (splittedEmail.first.length > 64) {
-                    Toast.makeText(this, "Parte locale TROPPO lunga", Toast.LENGTH_LONG).show()
+                    email.error = getString(R.string.email_local_toolong_error)
                     flag = false
                 } else if (splittedEmail.second.length > 255) {
-                    Toast.makeText(this, "Parte dominio TROPPO lunga", Toast.LENGTH_LONG).show()
+                    email.error = getString(R.string.email_domain_toolong_error)
                     flag = false
                 }
             }
         } else {
-            Toast.makeText(this, "Non hai inserito la mail", Toast.LENGTH_LONG).show()
+            email.error = getString(R.string.email_null_error)
             flag = false
         }
         if (passText.isEmpty() || passText.isBlank()) {
-            Toast.makeText(this, "Non hai inserito la password", Toast.LENGTH_LONG).show()
+            password.error = getString(R.string.password_null_error)
             flag = false
         }
         if (confPassText.isEmpty() || confPassText.isBlank()) {
-            Toast.makeText(this, "Non hai inserito la password", Toast.LENGTH_LONG).show()
+            confirmPassword.error = getString(R.string.password_conf_null_error)
             flag = false
         }
         if (confPassText != passText) {
-            Toast.makeText(this, "Le password inserite sono diverse", Toast.LENGTH_LONG).show()
+            confirmPassword.error = getString(R.string.password_unmatch_error)
             flag = false
         }
 

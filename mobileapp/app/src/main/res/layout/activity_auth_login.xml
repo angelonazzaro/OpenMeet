@@ -73,19 +73,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <Button
-        android:id="@+id/loginBtn"
-        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-        android:layout_width="wrap_content"
-        android:layout_height="65dp"
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="8dp"
-        android:text="Accedi"
-        app:icon="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pswField" />
+        app:layout_constraintTop_toBottomOf="@+id/pswField">
+
+        <Button
+            android:id="@+id/loginBtn"
+            style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:text="Accedi"
+            app:icon="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+        <TextView
+            android:id="@+id/registrationTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/registration_TextView"
+            android:textIsSelectable="false"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
