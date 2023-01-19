@@ -5,6 +5,15 @@
          version="5.0">
 
     <servlet>
+        <servlet-name>MeeterService</servlet-name>
+        <servlet-class>com.openmeet.webservice.MeeterService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MeeterService</servlet-name>
+        <url-pattern>/MeeterService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.openmeet.webservice.LoginServlet</servlet-class>
     </servlet>

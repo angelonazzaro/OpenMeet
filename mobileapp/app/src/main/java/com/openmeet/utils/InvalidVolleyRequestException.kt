@@ -1,4 +1,3 @@
 package com.openmeet.utils
 
-class VolleyRequestException {
-}
+class InvalidVolleyRequestException(message: String) : RuntimeException(message)

@@ -21,7 +21,7 @@ class AuthActivity : AppCompatActivity() {
 
         val loginBtn = findViewById<Button>(R.id.nextStepBtn)
         val emailFld = findViewById<TextInputLayout>(R.id.emailField)
-
+        emailFld.editText?.setText("roberto.st@gmail.com")
         /*
             mike.st@gmail.com; test
             roberto.st@gmail.com; test
