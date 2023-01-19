@@ -1,8 +1,10 @@
 package com.openmeet.logic
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.toolbox.StringRequest
@@ -21,6 +23,8 @@ class LoginActivity : AppCompatActivity() {
 
         val emailFld = findViewById<TextInputLayout>(R.id.emailFixedField)
         val pswFld = findViewById<TextInputLayout>(R.id.pswField)
+        val loginBtn =  findViewById<Button>(R.id.loginBtn)
+        val registrationTxt =  findViewById<TextView>(R.id.registrationTxt)
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
@@ -30,13 +34,21 @@ class LoginActivity : AppCompatActivity() {
         /*
             roberto.st@gmail.com; test
          */
-        findViewById<Button>(R.id.loginBtn).setOnClickListener {
+        val email = emailFld.editText?.text.toString()
 
-            val email = emailFld.editText?.text.toString()
+        loginBtn.setOnClickListener {
+
             val pwd = pswFld.editText?.text.toString()
 
             doHttpLogin(email, pwd)
 
+        }
+
+        registrationTxt.setOnClickListener {
+            startActivity(
+                Intent(this, RegistrationActivity::class.java).putExtra("email", email)
+            )
+            overridePendingTransition(0, 0)
         }
     }
 
