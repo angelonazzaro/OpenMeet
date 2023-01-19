@@ -6,20 +6,27 @@ import com.openmeet.R
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.storage.DAO
 import com.openmeet.utils.ContextDAO
+import com.openmeet.utils.InvalidVolleyRequestException
 import com.openmeet.utils.VolleyRequestSender
 import java.util.HashMap
 
 class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
-//    private val url = "http://" + context.getString(R.string.request_server_address) + "MeeterService"
 
     override fun doRetrieveByCondition(condition: String): MutableList<Meeter> {
 
-
-        val response = VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "MeeterService",  hashMapOf("operation" to "doRetrieveByCondition", "condition" to "TRUE"))
-
-        println("REPONSE: $response")
+        VolleyRequestSender.getInstance(this.context)
+            .doHttpPostRequest(getUrl() + "MeeterService",
+                hashMapOf("operation" to "doRetrieveByCondition", "condition" to "TRUE"),
+                { response ->
+                    // success callback
+                    println("Mi piac $response")
+                },
+                { error ->
+                    // error callback
+                    throw InvalidVolleyRequestException(error)
+                }
+            )
         return mutableListOf()
     }
 

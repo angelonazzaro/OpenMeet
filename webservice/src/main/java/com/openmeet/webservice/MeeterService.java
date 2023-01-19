@@ -42,62 +42,62 @@ public class MeeterService extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String operation = request.getParameter("operation");
-        PrintWriter out = response.getWriter();
-
-        //check if all the parameters are present
-        if (!ResponseHelper.checkStringFields(operation)) {
-            ResponseHelper.sendGenericError(out);
-            logger.log(Level.SEVERE, "MeeterService:doPost() - Error: missing parameters - operation");
-            return;
-        }
-
-        MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
-
-        switch (operation) {
-            case DO_RETRIEVE_BY_CONDITION:
-                try {
-                    doRetrieveByConditionProxy(meeterDAO, request, out);
-                } catch (SQLException | InvalidParameterException e) {
-                    ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "MeeterService:doPost() - Error: " + e.getMessage());
-                    return;
-                }
-                break;
-
-            default:
-                ResponseHelper.sendGenericError(out);
-                logger.log(Level.SEVERE, "MeeterService:doPost() - Error: unknown operation");
-                break;
-        }
-
-
-
 //        String operation = request.getParameter("operation");
+//        PrintWriter out = response.getWriter();
 //
-//        if (operation.equals(DO_RETRIEVE_BY_CONDITION)){
+//        //check if all the parameters are present
+//        if (!ResponseHelper.checkStringFields(operation)) {
+//            ResponseHelper.sendGenericError(out);
+//            logger.log(Level.SEVERE, "MeeterService:doPost() - Error: missing parameters - operation");
+//            return;
+//        }
 //
-//            System.out.println("Operazione di doRetrieveByCondition" + operation);
+//        MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
 //
-//            PrintWriter out = response.getWriter();
-//            String condition = request.getParameter("condition");
+//        switch (operation) {
+//            case DO_RETRIEVE_BY_CONDITION:
+//                try {
+//                    doRetrieveByConditionProxy(meeterDAO, request, out);
+//                } catch (SQLException | InvalidParameterException e) {
+//                    ResponseHelper.sendGenericError(out);
+//                    logger.log(Level.SEVERE, "MeeterService:doPost() - Error: " + e.getMessage());
+//                    return;
+//                }
+//                break;
 //
-//            System.out.println("Condizione di doRetrieveByCondition" + condition);
-//
-//            List<Meeter> meeters = null;
-//
-//            MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
-//            try {
-//                meeters = meeterDAO.doRetrieveByCondition(condition);
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            System.out.println("Query eseguita");
-//
-//            HashMap<String, String> values = new HashMap<>();
-//            values.put("status", "success");
-//            ResponseHelper.sendGenericResponse(out, values);
+//            default:
+//                ResponseHelper.sendGenericError(out);
+//                logger.log(Level.SEVERE, "MeeterService:doPost() - Error: unknown operation");
+//                break;
+//        }
+
+
+        String operation = request.getParameter("operation");
+
+        if (operation.equals(DO_RETRIEVE_BY_CONDITION)) {
+
+            System.out.println("Operazione di doRetrieveByCondition" + operation);
+
+            PrintWriter out = response.getWriter();
+            String condition = request.getParameter("condition");
+
+            System.out.println("Condizione di doRetrieveByCondition" + condition);
+
+            List<Meeter> meeters = null;
+
+            MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
+            try {
+                meeters = meeterDAO.doRetrieveByCondition(condition);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+            System.out.println("Query eseguita");
+
+            HashMap<String, String> values = new HashMap<>();
+            values.put("status", "success");
+            ResponseHelper.sendGenericResponse(out, values);
         }
     }
 }
+
