@@ -1,46 +1,36 @@
-package com.openmeet.shared.data.image;
+package com.openmeet.shared.data.meeter_interest;
 
 import com.openmeet.shared.data.storage.IEntity;
 
 import java.util.HashMap;
 
-public class Image implements IEntity {
-
-    public static final String IMAGE = "Image";
-    public static final String IMAGE_ID = IMAGE + ".id";
-    public static final String IMAGE_PATH = IMAGE + ".path";
-    public static final String IMAGE_MEETER_ID = IMAGE + ".meeterId";
+public class Meeter_Interest implements IEntity {
+    public static final String MEETER_INTEREST = "Meeter_Interest";
+    public static final String MEETER_INTEREST_ID = MEETER_INTEREST + ".id";
+    public static final String MEETER_INTEREST_MEETER_ID = MEETER_INTEREST + ".meeterId";
     private int id;
-    private String path;
     private int meeterId;
 
-    public Image() {
-
+    public Meeter_Interest() {
     }
 
     @Override
-    public HashMap<String, ?> toHashMap() {
-
+    public HashMap<String, Object> toHashMap() {
         return new HashMap<>() {{
             put("id", id);
-            put("path", path);
             put("meeterId", meeterId);
         }};
     }
 
     @Override
-    public HashMap<String, ?> toHashMap(String... fields) {
-
+    public HashMap<String, Object> toHashMap(String... fields) {
         return new HashMap<>() {{
             for (String field : fields) {
                 switch (field) {
-                    case IMAGE_ID:
+                    case MEETER_INTEREST_ID:
                         put("id", id);
                         break;
-                    case IMAGE_PATH:
-                        put("path", path);
-                        break;
-                    case IMAGE_MEETER_ID:
+                    case MEETER_INTEREST_MEETER_ID:
                         put("meeterId", meeterId);
                         break;
                 }
@@ -50,9 +40,8 @@ public class Image implements IEntity {
 
     @Override
     public String toString() {
-        return "Image{" +
+        return "Meeter_Interest{" +
                 "id=" + id +
-                ", path='" + path + '\'' +
                 ", meeterId=" + meeterId +
                 '}';
     }
@@ -63,14 +52,6 @@ public class Image implements IEntity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     public int getMeeterId() {
