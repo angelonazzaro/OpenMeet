@@ -17,7 +17,7 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to "doRetrieveByCondition", "condition" to "TRUE"),
+                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION, "condition" to "TRUE"),
                 { response ->
                     // success callback
                     println("Mi piac $response")

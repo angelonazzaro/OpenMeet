@@ -14,7 +14,7 @@
     <aside class="sidebar open" data-sidebar>
         <div class="top-sidebar mb-3">
             <img src="<%= profilePic %>" alt="user profile pic" class="channel-logo">
-            <div class="hidden-sidebar your-channel"><%= user.getFullName() %>
+            <div class="hidden-sidebar your-channel"><%= user.getModeratorName() + " " + user.getModeratorSurname()%>
             </div>
             <div class="hidden-sidebar channel-name"><%= user.getEmail() %>
             </div>

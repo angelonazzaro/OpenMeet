@@ -22,7 +22,6 @@ class VolleyRequestSender private constructor(context: Context) {
                 INSTANCE ?: VolleyRequestSender(context).also { INSTANCE = it }
             }
 
-
     }
 
 
