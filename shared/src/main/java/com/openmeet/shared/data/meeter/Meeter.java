@@ -177,7 +177,4 @@ public class Meeter implements IEntity {
         this.publicKey = publicKey;
     }
 
-    public String getFullName() {
-        return meeterName + " " + meeterSurname;
-    }
 }

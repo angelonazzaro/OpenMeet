@@ -144,7 +144,4 @@ public class Moderator implements IEntity {
         this.profilePic = profilePic;
     }
 
-    public String getFullName() {
-        return moderatorName + " " + moderatorSurname;
-    }
 }

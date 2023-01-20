@@ -25,7 +25,10 @@ public interface DAO<T> {
     String DO_RETRIEVE_BY_CONDITION = "doRetrieveByCondition";
     String DO_RETRIEVE_BY_KEY = "doRetrieveByKey";
     String DO_RETRIEVE_ALL = "doRetrieveAll";
+    String DO_RETRIEVE_ALL_LIMIT = "doRetrieveAllLimit";
+    String DO_RETRIEVE_ALL_LIMIT_OFFSET = "doRetrieveAllLimitOffset";
     String DO_SAVE = "doSave";
+    String DO_SAVE_PARTIAL = "doSavePartial";
     String DO_UPDATE = "doUpdate";
     String DO_SAVE_OR_UPDATE = "doSaveOrUpdate";
     String DO_DELETE = "doDelete";
