@@ -14,11 +14,11 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
     override fun doRetrieveByCondition(condition: String): MutableList<Meeter> {
 
 
-        val volleyListener: VolleyResponseListener = context as VolleyResponseListener
+       /* val volleyListener: VolleyResponseListener = context as VolleyResponseListener
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to "doRetrieveByCondition", "condition" to condition),
+                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION, "condition" to condition),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         volleyListener.requestFinished(false, error)
@@ -29,7 +29,7 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
                     }
 
                 }
-            )
+            )*/
 
         return mutableListOf()
     }
