@@ -1,32 +1,36 @@
 package com.openmeet.data.meeter
 
 import android.content.Context
-import com.openmeet.R
-
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.storage.DAO
 import com.openmeet.utils.ContextDAO
-import com.openmeet.utils.InvalidVolleyRequestException
 import com.openmeet.utils.VolleyRequestSender
-import java.util.HashMap
+import com.openmeet.utils.VolleyResponseCallback
+import com.openmeet.utils.VolleyResponseListener
+
 
 class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
-
     override fun doRetrieveByCondition(condition: String): MutableList<Meeter> {
+
+
+        val volleyListener: VolleyResponseListener = context as VolleyResponseListener
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to "doRetrieveByCondition", "condition" to "TRUE"),
-                { response ->
-                    // success callback
-                    println("Mi piac $response")
-                },
-                { error ->
-                    // error callback
-                    throw InvalidVolleyRequestException(error)
+                hashMapOf("operation" to "doRetrieveByCondition", "condition" to condition),
+                object : VolleyResponseCallback {
+                    override fun onError(error: String) {
+                        volleyListener.requestFinished(false, error)
+
+                    }
+                    override fun onSuccess(response: String) {
+                        volleyListener.requestFinished(true, response)
+                    }
+
                 }
             )
+
         return mutableListOf()
     }
 
