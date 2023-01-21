@@ -39,8 +39,9 @@ class VolleyRequestSender private constructor(context: Context) {
     fun doHttpPostRequest(
         url: String,
         params: HashMap<String, String>,
-        callbackForSuccess: (String) -> Unit,
-        callbackForError: (String) -> Unit
+        /*callbackForSuccess: (String) -> Unit,
+        callbackForError: (String) -> Unit*/
+        callback: VolleyResponseCallback
     ) {
 
         //create a string request and use a success callback in case of success
@@ -49,17 +50,17 @@ class VolleyRequestSender private constructor(context: Context) {
         val stringRequest = object : StringRequest(
             Method.POST, url,
             { response ->
-
+                callback.onSuccess(response)
                 println("Sto per chimare il callback di successo")
-                callbackForSuccess(response)
+                //callbackForSuccess(response)
             },
             { error ->
+                 callback.onError(error.toString())
 
                 println("Sto per chimare il callback di errore")
-                callbackForError(error.toString())
+                //callbackForError(error.toString())
 
             }) {
-
             override fun getParams() = params
 
         }

@@ -7,17 +7,13 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.toolbox.StringRequest
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import com.openmeet.data.meeter.MeeterProxyDAO
-import com.openmeet.shared.data.meeter.Meeter
-import com.openmeet.utils.InvalidVolleyRequestException
-import com.openmeet.utils.VolleyRequestSender
-import org.json.JSONObject
+import com.openmeet.utils.VolleyResponseListener
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), VolleyResponseListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -30,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         val loginBtn = findViewById<Button>(R.id.loginBtn)
         val registrationTxt = findViewById<TextView>(R.id.registrationTxt)
 
-        val snackbarView = findViewById<View>(R.id.auth_login_container)
+
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
@@ -48,11 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
             val pwd = pswFld.editText?.text.toString()
 
-            try {
-                MeeterProxyDAO(this).doRetrieveByCondition("TRUE"/*Meeter.MEETER_EMAIL + " = '$email'"*/)
-            } catch (e: InvalidVolleyRequestException) {
-                Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
-            }
+            MeeterProxyDAO(this).doRetrieveByCondition("")
 
 
         }
@@ -69,5 +61,12 @@ class LoginActivity : AppCompatActivity() {
         super.onBackPressed()
         overridePendingTransition(0, 0)
 
+    }
+
+    override fun requestFinished(isSuccessful: Boolean, response: String) {
+        println("Sono in login activity $isSuccessful, $response")
+
+        val snackbarView = findViewById<View>(R.id.auth_login_container)
+        Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
     }
 }
