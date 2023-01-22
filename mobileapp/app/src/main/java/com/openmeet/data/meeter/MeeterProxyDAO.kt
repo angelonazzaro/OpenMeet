@@ -1,33 +1,58 @@
 package com.openmeet.data.meeter
 
 import android.content.Context
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.storage.DAO
 import com.openmeet.utils.ContextDAO
 import com.openmeet.utils.VolleyRequestSender
 import com.openmeet.utils.VolleyResponseCallback
-import com.openmeet.utils.VolleyResponseListener
+import org.json.JSONObject
+import java.util.concurrent.CountDownLatch
 
 
-class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
+class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter>{
 
-    override fun doRetrieveByCondition(condition: String): MutableList<Meeter> {
 
+
+    override fun doRetrieveByCondition(condition: String): MutableList<Meeter>? {
+
+        var resp = ""
+        val latch = CountDownLatch(1)
+        println(condition)
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION, "condition" to "TRUE"),
-                { response ->
-                    // success callback
-                    println("Mi piac $response")
-                },
-                { error ->
-                    // error callback
-                    throw InvalidVolleyRequestException(error)
+                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION, "condition" to condition),
+                object : VolleyResponseCallback {
+                    override fun onError(error: String) {
+                        resp = error
+                        latch.countDown()
+
+                    }
+                    override fun onSuccess(response: String) {
+                        resp = response
+                        latch.countDown()
+                    }
+
                 }
             )
 
-        return mutableListOf()
+        latch.await()
+
+        if(resp.contains(VolleyRequestSender.ERROR_STR))
+            return null
+
+        val jsonResp = JSONObject(resp)
+        if(jsonResp.getString("status") == "error")
+            return null
+
+        val meetersData = jsonResp.getString("data")
+
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
+        return gson.fromJson(meetersData, Array<Meeter>::class.java).toMutableList()
+
     }
 
     override fun doRetrieveByKey(key: String?): Meeter {
@@ -65,4 +90,5 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
     override fun doDelete(condition: String?): Boolean {
         TODO("Not yet implemented")
     }
+
 }
