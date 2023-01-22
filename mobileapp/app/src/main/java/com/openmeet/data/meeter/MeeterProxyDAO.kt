@@ -12,15 +12,13 @@ import org.json.JSONObject
 import java.util.concurrent.CountDownLatch
 
 
-class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter>{
-
+class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
 
     override fun doRetrieveByCondition(condition: String): MutableList<Meeter>? {
 
         var resp = ""
         val latch = CountDownLatch(1)
-        println(condition)
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
@@ -29,8 +27,8 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter>{
                     override fun onError(error: String) {
                         resp = error
                         latch.countDown()
-
                     }
+
                     override fun onSuccess(response: String) {
                         resp = response
                         latch.countDown()
@@ -41,11 +39,12 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter>{
 
         latch.await()
 
-        if(resp.contains(VolleyRequestSender.ERROR_STR))
+        if (resp.contains(VolleyRequestSender.ERROR_STR))
             return null
 
         val jsonResp = JSONObject(resp)
-        if(jsonResp.getString("status") == "error")
+
+        if (jsonResp.getString("status") == "error")
             return null
 
         val meetersData = jsonResp.getString("data")
@@ -72,7 +71,40 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter>{
     }
 
     override fun doSave(obj: Meeter?): Boolean {
-        TODO("Not yet implemented")
+
+        var resp = ""
+        val latch = CountDownLatch(1)
+
+        VolleyRequestSender.getInstance(this.context)
+            .doHttpPostRequest(getUrl() + "MeeterService",
+                hashMapOf("operation" to DAO.DO_SAVE, "meeter" to obj.toString()),
+                object : VolleyResponseCallback {
+                    override fun onError(error: String) {
+                        resp = error
+                        latch.countDown()
+                    }
+
+                    override fun onSuccess(response: String) {
+                        resp = response
+                        latch.countDown()
+                    }
+
+                }
+            )
+
+        latch.await()
+
+        if (resp.contains(VolleyRequestSender.ERROR_STR))
+            return false
+
+        val jsonResp = JSONObject(resp)
+
+        if (jsonResp.getString("status") == "error")
+            return false
+
+        val isSuccesful = jsonResp.getString("data")
+
+        return isSuccesful.toBoolean()
     }
 
     override fun doSave(values: HashMap<String, *>?): Boolean {
