@@ -15,6 +15,8 @@ import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.utils.PasswordEncrypter
 import java.nio.charset.Charset
 import java.security.MessageDigest
+import java.sql.Date
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -49,12 +51,22 @@ class LoginActivity : AppCompatActivity() {
             val cntx = this
 
 
-           Thread {
-                val ret = MeeterProxyDAO(cntx).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
+            Thread {
+//                val ret = MeeterProxyDAO(cntx).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
+                val meeter = Meeter()
+                meeter.email = "provaDoSave@gmail.com"
+                meeter.pwd = "provaDoSave"
+                meeter.meeterName = "provaDoSave"
+                meeter.meeterSurname = "provaDoSave"
+                meeter.birthDate = Date.valueOf("1999-01-01")
 
-                if(ret == null)
-                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
-                else{
+                val ret = MeeterProxyDAO(cntx).doSave(meeter)
+                print("RET: $ret")
+
+                if (ret == null)
+                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT)
+                        .show()
+                else {
 
                 }
 
