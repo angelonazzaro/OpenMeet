@@ -11,9 +11,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import com.openmeet.data.meeter.MeeterProxyDAO
-import com.openmeet.utils.VolleyResponseListener
+import com.openmeet.shared.data.meeter.Meeter
+import com.openmeet.shared.utils.PasswordEncrypter
+import java.nio.charset.Charset
+import java.security.MessageDigest
 
-class LoginActivity : AppCompatActivity(), VolleyResponseListener {
+class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -26,7 +29,7 @@ class LoginActivity : AppCompatActivity(), VolleyResponseListener {
         val loginBtn = findViewById<Button>(R.id.loginBtn)
         val registrationTxt = findViewById<TextView>(R.id.registrationTxt)
 
-
+        val snackbarView = findViewById<View>(R.id.auth_login_container)
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
@@ -43,8 +46,19 @@ class LoginActivity : AppCompatActivity(), VolleyResponseListener {
         loginBtn.setOnClickListener {
 
             val pwd = pswFld.editText?.text.toString()
+            val cntx = this
 
-            MeeterProxyDAO(this).doRetrieveByCondition("")
+
+           Thread {
+                val ret = MeeterProxyDAO(cntx).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
+
+                if(ret == null)
+                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                else{
+
+                }
+
+            }.start()
 
 
         }
@@ -63,10 +77,4 @@ class LoginActivity : AppCompatActivity(), VolleyResponseListener {
 
     }
 
-    override fun requestFinished(isSuccessful: Boolean, response: String) {
-        println("Sono in login activity $isSuccessful, $response")
-
-        val snackbarView = findViewById<View>(R.id.auth_login_container)
-        Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
-    }
 }

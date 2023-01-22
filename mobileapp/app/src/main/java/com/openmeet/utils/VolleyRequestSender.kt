@@ -22,6 +22,8 @@ class VolleyRequestSender private constructor(context: Context) {
                 INSTANCE ?: VolleyRequestSender(context).also { INSTANCE = it }
             }
 
+        const val ERROR_STR = "VOLLEY_ERROR"
+
     }
 
 
@@ -55,7 +57,7 @@ class VolleyRequestSender private constructor(context: Context) {
                 //callbackForSuccess(response)
             },
             { error ->
-                 callback.onError(error.toString())
+                 callback.onError("$ERROR_STR $error")
 
                 println("Sto per chimare il callback di errore")
                 //callbackForError(error.toString())
