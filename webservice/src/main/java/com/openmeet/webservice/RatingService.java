@@ -149,3 +149,4 @@ public class RatingService extends HttpServlet {
     }
 
 }
+
