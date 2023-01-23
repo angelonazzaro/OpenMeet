@@ -5,7 +5,6 @@ import com.openmeet.shared.data.meeter.MeeterDAO;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.helpers.ResponseHelper;
 import com.openmeet.webservice.proxies.MeeterProxyDAO;
-import com.openmeet.webservice.proxies.ProxyDAO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
