@@ -15,10 +15,10 @@ The basic steps required to open a pull request are the following:
 - Push to the branch: `git push origin my-features`; 
 - Open up a pull request and explain what you did; 
 
-Since the project is structured into multiple apps and directories, when you want to make a change on the code the name of your branch should start with the app or directory you are intend to modify. Example, if you want to make changes to the webapp, your branch should be called `webapp-my-changes`. 
+Since the project is structured into multiple apps and directories, when you want to make a change on the code the name of your branch should start with the app or directory you intend to modify. Example, if you want to make changes to the webapp, your branch should be called `webapp-my-changes`. 
 
 ### I don't know how pull requests work
-If it's your first time contributing to a project on Github don't worry! Github's got you covered! Follow the guide [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to understand what pull requests are, how they work and why they are useful. 
+If it's your first time contributing to a project on Github don't worry, Github's got you covered! Follow the guide [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests) to understand what pull requests are, how they work and why they are useful. 
 
 ## How to report a bug 
 To report a bug don't try to fix it on your own! First, open up an issue, describe what the bug you found is and your possible solution to it. <br> 
