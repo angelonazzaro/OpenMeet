@@ -193,5 +193,7 @@ public class RatingProxyDAO extends ProxyDAO<Rating> implements DAO<Rating> {
 
         return isSuccessful;
 
+
+
     }
 }
