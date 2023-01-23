@@ -2,13 +2,17 @@ package com.openmeet.logic
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.Toast
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.data.meeter.MeeterProxyDAO
+import com.openmeet.shared.data.meeter.Meeter
 import java.security.InvalidParameterException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -25,7 +29,10 @@ class RegistrationActivity : AppCompatActivity() {
         val emailFld = findViewById<TextInputLayout>(R.id.emailField)
         val passwordFld = findViewById<TextInputLayout>(R.id.passwordField)
         val confirmPasswordFld = findViewById<TextInputLayout>(R.id.confirmPasswordField)
-        val confirmButtonFld = findViewById<Button>(R.id.registrationBtn)
+
+        val confirmButton = findViewById<Button>(R.id.registrationBtn)
+        val snackbarView = findViewById<View>(R.id.auth_reg_container)
+        val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
 
         val datePicker = DatepickerMaterialDatePicker.Builder.datePicker()
             .setTitleText("Seleziona la data di nascita")
@@ -38,13 +45,29 @@ class RegistrationActivity : AppCompatActivity() {
             )
             .build()
 
-        confirmButtonFld.setOnClickListener {
+        confirmButton.setOnClickListener {
+            progressionIndicator.visibility = View.VISIBLE
+
             val result =
                 checkForm(nameFld, surnameFld, datePicker.selection, birthdayFld, emailFld, passwordFld, confirmPasswordFld)
-            if (result)
-                Toast.makeText(this, "SUCCESS", Toast.LENGTH_SHORT).show()
-            else
-                Toast.makeText(this, "NOT SUCCESS", Toast.LENGTH_SHORT).show()
+            Snackbar.make(snackbarView, result.toString(), Snackbar.LENGTH_SHORT).show()
+
+            if (result){
+                val meeter = Meeter()
+                meeter.meeterName = nameFld.editText?.text.toString()
+                meeter.meeterSurname = surnameFld.editText?.text.toString()
+                meeter.email = emailFld.editText?.text.toString()
+                meeter.pwd = passwordFld.editText?.text.toString()
+                meeter.birthDate = java.sql.Date(datePicker.selection!!)
+
+                Thread {
+                    if(!MeeterProxyDAO(this).doSave(meeter))
+                        Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+
+                }.start()
+
+            }
+            progressionIndicator.visibility = View.GONE
         }
 
         birthdayFld.editText?.setOnClickListener {
@@ -60,7 +83,7 @@ class RegistrationActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        super.getOnBackPressedDispatcher().onBackPressed()
         overridePendingTransition(0, 0)
 
     }
@@ -80,6 +103,13 @@ class RegistrationActivity : AppCompatActivity() {
         password: TextInputLayout,
         confirmPassword: TextInputLayout
     ): Boolean {
+
+        name.error = ""
+        surname.error = ""
+        birthday.error = ""
+        email.error = ""
+        password.error = ""
+        confirmPassword.error = ""
 
         val nameText = name.editText?.text.toString()
         val surnameText = surname.editText?.text.toString()
@@ -104,9 +134,10 @@ class RegistrationActivity : AppCompatActivity() {
             val now = Calendar.getInstance().timeInMillis
             val diff = Calendar.getInstance()
             diff.timeInMillis = now - birthdayMillis
-            if (diff.get(Calendar.YEAR) - 1970 < 18)
+            if (diff.get(Calendar.YEAR) - 1970 < 18){
                 birthday.error = getString(R.string.underage_error)
-            flag = false
+                flag = false
+            }
 
         }
         //check mail
