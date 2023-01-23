@@ -57,7 +57,7 @@ class VolleyRequestSender private constructor(context: Context) {
                 //callbackForSuccess(response)
             },
             { error ->
-                 callback.onError("$ERROR_STR $error")
+                callback.onError("$ERROR_STR $error")
 
                 println("Sto per chimare il callback di errore")
                 //callbackForError(error.toString())

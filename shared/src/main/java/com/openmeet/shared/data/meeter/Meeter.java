@@ -26,7 +26,7 @@ public class Meeter implements IEntity {
     private String pwd;
     private String biography;
     private Date birthDate;
-    private byte[] publicKey = new byte[128];
+    private String publicKey;
 
     public Meeter() {
 
@@ -46,7 +46,7 @@ public class Meeter implements IEntity {
             put("pwd", pwd);
             put("birthDate", birthDate.toString());
 
-            if (publicKey != null && publicKey.length > 0) {
+            if (publicKey != null && publicKey.length() > 0) {
                 put("publicKey", publicKey);
             }
         }};
@@ -82,7 +82,7 @@ public class Meeter implements IEntity {
                         put("birthDate", birthDate.toString());
                         break;
                     case MEETER_PUBLIC_KEY:
-                        if (publicKey != null && publicKey.length > 0) {
+                        if (publicKey != null && publicKey.length() > 0) {
                             put("publicKey", publicKey);
                         }
                         break;
@@ -101,7 +101,7 @@ public class Meeter implements IEntity {
                 ", pwd='" + pwd + '\'' +
                 ", biography='" + biography + '\'' +
                 ", birthDate=" + birthDate +
-                ", publicKey=" + Arrays.toString(publicKey) +
+                ", publicKey=" + publicKey +
                 '}';
     }
 
@@ -169,11 +169,11 @@ public class Meeter implements IEntity {
         this.birthDate = birthDate;
     }
 
-    public byte[] getPublicKey() {
+    public String getPublicKey() {
         return publicKey;
     }
 
-    public void setPublicKey(byte[] publicKey) {
+    public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
     }
 

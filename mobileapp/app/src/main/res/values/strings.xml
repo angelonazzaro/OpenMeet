@@ -1,7 +1,14 @@
 <resources>
+
+    <string name="app_name">OpenMeet</string>
+    <string name="title_activity_auth">AuthActivity</string>
+    <string name="request_server_address">192.168.1.8:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
+    <string name="connection_error">Errore di connessione. Controlla la tua connessione ad Internet o riprova più tardi.</string>
+
     <string name="app_name" translatable="false">OpenMeet</string>
     <string name="request_server_address" translatable="false">192.168.1.33:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
     <string name="connection_error">Connection error. Check your Internet connection or try again later.</string>
+
 
     <string name="continue_btn">Continue</string>
     <string name="login_btn">Login</string>

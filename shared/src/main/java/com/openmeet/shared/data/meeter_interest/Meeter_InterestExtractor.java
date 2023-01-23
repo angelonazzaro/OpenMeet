@@ -13,6 +13,7 @@ public class Meeter_InterestExtractor implements ResultSetExtractor<Meeter_Inter
         Meeter_Interest meeterInterest = new Meeter_Interest();
 
         meeterInterest.setId(resultSet.getInt(Meeter_Interest.MEETER_INTEREST_ID));
+        meeterInterest.setInterestId(resultSet.getInt(Meeter_Interest.MEETER_INTEREST_INTEREST_ID));
         meeterInterest.setMeeterId(resultSet.getInt(Meeter_Interest.MEETER_INTEREST_MEETER_ID));
 
         return meeterInterest;
