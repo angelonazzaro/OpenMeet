@@ -2,12 +2,18 @@ package com.openmeet.logic
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.data.meeter.MeeterProxyDAO
+import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.meeter.MeeterDAO
+import com.openmeet.shared.utils.PasswordEncrypter
+import com.openmeet.utils.UserEncryptedData
 import java.security.InvalidParameterException
 
 
@@ -22,6 +28,9 @@ class AuthActivity : AppCompatActivity() {
         val loginBtn = findViewById<Button>(R.id.nextStepBtn)
         val emailFld = findViewById<TextInputLayout>(R.id.emailField)
         emailFld.editText?.setText("roberto.st@gmail.com")
+
+        tryStoredLogin()
+
         /*
             mike.st@gmail.com; test
             roberto.st@gmail.com; test
@@ -68,12 +77,38 @@ class AuthActivity : AppCompatActivity() {
     override fun onBackPressed() {
 
         if (backBtnLastPress + 2000 > System.currentTimeMillis())
-            super.onBackPressed()
+            super.getOnBackPressedDispatcher().onBackPressed()
         else {
             Toast.makeText(this, "Torna di nuovo indietro per uscire", Toast.LENGTH_SHORT)
                 .show()
             backBtnLastPress = System.currentTimeMillis()
         }
+    }
+
+    fun tryStoredLogin() {
+
+        val snackbarView = findViewById<View>(R.id.auth_container)
+        val sharedStoredValues = UserEncryptedData(this).getAllAsHashMap()
+
+        if(sharedStoredValues["email"] != null && sharedStoredValues["pwd"] != null){
+            println("TEST" + sharedStoredValues["email"] +  " " + sharedStoredValues["pwd"])
+            Thread {
+                val ret = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '${sharedStoredValues["email"]}' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(sharedStoredValues["pwd"])}'")
+                if(ret == null)
+                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                else
+                    if(ret.size == 0)
+                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_SHORT).show()
+                    else{
+                        //Go To HomePage
+                        startActivity(
+                            Intent(this, LoginActivity::class.java).putExtra("email", ret[0].id)
+                        )
+                        overridePendingTransition(0, 0)
+                    }
+            }.start()
+        }
+
 
     }
 }
