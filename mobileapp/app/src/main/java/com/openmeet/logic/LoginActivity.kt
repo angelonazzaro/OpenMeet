@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
-        Toast.makeText(this, str, Toast.LENGTH_LONG).show()
 
 
         pswFld.editText?.setText("test")
@@ -55,10 +54,9 @@ class LoginActivity : AppCompatActivity() {
             progressionIndicator.visibility = View.VISIBLE
             val pwd = pswFld.editText?.text.toString()
 
-            Thread {
-
+/*
 //                //Test 1
-                val ret = MeeterProxyDAO(cntx).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
+                val ret = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
 //                //Test 2
 //                val ret = MeeterProxyDAO(cntx).doRetrieveByKey("1")
 //                //Test 3
@@ -103,14 +101,7 @@ class LoginActivity : AppCompatActivity() {
 //                val ret =
 //                    MeeterProxyDAO(cntx).doDelete("${Meeter.MEETER_EMAIL} = 'provaDoSaveOrUpdate'")
 
-                print("RET: $ret")
-
-                if (ret == null)
-                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT)
-                        .show()
-                else {
-
-                }
+                }*/
 
            Thread {
 
