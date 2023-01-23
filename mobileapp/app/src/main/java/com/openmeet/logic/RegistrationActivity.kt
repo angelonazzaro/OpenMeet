@@ -53,8 +53,9 @@ class RegistrationActivity : AppCompatActivity() {
         confirmButton.setOnClickListener {
             progressionIndicator.visibility = View.VISIBLE
 
-            val result =
-                checkForm(nameFld, surnameFld, datePicker.selection, birthdayFld, emailFld, passwordFld, confirmPasswordFld)
+            val result = true
+               // checkForm(nameFld, surnameFld, datePicker.selection, birthdayFld, emailFld, passwordFld, confirmPasswordFld)
+
 
             if (result){
                 val meeter = Meeter()
@@ -64,7 +65,12 @@ class RegistrationActivity : AppCompatActivity() {
                 meeter.pwd = passwordFld.editText?.text.toString()
                 meeter.birthDate = java.sql.Date(datePicker.selection!!)
 
-                Thread {
+                startActivity(
+                    Intent(this, Registration2Activity::class.java).putExtra("email", meeter.email)
+                )
+                overridePendingTransition(0, 0)
+                // Uncomment below and remove above
+                /*Thread {
                     val retrieveMail = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '${meeter.email}'")
                     if(retrieveMail == null)
                         Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
@@ -83,7 +89,7 @@ class RegistrationActivity : AppCompatActivity() {
                         else
                             Snackbar.make(snackbarView, R.string.duplicate_mail, Snackbar.LENGTH_SHORT).show()
 
-                }.start()
+                }.start()*/
 
             }
             progressionIndicator.visibility = View.GONE
