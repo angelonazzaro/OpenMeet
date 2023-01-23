@@ -1,6 +1,7 @@
 package com.openmeet.webservice.proxies;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.data.meeter.MeeterDAO;
@@ -27,9 +28,9 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public List<Meeter> doRetrieveByCondition(String condition) throws SQLException, InvalidParameterException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveByCondition() - condition: " + condition);
-
         condition = request.getParameter("condition");
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveByCondition() - condition: " + condition);
 
         if (!ResponseHelper.checkStringFields(condition)) {
             throw new InvalidParameterException("Missing parameters - condition");
@@ -37,7 +38,8 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
 
         List<Meeter> meeters = dao.doRetrieveByCondition(condition);
 
-        String json = new Gson().toJson(meeters);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = builder.toJson(meeters);
 
         HashMap<String, String> values = new HashMap<>();
         values.put("status", "success");
@@ -52,9 +54,9 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public Meeter doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveByKey() - key: " + key);
-
         key = request.getParameter("key");
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveByKey() - key: " + key);
 
         if (!ResponseHelper.checkStringFields(key)) {
             throw new InvalidParameterException("Missing parameters - key");
@@ -62,7 +64,8 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
 
         Meeter meeter = dao.doRetrieveByKey(key);
 
-        String json = new Gson().toJson(meeter);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = builder.toJson(meeter);
 
         HashMap<String, String> values = new HashMap<>();
         values.put("status", "success");
@@ -81,7 +84,8 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
 
         List<Meeter> meeters = dao.doRetrieveByCondition("TRUE");
 
-        String json = new Gson().toJson(meeters);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = builder.toJson(meeters);
 
         HashMap<String, String> values = new HashMap<>();
         values.put("status", "success");
@@ -96,9 +100,9 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public List<Meeter> doRetrieveAll(int row_count) throws SQLException, InvalidParameterException, NumberFormatException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveAll() - row_count: " + row_count);
-
         row_count = Integer.parseInt(request.getParameter("row_count"));
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveAll() - row_count: " + row_count);
 
         if (row_count <= 0) {
             throw new InvalidParameterException("Invalid parameters - row count");
@@ -106,7 +110,8 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
 
         List<Meeter> meeters = dao.doRetrieveByCondition("TRUE LIMIT " + row_count);
 
-        String json = new Gson().toJson(meeters);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = builder.toJson(meeters);
 
         HashMap<String, String> values = new HashMap<>();
         values.put("status", "success");
@@ -121,10 +126,10 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public List<Meeter> doRetrieveAll(int offset, int row_count) throws SQLException, InvalidParameterException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveAll() - offset: " + offset + ", row_count: " + row_count);
-
         row_count = Integer.parseInt(request.getParameter("row_count"));
         offset = Integer.parseInt(request.getParameter("offset"));
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveAll() - offset: " + offset + ", row_count: " + row_count);
 
         if (row_count <= 0) {
             throw new InvalidParameterException("Invalid parameters - row count");
@@ -135,7 +140,8 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
 
         List<Meeter> meeters = dao.doRetrieveByCondition("TRUE LIMIT " + offset + ", " + row_count);
 
-        String json = new Gson().toJson(meeters);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = builder.toJson(meeters);
 
         HashMap<String, String> values = new HashMap<>();
         values.put("status", "success");
@@ -150,9 +156,12 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public boolean doSave(Meeter obj) throws SQLException {
 
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        obj = builder.fromJson(request.getParameter("meeter"), Meeter.class);
+
         logger.log(Level.INFO, "MeeterProxyDAO:doSave() - obj: " + obj);
 
-        obj = new Gson().fromJson(request.getParameter("meeter"), Meeter.class);
+        System.out.println(obj.toHashMap());
 
         boolean isSuccessful = dao.doSave(obj);
 
@@ -169,9 +178,10 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doSave() - values: " + values);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        values = builder.fromJson(request.getParameter("values"), HashMap.class);
 
-        values = new Gson().fromJson(request.getParameter("values"), HashMap.class);
+        logger.log(Level.INFO, "MeeterProxyDAO:doSave() - values: " + values);
 
         boolean isSuccessful = dao.doSave(values);
 
@@ -189,10 +199,12 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException, InvalidParameterException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doUpdate() - values: " + values + ", condition: " + condition);
-
-        values = new Gson().fromJson(request.getParameter("values"), HashMap.class);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        values = builder.fromJson(request.getParameter("values"), HashMap.class);
         condition = request.getParameter("condition");
+
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doUpdate() - values: " + values + ", condition: " + condition);
 
         if (!ResponseHelper.checkStringFields(condition)) {
             throw new InvalidParameterException("Missing parameters - condition");
@@ -214,9 +226,10 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public boolean doSaveOrUpdate(Meeter obj) throws SQLException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doSaveOrUpdate() - obj: " + obj);
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        obj = builder.fromJson(request.getParameter("meeter"), Meeter.class);
 
-        obj = new Gson().fromJson(request.getParameter("meeter"), Meeter.class);
+        logger.log(Level.INFO, "MeeterProxyDAO:doSaveOrUpdate() - obj: " + obj);
 
         boolean isSuccessful = dao.doSaveOrUpdate(obj);
 
@@ -234,9 +247,9 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     @Override
     public boolean doDelete(String condition) throws SQLException {
 
-        logger.log(Level.INFO, "MeeterProxyDAO:doDelete() - condition: " + condition);
-
         condition = request.getParameter("condition");
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doDelete() - condition: " + condition);
 
         boolean isSuccessful = dao.doDelete(condition);
 

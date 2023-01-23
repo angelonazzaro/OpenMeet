@@ -245,7 +245,10 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to DAO.DO_SAVE, "meeter" to Gson().toJson(obj)),
+                hashMapOf(
+                    "operation" to DAO.DO_SAVE,
+                    "meeter" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
@@ -286,7 +289,10 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to DAO.DO_SAVE_PARTIAL, "values" to Gson().toJson(values)),
+                hashMapOf(
+                    "operation" to DAO.DO_SAVE_PARTIAL,
+                    "values" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(values)
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
@@ -370,7 +376,10 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to DAO.DO_SAVE_OR_UPDATE, "meeter" to Gson().toJson(obj)),
+                hashMapOf(
+                    "operation" to DAO.DO_SAVE_OR_UPDATE,
+                    "meeter" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error

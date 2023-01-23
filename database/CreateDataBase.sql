@@ -1,4 +1,4 @@
-/* remote_usr ha i permessi solo su OpenMeet
+/*remote_usr ha i permessi solo su OpenMeet
 DROP DATABASE IF EXISTS OpenMeet;
 CREATE DATABASE OpenMeet;*/
 USE OpenMeet;
@@ -16,7 +16,7 @@ CREATE TABLE Meeter (
     `pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`biography` VARCHAR(255), 
     `birthDate` DATE NOT NULL,
-    `publicKey` BINARY(128) /*Key Pair da 1024 bit*/
+    `publicKey` CHAR(40) /*Key Pair da 1024 bit*/
 );
 
 CREATE TABLE Rating (
@@ -53,6 +53,7 @@ CREATE TABLE Interest (
 CREATE TABLE Meeter_Interest (
 
     `id` INT, 
+    `interestId` INT, 
     `meeterId` INT, 
 
     FOREIGN KEY (`interestId`) REFERENCES Interest (`id`) ON UPDATE CASCADE ON DELETE NO ACTION, 
