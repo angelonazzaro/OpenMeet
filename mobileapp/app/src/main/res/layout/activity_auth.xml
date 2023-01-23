@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="65dp"
             android:layout_weight="1"
-            android:text="Continua"
+            android:text="@string/continue_btn"
             app:icon="@drawable/ic_baseline_arrow_forward_ios_24" />
 
         <com.google.android.material.divider.MaterialDivider
