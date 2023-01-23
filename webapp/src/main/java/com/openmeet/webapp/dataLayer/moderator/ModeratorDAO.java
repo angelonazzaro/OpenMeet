@@ -1,6 +1,7 @@
 package com.openmeet.webapp.dataLayer.moderator;
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -17,7 +18,7 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
 
     @Override
     public List<Moderator> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Moderator.MODERATOR, condition, new ModeratorExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Moderator.MODERATOR, condition, new ModeratorExtractor(), source);
     }
 
     @Override
@@ -49,17 +50,17 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
 
     @Override
     public boolean doSave(Moderator obj) throws SQLException {
-        return genericDoSave(Moderator.MODERATOR, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Moderator.MODERATOR, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Moderator.MODERATOR, values, this.source);
+        return GenericDAO.genericDoSave(Moderator.MODERATOR, values, this.source);
     }
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Moderator.MODERATOR, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Moderator.MODERATOR, condition, values, this.source);
     }
 
     @Override
@@ -74,6 +75,6 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Moderator.MODERATOR, condition, this.source);
+        return GenericDAO.genericDoDelete(Moderator.MODERATOR, condition, this.source);
     }
 }
