@@ -47,7 +47,7 @@ CREATE TABLE Report (
 CREATE TABLE Interest (
 
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
-    `description` VARCHAR(12) NOT NULL 
+    `description` VARCHAR(25) NOT NULL 
 ); 
 
 CREATE TABLE Meeter_Interest (
