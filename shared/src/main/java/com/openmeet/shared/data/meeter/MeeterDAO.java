@@ -1,6 +1,7 @@
 package com.openmeet.shared.data.meeter;
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -17,7 +18,7 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
 
     @Override
     public List<Meeter> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Meeter.MEETER, condition, new MeeterExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Meeter.MEETER, condition, new MeeterExtractor(), source);
     }
 
     @Override
@@ -49,18 +50,18 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
 
     @Override
     public boolean doSave(Meeter obj) throws SQLException {
-        return genericDoSave(Meeter.MEETER, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Meeter.MEETER, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Meeter.MEETER, values, this.source);
+        return GenericDAO.genericDoSave(Meeter.MEETER, values, this.source);
     }
 
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Meeter.MEETER, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Meeter.MEETER, condition, values, this.source);
     }
 
     @Override
@@ -75,6 +76,6 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Meeter.MEETER, condition, this.source);
+        return GenericDAO.genericDoDelete(Meeter.MEETER, condition, this.source);
     }
 }

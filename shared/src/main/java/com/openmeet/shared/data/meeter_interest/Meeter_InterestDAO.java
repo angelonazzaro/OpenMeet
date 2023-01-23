@@ -1,6 +1,7 @@
 package com.openmeet.shared.data.meeter_interest;
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -17,7 +18,7 @@ public class Meeter_InterestDAO extends SQLDAO implements DAO<Meeter_Interest> {
 
     @Override
     public List<Meeter_Interest> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Meeter_Interest.MEETER_INTEREST, condition, new Meeter_InterestExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Meeter_Interest.MEETER_INTEREST, condition, new Meeter_InterestExtractor(), source);
     }
 
     @Override
@@ -49,17 +50,17 @@ public class Meeter_InterestDAO extends SQLDAO implements DAO<Meeter_Interest> {
 
     @Override
     public boolean doSave(Meeter_Interest obj) throws SQLException {
-        return genericDoSave(Meeter_Interest.MEETER_INTEREST, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Meeter_Interest.MEETER_INTEREST, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Meeter_Interest.MEETER_INTEREST, values, this.source);
+        return GenericDAO.genericDoSave(Meeter_Interest.MEETER_INTEREST, values, this.source);
     }
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Meeter_Interest.MEETER_INTEREST, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Meeter_Interest.MEETER_INTEREST, condition, values, this.source);
     }
 
     @Override
@@ -74,6 +75,6 @@ public class Meeter_InterestDAO extends SQLDAO implements DAO<Meeter_Interest> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Meeter_Interest.MEETER_INTEREST, condition, this.source);
+        return GenericDAO.genericDoDelete(Meeter_Interest.MEETER_INTEREST, condition, this.source);
     }
 }

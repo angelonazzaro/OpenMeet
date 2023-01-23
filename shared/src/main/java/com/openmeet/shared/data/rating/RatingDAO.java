@@ -1,6 +1,7 @@
 package com.openmeet.shared.data.rating;
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -17,7 +18,7 @@ public class RatingDAO extends SQLDAO implements DAO<Rating> {
 
     @Override
     public List<Rating> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Rating.RATING, condition, new RatingExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Rating.RATING, condition, new RatingExtractor(), source);
     }
 
     @Override
@@ -51,17 +52,17 @@ public class RatingDAO extends SQLDAO implements DAO<Rating> {
 
     @Override
     public boolean doSave(Rating obj) throws SQLException {
-        return genericDoSave(Rating.RATING, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Rating.RATING, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Rating.RATING, values, this.source);
+        return GenericDAO.genericDoSave(Rating.RATING, values, this.source);
     }
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Rating.RATING, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Rating.RATING, condition, values, this.source);
     }
 
     @Override
@@ -76,6 +77,6 @@ public class RatingDAO extends SQLDAO implements DAO<Rating> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Rating.RATING, condition, this.source);
+        return GenericDAO.genericDoDelete(Rating.RATING, condition, this.source);
     }
 }

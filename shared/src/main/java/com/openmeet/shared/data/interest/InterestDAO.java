@@ -1,6 +1,7 @@
 package com.openmeet.shared.data.interest;
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -17,7 +18,7 @@ public class InterestDAO extends SQLDAO implements DAO<Interest> {
 
     @Override
     public List<Interest> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Interest.INTEREST, condition, new InterestExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Interest.INTEREST, condition, new InterestExtractor(), source);
     }
 
     @Override
@@ -47,17 +48,17 @@ public class InterestDAO extends SQLDAO implements DAO<Interest> {
 
     @Override
     public boolean doSave(Interest obj) throws SQLException {
-        return genericDoSave(Interest.INTEREST, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Interest.INTEREST, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Interest.INTEREST, values, this.source);
+        return GenericDAO.genericDoSave(Interest.INTEREST, values, this.source);
     }
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Interest.INTEREST, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Interest.INTEREST, condition, values, this.source);
     }
 
     @Override
@@ -72,6 +73,6 @@ public class InterestDAO extends SQLDAO implements DAO<Interest> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Interest.INTEREST_ID, condition, this.source);
+        return GenericDAO.genericDoDelete(Interest.INTEREST_ID, condition, this.source);
     }
 }
