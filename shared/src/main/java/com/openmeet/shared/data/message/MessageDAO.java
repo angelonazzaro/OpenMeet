@@ -1,6 +1,7 @@
 package com.openmeet.shared.data.message;
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -17,7 +18,7 @@ public class MessageDAO extends SQLDAO implements DAO<Message> {
 
     @Override
     public List<Message> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Message.MESSAGE, condition, new MessageExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Message.MESSAGE, condition, new MessageExtractor(), source);
     }
 
     @Override
@@ -49,17 +50,17 @@ public class MessageDAO extends SQLDAO implements DAO<Message> {
 
     @Override
     public boolean doSave(Message obj) throws SQLException {
-        return genericDoSave(Message.MESSAGE, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Message.MESSAGE, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Message.MESSAGE, values, this.source);
+        return GenericDAO.genericDoSave(Message.MESSAGE, values, this.source);
     }
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Message.MESSAGE, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Message.MESSAGE, condition, values, this.source);
     }
 
     @Override
@@ -73,6 +74,6 @@ public class MessageDAO extends SQLDAO implements DAO<Message> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Message.MESSAGE, condition, source);
+        return GenericDAO.genericDoDelete(Message.MESSAGE, condition, source);
     }
 }

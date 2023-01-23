@@ -2,6 +2,7 @@ package com.openmeet.shared.data.image;
 
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -18,7 +19,7 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
 
     @Override
     public List<Image> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Image.IMAGE, condition, new ImageExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Image.IMAGE, condition, new ImageExtractor(), source);
     }
 
     @Override
@@ -50,17 +51,17 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
 
     @Override
     public boolean doSave(Image obj) throws SQLException {
-        return genericDoSave(Image.IMAGE, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Image.IMAGE, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Image.IMAGE, values, this.source);
+        return GenericDAO.genericDoSave(Image.IMAGE, values, this.source);
     }
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Image.IMAGE, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Image.IMAGE, condition, values, this.source);
     }
 
     @Override
@@ -75,6 +76,6 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Image.IMAGE, condition, this.source);
+        return GenericDAO.genericDoDelete(Image.IMAGE, condition, this.source);
     }
 }

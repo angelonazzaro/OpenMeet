@@ -1,6 +1,7 @@
 package com.openmeet.shared.data.ban;
 
 import com.openmeet.shared.data.storage.DAO;
+import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
@@ -17,7 +18,7 @@ public class BanDAO extends SQLDAO implements DAO<Ban> {
 
     @Override
     public List<Ban> doRetrieveByCondition(String condition) throws SQLException {
-        return genericDoRetrieveByCondition(Ban.BAN, condition, new BanExtractor(), source);
+        return GenericDAO.genericDoRetrieveByCondition(Ban.BAN, condition, new BanExtractor(), source);
     }
 
     @Override
@@ -49,17 +50,17 @@ public class BanDAO extends SQLDAO implements DAO<Ban> {
 
     @Override
     public boolean doSave(Ban obj) throws SQLException {
-        return genericDoSave(Ban.BAN, obj.toHashMap(), this.source);
+        return GenericDAO.genericDoSave(Ban.BAN, obj.toHashMap(), this.source);
     }
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {
-        return genericDoSave(Ban.BAN, values, this.source);
+        return GenericDAO.genericDoSave(Ban.BAN, values, this.source);
     }
 
     @Override
     public boolean doUpdate(HashMap<String, ?> values, String condition) throws SQLException {
-        return genericDoUpdate(Ban.BAN, condition, values, this.source);
+        return GenericDAO.genericDoUpdate(Ban.BAN, condition, values, this.source);
     }
 
     @Override
@@ -74,6 +75,6 @@ public class BanDAO extends SQLDAO implements DAO<Ban> {
 
     @Override
     public boolean doDelete(String condition) throws SQLException {
-        return genericDoDelete(Ban.BAN, condition, this.source);
+        return GenericDAO.genericDoDelete(Ban.BAN, condition, this.source);
     }
 }
