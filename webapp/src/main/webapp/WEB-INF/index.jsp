@@ -61,6 +61,22 @@
 
 <%@ include file="templates/footer.jsp" %>
 
+<% if (!view.contains("login.jsp")) { %>
+    <%-- everytime it's not possibile loading the user profile pic, load the default one--%>
+    <script>
+        const defaultPic = getBaseURL() + "assets/imgs/special/userplaceholder.png";
+        document.querySelectorAll(".show-on-error-imgs").forEach(item => {
+            item.addEventListener('error', function () {
+                // keeping it from going into an infinite loop
+                if (this.getAttribute("src") === defaultPic) {
+                    return;
+                }
+                this.src = defaultPic;
+            })
+        })
+    </script>
+<% } %>
+
 <% if (!view.contains("settings") && !view.contains("dashboard") && !view.contains("login")) { %>
 <script>
     $(document).ready(() => {
