@@ -13,9 +13,13 @@ import com.openmeet.R
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.utils.PasswordEncrypter
+
 import java.nio.charset.Charset
 import java.security.MessageDigest
 import java.sql.Date
+
+import com.openmeet.utils.UserEncryptedData
+
 
 
 class LoginActivity : AppCompatActivity() {
@@ -32,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
         val registrationTxt = findViewById<TextView>(R.id.registrationTxt)
 
         val snackbarView = findViewById<View>(R.id.auth_login_container)
+        val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
@@ -47,9 +52,8 @@ class LoginActivity : AppCompatActivity() {
 
         loginBtn.setOnClickListener {
 
+            progressionIndicator.visibility = View.VISIBLE
             val pwd = pswFld.editText?.text.toString()
-            val cntx = this
-
 
             Thread {
 
@@ -108,9 +112,22 @@ class LoginActivity : AppCompatActivity() {
 
                 }
 
+           Thread {
+
+                val ret = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
+
+                if(ret == null)
+                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                else
+                    if(ret.size == 0)
+                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_SHORT).show()
+                    else{
+                        UserEncryptedData(this).storeCredentials(email, pwd)
+                    }
+
+
             }.start()
-
-
+            progressionIndicator.visibility = View.GONE
         }
 
         registrationTxt.setOnClickListener {
@@ -122,9 +139,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        super.getOnBackPressedDispatcher().onBackPressed()
         overridePendingTransition(0, 0)
 
     }
-
 }

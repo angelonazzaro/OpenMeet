@@ -11,6 +11,18 @@
     tools:context=".logic.RegistrationActivity">
 
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/linearProgressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/openMeetLogo"
         android:layout_width="150dp"
@@ -22,12 +34,12 @@
         app:srcCompat="@drawable/openmeet_blank_logo" />
 
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/instructionTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-light"
-        android:text="result"
+        android:text="prompt"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,12 +51,34 @@
         style="@style/Widget.Material3.Button.OutlinedButton.Icon"
         android:layout_width="wrap_content"
         android:layout_height="65dp"
-        android:text="Continua"
+        android:layout_marginBottom="50dp"
+        android:text="@string/continue_btn"
         app:icon="@drawable/ic_baseline_arrow_forward_ios_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/biographyField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:hint="@string/biography_hint"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/instructionTxt"
+        tools:visibility="gone">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:focusable="false"
+            android:singleLine="false"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

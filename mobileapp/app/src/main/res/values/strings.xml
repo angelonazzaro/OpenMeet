@@ -1,27 +1,44 @@
 <resources>
+
     <string name="app_name">OpenMeet</string>
     <string name="title_activity_auth">AuthActivity</string>
     <string name="request_server_address">192.168.1.8:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
     <string name="connection_error">Errore di connessione. Controlla la tua connessione ad Internet o riprova più tardi.</string>
 
-    <string name="registration_TextView">Non hai un account? <u>Registrati</u></string>
-    <string name="login_TextView">Hai già un account? <u>Accedi</u></string>
+    <string name="app_name" translatable="false">OpenMeet</string>
+    <string name="request_server_address" translatable="false">192.168.1.33:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
+    <string name="connection_error">Connection error. Check your Internet connection or try again later.</string>
 
-    <string name="email_null_error">Email non inserita!</string>
-    <string name="email_format_error">Formato email non valido!</string>
-    <string name="email_local_toolong_error">Parte locale Email troppo lunga!</string>
-    <string name="email_domain_toolong_error">Parte dominio Email troppo lunga!</string>
 
-    <string name="name_null_error">Nome non inserito!</string>
-    <string name="surname_null_error">Cognome non inserito!</string>
-    <string name="underage_error">Sei troppo piccino, ma potresti far iscrivere tua mamma.</string>
-    <string name="password_null_error">Password non inserita!</string>
-    <string name="password_conf_null_error">Devi confermare la password!</string>
-    <string name="password_unmatch_error">Le password devono essere uguali!</string>
+    <string name="continue_btn">Continue</string>
+    <string name="login_btn">Login</string>
+    <string name="signup_btn">Sign-up</string>
 
-    <string name="login_failed">"Accesso fallito: credenziali errate."</string>
-    <string name="login_failed_email">Controlla che l\'email sia corretta.</string>
-    <string name="login_failed_password">Controlla che la password sia corretta.</string>
+    <string name="registration_title">Insert your personal data</string>
+    <string name="name_hint">Name</string>
+    <string name="surname_hint">Surname</string>
+    <string name="birthdate_hint">Date of Birth</string>
+    <string name="confirmPass_hint">Confirm Password</string>
+    <string name="biography_hint">Biography</string>
+
+    <string name="registration_TextView">Not registered? <u>Sign-up</u></string>
+    <string name="login_TextView">Already registered? <u>Login</u></string>
+
+    <string name="email_null_error">Empty email!</string>
+    <string name="email_format_error">Invalid email format!</string>
+    <string name="email_local_toolong_error">Local part of email is too long!</string>
+    <string name="email_domain_toolong_error">Domain part of email is too long!</string>
+
+    <string name="name_null_error">Empty name!</string>
+    <string name="surname_null_error">Empty surname!</string>
+    <string name="underage_error">Hey, you\'re too little, let your mom sign-up instead.</string>
+    <string name="password_null_error">Empty password!</string>
+    <string name="password_conf_null_error">You have to confirm your password!</string>
+    <string name="password_unmatch_error">Passwordsa must match!</string>
+
+    <string name="login_failed">"Login failed: wrong credentials."</string>
+    <string name="login_failed_email">Check your email.</string>
+    <string name="login_failed_password">Check your password.</string>
 
     <string name="homescreen_chat_title">Chats</string>
     <string name="homescreen_discover_title">Discover</string>
