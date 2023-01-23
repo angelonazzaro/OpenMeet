@@ -10,8 +10,8 @@ In order to submit changes to the project, please open **pull request** where yo
 The basic steps required to open a pull request are the following: 
 - Fork the [main repository](https://github.com/sl1mSha4dey/openMeet_Classe03); 
 - Clone your fork onto your machine; 
-- Create your feature branch: `git checkout -b my-features'; 
-- Commit your changes: `git commit -m "Brief description"; 
+- Create your feature branch: `git checkout -b my-features'`; 
+- Commit your changes: `git commit -m "Brief description"`; 
 - Push to the branch: `git push origin my-features`; 
 - Open up a pull request and explain what you did; 
 
