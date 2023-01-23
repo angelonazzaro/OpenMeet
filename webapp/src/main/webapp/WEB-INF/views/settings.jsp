@@ -1,11 +1,17 @@
 <%@ page import="com.openmeet.webapp.dataLayer.moderator.Moderator" %>
+<%@ page import="java.io.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Moderator user = (Moderator) request.getSession().getAttribute("user"); %>
 <% String profilePic = user.getProfilePic(); %>
+<% String basePath = request.getContextPath() + File.separator + "assets" + File.separator; %>
 
-<% if (profilePic == null || profilePic.length() > 0) { %>
-<% profilePic = request.getContextPath() + "/assets/imgs/special/userplaceholder.png"; %>
+<% if (profilePic == null || profilePic.length() == 0) { %>
+<% profilePic = basePath + "imgs" + File.separator
+        + "special" + File.separator + "userplaceholder.png"; %>
+<% } else { %>
+<% profilePic = basePath + "uploads" + File.separator + "moderators" + File.separator + user.getId() + File.separator
+        + user.getProfilePic(); %>
 <% } %>
 
 <style>
@@ -99,8 +105,7 @@
                         </button>
                     </div>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
 </div>

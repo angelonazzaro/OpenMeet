@@ -68,6 +68,7 @@
 
 <%@include file="../templates/modals/banModal.jsp" %>
 
+<% if (rows > 0) { %>
 <script>
 
     function addFunctionality(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute) {
@@ -84,3 +85,4 @@
     addFunctionality(reportId, "a[data-bs-target='#archive-modal']", "#archive-modal button[data-bs-dismiss]", "data-report-id");
     addFunctionality(meeterId, "a[data-bs-target='#ban-modal']", "#ban-modal button[data-bs-dismiss]", "data-meeter-id");
 </script>
+<% } %>

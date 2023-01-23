@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 @MultipartConfig(
@@ -37,7 +38,6 @@ public class SettingsServlet extends HttpServlet {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
 
-        Gson gson = new Gson();
         PrintWriter out = resp.getWriter();
 
         resp.setContentType("application/json");
@@ -55,8 +55,8 @@ public class SettingsServlet extends HttpServlet {
         user.setModeratorName(name);
         user.setModeratorSurname(surname);
 
-        valuesToUpdate.put("name", name);
-        valuesToUpdate.put("surname", surname);
+        valuesToUpdate.put("moderatorName", name);
+        valuesToUpdate.put("moderatorSurname", surname);
 
         String password = req.getParameter("password");
         // Regex check
@@ -68,7 +68,7 @@ public class SettingsServlet extends HttpServlet {
             }
 
             user.setPwd(password);
-            valuesToUpdate.put("name", name);
+            valuesToUpdate.put("pwd", password);
         }
 
         // File Upload if any
@@ -79,6 +79,7 @@ public class SettingsServlet extends HttpServlet {
 
                 String fileName = profilePicPart.getSubmittedFileName();
                 String[] splittedFileName = fileName.split("\\.");
+
                 String fileExtension = splittedFileName[splittedFileName.length - 1];
 
                 // Check if the file uploaded is an img
@@ -93,9 +94,10 @@ public class SettingsServlet extends HttpServlet {
                     return;
                 }
 
+                String newFilename = "profilePic." + fileExtension;
                 String appPath = req.getServletContext().getRealPath("/");
-                String basePath = appPath + "assets/uploads/moderators/" + user.getId();
-                String uploadPath = basePath + "/profilePic." + fileExtension;
+                String basePath = appPath + "assets" + File.separator + "uploads" + File.separator + "moderators" +  File.separator + user.getId();
+                String uploadPath = basePath + File.separator + newFilename;
                 File userProfilePicFolder = new File(basePath);
 
                 // If the folder does not exist, it means this is the first upload by the user
@@ -106,12 +108,26 @@ public class SettingsServlet extends HttpServlet {
                         ResponseHelper.sendCustomError(out, "An error occurred while trying to upload your file. Try again later.");
                         return;
                     }
-                    // Save image for the first time
-                    BufferedImage bufferedImage = ImageIO.read(profilePicPart.getInputStream());
-                    ImageIO.write(bufferedImage, fileExtension, new File(uploadPath));
-                    user.setProfilePic(uploadPath);
-                    valuesToUpdate.put("profilePic", uploadPath);
+
+                } else {
+                    // The directory already exists and the user already has a custom profile pic
+                    // Remove the old one and upload the new one
+                    File[] files = userProfilePicFolder.listFiles();
+
+                    if (files != null && files.length > 0) {
+                        if (!files[0].delete()) {
+                            ResponseHelper.sendCustomError(out, "An error occurred while trying to upload your file. Try again later.");
+                            return;
+                        }
+                    }
                 }
+
+                // Save image
+                BufferedImage bufferedImage = ImageIO.read(profilePicPart.getInputStream());
+                ImageIO.write(bufferedImage, fileExtension, new File(uploadPath));
+
+                user.setProfilePic(newFilename);
+                valuesToUpdate.put("profilePic", newFilename);
             }
 
         } catch (ServletException e) {
@@ -131,6 +147,7 @@ public class SettingsServlet extends HttpServlet {
                 ResponseHelper.sendGenericResponse(out, values);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             ResponseHelper.sendGenericError(out);
         }
     }
