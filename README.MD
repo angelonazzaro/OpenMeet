@@ -40,7 +40,7 @@ To compile use the following JDK versions:
  - **Francesco Granozio**   - Developer - [Francesco-Granozio](https://github.com/Francesco-Granozio)
 
 ## Contributing
-You can contribute to this software by following the guide lines specified here [Contribute]().
+You can contribute to this software by following the guide lines specified here [Contribute](https://github.com/sl1mSha4dey/openMeet_Classe03/blob/main/contributing/CONTRIBUTING.MD).
 
 
 ## License

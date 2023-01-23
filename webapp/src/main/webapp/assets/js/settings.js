@@ -42,8 +42,7 @@ form.addEventListener('submit', function (e) {
         if (response.status === "error") {
             errorMsgParagraph.show().text(response.message);
         } else {
-            // redirect to dashboard
-            window.location.reload();
+            window.location.replace(getBaseURL() + "settings");
         }
     }).fail(() => {
         errorMsgParagraph.show().text("An error occurred. Please try again later.");

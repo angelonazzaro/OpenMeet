@@ -40,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
 
         val str = intent.getStringExtra("email").toString()
         emailFld.editText?.setText(str)
-        Toast.makeText(this, str, Toast.LENGTH_LONG).show()
 
 
         pswFld.editText?.setText("test")
@@ -55,7 +54,8 @@ class LoginActivity : AppCompatActivity() {
             progressionIndicator.visibility = View.VISIBLE
             val pwd = pswFld.editText?.text.toString()
 
-            Thread {
+
+           Thread {
 
                 val ret = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
 

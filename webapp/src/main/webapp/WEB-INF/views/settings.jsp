@@ -1,11 +1,17 @@
 <%@ page import="com.openmeet.webapp.dataLayer.moderator.Moderator" %>
+<%@ page import="java.io.File" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <% Moderator user = (Moderator) request.getSession().getAttribute("user"); %>
 <% String profilePic = user.getProfilePic(); %>
+<% String basePath = request.getContextPath() + File.separator + "assets" + File.separator; %>
 
-<% if (profilePic == null || profilePic.length() > 0) { %>
-<% profilePic = request.getContextPath() + "/assets/imgs/special/userplaceholder.png"; %>
+<% if (profilePic == null || profilePic.length() == 0) { %>
+<% profilePic = basePath + "imgs" + File.separator
+        + "special" + File.separator + "userplaceholder.png"; %>
+<% } else { %>
+<% profilePic = basePath + "uploads" + File.separator + "moderators" + File.separator + user.getId() + File.separator
+        + user.getProfilePic(); %>
 <% } %>
 
 <style>
@@ -28,7 +34,7 @@
                     <div class="card-body d-flex flex-column align-items-center">
                         <div class="col-md-8 col-sm-12 mb-4">
                             <div class="form-group d-flex flex-column align-items-center">
-                                <img src="<%= profilePic %>" alt="profile pic preview" class="mb-1" id="preview">
+                                <img src="<%= profilePic %>" alt="profile pic preview" class="mb-1 show-on-error-imgs" id="preview">
                                 <div style="flex-basis: 100%; width: 100%">
                                     <label for="profile-pic" class="form-label">Profile Picture</label>
                                     <input type="file" name="profilePic" id="profile-pic" class="form-control">
@@ -99,8 +105,7 @@
                         </button>
                     </div>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
 </div>
