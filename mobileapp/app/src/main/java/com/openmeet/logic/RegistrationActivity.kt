@@ -1,5 +1,6 @@
 package com.openmeet.logic
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -30,6 +31,7 @@ class RegistrationActivity : AppCompatActivity() {
         val passwordFld = findViewById<TextInputLayout>(R.id.passwordField)
         val confirmPasswordFld = findViewById<TextInputLayout>(R.id.confirmPasswordField)
 
+
         val confirmButton = findViewById<Button>(R.id.registrationBtn)
         val snackbarView = findViewById<View>(R.id.auth_reg_container)
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
@@ -45,12 +47,14 @@ class RegistrationActivity : AppCompatActivity() {
             )
             .build()
 
+        val str = intent.getStringExtra("email").toString()
+        emailFld.editText?.setText(str)
+
         confirmButton.setOnClickListener {
             progressionIndicator.visibility = View.VISIBLE
 
             val result =
                 checkForm(nameFld, surnameFld, datePicker.selection, birthdayFld, emailFld, passwordFld, confirmPasswordFld)
-            Snackbar.make(snackbarView, result.toString(), Snackbar.LENGTH_SHORT).show()
 
             if (result){
                 val meeter = Meeter()
@@ -61,8 +65,23 @@ class RegistrationActivity : AppCompatActivity() {
                 meeter.birthDate = java.sql.Date(datePicker.selection!!)
 
                 Thread {
-                    if(!MeeterProxyDAO(this).doSave(meeter))
+                    val retrieveMail = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '${meeter.email}'")
+                    if(retrieveMail == null)
                         Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                    else
+                        if(retrieveMail.size == 0){
+                            if(!MeeterProxyDAO(this).doSave(meeter))
+                                Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                            else{
+                                startActivity(
+                                    Intent(this, RegistrationActivity::class.java).putExtra("email", meeter.email)
+                                )
+                                overridePendingTransition(0, 0)
+                            }
+
+                        }
+                        else
+                            Snackbar.make(snackbarView, R.string.duplicate_mail, Snackbar.LENGTH_SHORT).show()
 
                 }.start()
 
