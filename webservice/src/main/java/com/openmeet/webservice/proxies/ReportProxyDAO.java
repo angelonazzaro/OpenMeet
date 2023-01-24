@@ -30,7 +30,7 @@ public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
         condition = request.getParameter("condition");
 
         if (!ResponseHelper.checkStringFields(condition)) {
-            throw new java.security.InvalidParameterException("Missing parameters - condition");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - condition");
         }
 
         logger.log(Level.INFO, "ReportProxyDAO:doRetrieveByCondition() - condition: " + condition);
@@ -49,7 +49,7 @@ public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
         key = request.getParameter("key");
 
         if (!ResponseHelper.checkStringFields(key)) {
-            throw new java.security.InvalidParameterException("Missing parameters - key");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - key");
         }
 
         logger.log(Level.INFO, "ReportProxyDAO:doRetrieveByKey() - key: " + key);
