@@ -29,7 +29,7 @@ public class Meeter_InterestProxyDAO extends ProxyDAO<Meeter_Interest> implement
         condition = request.getParameter("condition");
 
         if (!ResponseHelper.checkStringFields(condition)) {
-            throw new java.security.InvalidParameterException("Missing parameters - condition");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - condition");
         }
 
         logger.log(Level.INFO, "Meeter_InterestProxyDAO:doRetrieveByCondition() - condition: " + condition);
@@ -48,7 +48,7 @@ public class Meeter_InterestProxyDAO extends ProxyDAO<Meeter_Interest> implement
         key = request.getParameter("key");
 
         if (!ResponseHelper.checkStringFields(key)) {
-            throw new java.security.InvalidParameterException("Missing parameters - key");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - key");
         }
 
         logger.log(Level.INFO, "Meeter_InterestProxyDAO:doRetrieveByKey() - key: " + key);
