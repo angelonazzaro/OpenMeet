@@ -28,7 +28,7 @@ public class MessageProxyDAO extends ProxyDAO<Message> implements DAO<Message> {
         condition = request.getParameter("condition");
 
         if (!ResponseHelper.checkStringFields(condition)) {
-            throw new java.security.InvalidParameterException("Missing parameters - condition");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - condition");
         }
 
         logger.log(Level.INFO, "MessageProxyDAO:doRetrieveByCondition() - condition: " + condition);
@@ -47,14 +47,14 @@ public class MessageProxyDAO extends ProxyDAO<Message> implements DAO<Message> {
         key = request.getParameter("key");
 
         if (!ResponseHelper.checkStringFields(key)) {
-            throw new java.security.InvalidParameterException("Missing parameters - key");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - key");
         }
 
         logger.log(Level.INFO, "MessageProxyDAO:doRetrieveByKey() - key: " + key);
 
         Message message = GenericProxyDAO.genericProxyDoRetrieveByKey(key, dao, out);
 
-        logger.log(Level.INFO, "MessageProxyDAO:doRetrieveByKey() - meeter: " + message);
+        logger.log(Level.INFO, "MessageProxyDAO:doRetrieveByKey() - message: " + message);
 
         return message;
 
