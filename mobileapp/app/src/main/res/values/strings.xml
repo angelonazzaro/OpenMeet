@@ -15,6 +15,7 @@
     <string name="birthdate_hint">Date of Birth</string>
     <string name="confirmPass_hint">Confirm Password</string>
     <string name="biography_hint">Biography</string>
+    <string name="interestFilter_hint">Filter interests</string>
 
     <string name="registration_TextView">Not registered? <u>Sign-up</u></string>
     <string name="login_TextView">Already registered? <u>Login</u></string>
