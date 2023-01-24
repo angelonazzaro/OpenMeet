@@ -56,7 +56,7 @@ public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
 
         Report report = GenericProxyDAO.genericProxyDoRetrieveByKey(key, dao, out);
 
-        logger.log(Level.INFO, "ReportProxyDAO:doRetrieveByKey() - meeter: " + report);
+        logger.log(Level.INFO, "ReportProxyDAO:doRetrieveByKey() - report: " + report);
 
         return report;
 
