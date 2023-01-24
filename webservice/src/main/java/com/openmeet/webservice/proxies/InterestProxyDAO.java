@@ -28,7 +28,7 @@ public class InterestProxyDAO extends ProxyDAO<Interest> implements DAO<Interest
         condition = request.getParameter("condition");
 
         if (!ResponseHelper.checkStringFields(condition)) {
-            throw new java.security.InvalidParameterException("Missing parameters - condition");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - condition");
         }
 
         logger.log(Level.INFO, "InterestProxyDAO:doRetrieveByCondition() - condition: " + condition);
@@ -47,7 +47,7 @@ public class InterestProxyDAO extends ProxyDAO<Interest> implements DAO<Interest
         key = request.getParameter("key");
 
         if (!ResponseHelper.checkStringFields(key)) {
-            throw new java.security.InvalidParameterException("Missing parameters - key");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - key");
         }
 
         logger.log(Level.INFO, "InterestProxyDAO:doRetrieveByKey() - key: " + key);
