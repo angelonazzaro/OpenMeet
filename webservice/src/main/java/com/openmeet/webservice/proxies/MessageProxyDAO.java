@@ -35,7 +35,7 @@ public class MessageProxyDAO extends ProxyDAO<Message> implements DAO<Message> {
 
         List<Message> messages = GenericProxyDAO.genericProxyDoRetrieveByCondition(condition, dao, out);
 
-        logger.log(Level.INFO, "MessageProxyDAO:doRetrieveByCondition() - meeters: " + messages);
+        logger.log(Level.INFO, "MessageProxyDAO:doRetrieveByCondition() - messages: " + messages);
 
         return messages;
 
