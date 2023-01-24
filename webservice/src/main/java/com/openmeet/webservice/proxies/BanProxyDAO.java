@@ -28,7 +28,7 @@ public class BanProxyDAO extends ProxyDAO<Ban> implements DAO<Ban> {
         condition = request.getParameter("condition");
 
         if (!ResponseHelper.checkStringFields(condition)) {
-            throw new java.security.InvalidParameterException("Missing parameters - condition");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - condition");
         }
 
         logger.log(Level.INFO, "BanProxyDAO:doRetrieveByCondition() - condition: " + condition);
@@ -47,14 +47,14 @@ public class BanProxyDAO extends ProxyDAO<Ban> implements DAO<Ban> {
         key = request.getParameter("key");
 
         if (!ResponseHelper.checkStringFields(key)) {
-            throw new java.security.InvalidParameterException("Missing parameters - key");
+            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - key");
         }
 
         logger.log(Level.INFO, "BanProxyDAO:doRetrieveByKey() - key: " + key);
 
         Ban ban = GenericProxyDAO.genericProxyDoRetrieveByKey(key, dao, out);
 
-        logger.log(Level.INFO, "BanProxyDAO:doRetrieveByKey() - meeter: " + ban);
+        logger.log(Level.INFO, "BanProxyDAO:doRetrieveByKey() - ban: " + ban);
 
         return ban;
 
