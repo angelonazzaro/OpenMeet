@@ -1,5 +1,6 @@
 package com.openmeet.data.interest
 
+import com.openmeet.shared.data.interest.Interest
 import com.openmeet.shared.data.storage.DAO
 import java.util.HashMap
 
