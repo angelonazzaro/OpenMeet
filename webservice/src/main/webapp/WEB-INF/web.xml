@@ -14,6 +14,69 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>MessageService</servlet-name>
+        <servlet-class>com.openmeet.webservice.MessageService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MessageService</servlet-name>
+        <url-pattern>/MessageService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Meeter_InterestService</servlet-name>
+        <servlet-class>com.openmeet.webservice.Meeter_InterestService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Meeter_InterestService</servlet-name>
+        <url-pattern>/Meeter_InterestService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ImageService</servlet-name>
+        <servlet-class>com.openmeet.webservice.ImageService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImageService</servlet-name>
+        <url-pattern>/ImageService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>InterestService</servlet-name>
+        <servlet-class>com.openmeet.webservice.InterestService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InterestService</servlet-name>
+        <url-pattern>/InterestService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BanService</servlet-name>
+        <servlet-class>com.openmeet.webservice.BanService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BanService</servlet-name>
+        <url-pattern>/BanService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ReportService</servlet-name>
+        <servlet-class>com.openmeet.webservice.ReportService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReportService</servlet-name>
+        <url-pattern>/ReportService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RatingService</servlet-name>
+        <servlet-class>com.openmeet.webservice.RatingService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RatingService</servlet-name>
+        <url-pattern>/RatingService</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.openmeet.webservice.LoginServlet</servlet-class>
     </servlet>
