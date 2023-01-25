@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
@@ -14,9 +13,6 @@ import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.utils.PasswordEncrypter
 
-import java.nio.charset.Charset
-import java.security.MessageDigest
-import java.sql.Date
 
 import com.openmeet.utils.UserEncryptedData
 
@@ -51,12 +47,14 @@ class LoginActivity : AppCompatActivity() {
 
         loginBtn.setOnClickListener {
 
-            progressionIndicator.visibility = View.VISIBLE
             val pwd = pswFld.editText?.text.toString()
 
 
            Thread {
 
+               runOnUiThread {
+                   progressionIndicator.visibility = View.VISIBLE
+               }
                 val ret = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(pwd)}'")
 
                 if(ret == null)
@@ -68,9 +66,11 @@ class LoginActivity : AppCompatActivity() {
                         UserEncryptedData(this).storeCredentials(email, pwd)
                     }
 
+               runOnUiThread {
+                   progressionIndicator.visibility = View.GONE
+               }
 
             }.start()
-            progressionIndicator.visibility = View.GONE
         }
 
         registrationTxt.setOnClickListener {

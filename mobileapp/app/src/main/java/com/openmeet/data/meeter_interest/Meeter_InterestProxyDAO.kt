@@ -1,11 +1,10 @@
-package com.openmeet.data.interest
+package com.openmeet.data.meeter_interest
 
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.openmeet.shared.data.interest.Interest
+import com.openmeet.shared.data.meeter_interest.Meeter_Interest
 import com.openmeet.shared.data.storage.DAO
-import com.openmeet.shared.data.storage.DAO.logger
 import com.openmeet.utils.ContextDAO
 import com.openmeet.utils.VolleyRequestSender
 import com.openmeet.utils.VolleyResponseCallback
@@ -14,27 +13,29 @@ import java.util.HashMap
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
-class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
+class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter_Interest> {
 
-    override fun doRetrieveByCondition(condition: String): MutableList<Interest>? {
+    override fun doRetrieveByCondition(condition: String): MutableList<Meeter_Interest>? {
 
-        logger.log(Level.INFO, "doRetrieveByCondition: $condition")
+        DAO.logger.log(Level.INFO, "doRetrieveByCondition: $condition")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION, "condition" to condition),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
                         latch.countDown()
                     }
+
                     override fun onSuccess(response: String) {
                         resp = response
                         latch.countDown()
                     }
+
                 }
             )
 
@@ -48,23 +49,24 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return null
 
-        val interests = jsonResp.getString("data")
+        val meeter_interests = jsonResp.getString("data")
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
 
-        logger.log(Level.INFO, "doRetrieveByCondition: $interests")
+        DAO.logger.log(Level.INFO, "doRetrieveByCondition: $meeter_interests")
 
-        return gson.fromJson(interests, Array<Interest>::class.java).toMutableList()
+        return gson.fromJson(meeter_interests, Array<Meeter_Interest>::class.java).toMutableList()
+
     }
 
-    override fun doRetrieveByKey(key: String): Interest? {
+    override fun doRetrieveByKey(key: String): Meeter_Interest? {
 
-        logger.log(Level.INFO, "doRetrieveByKey: $key")
+        DAO.logger.log(Level.INFO, "doRetrieveByKey: $key")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf("operation" to DAO.DO_RETRIEVE_BY_KEY, "key" to key),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
@@ -92,25 +94,24 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return null
 
-        val interest = jsonResp.getString("data")
+        val meeter_interest = jsonResp.getString("data")
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
 
-        logger.log(Level.INFO, "doRetrieveByKey: $interest")
+        DAO.logger.log(Level.INFO, "doRetrieveByKey: $meeter_interest")
 
-        return gson.fromJson(interest, Interest::class.java)
-
+        return gson.fromJson(meeter_interest, Meeter_Interest::class.java)
 
     }
 
-    override fun doRetrieveAll(): MutableList<Interest>? {
+    override fun doRetrieveAll(): MutableList<Meeter_Interest>? {
 
-        logger.log(Level.INFO, "doRetrieveAll")
+        DAO.logger.log(Level.INFO, "doRetrieveAll")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf("operation" to DAO.DO_RETRIEVE_ALL),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
@@ -136,24 +137,24 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return null
 
-        val interests = jsonResp.getString("data")
+        val meeters_interests = jsonResp.getString("data")
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
 
-        logger.log(Level.INFO, "doRetrieveAll: $interests")
+        DAO.logger.log(Level.INFO, "doRetrieveAll: $meeters_interests")
 
-        return gson.fromJson(interests, Array<Interest>::class.java).toMutableList()
+        return gson.fromJson(meeters_interests, Array<Meeter_Interest>::class.java).toMutableList()
 
     }
 
-    override fun doRetrieveAll(row_count: Int): MutableList<Interest>? {
+    override fun doRetrieveAll(row_count: Int): MutableList<Meeter_Interest>? {
 
-        logger.log(Level.INFO, "doRetrieveAll: $row_count")
+        DAO.logger.log(Level.INFO, "doRetrieveAll: $row_count")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_RETRIEVE_ALL_LIMIT,
                     "row_count" to row_count.toString()
@@ -182,24 +183,24 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return null
 
-        val interests = jsonResp.getString("data")
+        val meeter_interests = jsonResp.getString("data")
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
 
-        logger.log(Level.INFO, "doRetrieveAll: $interests")
+        DAO.logger.log(Level.INFO, "doRetrieveAll: $meeter_interests")
 
-        return gson.fromJson(interests, Array<Interest>::class.java).toMutableList()
+        return gson.fromJson(meeter_interests, Array<Meeter_Interest>::class.java).toMutableList()
 
     }
 
-    override fun doRetrieveAll(offset: Int, row_count: Int): MutableList<Interest>? {
+    override fun doRetrieveAll(offset: Int, row_count: Int): MutableList<Meeter_Interest>? {
 
-        logger.log(Level.INFO, "doRetrieveAll: $offset, $row_count")
+        DAO.logger.log(Level.INFO, "doRetrieveAll: $offset, $row_count")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_RETRIEVE_ALL_LIMIT_OFFSET,
                     "offset" to offset.toString(),
@@ -229,27 +230,26 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return null
 
-        val interests = jsonResp.getString("data")
+        val meeter_interests = jsonResp.getString("data")
         val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
 
-        logger.log(Level.INFO, "doRetrieveAll: $interests")
+        DAO.logger.log(Level.INFO, "doRetrieveAll: $meeter_interests")
 
-        return gson.fromJson(interests, Array<Interest>::class.java).toMutableList()
-
+        return gson.fromJson(meeter_interests, Array<Meeter_Interest>::class.java).toMutableList()
     }
 
-    override fun doSave(obj: Interest?): Boolean {
+    override fun doSave(obj: Meeter_Interest?): Boolean {
 
-        logger.log(Level.INFO, "doSave: $obj")
+        DAO.logger.log(Level.INFO, "doSave: $obj")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_SAVE,
-                    "interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
+                    "meeter_interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
                 ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
@@ -277,21 +277,20 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return false
 
-        logger.log(Level.INFO, "doSave: ${jsonResp.getString("data")}")
+        DAO.logger.log(Level.INFO, "doSave: ${jsonResp.getString("data")}")
 
         return jsonResp.getString("data").toBoolean()
-
     }
 
-    override fun doSave(values: HashMap<String, *>?): Boolean {
+    override fun doSave(values: HashMap<String, *>): Boolean {
 
-        logger.log(Level.INFO, "doSave: $values")
+        DAO.logger.log(Level.INFO, "doSave: $values")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_SAVE_PARTIAL,
                     "values" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(values)
@@ -320,21 +319,20 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return false
 
-        logger.log(Level.INFO, "doSave: ${jsonResp.getString("data")}")
+        DAO.logger.log(Level.INFO, "doSave: ${jsonResp.getString("data")}")
 
         return jsonResp.getString("data").toBoolean()
-
     }
 
-    override fun doUpdate(values: HashMap<String, *>?, condition: String): Boolean {
+    override fun doUpdate(values: HashMap<String, *>, condition: String): Boolean {
 
-        logger.log(Level.INFO, "doUpdate: $values, $condition")
+        DAO.logger.log(Level.INFO, "doUpdate: $values, $condition")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_UPDATE,
                     "values" to Gson().toJson(values),
@@ -366,24 +364,23 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return false
 
-        logger.log(Level.INFO, "doUpdate: ${jsonResp.getString("data")}")
+        DAO.logger.log(Level.INFO, "doUpdate: ${jsonResp.getString("data")}")
 
         return jsonResp.getString("data").toBoolean()
-
     }
 
-    override fun doSaveOrUpdate(obj: Interest?): Boolean {
+    override fun doSaveOrUpdate(obj: Meeter_Interest?): Boolean {
 
-        logger.log(Level.INFO, "doSaveOrUpdate: $obj")
+        DAO.logger.log(Level.INFO, "doSaveOrUpdate: $obj")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_SAVE_OR_UPDATE,
-                    "interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
+                    "meeter_interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
                 ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
@@ -411,21 +408,20 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return false
 
-        logger.log(Level.INFO, "doSaveOrUpdate: ${jsonResp.getString("data")}")
+        DAO.logger.log(Level.INFO, "doSaveOrUpdate: ${jsonResp.getString("data")}")
 
         return jsonResp.getString("data").toBoolean()
-
     }
 
     override fun doDelete(condition: String): Boolean {
 
-        logger.log(Level.INFO, "doDelete: $condition")
+        DAO.logger.log(Level.INFO, "doDelete: $condition")
 
         var resp = ""
         val latch = CountDownLatch(1)
 
         VolleyRequestSender.getInstance(this.context)
-            .doHttpPostRequest(getUrl() + "InterestService",
+            .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf("operation" to DAO.DO_DELETE, "condition" to condition),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
@@ -453,10 +449,9 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         if (jsonResp.getString("status") == "error")
             return false
 
-        logger.log(Level.INFO, "doDelete: ${jsonResp.getString("data")}")
+        DAO.logger.log(Level.INFO, "doDelete: ${jsonResp.getString("data")}")
 
         return jsonResp.getString("data").toBoolean()
     }
-
 
 }

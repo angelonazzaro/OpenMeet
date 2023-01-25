@@ -34,4 +34,5 @@
     <string name="birthdate_hint">Data di Nascita</string>
     <string name="biography_hint">Biografia</string>
     <string name="duplicate_mail">Questa email è già registrata.</string>
+    <string name="interestFilter_hint">Filtra interessi</string>
 </resources>
