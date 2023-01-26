@@ -21,7 +21,7 @@ import javax.sql.DataSource;
 
 public class MeeterService extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(MeeterService.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

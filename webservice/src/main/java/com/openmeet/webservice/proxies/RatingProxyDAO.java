@@ -18,7 +18,6 @@ import java.util.logging.Level;
 
 public class RatingProxyDAO extends ProxyDAO<Rating> implements DAO<Rating> {
 
-
     public RatingProxyDAO(DAO<Rating> dao, HttpServletRequest request, PrintWriter out) {
         super(dao, request, out);
     }
@@ -191,7 +190,6 @@ public class RatingProxyDAO extends ProxyDAO<Rating> implements DAO<Rating> {
         logger.log(Level.INFO, "RatingProxyDAO:doDelete() - isSuccessful: " + isSuccessful);
 
         return isSuccessful;
-
 
 
     }

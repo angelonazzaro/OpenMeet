@@ -75,5 +75,5 @@
         <servlet-name>RatingService</servlet-name>
         <url-pattern>/RatingService</url-pattern>
     </servlet-mapping>
-    
+
 </web-app>

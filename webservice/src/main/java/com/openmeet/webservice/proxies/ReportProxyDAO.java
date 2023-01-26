@@ -18,7 +18,6 @@ import java.util.logging.Level;
 
 public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
 
-
     public ReportProxyDAO(DAO<Report> dao, HttpServletRequest request, PrintWriter out) {
         super(dao, request, out);
     }
