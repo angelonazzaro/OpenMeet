@@ -7,7 +7,7 @@ import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.GenericProxyDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 import com.openmeet.shared.helpers.ResponseHelper;
-import com.openmeet.webservice.InvalidParameterException;
+import com.openmeet.webservice.exceptions.InvalidParameterException;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.PrintWriter;
@@ -28,7 +28,7 @@ public class InterestProxyDAO extends ProxyDAO<Interest> implements DAO<Interest
         condition = request.getParameter("condition");
 
         if (!ResponseHelper.checkStringFields(condition)) {
-            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - condition");
+            throw new InvalidParameterException("Missing parameters - condition");
         }
 
         logger.log(Level.INFO, "InterestProxyDAO:doRetrieveByCondition() - condition: " + condition);
@@ -47,7 +47,7 @@ public class InterestProxyDAO extends ProxyDAO<Interest> implements DAO<Interest
         key = request.getParameter("key");
 
         if (!ResponseHelper.checkStringFields(key)) {
-            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - key");
+            throw new InvalidParameterException("Missing parameters - key");
         }
 
         logger.log(Level.INFO, "InterestProxyDAO:doRetrieveByKey() - key: " + key);

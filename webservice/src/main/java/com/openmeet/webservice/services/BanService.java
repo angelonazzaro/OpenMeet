@@ -4,7 +4,7 @@ import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.ban.BanDAO;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.helpers.ResponseHelper;
-import com.openmeet.webservice.InvalidParameterException;
+import com.openmeet.webservice.exceptions.InvalidParameterException;
 import com.openmeet.webservice.LoginServlet;
 import com.openmeet.webservice.proxies.BanProxyDAO;
 import jakarta.servlet.http.HttpServlet;

@@ -2,13 +2,12 @@ package com.openmeet.webservice.proxies;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.data.rating.Rating;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.GenericProxyDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 import com.openmeet.shared.helpers.ResponseHelper;
-import com.openmeet.webservice.InvalidParameterException;
+import com.openmeet.webservice.exceptions.InvalidParameterException;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.PrintWriter;
