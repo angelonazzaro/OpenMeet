@@ -69,7 +69,7 @@
 
     <servlet>
         <servlet-name>RatingService</servlet-name>
-        <servlet-class>com.openmeet.webservice.RatingService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.RatingService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RatingService</servlet-name>
