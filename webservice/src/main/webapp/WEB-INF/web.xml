@@ -60,7 +60,7 @@
 
     <servlet>
         <servlet-name>ReportService</servlet-name>
-        <servlet-class>com.openmeet.webservice.ReportService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.ReportService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ReportService</servlet-name>

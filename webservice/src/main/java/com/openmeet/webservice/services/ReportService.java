@@ -1,9 +1,11 @@
-package com.openmeet.webservice;
+package com.openmeet.webservice.services;
 
 import com.openmeet.shared.data.report.Report;
 import com.openmeet.shared.data.report.ReportDAO;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.helpers.ResponseHelper;
+import com.openmeet.webservice.InvalidParameterException;
+import com.openmeet.webservice.LoginServlet;
 import com.openmeet.webservice.proxies.ReportProxyDAO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
