@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>InterestService</servlet-name>
-        <servlet-class>com.openmeet.webservice.InterestService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.InterestService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>InterestService</servlet-name>
