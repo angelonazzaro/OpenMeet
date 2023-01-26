@@ -5,7 +5,6 @@ import com.openmeet.shared.data.image.ImageDAO;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.helpers.ResponseHelper;
 import com.openmeet.webservice.exceptions.InvalidParameterException;
-import com.openmeet.webservice.LoginServlet;
 import com.openmeet.webservice.proxies.ImageProxyDAO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
