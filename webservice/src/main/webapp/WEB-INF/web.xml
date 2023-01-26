@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>MessageService</servlet-name>
-        <servlet-class>com.openmeet.webservice.MessageService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.MessageService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MessageService</servlet-name>
