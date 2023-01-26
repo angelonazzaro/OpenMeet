@@ -1,9 +1,10 @@
-package com.openmeet.webservice;
+package com.openmeet.webservice.services;
 
 import com.openmeet.shared.data.message.Message;
 import com.openmeet.shared.data.message.MessageDAO;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.helpers.ResponseHelper;
+import com.openmeet.webservice.exceptions.InvalidParameterException;
 import com.openmeet.webservice.proxies.MessageProxyDAO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import java.util.logging.Logger;
 
 public class MessageService extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(MessageService.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

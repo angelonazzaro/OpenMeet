@@ -1,10 +1,11 @@
-package com.openmeet.webservice;
+package com.openmeet.webservice.services;
 
-import com.openmeet.shared.data.image.Image;
-import com.openmeet.shared.data.image.ImageDAO;
+import com.openmeet.shared.data.interest.Interest;
+import com.openmeet.shared.data.interest.InterestDAO;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.helpers.ResponseHelper;
-import com.openmeet.webservice.proxies.ImageProxyDAO;
+import com.openmeet.webservice.exceptions.InvalidParameterException;
+import com.openmeet.webservice.proxies.InterestProxyDAO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,9 +18,9 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ImageService extends HttpServlet {
+public class InterestService extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(InterestService.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -29,21 +30,21 @@ public class ImageService extends HttpServlet {
         //check if all the parameters are present
         if (!ResponseHelper.checkStringFields(operation)) {
             ResponseHelper.sendGenericError(out);
-            logger.log(Level.SEVERE, "ImageService:doPost() - Error: missing parameters - operation");
+            logger.log(Level.SEVERE, "InterestService:doPost() - Error: missing parameters - operation");
             return;
         }
 
-        ImageDAO imageDAO = new ImageDAO((DataSource) getServletContext().getAttribute("DataSource"));
-        ImageProxyDAO imageProxyDAO = new ImageProxyDAO(imageDAO, request, out);
+        InterestDAO interestDAO = new InterestDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        InterestProxyDAO interestProxyDAO = new InterestProxyDAO(interestDAO, request, out);
 
         switch (operation) {
             case DAO.DO_RETRIEVE_BY_CONDITION: {
                 try {
 
-                    imageProxyDAO.doRetrieveByCondition(null);
+                    interestProxyDAO.doRetrieveByCondition(null);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
@@ -51,50 +52,50 @@ public class ImageService extends HttpServlet {
             case DAO.DO_RETRIEVE_BY_KEY: {
 
                 try {
-                    imageProxyDAO.doRetrieveByKey(null);
+                    interestProxyDAO.doRetrieveByKey(null);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
             }
             case DAO.DO_RETRIEVE_ALL: {
                 try {
-                    imageProxyDAO.doRetrieveAll();
+                    interestProxyDAO.doRetrieveAll();
                 } catch (SQLException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
             }
             case DAO.DO_RETRIEVE_ALL_LIMIT: {
                 try {
-                    imageProxyDAO.doRetrieveAll(0);
+                    interestProxyDAO.doRetrieveAll(0);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
             }
             case DAO.DO_RETRIEVE_ALL_LIMIT_OFFSET: {
                 try {
-                    imageProxyDAO.doRetrieveAll(0, 0);
+                    interestProxyDAO.doRetrieveAll(0, 0);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
             }
             case DAO.DO_SAVE: {
                 try {
-                    imageProxyDAO.doSave(new Image());
+                    interestProxyDAO.doSave(new Interest());
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
@@ -103,47 +104,47 @@ public class ImageService extends HttpServlet {
                 E:
                 {
                     try {
-                        imageProxyDAO.doSave(new HashMap<>());
+                        interestProxyDAO.doSave(new HashMap<>());
                     } catch (SQLException | InvalidParameterException e) {
                         ResponseHelper.sendGenericError(out);
-                        logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                        logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                         return;
                     }
                     break;
                 }
             case DAO.DO_UPDATE: {
                 try {
-                    imageProxyDAO.doUpdate(null, null);
+                    interestProxyDAO.doUpdate(null, null);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
             }
             case DAO.DO_SAVE_OR_UPDATE: {
                 try {
-                    imageProxyDAO.doSaveOrUpdate(null);
+                    interestProxyDAO.doSaveOrUpdate(null);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
             }
             case DAO.DO_DELETE: {
                 try {
-                    imageProxyDAO.doDelete(null);
+                    interestProxyDAO.doDelete(null);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
             }
             default:
                 ResponseHelper.sendGenericError(out);
-                logger.log(Level.SEVERE, "ImageService:doPost() - Error: unknown operation");
+                logger.log(Level.SEVERE, "InterestService:doPost() - Error: unknown operation");
                 break;
         }
     }

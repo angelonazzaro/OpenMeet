@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>MeeterService</servlet-name>
-        <servlet-class>com.openmeet.webservice.MeeterService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.MeeterService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MeeterService</servlet-name>
@@ -15,7 +15,7 @@
 
     <servlet>
         <servlet-name>MessageService</servlet-name>
-        <servlet-class>com.openmeet.webservice.MessageService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.MessageService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MessageService</servlet-name>
@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>Meeter_InterestService</servlet-name>
-        <servlet-class>com.openmeet.webservice.Meeter_InterestService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.Meeter_InterestService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Meeter_InterestService</servlet-name>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>ImageService</servlet-name>
-        <servlet-class>com.openmeet.webservice.ImageService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.ImageService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImageService</servlet-name>
@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>InterestService</servlet-name>
-        <servlet-class>com.openmeet.webservice.InterestService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.InterestService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>InterestService</servlet-name>
@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>BanService</servlet-name>
-        <servlet-class>com.openmeet.webservice.BanService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.BanService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BanService</servlet-name>
@@ -60,7 +60,7 @@
 
     <servlet>
         <servlet-name>ReportService</servlet-name>
-        <servlet-class>com.openmeet.webservice.ReportService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.ReportService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ReportService</servlet-name>
@@ -69,28 +69,11 @@
 
     <servlet>
         <servlet-name>RatingService</servlet-name>
-        <servlet-class>com.openmeet.webservice.RatingService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.RatingService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RatingService</servlet-name>
         <url-pattern>/RatingService</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.openmeet.webservice.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <servlet-class>com.openmeet.webservice.RegistrationServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <url-pattern>/RegistrationServlet</url-pattern>
-    </servlet-mapping>
 </web-app>

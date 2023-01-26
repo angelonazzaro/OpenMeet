@@ -1,9 +1,10 @@
-package com.openmeet.webservice;
+package com.openmeet.webservice.services;
 
 import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.data.meeter.MeeterDAO;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.helpers.ResponseHelper;
+import com.openmeet.webservice.exceptions.InvalidParameterException;
 import com.openmeet.webservice.proxies.MeeterProxyDAO;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ import javax.sql.DataSource;
 
 public class MeeterService extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(MeeterService.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

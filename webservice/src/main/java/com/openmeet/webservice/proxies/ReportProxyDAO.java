@@ -2,13 +2,12 @@ package com.openmeet.webservice.proxies;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.data.report.Report;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.GenericProxyDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 import com.openmeet.shared.helpers.ResponseHelper;
-import com.openmeet.webservice.InvalidParameterException;
+import com.openmeet.webservice.exceptions.InvalidParameterException;
 import jakarta.servlet.http.HttpServletRequest;
 
 import java.io.PrintWriter;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.logging.Level;
 
 public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
-
 
     public ReportProxyDAO(DAO<Report> dao, HttpServletRequest request, PrintWriter out) {
         super(dao, request, out);
@@ -30,7 +28,7 @@ public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
         condition = request.getParameter("condition");
 
         if (!ResponseHelper.checkStringFields(condition)) {
-            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - condition");
+            throw new InvalidParameterException("Missing parameters - condition");
         }
 
         logger.log(Level.INFO, "ReportProxyDAO:doRetrieveByCondition() - condition: " + condition);
@@ -49,7 +47,7 @@ public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
         key = request.getParameter("key");
 
         if (!ResponseHelper.checkStringFields(key)) {
-            throw new com.openmeet.webservice.InvalidParameterException("Missing parameters - key");
+            throw new InvalidParameterException("Missing parameters - key");
         }
 
         logger.log(Level.INFO, "ReportProxyDAO:doRetrieveByKey() - key: " + key);
