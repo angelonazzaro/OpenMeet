@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>BanService</servlet-name>
-        <servlet-class>com.openmeet.webservice.BanService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.BanService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BanService</servlet-name>
