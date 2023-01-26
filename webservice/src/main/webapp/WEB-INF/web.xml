@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>Meeter_InterestService</servlet-name>
-        <servlet-class>com.openmeet.webservice.Meeter_InterestService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.Meeter_InterestService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Meeter_InterestService</servlet-name>
