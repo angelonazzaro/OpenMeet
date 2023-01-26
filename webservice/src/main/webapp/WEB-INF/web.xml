@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>ImageService</servlet-name>
-        <servlet-class>com.openmeet.webservice.ImageService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.ImageService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ImageService</servlet-name>
