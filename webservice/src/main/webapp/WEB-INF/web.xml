@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>MeeterService</servlet-name>
-        <servlet-class>com.openmeet.webservice.MeeterService</servlet-class>
+        <servlet-class>com.openmeet.webservice.services.MeeterService</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MeeterService</servlet-name>
