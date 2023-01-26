@@ -75,13 +75,5 @@
         <servlet-name>RatingService</servlet-name>
         <url-pattern>/RatingService</url-pattern>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <servlet-class>com.openmeet.webservice.RegistrationServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegistrationServlet</servlet-name>
-        <url-pattern>/RegistrationServlet</url-pattern>
-    </servlet-mapping>
+    
 </web-app>
