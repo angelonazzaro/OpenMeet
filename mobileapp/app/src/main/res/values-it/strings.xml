@@ -35,4 +35,8 @@
     <string name="biography_hint">Biografia</string>
     <string name="duplicate_mail">Questa email è già registrata.</string>
     <string name="interestFilter_hint">Filtra interessi</string>
+    <string name="warn_title">Qualcosa è andato storto...</string>
+    <string name="GPS_disabled_message">Il tuo GPS sembra essere disabilitato. Devi attivarlo per continuare.</string>
+    <string name="positive_dialog">Va benone</string>
+    <string name="retry_dialog">Riprova</string>
 </resources>
