@@ -1,11 +1,20 @@
 package com.openmeet.logic
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.GraphRequest
+import com.facebook.login.LoginBehavior
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
@@ -14,17 +23,24 @@ import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.meeter.MeeterDAO
 import com.openmeet.shared.utils.PasswordEncrypter
 import com.openmeet.utils.UserEncryptedData
+import org.json.JSONObject
 import java.security.InvalidParameterException
 
 
 var backBtnLastPress = 0L
 
 class AuthActivity : AppCompatActivity() {
+
+    private lateinit var callbackManager: CallbackManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
 
+        callbackManager = CallbackManager.Factory.create()
+
+        val fbLoginBtn = findViewById<Button>(R.id.fb_login_button) as LoginButton
         val loginBtn = findViewById<Button>(R.id.nextStepBtn)
         val emailFld = findViewById<TextInputLayout>(R.id.emailField)
         emailFld.editText?.setText("roberto.st@gmail.com")
@@ -63,6 +79,35 @@ class AuthActivity : AppCompatActivity() {
             }
         }
 
+
+        fbLoginBtn.setOnClickListener {
+            val loginManager = LoginManager.getInstance()
+            loginManager.setLoginBehavior(LoginBehavior.KATANA_ONLY)
+            loginManager.logInWithReadPermissions(this, listOf("email", "public_profile"
+                , "user_gender", "user_birthday"));
+        }
+
+        fbLoginBtn.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                val graphRequest = GraphRequest.newMeRequest(result?.accessToken){ _, response ->
+                    getFacebookData(response?.getJSONObject())
+                }
+
+                val parameters = Bundle()
+                parameters.putString("fields", "id, email, birthday, gender, name")
+                graphRequest.parameters = parameters
+                graphRequest.executeAsync()
+            }
+
+            override fun onCancel() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onError(exception: FacebookException) {
+                TODO("Not yet implemented")
+            }
+        })
+
     }
 
     fun splitEmail(email: String): Pair<String, String> {
@@ -90,16 +135,22 @@ class AuthActivity : AppCompatActivity() {
         val snackbarView = findViewById<View>(R.id.auth_container)
         val sharedStoredValues = UserEncryptedData(this).getAllAsHashMap()
 
-        if(sharedStoredValues["email"] != null && sharedStoredValues["pwd"] != null){
-            println("TEST" + sharedStoredValues["email"] +  " " + sharedStoredValues["pwd"])
+        if (sharedStoredValues["email"] != null && sharedStoredValues["pwd"] != null) {
+            println("TEST" + sharedStoredValues["email"] + " " + sharedStoredValues["pwd"])
             Thread {
-                val ret = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '${sharedStoredValues["email"]}' AND ${Meeter.MEETER_PWD} = '${PasswordEncrypter.sha1(sharedStoredValues["pwd"])}'")
-                if(ret == null)
-                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                val ret = MeeterProxyDAO(this).doRetrieveByCondition(
+                    "${Meeter.MEETER_EMAIL} = '${sharedStoredValues["email"]}' AND ${Meeter.MEETER_PWD} = '${
+                        PasswordEncrypter.sha1(sharedStoredValues["pwd"])
+                    }'"
+                )
+                if (ret == null)
+                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT)
+                        .show()
                 else
-                    if(ret.size == 0)
-                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_SHORT).show()
-                    else{
+                    if (ret.size == 0)
+                        Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_SHORT)
+                            .show()
+                    else {
                         //Go To HomePage
                         startActivity(
                             Intent(this, LoginActivity::class.java).putExtra("email", ret[0].id)
@@ -108,7 +159,18 @@ class AuthActivity : AppCompatActivity() {
                     }
             }.start()
         }
+    }
 
+    private fun getFacebookData(obj: JSONObject?) {
+        val name = obj?.getString("name")
+        val birthday = obj?.getString("birthday")
+        val gender = obj?.getString("gender")
+        val email = obj?.getString("email")
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 }
