@@ -1,0 +1,1 @@
+INSERT INTO Moderator (email, moderatorName, moderatorSurname, pwd) VALUES ('prova@email.com', 'Angelo', 'Bello', SHA1('test')); /*SHA1 di 'test'*/

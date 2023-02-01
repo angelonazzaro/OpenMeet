@@ -1,8 +1,11 @@
 <resources>
+    <string name="facebook_app_id" translatable="false">876963683557356</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb876963683557356</string>
+    <string name="facebook_client_token" translatable="false">52983808b6067558a03fd551e748d4b2</string>
+
     <string name="app_name" translatable="false">OpenMeet</string>
     <string name="request_server_address" translatable="false">192.168.1.8:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
     <string name="connection_error">Connection error. Check your Internet connection or try again later.</string>
-
 
     <string name="continue_btn">Continue</string>
     <string name="login_btn">Login</string>
