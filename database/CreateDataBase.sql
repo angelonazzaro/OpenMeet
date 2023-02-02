@@ -13,6 +13,8 @@ CREATE TABLE Meeter (
     `email` VARCHAR(320) UNIQUE, 
     `meeterName` VARCHAR(35) NOT NULL, 
     `meeterSurname` VARCHAR(35) NOT NULL, 
+    `gender` CHAR(1) NOT NULL,
+    `searching_gender` CHAR(1) NOT NULL,
     `pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`biography` VARCHAR(255), 
     `birthDate` DATE NOT NULL,
@@ -21,7 +23,7 @@ CREATE TABLE Meeter (
 
 CREATE TABLE Rating (
 
-   `id` INT PRIMARY KEY AUTO_INCREMENT, 
+    `id` INT PRIMARY KEY AUTO_INCREMENT, 
 	`meeterRater` INT,
     `meeterRated` INT,
 	`type` BOOL NOT NULL, 
@@ -33,7 +35,7 @@ CREATE TABLE Rating (
 
 CREATE TABLE Report (
 
-   `id` INT PRIMARY KEY AUTO_INCREMENT, 
+    `id` INT PRIMARY KEY AUTO_INCREMENT, 
 	`meeterReporter` INT,
     `meeterReported` INT,
 	`reason` VARCHAR(50) NOT NULL, 
@@ -52,13 +54,12 @@ CREATE TABLE Interest (
 
 CREATE TABLE Meeter_Interest (
 
-    `id` INT, 
+    `id` INT PRIMARY KEY AUTO_INCREMENT, 
     `interestId` INT, 
     `meeterId` INT, 
 
     FOREIGN KEY (`interestId`) REFERENCES Interest (`id`) ON UPDATE CASCADE ON DELETE NO ACTION, 
-    FOREIGN KEY (`meeterId`) REFERENCES Meeter (`id`) ON UPDATE CASCADE ON DELETE NO ACTION, 
-    PRIMARY KEY (`interestId`, `meeterId`)
+    FOREIGN KEY (`meeterId`) REFERENCES Meeter (`id`) ON UPDATE CASCADE ON DELETE NO ACTION 
 ); 
 
 
@@ -96,8 +97,6 @@ CREATE TABLE Moderator (
 	`pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`profilePic` VARCHAR(2048)
 ); 
-
-INSERT INTO Moderator (email, moderatorName, moderatorSurname, pwd) VALUES ('prova@email.com', 'Angelo', 'Bello', SHA1('test')); /*SHA1 di 'test'*/
 
 CREATE TABLE Ban (
 

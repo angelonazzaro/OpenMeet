@@ -1,21 +1,25 @@
 package com.openmeet.logic
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.GraphRequest
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.utils.PasswordEncrypter
-
-
 import com.openmeet.utils.UserEncryptedData
-
 
 
 class LoginActivity : AppCompatActivity() {
@@ -24,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth_login)
-
 
         val emailFld = findViewById<TextInputLayout>(R.id.emailFixedField)
         val pswFld = findViewById<TextInputLayout>(R.id.pswField)
@@ -85,11 +88,13 @@ class LoginActivity : AppCompatActivity() {
             )
             overridePendingTransition(0, 0)
         }
+
     }
+
+
 
     override fun onBackPressed() {
         super.getOnBackPressedDispatcher().onBackPressed()
         overridePendingTransition(0, 0)
-
     }
 }
