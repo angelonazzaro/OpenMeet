@@ -2,16 +2,30 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_generalContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".logic.RegistrationActivity">
+    tools:context=".logic.HomeScreenActivity">
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/linearProgressIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
@@ -26,8 +40,23 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/meeterInfoLayout"
+            android:animateLayoutChanges="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="16dp">
+
+            <ImageButton
+                android:id="@+id/compressBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:contentDescription="Compress description"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/meeterName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_baseline_expand_more_24" />
 
             <ImageButton
                 android:id="@+id/expandBtn"
@@ -54,19 +83,58 @@
                 android:id="@+id/meeterLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-light"
                 android:text="Città (PR) - 00 Km."
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/biographyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="false"
+                android:text="This is my biography"
+                android:textSize="16sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/expandBtn"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/biographyView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/interestLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp">
+
+                    <!-- Interests GO HERE -->
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout2"
         app:layout_constraintEnd_toEndOf="parent">
 
 
@@ -82,7 +150,7 @@
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout"
+        android:id="@+id/coordinatorLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
@@ -100,6 +168,26 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_redo_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:contentDescription="Undo"
+            app:srcCompat="@drawable/baseline_undo_24" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
