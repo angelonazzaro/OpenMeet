@@ -35,8 +35,20 @@
     <string name="biography_hint">Biografia</string>
     <string name="duplicate_mail">Questa email è già registrata.</string>
     <string name="interestFilter_hint">Filtra interessi</string>
-    <string name="warn_title">Qualcosa è andato storto...</string>
+    <string name="warn_title">Qualcosa è andato storto…</string>
     <string name="GPS_disabled_message">Il tuo GPS sembra essere disabilitato. Devi attivarlo per continuare.</string>
     <string name="positive_dialog">Va benone</string>
     <string name="retry_dialog">Riprova</string>
+    <string name="registration_sexual_stage_title">Che genere ti identifica? E chi cerchi?</string>
+    <string name="registration_interest_stage_title">Hai qualche hobby? (selezionane almeno 3 e massimo 6)</string>
+    <string name="registration_biography_stage_title">Scrivi qualcosa su di te.</string>
+    <string name="registration_image_stage_title">Vogliamo sapere quanto sei bello, metti qualche foto!</string>
+
+    <string name="genderIndentity_hint">Mi identifico come…</string>
+    <string name="genderOrientation_hint">Sto cercando…</string>
+    <string name="generic_null_error">Campo vuoto!</string>
+    <string name="checkbox_error">Devi inserire almeno 3 e massimo 6 interessi!</string>
+    <string name="image_error">Devi impostare almeno un\'immagine di profilo per continuare.</string>
+
+    <string name="double_back_prompt">Torna di nuovo indietro per uscire.</string>
 </resources>

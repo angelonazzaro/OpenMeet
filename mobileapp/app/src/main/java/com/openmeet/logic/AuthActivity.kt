@@ -27,9 +27,10 @@ import org.json.JSONObject
 import java.security.InvalidParameterException
 
 
-var backBtnLastPress = 0L
-
 class AuthActivity : AppCompatActivity() {
+
+    private var backBtnLastPress = 0L
+
 
     private lateinit var callbackManager: CallbackManager
 
@@ -124,7 +125,7 @@ class AuthActivity : AppCompatActivity() {
         if (backBtnLastPress + 2000 > System.currentTimeMillis())
             super.getOnBackPressedDispatcher().onBackPressed()
         else {
-            Toast.makeText(this, "Torna di nuovo indietro per uscire", Toast.LENGTH_SHORT)
+            Toast.makeText(this, getString(R.string.double_back_prompt), Toast.LENGTH_SHORT)
                 .show()
             backBtnLastPress = System.currentTimeMillis()
         }
@@ -153,7 +154,7 @@ class AuthActivity : AppCompatActivity() {
                     else {
                         //Go To HomePage
                         startActivity(
-                            Intent(this, LoginActivity::class.java).putExtra("email", ret[0].id)
+                            Intent(this, HomeScreenActivity::class.java).putExtra("email", ret[0].email)
                         )
                         overridePendingTransition(0, 0)
                     }

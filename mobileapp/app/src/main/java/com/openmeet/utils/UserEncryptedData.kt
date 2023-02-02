@@ -8,7 +8,7 @@ import androidx.security.crypto.MasterKey
 class UserEncryptedData(context: Context) {
 
     private val sharedPreferences: SharedPreferences
-    private val PREFERENCES_FILE_NAME = "user_encrypted_preferences"
+    private val PREFERENCES_FILE_NAME = "com.openmeet.user_encrypted_preferences"
 
     init {
         val masterKey: MasterKey = MasterKey.Builder(context)
@@ -28,7 +28,7 @@ class UserEncryptedData(context: Context) {
         val sharedPreferencesEditor = sharedPreferences.edit()
         sharedPreferencesEditor.putString("email", email)
         sharedPreferencesEditor.putString("pwd", password)
-        sharedPreferencesEditor.commit()
+        sharedPreferencesEditor.apply()
     }
 
     fun storePrivateKey(){

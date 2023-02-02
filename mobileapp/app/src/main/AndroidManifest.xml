@@ -61,6 +61,10 @@
             android:name=".logic.Registration2Activity"
             android:exported="true"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".logic.HomeScreenActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

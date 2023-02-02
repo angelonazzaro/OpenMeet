@@ -161,10 +161,7 @@ class RegistrationActivity : AppCompatActivity() {
         }
         //check if birthday date inserted has more 18 years old
         if (birthdayMillis != null) {
-            val now = Calendar.getInstance().timeInMillis
-            val diff = Calendar.getInstance()
-            diff.timeInMillis = now - birthdayMillis
-            if (diff.get(Calendar.YEAR) - 1970 < 18){
+            if (getAge(birthdayMillis) < 18){
                 birthday.error = getString(R.string.underage_error)
                 flag = false
             }
@@ -213,6 +210,13 @@ class RegistrationActivity : AppCompatActivity() {
         if (str.size != 2)
             throw InvalidParameterException("Probably invalid mail")
         return Pair(str[0], str[1])
+    }
+
+    fun getAge(birthdayMillis: Long): Int{
+        val now = Calendar.getInstance().timeInMillis
+        val diff = Calendar.getInstance()
+        diff.timeInMillis = now - birthdayMillis
+        return (diff.get(Calendar.YEAR) - 1970)
     }
 
 

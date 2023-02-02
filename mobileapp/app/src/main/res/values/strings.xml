@@ -4,7 +4,7 @@
     <string name="facebook_client_token" translatable="false">52983808b6067558a03fd551e748d4b2</string>
 
     <string name="app_name" translatable="false">OpenMeet</string>
-    <string name="request_server_address" translatable="false">192.168.1.8:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
+    <string name="request_server_address" translatable="false">192.168.1.33:8080/Gradle___com_openmeet___webservice_1_0_SNAPSHOT_war/</string>
     <string name="connection_error">Connection error. Check your Internet connection or try again later.</string>
 
     <string name="continue_btn">Continue</string>
@@ -19,6 +19,13 @@
     <string name="confirmPass_hint">Confirm Password</string>
     <string name="biography_hint">Biography</string>
     <string name="interestFilter_hint">Filter interests</string>
+    <string name="genderIndentity_hint">I Identify as…</string>
+    <string name="genderOrientation_hint">I\'m looking for…</string>
+
+    <string name="registration_sexual_stage_title">What do you identify as? What are you looking for?</string>
+    <string name="registration_interest_stage_title">Do you have some hobbies? (select at least 3 and up to 6)</string>
+    <string name="registration_biography_stage_title">Why don\'t you write something about you?</string>
+    <string name="registration_image_stage_title">Do you think people don\'t want to know what you look like?</string>
 
     <string name="registration_TextView">Not registered? <u>Sign-up</u></string>
     <string name="login_TextView">Already registered? <u>Login</u></string>
@@ -28,18 +35,21 @@
     <string name="email_local_toolong_error">Local part of email is too long!</string>
     <string name="email_domain_toolong_error">Domain part of email is too long!</string>
 
+    <string name="generic_null_error">Empty field!</string>
     <string name="name_null_error">Empty name!</string>
     <string name="surname_null_error">Empty surname!</string>
     <string name="underage_error">Hey, you\'re too little, let your mom sign-up instead.</string>
     <string name="password_null_error">Empty password!</string>
     <string name="password_conf_null_error">You have to confirm your password!</string>
-    <string name="password_unmatch_error">Passwordsa must match!</string>
+    <string name="password_unmatch_error">Passwords must match!</string>
+    <string name="checkbox_error">You must select at least 3 and up to 6 interests!</string>
+    <string name="image_error">You must set at least one profile picture to continue…</string>
 
     <string name="login_failed">"Login failed: wrong credentials."</string>
     <string name="login_failed_email">Check your email.</string>
     <string name="login_failed_password">Check your password.</string>
 
-    <string name="warn_title">"Something went wrong..."</string>
+    <string name="warn_title">"Something went wrong…"</string>
     <string name="GPS_disabled_message">"Your GPS seems to be disabled, please activate it to continue."</string>
 
     <string name="positive_dialog">"Ok"</string>
@@ -48,4 +58,7 @@
     <string name="homescreen_chat_title">Chats</string>
     <string name="homescreen_discover_title">Discover</string>
     <string name="homescreen_user_title">User</string>
+
+    <string name="STD_PREFS" translatable="false">"com.openmeet.user_standard_preferences"</string>
+    <string name="double_back_prompt">Go back again to quit.</string>
 </resources>
