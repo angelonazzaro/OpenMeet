@@ -63,7 +63,13 @@ class LoginActivity : AppCompatActivity() {
                     if(ret.size == 0)
                         Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_SHORT).show()
                     else{
+                        //Saving credentials to remember the user.
                         UserEncryptedData(this).storeCredentials(email, pwd)
+                        //Aggiungere verifica registrazione pt.2
+                        startActivity(
+                            Intent(this, HomeScreenActivity::class.java).putExtra("email", email)
+                        )
+                        overridePendingTransition(0, 0)
                     }
 
                runOnUiThread {
