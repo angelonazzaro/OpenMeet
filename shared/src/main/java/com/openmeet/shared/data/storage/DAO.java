@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 public interface DAO<T> {
 
     String DO_RETRIEVE_BY_CONDITION = "doRetrieveByCondition";
+    String DO_RETRIEVE_BY_CONDITION_LIMIT = "doRetrieveByConditionLimit";
     String DO_RETRIEVE_BY_KEY = "doRetrieveByKey";
     String DO_RETRIEVE_ALL = "doRetrieveAll";
     String DO_RETRIEVE_ALL_LIMIT = "doRetrieveAllLimit";
