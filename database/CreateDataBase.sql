@@ -14,10 +14,10 @@ CREATE TABLE Meeter (
     `meeterName` VARCHAR(35) NOT NULL, 
     `meeterSurname` VARCHAR(35) NOT NULL, 
     `gender` CHAR(1) NOT NULL,
-    `searching_gender` CHAR(1) NOT NULL,
+    `searchingGender` CHAR(1) NOT NULL,
     `pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`biography` VARCHAR(255), 
-    `birthDate` DATE NOT NULL,
+    `birthdate` DATE NOT NULL,
     `publicKey` CHAR(40) /*Key Pair da 1024 bit*/
 );
 

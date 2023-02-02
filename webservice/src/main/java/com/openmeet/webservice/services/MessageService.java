@@ -40,7 +40,6 @@ public class MessageService extends HttpServlet {
         switch (operation) {
             case DAO.DO_RETRIEVE_BY_CONDITION: {
                 try {
-
                     messageProxyDAO.doRetrieveByCondition(null);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
@@ -49,8 +48,17 @@ public class MessageService extends HttpServlet {
                 }
                 break;
             }
+            case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT: {
+                try {
+                    messageProxyDAO.doRetrieveByCondition(null, 0, 0);
+                } catch (SQLException | InvalidParameterException e) {
+                    ResponseHelper.sendGenericError(out);
+                    logger.log(Level.SEVERE, "BanService:doPost() - Error: " + e.getMessage());
+                    return;
+                }
+                break;
+            }
             case DAO.DO_RETRIEVE_BY_KEY: {
-
                 try {
                     messageProxyDAO.doRetrieveByKey(null);
                 } catch (SQLException | InvalidParameterException e) {

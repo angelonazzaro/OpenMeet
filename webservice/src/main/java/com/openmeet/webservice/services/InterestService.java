@@ -40,7 +40,6 @@ public class InterestService extends HttpServlet {
         switch (operation) {
             case DAO.DO_RETRIEVE_BY_CONDITION: {
                 try {
-
                     interestProxyDAO.doRetrieveByCondition(null);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
@@ -49,8 +48,17 @@ public class InterestService extends HttpServlet {
                 }
                 break;
             }
+            case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT: {
+                try {
+                    interestProxyDAO.doRetrieveByCondition(null, 0, 0);
+                } catch (SQLException | InvalidParameterException e) {
+                    ResponseHelper.sendGenericError(out);
+                    logger.log(Level.SEVERE, "BanService:doPost() - Error: " + e.getMessage());
+                    return;
+                }
+                break;
+            }
             case DAO.DO_RETRIEVE_BY_KEY: {
-
                 try {
                     interestProxyDAO.doRetrieveByKey(null);
                 } catch (SQLException | InvalidParameterException e) {

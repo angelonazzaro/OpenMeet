@@ -43,6 +43,35 @@ public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
     }
 
     @Override
+    public List<Image> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
+
+        condition = request.getParameter("condition");
+        offset = Integer.parseInt(request.getParameter("offset"));
+        rows_count = Integer.parseInt(request.getParameter("rows_count"));
+
+        if (!ResponseHelper.checkStringFields(condition)) {
+            throw new InvalidParameterException("Missing parameters - condition");
+        }
+
+        if (offset < 0) {
+            throw new InvalidParameterException("Offset parameter cannot contain a negative value");
+        }
+
+        if (rows_count <= 0) {
+            throw new InvalidParameterException("Rows_count parameter must be greater than 0");
+        }
+
+        logger.log(Level.INFO, "ImageProxyDAO:doRetrieveByCondition() - condition: " + condition + " LIMIT " + offset + ", " + rows_count);
+
+        List<Image> images = GenericProxyDAO.genericProxyDoRetrieveByCondition(condition, offset, rows_count, dao, out);
+
+        logger.log(Level.INFO, "ImageProxyDAO:doRetrieveByCondition() - images: " + images);
+
+        return images;
+
+    }
+
+    @Override
     public Image doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         key = request.getParameter("key");

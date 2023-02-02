@@ -22,6 +22,12 @@ public class InterestDAO extends SQLDAO implements DAO<Interest> {
     }
 
     @Override
+    public List<Interest> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Interest.INTEREST, condition + " LIMIT " + offset + ", " + rows_count,
+                new InterestExtractor(), source);
+    }
+
+    @Override
     public Interest doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {

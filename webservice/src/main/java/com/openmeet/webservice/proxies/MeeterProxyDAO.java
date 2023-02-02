@@ -43,6 +43,34 @@ public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
     }
 
     @Override
+    public List<Meeter> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException, InvalidParameterException {
+
+        condition = request.getParameter("condition");
+        offset = Integer.parseInt(request.getParameter("offset"));
+        rows_count = Integer.parseInt(request.getParameter("rows_count"));
+
+        if (!ResponseHelper.checkStringFields(condition)) {
+            throw new InvalidParameterException("Missing parameters - condition");
+        }
+
+        if (offset < 0) {
+            throw new InvalidParameterException("Offset parameter cannot contain a negative value");
+        }
+
+        if (rows_count <= 0) {
+            throw new InvalidParameterException("Rows_count parameter must be greater than 0");
+        }
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveByCondition() - condition: " + condition + " LIMIT " + offset + ", " + rows_count);
+
+        List<Meeter> meeters = GenericProxyDAO.genericProxyDoRetrieveByCondition(condition, offset, rows_count, dao, out);
+
+        logger.log(Level.INFO, "MeeterProxyDAO:doRetrieveByCondition() - meeters: " + meeters);
+
+        return meeters;
+    }
+
+    @Override
     public Meeter doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         key = request.getParameter("key");

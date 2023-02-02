@@ -22,6 +22,12 @@ public class MessageDAO extends SQLDAO implements DAO<Message> {
     }
 
     @Override
+    public List<Message> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Message.MESSAGE, condition + " LIMIT " + offset + ", " + rows_count,
+                new MessageExtractor(), source);
+    }
+
+    @Override
     public Message doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {
