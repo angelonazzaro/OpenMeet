@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender_identity_items">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Non-Binary</item>
+    </string-array>
+
+    <string-array name="gender_orientation_items">
+        <item>Males</item>
+        <item>Females</item>
+        <item>Both (Males &amp; Females)</item>
+        <item>Non-Binary\'s</item>
+        <item>Everybody</item>
+    </string-array>
+</resources>
