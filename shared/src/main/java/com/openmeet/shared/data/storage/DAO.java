@@ -47,6 +47,18 @@ public interface DAO<T> {
     List<T> doRetrieveByCondition(String condition) throws SQLException;
 
     /**
+     * Returns a list of objects from the database that match a given condition.
+     *
+     * @param condition the condition to be matched.
+     * @param offset the offset position.
+     * @param rows_count the number of rows to return.
+     * @return the query results as a list of objects.
+     *
+     * @author Angelo Nazzaro
+     */
+    List<T> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException;
+
+    /**
      * Returns an object from the database that match a given condition.
      *
      * @param key the primary key of the object to be retrieved.

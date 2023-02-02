@@ -23,6 +23,12 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
     }
 
     @Override
+    public List<Image> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Image.IMAGE, condition + " LIMIT " + offset + ", " + rows_count,
+                new ImageExtractor(), source);
+    }
+
+    @Override
     public Image doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {

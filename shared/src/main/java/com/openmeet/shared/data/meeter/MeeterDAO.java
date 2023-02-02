@@ -22,6 +22,12 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
     }
 
     @Override
+    public List<Meeter> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Meeter.MEETER, condition + " LIMIT " + offset + ", " + rows_count,
+                new MeeterExtractor(), source);
+    }
+
+    @Override
     public Meeter doRetrieveByKey(String key) throws SQLException, InvalidPrimaryKeyException {
 
         if (key == null) {

@@ -2,13 +2,9 @@ package com.openmeet.shared.data.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.helpers.ResponseHelper;
 
-
 import java.io.PrintWriter;
-import java.security.InvalidParameterException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +36,24 @@ public class GenericProxyDAO {
 
         return entities;
     }
+
+    public static <T> List<T> genericProxyDoRetrieveByCondition(String condition, int offset, int rows_count, DAO<T> dao, PrintWriter out) throws SQLException {
+
+        List<T> entities = dao.doRetrieveByCondition(condition, offset, rows_count);
+
+        Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        String json = builder.toJson(entities);
+
+        HashMap<String, String> values = new HashMap<>();
+        values.put("status", "success");
+        values.put("data", json);
+        ResponseHelper.sendGenericResponse(out, values);
+
+        logger.log(Level.INFO, "GenericProxyDAO:genericProxyDoRetrieveByCondition() - entities: " + entities);
+
+        return entities;
+    }
+
 
     public static <T> T genericProxyDoRetrieveByKey(String key, DAO<T> dao, PrintWriter out) throws SQLException {
 

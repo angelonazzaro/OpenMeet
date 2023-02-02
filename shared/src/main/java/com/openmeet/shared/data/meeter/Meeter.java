@@ -4,7 +4,6 @@ import com.openmeet.shared.data.storage.IEntity;
 import com.openmeet.shared.utils.PasswordEncrypter;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.sql.Date;
 import java.util.HashMap;
 
@@ -15,17 +14,27 @@ public class Meeter implements IEntity {
     public static final String MEETER_EMAIL = MEETER + ".email";
     public static final String MEETER_MEETER_NAME = MEETER + ".meeterName";
     public static final String MEETER_MEETER_SURNAME = MEETER + ".meeterSurname";
+
+    public static final String MEETER_GENDER = MEETER  + ".gender";
+
+    public static final String MEETER_SEARCHING_GENDER = MEETER + ".searchingGender";
+
+    public static final String MEETER_CITY = MEETER + ".city";
     public static final String MEETER_PWD = MEETER + ".pwd";
     public static final String MEETER_BIOGRAPHY = MEETER + ".biography";
-    public static final String MEETER_BIRTH_DATE = MEETER + ".birthDate";
+    public static final String MEETER_BIRTHDATE = MEETER + ".birthdate";
     public static final String MEETER_PUBLIC_KEY = MEETER + ".publicKey";
     private int id;
     private String email;
     private String meeterName;
     private String meeterSurname;
     private String pwd;
+
+    private char gender;
+    private char searchingGender;
+    private String city;
     private String biography;
-    private Date birthDate;
+    private Date birthdate;
     private String publicKey;
 
     public Meeter() {
@@ -44,7 +53,10 @@ public class Meeter implements IEntity {
                 put("biography", biography);
             }
             put("pwd", pwd);
-            put("birthDate", birthDate.toString());
+            put("gender", gender);
+            put("searchingGender", searchingGender);
+            put("city", city);
+            put("birthdate", birthdate.toString());
 
             if (publicKey != null && publicKey.length() > 0) {
                 put("publicKey", publicKey);
@@ -70,6 +82,15 @@ public class Meeter implements IEntity {
                     case MEETER_MEETER_SURNAME:
                         put("meeterSurname", meeterSurname);
                         break;
+                    case MEETER_GENDER:
+                        put("gender", gender);
+                        break;
+                    case MEETER_SEARCHING_GENDER:
+                        put("searchingGender", searchingGender);
+                        break;
+                    case MEETER_CITY:
+                        put("city", city);
+                        break;
                     case MEETER_PWD:
                         put("pwd", pwd);
                         break;
@@ -78,8 +99,8 @@ public class Meeter implements IEntity {
                             put("biography", biography);
                         }
                         break;
-                    case MEETER_BIRTH_DATE:
-                        put("birthDate", birthDate.toString());
+                    case MEETER_BIRTHDATE:
+                        put("birthdate", birthdate.toString());
                         break;
                     case MEETER_PUBLIC_KEY:
                         if (publicKey != null && publicKey.length() > 0) {
@@ -99,8 +120,11 @@ public class Meeter implements IEntity {
                 ", meeterName='" + meeterName + '\'' +
                 ", meeterSurname='" + meeterSurname + '\'' +
                 ", pwd='" + pwd + '\'' +
+                ", gender='" + gender + '\'' +
+                ", searchingGender='" + searchingGender + '\'' +
+                ", city='" + city + '\'' +
                 ", biography='" + biography + '\'' +
-                ", birthDate=" + birthDate +
+                ", birthdate=" + birthdate +
                 ", publicKey=" + publicKey +
                 '}';
     }
@@ -153,6 +177,30 @@ public class Meeter implements IEntity {
         }
     }
 
+    public char getGender() {
+        return gender;
+    }
+
+    public void setGender(char gender) {
+        this.gender = gender;
+    }
+
+    public char getSearchingGender() {
+        return searchingGender;
+    }
+
+    public void setSearchingGender(char searchingGender) {
+        this.searchingGender = searchingGender;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getBiography() {
         return biography;
     }
@@ -161,12 +209,12 @@ public class Meeter implements IEntity {
         this.biography = biography;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public String getPublicKey() {
