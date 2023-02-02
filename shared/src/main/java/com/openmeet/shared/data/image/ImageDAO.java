@@ -6,7 +6,12 @@ import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
+import javax.imageio.ImageIO;
 import javax.sql.DataSource;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +58,21 @@ public class ImageDAO extends SQLDAO implements DAO<Image> {
     public boolean doSave(Image obj) throws SQLException {
         return GenericDAO.genericDoSave(Image.IMAGE, obj.toHashMap(), this.source);
     }
+
+    /*@Override
+    public boolean doSave(int MeeterID, byte[] obj) throws SQLException {
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(obj);
+        try{
+            BufferedImage bImage2 = ImageIO.read(bis);
+            ImageIO.write(bImage2, "jpg", new File("image.jpg") );
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        Image img = new Image();
+        return GenericDAO.genericDoSave(Image.IMAGE, img.toHashMap(), this.source);
+    }*/
 
     @Override
     public boolean doSave(HashMap<String, ?> values) throws SQLException {

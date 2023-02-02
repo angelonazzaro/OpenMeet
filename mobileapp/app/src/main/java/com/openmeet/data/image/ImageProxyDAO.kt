@@ -1,9 +1,11 @@
 package com.openmeet.data.image
 
 import android.content.Context
-import android.media.Image
+import android.graphics.Bitmap
+import com.openmeet.shared.data.image.Image
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.storage.DAO
 import com.openmeet.utils.ContextDAO
 import com.openmeet.utils.VolleyRequestSender
@@ -237,6 +239,50 @@ class ImageProxyDAO(context: Context) : ContextDAO(context), DAO<Image> {
 
     }
 
+    /*override fun doSave(MeetedId: Int, obj: ByteArray?): Boolean {
+
+        DAO.logger.log(Level.INFO, "doSave: $obj")
+
+        var resp = ""
+        val latch = CountDownLatch(1)
+
+        VolleyRequestSender.getInstance(this.context)
+            .doHttpPostRequest(getUrl() + "ImageService",
+                hashMapOf(
+                    "operation" to DAO.DO_SAVE,
+                    "image" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
+                ),
+                object : VolleyResponseCallback {
+                    override fun onError(error: String) {
+                        resp = error
+                        latch.countDown()
+                    }
+
+                    override fun onSuccess(response: String) {
+                        resp = response
+                        latch.countDown()
+                    }
+
+                }
+            )
+
+        latch.await()
+
+        println(resp)
+
+        if (resp.contains(VolleyRequestSender.ERROR_STR))
+            return false
+
+        val jsonResp = JSONObject(resp)
+
+        if (jsonResp.getString("status") == "error")
+            return false
+
+        DAO.logger.log(Level.INFO, "doSave: ${jsonResp.getString("data")}")
+
+        return jsonResp.getString("data").toBoolean()
+
+    }*/
     override fun doSave(obj: Image?): Boolean {
 
         DAO.logger.log(Level.INFO, "doSave: $obj")
