@@ -40,6 +40,30 @@ public class RatingProxyDAO extends ProxyDAO<Rating> implements DAO<Rating> {
     }
 
     @Override
+    public List<Rating> doRetrieveByCondition(String condition, int row_count) throws SQLException {
+
+        condition = request.getParameter("condition");
+        row_count = Integer.parseInt(request.getParameter("row_count"));
+
+        if (!ResponseHelper.checkStringFields(condition)) {
+            throw new InvalidParameterException("Missing parameters - condition");
+        }
+
+        if (row_count <= 0) {
+            throw new InvalidParameterException("Rows_count parameter must be greater than 0");
+        }
+
+        logger.log(Level.INFO, "RatingProxyDAO:doRetrieveByCondition() - condition: " + condition + " LIMIT " + row_count);
+
+        List<Rating> rates = GenericProxyDAO.genericProxyDoRetrieveByCondition(condition, 0, row_count, dao, out);
+
+        logger.log(Level.INFO, "RatingProxyDAO:doRetrieveByCondition() - rates: " + rates);
+
+        return rates;
+    }
+
+    @Override
+
     public List<Rating> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
         condition = request.getParameter("condition");
         offset = Integer.parseInt(request.getParameter("offset"));
