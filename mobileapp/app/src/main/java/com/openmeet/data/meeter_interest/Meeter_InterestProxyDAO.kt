@@ -454,4 +454,16 @@ class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter
         return jsonResp.getString("data").toBoolean()
     }
 
+    override fun doRetrieveByCondition(p0: String?, p1: Int): MutableList<Meeter_Interest> {
+        TODO("Not yet implemented")
+    }
+
+    override fun doRetrieveByCondition(
+        p0: String?,
+        p1: Int,
+        p2: Int
+    ): MutableList<Meeter_Interest> {
+        TODO("Not yet implemented")
+    }
+
 }
