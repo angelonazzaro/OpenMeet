@@ -3,7 +3,6 @@ package com.openmeet.webservice.proxies;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.image.Image;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.GenericProxyDAO;
