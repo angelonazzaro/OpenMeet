@@ -22,6 +22,12 @@ public class RatingDAO extends SQLDAO implements DAO<Rating> {
     }
 
     @Override
+    public List<Rating> doRetrieveByCondition(String condition, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Rating.RATING, condition + " LIMIT " + row_count,
+                new RatingExtractor(), source);
+    }
+
+    @Override
     public List<Rating> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
         return GenericDAO.genericDoRetrieveByCondition(Rating.RATING, condition + " LIMIT " + offset + ", " + row_count,
                 new RatingExtractor(), source);

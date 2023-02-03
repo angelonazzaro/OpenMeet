@@ -22,6 +22,12 @@ public class Meeter_InterestDAO extends SQLDAO implements DAO<Meeter_Interest> {
     }
 
     @Override
+    public List<Meeter_Interest> doRetrieveByCondition(String condition, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Meeter_Interest.MEETER_INTEREST, condition + " LIMIT " + row_count, new Meeter_InterestExtractor(), source);
+    }
+
+
+    @Override
     public List<Meeter_Interest> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
         return GenericDAO.genericDoRetrieveByCondition(Meeter_Interest.MEETER_INTEREST, condition + " LIMIT " + offset + ", " + row_count, new Meeter_InterestExtractor(), source);
     }
