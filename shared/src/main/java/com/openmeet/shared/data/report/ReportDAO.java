@@ -21,8 +21,14 @@ public class ReportDAO extends SQLDAO implements DAO<Report> {
     }
 
     @Override
-    public List<Report> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
-        return GenericDAO.genericDoRetrieveByCondition(Report.REPORT, condition + " LIMIT " + offset + ", " + rows_count,
+    public List<Report> doRetrieveByCondition(String condition, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Report.REPORT, condition + " LIMIT " + row_count,
+                new ReportExtractor(), source);
+    }
+
+    @Override
+    public List<Report> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Report.REPORT, condition + " LIMIT " + offset + ", " + row_count,
                 new ReportExtractor(), source);
     }
 

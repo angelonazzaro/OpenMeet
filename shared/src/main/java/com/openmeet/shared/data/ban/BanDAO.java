@@ -22,8 +22,14 @@ public class BanDAO extends SQLDAO implements DAO<Ban> {
     }
 
     @Override
-    public List<Ban> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
-        return GenericDAO.genericDoRetrieveByCondition(Ban.BAN, condition + " LIMIT " + offset + ", " + rows_count,
+    public List<Ban> doRetrieveByCondition(String condition, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Ban.BAN, condition + " LIMIT " + row_count,
+                new BanExtractor(), source);
+    }
+
+    @Override
+    public List<Ban> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Ban.BAN, condition + " LIMIT " + offset + ", " + row_count,
                 new BanExtractor(), source);
     }
 

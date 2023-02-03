@@ -10,14 +10,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.sql.DataSource;
 
 public class MeeterService extends HttpServlet {
 
@@ -51,10 +50,20 @@ public class MeeterService extends HttpServlet {
             }
             case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT: {
                 try {
+                    meeterProxyDAO.doRetrieveByCondition(null, 0);
+                } catch (SQLException | InvalidParameterException e) {
+                    ResponseHelper.sendGenericError(out);
+                    logger.log(Level.SEVERE, "MeeterService:doPost() - Error: " + e.getMessage());
+                    return;
+                }
+                break;
+            }
+            case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET: {
+                try {
                     meeterProxyDAO.doRetrieveByCondition(null, 0, 0);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "BanService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "MeeterService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;

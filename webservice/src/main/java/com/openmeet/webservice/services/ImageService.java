@@ -50,10 +50,20 @@ public class ImageService extends HttpServlet {
             }
             case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT: {
                 try {
+                    imageProxyDAO.doRetrieveByCondition(null, 0);
+                } catch (SQLException | InvalidParameterException e) {
+                    ResponseHelper.sendGenericError(out);
+                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
+                    return;
+                }
+                break;
+            }
+            case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET: {
+                try {
                     imageProxyDAO.doRetrieveByCondition(null, 0, 0);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "BanService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "ImageService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;

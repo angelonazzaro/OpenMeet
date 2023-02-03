@@ -37,9 +37,9 @@ public class GenericProxyDAO {
         return entities;
     }
 
-    public static <T> List<T> genericProxyDoRetrieveByCondition(String condition, int offset, int rows_count, DAO<T> dao, PrintWriter out) throws SQLException {
+    public static <T> List<T> genericProxyDoRetrieveByCondition(String condition, int offset, int row_count, DAO<T> dao, PrintWriter out) throws SQLException {
 
-        List<T> entities = dao.doRetrieveByCondition(condition, offset, rows_count);
+        List<T> entities = dao.doRetrieveByCondition(condition, offset, row_count);
 
         Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         String json = builder.toJson(entities);

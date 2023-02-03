@@ -24,6 +24,7 @@ public interface DAO<T> {
 
     String DO_RETRIEVE_BY_CONDITION = "doRetrieveByCondition";
     String DO_RETRIEVE_BY_CONDITION_LIMIT = "doRetrieveByConditionLimit";
+    String DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET = "doRetrieveByConditionLimitOffset";
     String DO_RETRIEVE_BY_KEY = "doRetrieveByKey";
     String DO_RETRIEVE_ALL = "doRetrieveAll";
     String DO_RETRIEVE_ALL_LIMIT = "doRetrieveAllLimit";
@@ -51,13 +52,24 @@ public interface DAO<T> {
      * Returns a list of objects from the database that match a given condition.
      *
      * @param condition the condition to be matched.
+     * @param row_count the number of rows to return.
+     * @return the query results as a list of objects.
+     *
+     * @author Francesco Granozio
+     */
+    List<T> doRetrieveByCondition(String condition, int row_count) throws SQLException;
+
+    /**
+     * Returns a list of objects from the database that match a given condition.
+     *
+     * @param condition the condition to be matched.
      * @param offset the offset position.
-     * @param rows_count the number of rows to return.
+     * @param row_count the number of rows to return.
      * @return the query results as a list of objects.
      *
      * @author Angelo Nazzaro
      */
-    List<T> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException;
+    List<T> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException;
 
     /**
      * Returns an object from the database that match a given condition.
