@@ -449,5 +449,13 @@ class MessageProxyDAO(context: Context) : ContextDAO(context), DAO<Message> {
         return jsonResp.getString("data").toBoolean()
     }
 
+    override fun doRetrieveByCondition(p0: String?, p1: Int): MutableList<Message> {
+        TODO("Not yet implemented")
+    }
+
+    override fun doRetrieveByCondition(p0: String?, p1: Int, p2: Int): MutableList<Message> {
+        TODO("Not yet implemented")
+    }
+
 
 }
