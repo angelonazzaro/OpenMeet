@@ -3,6 +3,7 @@ package com.openmeet.webservice.proxies;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.image.Image;
 import com.openmeet.shared.data.storage.DAO;
 import com.openmeet.shared.data.storage.GenericProxyDAO;
@@ -37,6 +38,29 @@ public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
         List<Image> images = GenericProxyDAO.genericProxyDoRetrieveByCondition(condition, dao, out);
 
         logger.log(Level.INFO, "ImageProxyDAO:doRetrieveByCondition() - images: " + images);
+
+        return images;
+
+    }
+
+    public List<Image> doRetrieveByCondition(String condition, int row_count) throws SQLException {
+
+        condition = request.getParameter("condition");
+        row_count = Integer.parseInt(request.getParameter("row_count"));
+
+        if (!ResponseHelper.checkStringFields(condition)) {
+            throw new InvalidParameterException("Missing parameters - condition");
+        }
+
+        if (row_count <= 0) {
+            throw new InvalidParameterException("Rows_count parameter must be greater than 0");
+        }
+
+        logger.log(Level.INFO, "BanProxyDAO:doRetrieveByCondition() - condition: " + condition + " LIMIT " + row_count);
+
+        List<Image> images = GenericProxyDAO.genericProxyDoRetrieveByCondition(condition, 0, row_count, dao, out);
+
+        logger.log(Level.INFO, "ImageProxyDAO:doRetrieveByCondition() - bans: " + images);
 
         return images;
 
