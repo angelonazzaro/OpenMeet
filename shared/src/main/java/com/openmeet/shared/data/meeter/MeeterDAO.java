@@ -22,8 +22,8 @@ public class MeeterDAO extends SQLDAO implements DAO<Meeter> {
     }
 
     @Override
-    public List<Meeter> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
-        return GenericDAO.genericDoRetrieveByCondition(Meeter.MEETER, condition + " LIMIT " + offset + ", " + rows_count,
+    public List<Meeter> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Meeter.MEETER, condition + " LIMIT " + offset + ", " + row_count,
                 new MeeterExtractor(), source);
     }
 

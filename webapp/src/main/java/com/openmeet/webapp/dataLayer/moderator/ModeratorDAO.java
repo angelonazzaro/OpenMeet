@@ -22,8 +22,8 @@ public class ModeratorDAO extends SQLDAO implements DAO<Moderator> {
     }
 
     @Override
-    public List<Moderator> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
-        return GenericDAO.genericDoRetrieveByCondition(Moderator.MODERATOR, condition + " LIMIT " + offset + ", " + rows_count,
+    public List<Moderator> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Moderator.MODERATOR, condition + " LIMIT " + offset + ", " + row_count,
                 new ModeratorExtractor(), source);
     }
 

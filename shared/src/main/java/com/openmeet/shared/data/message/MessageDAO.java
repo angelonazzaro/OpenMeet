@@ -22,8 +22,8 @@ public class MessageDAO extends SQLDAO implements DAO<Message> {
     }
 
     @Override
-    public List<Message> doRetrieveByCondition(String condition, int offset, int rows_count) throws SQLException {
-        return GenericDAO.genericDoRetrieveByCondition(Message.MESSAGE, condition + " LIMIT " + offset + ", " + rows_count,
+    public List<Message> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
+        return GenericDAO.genericDoRetrieveByCondition(Message.MESSAGE, condition + " LIMIT " + offset + ", " + row_count,
                 new MessageExtractor(), source);
     }
 
