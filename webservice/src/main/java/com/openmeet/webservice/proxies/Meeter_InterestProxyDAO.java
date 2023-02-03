@@ -42,6 +42,8 @@ public class Meeter_InterestProxyDAO extends ProxyDAO<Meeter_Interest> implement
 
     }
 
+
+
     @Override
     public List<Meeter_Interest> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException {
 

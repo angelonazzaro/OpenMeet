@@ -56,7 +56,7 @@ public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
             throw new InvalidParameterException("Rows_count parameter must be greater than 0");
         }
 
-        logger.log(Level.INFO, "BanProxyDAO:doRetrieveByCondition() - condition: " + condition + " LIMIT " + row_count);
+        logger.log(Level.INFO, "ImageProxyDAO:doRetrieveByCondition() - condition: " + condition + " LIMIT " + row_count);
 
         List<Image> images = GenericProxyDAO.genericProxyDoRetrieveByCondition(condition, 0, row_count, dao, out);
 
