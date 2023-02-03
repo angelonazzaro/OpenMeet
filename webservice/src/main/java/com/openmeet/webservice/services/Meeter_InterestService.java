@@ -48,12 +48,22 @@ public class Meeter_InterestService extends HttpServlet {
                 }
                 break;
             }
+            case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT: {
+                try {
+                    meeter_interestProxyDAO.doRetrieveByCondition(null, 0);
+                } catch (SQLException | InvalidParameterException e) {
+                    ResponseHelper.sendGenericError(out);
+                    logger.log(Level.SEVERE, "Meeter_InterestService:doPost() - Error: " + e.getMessage());
+                    return;
+                }
+                break;
+            }
             case DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET: {
                 try {
                     meeter_interestProxyDAO.doRetrieveByCondition(null, 0, 0);
                 } catch (SQLException | InvalidParameterException e) {
                     ResponseHelper.sendGenericError(out);
-                    logger.log(Level.SEVERE, "BanService:doPost() - Error: " + e.getMessage());
+                    logger.log(Level.SEVERE, "Meeter_InterestService:doPost() - Error: " + e.getMessage());
                     return;
                 }
                 break;
