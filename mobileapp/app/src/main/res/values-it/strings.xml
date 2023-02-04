@@ -37,6 +37,7 @@
     <string name="interestFilter_hint">Filtra interessi</string>
     <string name="warn_title">Qualcosa è andato storto…</string>
     <string name="GPS_disabled_message">Il tuo GPS sembra essere disabilitato. Devi attivarlo per continuare.</string>
+    <string name="empty_chat_message">Ancora nulla qui…🤕</string>
     <string name="positive_dialog">Va benone</string>
     <string name="retry_dialog">Riprova</string>
     <string name="registration_sexual_stage_title">Che genere ti identifica? E chi cerchi?</string>
@@ -51,4 +52,5 @@
     <string name="image_error">Devi impostare almeno un\'immagine di profilo per continuare.</string>
 
     <string name="double_back_prompt">Torna di nuovo indietro per uscire.</string>
+    <string name="report_btn_text"><u>Segnala</u></string>
 </resources>

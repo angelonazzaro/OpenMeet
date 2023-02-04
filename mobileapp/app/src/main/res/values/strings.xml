@@ -45,20 +45,23 @@
     <string name="checkbox_error">You must select at least 3 and up to 6 interests!</string>
     <string name="image_error">You must set at least one profile picture to continue…</string>
 
-    <string name="login_failed">"Login failed: wrong credentials."</string>
+    <string name="login_failed">Login failed: wrong credentials.</string>
     <string name="login_failed_email">Check your email.</string>
     <string name="login_failed_password">Check your password.</string>
 
-    <string name="warn_title">"Something went wrong…"</string>
-    <string name="GPS_disabled_message">"Your GPS seems to be disabled, please activate it to continue."</string>
+    <string name="warn_title">Something went wrong…</string>
+    <string name="GPS_disabled_message">Your GPS seems to be disabled, please activate it to continue.</string>
 
-    <string name="positive_dialog">"Ok"</string>
+    <string name="empty_chat_message">Uh. So empty…🤕</string>
+    <string name="report_btn_text"><u>Report</u></string>
+
+    <string name="positive_dialog">Ok</string>
     <string name="retry_dialog">"Retry"</string>
 
     <string name="homescreen_chat_title">Chats</string>
     <string name="homescreen_discover_title">Discover</string>
     <string name="homescreen_user_title">User</string>
 
-    <string name="STD_PREFS" translatable="false">"com.openmeet.user_standard_preferences"</string>
+    <string name="STD_PREFS" translatable="false">com.openmeet.user_standard_preferences</string>
     <string name="double_back_prompt">Go back again to quit.</string>
 </resources>

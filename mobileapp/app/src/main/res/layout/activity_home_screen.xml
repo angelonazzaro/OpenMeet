@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:checkable="true"
+        android:checkable="false"
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="@android:color/holo_blue_light"
@@ -41,9 +41,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/meeterInfoLayout"
-            android:animateLayoutChanges="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
             android:paddingTop="16dp">
 
             <ImageButton
@@ -90,18 +90,6 @@
                 app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/biographyView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:singleLine="false"
-                android:text="This is my biography"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/expandBtn"
-                app:layout_constraintStart_toStartOf="parent" />
-
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollView"
                 android:layout_width="match_parent"
@@ -124,6 +112,18 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/biographyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="false"
+                android:text="This is my biography"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/expandBtn"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -173,21 +173,37 @@
         android:id="@+id/coordinatorLayout3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:animateLayoutChanges="true"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent">
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_redo_button"
+            android:id="@+id/floating_undo_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
             android:contentDescription="Undo"
+            android:visibility="invisible"
             app:srcCompat="@drawable/baseline_undo_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/reportText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/report_btn_text"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"

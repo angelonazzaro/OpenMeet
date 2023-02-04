@@ -56,6 +56,46 @@ class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
         return gson.fromJson(interests, Array<Interest>::class.java).toMutableList()
     }
 
+    override fun doRetrieveByCondition(condition: String, offset: Int, row_count: Int): MutableList<Interest>? {
+
+        logger.log(Level.INFO, "doRetrieveByCondition: $condition")
+
+        var resp = ""
+        val latch = CountDownLatch(1)
+
+        VolleyRequestSender.getInstance(this.context)
+            .doHttpPostRequest(getUrl() + "InterestService",
+                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT, "condition" to condition, "offset" to offset.toString(), "rows_count" to row_count.toString()),
+                object : VolleyResponseCallback {
+                    override fun onError(error: String) {
+                        resp = error
+                        latch.countDown()
+                    }
+                    override fun onSuccess(response: String) {
+                        resp = response
+                        latch.countDown()
+                    }
+                }
+            )
+
+        latch.await()
+
+        if (resp.contains(VolleyRequestSender.ERROR_STR))
+            return null
+
+        val jsonResp = JSONObject(resp)
+
+        if (jsonResp.getString("status") == "error")
+            return null
+
+        val interests = jsonResp.getString("data")
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
+
+        logger.log(Level.INFO, "doRetrieveByCondition: $interests")
+
+        return gson.fromJson(interests, Array<Interest>::class.java).toMutableList()
+    }
+
     override fun doRetrieveByKey(key: String): Interest? {
 
         logger.log(Level.INFO, "doRetrieveByKey: $key")
