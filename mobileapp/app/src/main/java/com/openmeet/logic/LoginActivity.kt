@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
                         UserEncryptedData(this).storeCredentials(email, pwd)
                         //Aggiungere verifica registrazione pt.2
                         startActivity(
-                            Intent(this, HomeScreenActivity::class.java).putExtra("email", email)
+                            Intent(this, HomeScreenActivity::class.java).putExtra("ID", ret[0].id.toString())
                         )
                         overridePendingTransition(0, 0)
                     }

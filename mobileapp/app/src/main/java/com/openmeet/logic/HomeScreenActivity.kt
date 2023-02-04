@@ -6,22 +6,25 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
-import android.view.MenuItem
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.snackbar.Snackbar
 import com.openmeet.R
 import com.openmeet.data.interest.InterestProxyDAO
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.data.meeter_interest.Meeter_InterestProxyDAO
+import com.openmeet.data.report.ReportProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.meeter_interest.Meeter_Interest
+import com.openmeet.shared.data.report.Report
+import java.sql.Timestamp
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -81,6 +84,7 @@ class HomeScreenActivity : AppCompatActivity() {
             }.start()
         }
 
+
         likeBtn.setOnClickListener {
 
             if (listIndex + 1 == meeterList.size)
@@ -106,13 +110,29 @@ class HomeScreenActivity : AppCompatActivity() {
 
         }
 
+        reportBtn.setOnClickListener {
+            val view = LayoutInflater.from(this).inflate(R.layout.home_report_dialog, null)
+
+            MaterialAlertDialogBuilder(this)
+                .setView(view)
+                .setTitle(R.string.report_dialog_title)
+                .setPositiveButton(resources.getString(R.string.report_positive_dialog)) { dialog, which ->
+
+
+                    //Toast.makeText(this, intent.getStringExtra("ID").toString(), Toast.LENGTH_SHORT).show()
+                    doReportMeeter(view.findViewById<RadioGroup>(R.id.radioReportGroup).checkedRadioButtonId, Integer.parseInt(intent.getStringExtra("ID")), meeterList[listIndex].id)
+
+                }
+                .show()
+        }
+
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.chat_Tab -> {
                     startActivity(
                         Intent(this, HomeChatScreenActivity::class.java).putExtra(
-                            "email",
-                            intent.getStringExtra("email").toString()
+                            "ID",
+                            intent.getStringExtra("ID").toString()
                         )
                     )
                     overridePendingTransition(0, 0)
@@ -156,8 +176,7 @@ class HomeScreenActivity : AppCompatActivity() {
             }
 
             //Snackbar.make(snackbarView, "Reload", Snackbar.LENGTH_SHORT).show()
-            val temp = MeeterProxyDAO(this).doRetrieveByCondition(
-                "true",
+            val temp = MeeterProxyDAO(this).doRetrieveAll(
                 10,
                 10
             ) //Aggiungere ciclo degli offset
@@ -170,6 +189,9 @@ class HomeScreenActivity : AppCompatActivity() {
                     meeterList = temp
                 }
 
+                Log.d("Meeter retrieved", meeterList.size.toString())
+                updateCardView(meeterList[listIndex])
+
             } else
                 Snackbar.make(
                     snackbarView,
@@ -177,15 +199,11 @@ class HomeScreenActivity : AppCompatActivity() {
                     Snackbar.LENGTH_SHORT
                 ).show()
 
-            Log.d("Meeter retrieved", meeterList.size.toString())
             //Snackbar.make(snackbarView, meeterList.size.toString(), Snackbar.LENGTH_SHORT).show()
 
             runOnUiThread {
                 progressionIndicator.visibility = View.GONE
             }
-
-
-            updateCardView(meeterList[listIndex])
 
 
         }.start()
@@ -245,6 +263,44 @@ class HomeScreenActivity : AppCompatActivity() {
     }
 
     fun doRegisterRating(rating: Boolean, meetereRaterID: String, meeterRatedID: String) {
+
+    }
+
+    fun doReportMeeter(selectedRadio: Int, reporterMeeter: Int, reportedMeeter: Int){
+
+        val snackbarView = findViewById<View>(R.id.home_generalContainer)
+
+        val rep = Report()
+        rep.meeterReporter = reporterMeeter
+        rep.meeterReported = reportedMeeter
+        rep.creationDate = Timestamp(System.currentTimeMillis())
+        rep.reason = when(selectedRadio){
+            R.id.radio_report_spam -> "Spam"
+
+            R.id.radio_report_inappropriate -> "Inappropriate content"
+
+            R.id.radio_report_nudity -> "Nudity"
+
+            R.id.radio_report_impersonation -> "Impersonation"
+
+            else -> "general_report" //Should never happen
+        }
+
+        Thread {
+
+            if(ReportProxyDAO(this).doSave(rep)){
+                runOnUiThread {
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle(R.string.report_done_title)
+                        .setMessage(R.string.report_done_message)
+                        .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                        .show()
+                }
+            }
+            else
+                Snackbar.make(snackbarView, getString(R.string.connection_error), Snackbar.LENGTH_SHORT).show()
+
+        }.start()
 
     }
 

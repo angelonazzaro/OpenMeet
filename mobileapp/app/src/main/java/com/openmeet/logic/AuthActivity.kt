@@ -154,7 +154,7 @@ class AuthActivity : AppCompatActivity() {
                     else {
                         //Go To HomePage
                         startActivity(
-                            Intent(this, HomeScreenActivity::class.java).putExtra("email", ret[0].email)
+                            Intent(this, HomeScreenActivity::class.java).putExtra("ID", ret[0].id.toString())
                         )
                         overridePendingTransition(0, 0)
                     }

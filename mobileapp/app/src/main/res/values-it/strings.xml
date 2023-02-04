@@ -53,4 +53,15 @@
 
     <string name="double_back_prompt">Torna di nuovo indietro per uscire.</string>
     <string name="report_btn_text"><u>Segnala</u></string>
+    <string name="report_dialog_title">Qual è il motivo della segnalazione?</string>
+    <string name="report_positive_dialog">Invia</string>
+    <string name="report_reason_spam">È spam</string>
+    <string name="report_reason_impersonation">Sta impersonando qualcun altro</string>
+    <string name="report_reason_inappropriate">Contiene materiale inappropriato (Esempio: odio, terrorismo, autolesionismo…)</string>
+    <string name="report_reason_nudity">Contiene nudità esplicita</string>
+    <string name="report_reason_bullying">Sta praticando atti di bullismo</string>
+    <string name="report_reason_harrassment">Mi sta molestando</string>
+    <string name="report_reason_selling">Mi sta chiedendo dei soldi</string>
+    <string name="report_done_title">Segnalazione inviate! 📬</string>
+    <string name="report_done_message">La tua segnalazione sarà revisionata da un moderatore il prima possibile.\n\nGrazie per il tuo contributo.</string>
 </resources>
