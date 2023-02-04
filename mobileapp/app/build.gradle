@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.openmeet"
-        minSdk 25
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "Development 0.1"
@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.10'
     implementation("androidx.security:security-crypto:1.1.0-alpha04")
 
-    implementation "io.getstream:avatarview-coil:1.0.7"
+    implementation("androidx.room:room-runtime:2.5.0")
+
 
 }
