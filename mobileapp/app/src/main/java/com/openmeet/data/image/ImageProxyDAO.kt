@@ -105,7 +105,7 @@ class ImageProxyDAO(context: Context) : ContextDAO(context), DAO<Image> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "ImageService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT, "condition" to condition, "offset" to offset.toString(), "rows_count" to rows_count.toString()),
+                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET, "condition" to condition, "offset" to offset.toString(), "rows_count" to rows_count.toString()),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
