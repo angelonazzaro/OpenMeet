@@ -62,7 +62,7 @@ class RegistrationActivity : AppCompatActivity() {
                 meeter.meeterSurname = surnameFld.editText?.text.toString()
                 meeter.email = emailFld.editText?.text.toString()
                 meeter.pwd = passwordFld.editText?.text.toString()
-                meeter.birthDate = java.sql.Date(datePicker.selection!!)
+                meeter.birthdate = java.sql.Date(datePicker.selection!!)
 
                 startActivity(
                     Intent(this, Registration2Activity::class.java).putExtra("email", meeter.email)
