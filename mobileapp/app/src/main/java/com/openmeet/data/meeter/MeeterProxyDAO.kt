@@ -59,7 +59,7 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
         return gson.fromJson(meetersList, Array<Meeter>::class.java).toMutableList()
     }
 
-    override fun doRetrieveByCondition(condition: String, offset: Int, row_count: Int): MutableList<Meeter>? {
+    override fun doRetrieveByCondition(condition: String, rows_count: Int): MutableList<Meeter>? {
 
         logger.log(Level.INFO, "doRetrieveByCondition: $condition")
 
@@ -68,7 +68,62 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MeeterService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT, "condition" to condition, "offset" to offset.toString(), "rows_count" to row_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT,
+                    "condition" to condition,
+                    "rows_count" to rows_count.toString()
+                ),
+                object : VolleyResponseCallback {
+                    override fun onError(error: String) {
+                        resp = error
+                        latch.countDown()
+                    }
+
+                    override fun onSuccess(response: String) {
+                        resp = response
+                        latch.countDown()
+                    }
+
+                }
+            )
+
+        latch.await()
+
+        if (resp.contains(VolleyRequestSender.ERROR_STR))
+            return null
+
+        val jsonResp = JSONObject(resp)
+
+        if (jsonResp.getString("status") == "error")
+            return null
+
+        val meetersList = jsonResp.getString("data")
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd").create()
+
+        logger.log(Level.INFO, "doRetrieveByCondition: $meetersList")
+
+        return gson.fromJson(meetersList, Array<Meeter>::class.java).toMutableList()
+    }
+
+    override fun doRetrieveByCondition(
+        condition: String,
+        offset: Int,
+        row_count: Int
+    ): MutableList<Meeter>? {
+
+        logger.log(Level.INFO, "doRetrieveByCondition: $condition")
+
+        var resp = ""
+        val latch = CountDownLatch(1)
+
+        VolleyRequestSender.getInstance(this.context)
+            .doHttpPostRequest(getUrl() + "MeeterService",
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET,
+                    "condition" to condition,
+                    "offset" to offset.toString(),
+                    "rows_count" to row_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
@@ -492,14 +547,6 @@ class MeeterProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter> {
         logger.log(Level.INFO, "doDelete: ${jsonResp.getString("data")}")
 
         return jsonResp.getString("data").toBoolean()
-    }
-
-    override fun doRetrieveByCondition(p0: String?, p1: Int): MutableList<Meeter> {
-        TODO("Not yet implemented")
-    }
-
-    override fun doRetrieveByCondition(p0: String?, p1: Int, p2: Int): MutableList<Meeter> {
-        TODO("Not yet implemented")
     }
 
 }
