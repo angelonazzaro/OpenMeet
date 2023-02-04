@@ -32,6 +32,7 @@ class ImageProxyDAO(context: Context) : ContextDAO(context), DAO<Image> {
                         resp = error
                         latch.countDown()
                     }
+
                     override fun onSuccess(response: String) {
                         resp = response
                         latch.countDown()
@@ -65,12 +66,17 @@ class ImageProxyDAO(context: Context) : ContextDAO(context), DAO<Image> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "ImageService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT, "condition" to condition, "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT,
+                    "condition" to condition,
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
                         latch.countDown()
                     }
+
                     override fun onSuccess(response: String) {
                         resp = response
                         latch.countDown()
@@ -96,7 +102,11 @@ class ImageProxyDAO(context: Context) : ContextDAO(context), DAO<Image> {
         return gson.fromJson(images, Array<Image>::class.java).toMutableList()
     }
 
-    override fun doRetrieveByCondition(condition: String, offset: Int, rows_count: Int): MutableList<Image>? {
+    override fun doRetrieveByCondition(
+        condition: String,
+        offset: Int,
+        rows_count: Int
+    ): MutableList<Image>? {
 
         DAO.logger.log(Level.INFO, "doRetrieveByCondition: $condition")
 
@@ -105,12 +115,18 @@ class ImageProxyDAO(context: Context) : ContextDAO(context), DAO<Image> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "ImageService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET, "condition" to condition, "offset" to offset.toString(), "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET,
+                    "condition" to condition,
+                    "offset" to offset.toString(),
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
                         latch.countDown()
                     }
+
                     override fun onSuccess(response: String) {
                         resp = response
                         latch.countDown()
