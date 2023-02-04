@@ -11,10 +11,15 @@ import com.openmeet.shared.helpers.ResponseHelper;
 import com.openmeet.webservice.exceptions.InvalidParameterException;
 import jakarta.servlet.http.HttpServletRequest;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.ByteBuffer;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 
 public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
@@ -192,7 +197,46 @@ public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
 
         logger.log(Level.INFO, "ImageProxyDAO:doSave() - values: " + values);
 
-        boolean isSuccessful = GenericProxyDAO.genericProxyDoSave(values, dao, out);
+        byte[] meeterData = Base64.getDecoder().decode((String) values.get("meeterId"));
+        int meeterId = 0;
+
+        for (byte b: meeterData) {
+            meeterId = (meeterId << 8) + (b & 0xFF);
+        }
+
+        String basePath = request.getServletContext().getRealPath("/");
+        String meeterUploadPath = "uploads" + File.separator + "meeters" + File.separator +  meeterId;
+        File uploadPath = new File(basePath + File.separator + meeterUploadPath);
+
+        if (!uploadPath.exists()) {
+            if (!uploadPath.mkdirs()) {
+                ResponseHelper.sendGenericError(out);
+                return false;
+            }
+        }
+
+        String filename = meeterUploadPath + File.separator + String.valueOf(System.currentTimeMillis()) + ".png";
+
+        Image image = new Image();
+        byte[] photoData = Base64.getDecoder().decode((String) values.get("photoByteArray"));
+
+        ByteArrayInputStream bis = new ByteArrayInputStream(photoData);
+
+        try {
+            BufferedImage bImage = ImageIO.read(bis);
+            if (ImageIO.write(bImage, "png", new File(basePath + File.separator + filename))) {
+                image.setPath(filename);
+                image.setMeeterId(1);
+            } else {
+                ResponseHelper.sendGenericError(out);
+                return false;
+            }
+        } catch (IOException e) {
+            ResponseHelper.sendGenericError(out);
+            return false;
+        }
+
+        boolean isSuccessful = GenericProxyDAO.genericProxyDoSave(image, dao, out);
 
         logger.log(Level.INFO, "ImageProxyDAO:doSave() - isSuccessful: " + isSuccessful);
 
