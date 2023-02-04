@@ -76,17 +76,17 @@ class HomeScreenActivity : AppCompatActivity() {
 
         undoBtn.setOnClickListener {
             undoBtn.visibility = View.INVISIBLE
-            Thread{
+            Thread {
                 updateCardView(meeterList[--listIndex])
             }.start()
         }
 
         likeBtn.setOnClickListener {
 
-            if(listIndex+1 == meeterList.size)
+            if (listIndex + 1 == meeterList.size)
                 getDiscoverFlow()
-            else{
-                Thread{
+            else {
+                Thread {
                     updateCardView(meeterList[++listIndex])
                 }.start()
             }
@@ -106,11 +106,14 @@ class HomeScreenActivity : AppCompatActivity() {
 
         }
 
-        bottomNav.setOnItemSelectedListener{ item ->
-            when(item.itemId){
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.chat_Tab -> {
                     startActivity(
-                        Intent(this, HomeChatScreenActivity::class.java).putExtra("email", intent.getStringExtra("email").toString())
+                        Intent(this, HomeChatScreenActivity::class.java).putExtra(
+                            "email",
+                            intent.getStringExtra("email").toString()
+                        )
                     )
                     overridePendingTransition(0, 0)
                 }
@@ -131,11 +134,10 @@ class HomeScreenActivity : AppCompatActivity() {
     //Override del comportamento del back Button che passa alla schermata precedente/esce
     override fun onBackPressed() {
 
-        if (backBtnLastPress + 2000 > System.currentTimeMillis()){
+        if (backBtnLastPress + 2000 > System.currentTimeMillis()) {
             this.finish()
             exitProcess(0)
-        }
-        else {
+        } else {
             Toast.makeText(this, getString(R.string.double_back_prompt), Toast.LENGTH_SHORT)
                 .show()
             backBtnLastPress = System.currentTimeMillis()
@@ -154,19 +156,26 @@ class HomeScreenActivity : AppCompatActivity() {
             }
 
             //Snackbar.make(snackbarView, "Reload", Snackbar.LENGTH_SHORT).show()
-            val temp = MeeterProxyDAO(this).doRetrieveByCondition("true", 10, 10) //Aggiungere ciclo degli offset
-            if(temp != null){
-                if(meeterList.size != 0){
-                    val lastMeeter = meeterList[meeterList.size -1]
+            val temp = MeeterProxyDAO(this).doRetrieveByCondition(
+                "true",
+                10,
+                10
+            ) //Aggiungere ciclo degli offset
+            if (temp != null) {
+                if (meeterList.size != 0) {
+                    val lastMeeter = meeterList[meeterList.size - 1]
                     meeterList.add(0, lastMeeter)
                     meeterList = temp
-                }else{
+                } else {
                     meeterList = temp
                 }
 
-            }
-            else
-                Snackbar.make(snackbarView, getString(R.string.connection_error), Snackbar.LENGTH_SHORT).show()
+            } else
+                Snackbar.make(
+                    snackbarView,
+                    getString(R.string.connection_error),
+                    Snackbar.LENGTH_SHORT
+                ).show()
 
             Log.d("Meeter retrieved", meeterList.size.toString())
             //Snackbar.make(snackbarView, meeterList.size.toString(), Snackbar.LENGTH_SHORT).show()
@@ -179,11 +188,10 @@ class HomeScreenActivity : AppCompatActivity() {
             updateCardView(meeterList[listIndex])
 
 
-
         }.start()
     }
 
-    fun updateCardView(meeter: Meeter){
+    fun updateCardView(meeter: Meeter) {
         Log.d("Updating card", meeter.toString())
 
         val meeterName = findViewById<TextView>(R.id.meeterName)
@@ -191,17 +199,19 @@ class HomeScreenActivity : AppCompatActivity() {
         val meeterBiography = findViewById<TextView>(R.id.biographyView)
 
         runOnUiThread {
-            meeterName.text = "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
+            meeterName.text =
+                "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
             meeterCity.text = meeter.city
             meeterBiography.text = meeter.biography
         }
 
         resetInterestLayout()
-        val meeter_interestList = Meeter_InterestProxyDAO(this).doRetrieveByCondition("${Meeter_Interest.MEETER_INTEREST_MEETER_ID} = ${meeter.id}")
+        val meeter_interestList =
+            Meeter_InterestProxyDAO(this).doRetrieveByCondition("${Meeter_Interest.MEETER_INTEREST_MEETER_ID} = ${meeter.id}")
 
         val interestDAO = InterestProxyDAO(this)
         if (meeter_interestList != null) {
-            for(meeter_interest in meeter_interestList){
+            for (meeter_interest in meeter_interestList) {
                 val interest = interestDAO.doRetrieveByKey(meeter_interest.id.toString())
                 if (interest != null) {
                     addToInterestLayout(interest.description)
@@ -210,7 +220,7 @@ class HomeScreenActivity : AppCompatActivity() {
         }
     }
 
-    fun addToInterestLayout(interest: String){
+    fun addToInterestLayout(interest: String) {
         val interestLayout = findViewById<LinearLayout>(R.id.interestLayout)
 
         val intTxt = MaterialButton(this)
@@ -227,18 +237,18 @@ class HomeScreenActivity : AppCompatActivity() {
         }
     }
 
-    fun resetInterestLayout(){
+    fun resetInterestLayout() {
         val interestLayout = findViewById<LinearLayout>(R.id.interestLayout)
         runOnUiThread {
             interestLayout.removeAllViewsInLayout()
         }
     }
 
-    fun doRegisterRating(rating: Boolean, meetereRaterID: String, meeterRatedID: String){
+    fun doRegisterRating(rating: Boolean, meetereRaterID: String, meeterRatedID: String) {
 
     }
 
-    fun getAge(birthday: Date): Int{
+    fun getAge(birthday: Date): Int {
         val now = Calendar.getInstance().timeInMillis
         val diff = Calendar.getInstance()
         diff.timeInMillis = now - birthday.time
