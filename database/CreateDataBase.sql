@@ -13,8 +13,9 @@ CREATE TABLE Meeter (
     `email` VARCHAR(320) UNIQUE, 
     `meeterName` VARCHAR(35) NOT NULL, 
     `meeterSurname` VARCHAR(35) NOT NULL, 
-    `gender` CHAR(1) NOT NULL,
-    `searchingGender` CHAR(1) NOT NULL,
+    `gender` CHAR(1),
+    `searchingGender` CHAR(1),
+    `city` VARCHAR(50),
     `pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
 	`biography` VARCHAR(255), 
     `birthdate` DATE NOT NULL,
