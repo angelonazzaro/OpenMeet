@@ -3,6 +3,7 @@ package com.openmeet.logic
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -13,13 +14,18 @@ import com.facebook.FacebookException
 import com.facebook.GraphRequest
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
+import com.openmeet.shared.data.storage.DAO
 import com.openmeet.shared.utils.PasswordEncrypter
+import com.openmeet.utils.ContextDAO
 import com.openmeet.utils.UserEncryptedData
+import com.openmeet.utils.VolleyRequestSender
+import com.openmeet.utils.VolleyResponseCallback
 
 
 class LoginActivity : AppCompatActivity() {
@@ -33,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
         val pswFld = findViewById<TextInputLayout>(R.id.pswField)
         val loginBtn = findViewById<Button>(R.id.loginBtn)
         val registrationTxt = findViewById<TextView>(R.id.registrationTxt)
+        val recoverPassTxt = findViewById<TextView>(R.id.recoverPasswordTxt)
 
         val snackbarView = findViewById<View>(R.id.auth_login_container)
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
@@ -89,6 +96,17 @@ class LoginActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         }
 
+        recoverPassTxt.setOnClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.recovery_dialog_title)
+                .setMessage(R.string.recovery_dialog_message)
+                .setNegativeButton(R.string.negative_dialog){ dialog, which -> }
+                .setPositiveButton(R.string.positive_dialog){ dialog, which ->
+                    sendRecoveryHTTPRequest(email)
+                }
+                .show()
+        }
+
     }
 
 
@@ -96,5 +114,35 @@ class LoginActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.getOnBackPressedDispatcher().onBackPressed()
         overridePendingTransition(0, 0)
+    }
+
+    fun sendRecoveryHTTPRequest(email: String){
+
+        val snackbarView = findViewById<View>(R.id.auth_login_container)
+
+        VolleyRequestSender.getInstance(this)
+            .doHttpPostRequest(
+                "http://" + getString(R.string.request_server_address) + "PasswordRecoveryService",
+                hashMapOf(
+                    "email" to email,
+                ),
+                object : VolleyResponseCallback {
+                    override fun onError(error: String) {
+                        Log.e("Password recovery Volley error", error)
+                        Snackbar.make(snackbarView, getString(R.string.connection_error), Snackbar.LENGTH_SHORT)
+                    }
+
+                    override fun onSuccess(response: String) {
+                        Log.d("Password recovery Volley: ", response)
+                        runOnUiThread{
+                            MaterialAlertDialogBuilder(this@LoginActivity)
+                                .setTitle(R.string.completed_recovery_dialog_title)
+                                .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                                .show()
+                        }
+                    }
+
+                }
+            )
     }
 }

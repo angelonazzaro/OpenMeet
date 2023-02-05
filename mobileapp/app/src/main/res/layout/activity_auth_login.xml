@@ -86,7 +86,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+    <TextView
+        android:id="@+id/recoverPasswordTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/recover_password_TextView"
+        android:textAlignment="center"
+        android:textIsSelectable="false"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/pswField"
+        tools:layout_editor_absoluteX="16dp" />
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -97,7 +112,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pswField">
+        app:layout_constraintTop_toBottomOf="@+id/recoverPasswordTxt">
 
         <Button
             android:id="@+id/loginBtn"

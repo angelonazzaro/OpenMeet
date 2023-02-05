@@ -64,4 +64,9 @@
     <string name="report_reason_selling">Mi sta chiedendo dei soldi</string>
     <string name="report_done_title">Segnalazione inviate! 📬</string>
     <string name="report_done_message">La tua segnalazione sarà revisionata da un moderatore il prima possibile.\n\nGrazie per il tuo contributo.</string>
+    <string name="recover_password_TextView">Hai dimenticato la password? <u>Recuperala qui</u></string>
+    <string name="recovery_dialog_title">Verrà inviata un\'email con una nuova password all\'indirizzo</string>
+    <string name="negative_dialog">No</string>
+    <string name="recovery_dialog_message">Vuoi continuare?</string>
+    <string name="completed_recovery_dialog_title">Email inviata! 📬</string>
 </resources>
