@@ -28,6 +28,19 @@ public class BanServlet extends HttpServlet {
         req.setAttribute("title", "Bans");
         req.setAttribute("heading", "Bans");
 
+        // if banIdToUnban is set, delete the ban from the db
+        if (req.getParameter("banIdToUnban") != null) {
+            int banIdToUnBan = Integer.parseInt((String) req.getParameter("banIdToUnban"));
+            BanDAO banDAO = new BanDAO((DataSource) getServletContext().getAttribute("DataSource"));
+            
+            try {
+                banDAO.doDelete(String.format("%s = %d", Ban.BAN_ID, banIdToUnBan));
+            } catch (SQLException e) {
+                resp.sendRedirect(req.getContextPath() + "/ban");
+                return;
+            }
+        }
+
         // Get Data
         QueryJoinExecutor qjx = new QueryJoinExecutor((DataSource) getServletContext().getAttribute("DataSource"));
         MultiMapList<String, String> data = new MultiMapList<>();
