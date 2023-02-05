@@ -44,7 +44,6 @@ public class HomeServlet extends HttpServlet {
             resp.sendError(500, "Internal Server Error");
         }
 
-
         req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
 }
