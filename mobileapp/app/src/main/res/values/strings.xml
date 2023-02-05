@@ -62,6 +62,19 @@
     <string name="homescreen_discover_title">Discover</string>
     <string name="homescreen_user_title">User</string>
 
+    <string name="report_dialog_title">What do you want to report this Meeter for?</string>
+    <string name="report_positive_dialog">Send</string>
+    <string name="report_reason_spam">It\'s spam</string>
+    <string name="report_reason_inappropriate">It contains inappropriate or illegal material (e.g.: hate, terrorism, self-harm…)</string>
+    <string name="report_reason_nudity">It contains explicit nudity</string>
+    <string name="report_reason_impersonation">It\'s impersonating someone else</string>
+    <string name="report_reason_bullying">It\'s bullying me</string>
+    <string name="report_reason_harrassment">It\'s harrassing me</string>
+    <string name="report_reason_selling">It\'s asking me for money</string>
+
+    <string name="report_done_title">Report sent! 📬</string>
+    <string name="report_done_message">Your report will soon be reviewed by a moderator.\n\nThank you for your contribution.</string>
+
     <string name="STD_PREFS" translatable="false">com.openmeet.user_standard_preferences</string>
     <string name="double_back_prompt">Go back again to quit.</string>
 </resources>

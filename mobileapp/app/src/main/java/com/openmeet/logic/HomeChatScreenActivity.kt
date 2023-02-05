@@ -43,7 +43,7 @@ class HomeChatScreenActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.discover_Tab -> {
                     startActivity(
-                        Intent(this, HomeScreenActivity::class.java).putExtra("email", intent.getStringExtra("email").toString())
+                        Intent(this, HomeScreenActivity::class.java).putExtra("ID", intent.getStringExtra("ID").toString())
                     )
                     overridePendingTransition(0, 0)
                 }
@@ -56,7 +56,7 @@ class HomeChatScreenActivity : AppCompatActivity() {
         }
 
 
-        retrieveChats(intent.getStringExtra("email").toString())
+        retrieveChats(intent.getStringExtra("ID").toString())
     }
 
     //Override del comportamento del back Button che passa alla schermata precedente/esce
@@ -73,7 +73,7 @@ class HomeChatScreenActivity : AppCompatActivity() {
         }
     }
 
-    fun retrieveChats(meeterEmail: String){
+    fun retrieveChats(meeterID: String){
 
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
         val snackbarView = findViewById<View>(R.id.home_generalContainer)
@@ -85,28 +85,21 @@ class HomeChatScreenActivity : AppCompatActivity() {
 
             runOnUiThread { progressionIndicator.visibility = View.VISIBLE }
 
-            val MeeterList = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$meeterEmail'")
-            if(MeeterList != null){
-                val meeterID = MeeterList[0].id
-                val MatchedList = RatingProxyDAO(this).doRetrieveMatches(meeterID.toString())
-                println(MatchedList)
-                if (MatchedList != null)
-                    if(MatchedList.size > 0){
-                        val ChatList = MessageProxyDAO(this).doRetrieveByCondition("${Message.MESSAGE_MEETER_SENDER} = $meeterID OR ${Message.MESSAGE_MEETER_RECEIVER} = $meeterID")
-                        if (ChatList != null) {
-                            displayChatsPreview(MatchedList, ChatList)
-                        }
-                        else
-                            Snackbar.make(snackbarView, getString(R.string.connection_error) + "1", Snackbar.LENGTH_SHORT).show()
+            val MatchedList = RatingProxyDAO(this).doRetrieveMatches(meeterID)
+            println(MatchedList)
+            if (MatchedList != null)
+                if(MatchedList.size > 0){
+                    val ChatList = MessageProxyDAO(this).doRetrieveByCondition("${Message.MESSAGE_MEETER_SENDER} = $meeterID OR ${Message.MESSAGE_MEETER_RECEIVER} = $meeterID")
+                    if (ChatList != null) {
+                        displayChatsPreview(MatchedList, ChatList)
                     }
                     else
-                        runOnUiThread { emptyChatTxt.visibility = View.VISIBLE }
+                        Snackbar.make(snackbarView, getString(R.string.connection_error) + "1", Snackbar.LENGTH_SHORT).show()
+                }
                 else
-                    Snackbar.make(snackbarView, getString(R.string.connection_error)+ "2", Snackbar.LENGTH_SHORT).show()
-
-            }
+                    runOnUiThread { emptyChatTxt.visibility = View.VISIBLE }
             else
-                Snackbar.make(snackbarView, getString(R.string.connection_error)+ "3", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(snackbarView, getString(R.string.connection_error)+ "2", Snackbar.LENGTH_SHORT).show()
 
             runOnUiThread { progressionIndicator.visibility = View.GONE }
         }.start()

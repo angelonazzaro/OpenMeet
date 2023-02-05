@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/reportScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="300dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radioReportGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radio_report_spam">
+
+            <RadioButton
+                android:id="@+id/radio_report_spam"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/report_reason_spam" />
+
+            <RadioButton
+                android:id="@+id/radio_report_inappropriate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/report_reason_inappropriate" />
+
+            <RadioButton
+                android:id="@+id/radio_report_nudity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/report_reason_nudity" />
+
+            <RadioButton
+                android:id="@+id/radio_report_impersonation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/report_reason_impersonation" />
+
+        </RadioGroup>
+    </LinearLayout>
+</ScrollView>
+
+

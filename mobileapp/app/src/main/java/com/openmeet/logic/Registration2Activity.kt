@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.children
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
@@ -37,14 +38,13 @@ import java.io.ByteArrayOutputStream
 
 class Registration2Activity : AppCompatActivity() {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration_2)
 
         val instrTxt = findViewById<TextView>(R.id.instructionTxt)
         val continueBtn = findViewById<Button>(R.id.continueBtn)
-        val email = intent.getStringExtra("email").toString()
+        val id = intent.getStringExtra("ID").toString()
 
         val sexualPrefsLayout = findViewById<LinearLayout>(R.id.sexualPrefsLayout)
         val interestFilter = findViewById<TextInputLayout>(R.id.filterField)
@@ -144,8 +144,8 @@ class Registration2Activity : AppCompatActivity() {
                 4 -> { /* FINAL STAGE */
                     startActivity(
                         Intent(this, Registration2Activity::class.java).putExtra(
-                            "email",
-                            intent.getStringExtra("email").toString()
+                            "ID",
+                            intent.getStringExtra("ID").toString()
                         )
                     )
                     overridePendingTransition(0, 0)
@@ -264,7 +264,6 @@ class Registration2Activity : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun prepareImageUploadPhase(): ActivityResultLauncher<PickVisualMediaRequest> {
 
         val sharedPrefs =
@@ -410,7 +409,7 @@ class Registration2Activity : AppCompatActivity() {
 
         if (!gpsEnabled) {
             // notify user
-            AlertDialog.Builder(this)
+            MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.warn_title)
                 .setMessage(R.string.GPS_disabled_message)
                 .setPositiveButton(
