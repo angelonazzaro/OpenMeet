@@ -3,7 +3,6 @@ package com.openmeet.webapp.logicLayer;
 import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.ban.BanDAO;
 import com.openmeet.shared.data.meeter.Meeter;
-import com.openmeet.shared.data.report.Report;
 import com.openmeet.shared.helpers.ResponseHelper;
 import com.openmeet.shared.utils.MultiMapList;
 import com.openmeet.shared.utils.QueryJoinExecutor;
@@ -32,7 +31,7 @@ public class BanServlet extends HttpServlet {
         if (req.getParameter("banIdToUnban") != null) {
             int banIdToUnBan = Integer.parseInt((String) req.getParameter("banIdToUnban"));
             BanDAO banDAO = new BanDAO((DataSource) getServletContext().getAttribute("DataSource"));
-            
+
             try {
                 banDAO.doDelete(String.format("%s = %d", Ban.BAN_ID, banIdToUnBan));
             } catch (SQLException e) {
@@ -78,6 +77,38 @@ public class BanServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         BanDAO banDAO = new BanDAO((DataSource) getServletContext().getAttribute("DataSource"));
+
+        // if banId is set, modify the ban associated
+        if (req.getParameter("banId") != null) {
+            int banId = Integer.parseInt((String) req.getParameter("banId"));
+
+            try {
+                List<Ban> bans = banDAO.doRetrieveByCondition(String.format("%s = %d", Ban.BAN_ID, banId));
+
+                if (!bans.isEmpty()) {
+                    Ban ban = bans.get(0);
+
+                    if (endTime != null && ban.getStartTime().after(endTime)) {
+                        ResponseHelper.sendGenericError(out);
+                        return;
+                    }
+
+                    ban.setDescription(description);
+                    ban.setEndTime(endTime);
+
+                    if (banDAO.doSaveOrUpdate(ban)) {
+                        resp.sendRedirect(String.valueOf(req.getRequestURL()));
+                        return;
+                    }
+                }
+
+            } catch (SQLException e) {
+                ResponseHelper.sendGenericError(out);
+                return;
+            }
+
+        }
+
         // Check if the metter already has a ban in the same period or has been permanently banned
         try {
             List<Ban> meeterBans = banDAO.doRetrieveByCondition(String.format("%s = %d AND (%s IS NULL)",
