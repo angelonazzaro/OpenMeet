@@ -29,6 +29,7 @@
 
     <string name="registration_TextView">Not registered? <u>Sign-up</u></string>
     <string name="login_TextView">Already registered? <u>Login</u></string>
+    <string name="recover_password_TextView">Forgot your password? <u>Recover it here</u></string>
 
     <string name="email_null_error">Empty email!</string>
     <string name="email_format_error">Invalid email format!</string>
@@ -56,11 +57,17 @@
     <string name="report_btn_text"><u>Report</u></string>
 
     <string name="positive_dialog">Ok</string>
+    <string name="negative_dialog">No</string>
     <string name="retry_dialog">"Retry"</string>
 
     <string name="homescreen_chat_title">Chats</string>
     <string name="homescreen_discover_title">Discover</string>
     <string name="homescreen_user_title">User</string>
+
+    <string name="recovery_dialog_title">An email with a new password will be sent to</string>
+    <string name="recovery_dialog_message">Do you wish to continue?</string>
+
+    <string name="completed_recovery_dialog_title">Email sent! 📬</string>
 
     <string name="report_dialog_title">What do you want to report this Meeter for?</string>
     <string name="report_positive_dialog">Send</string>
