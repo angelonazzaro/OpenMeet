@@ -2,32 +2,83 @@ package com.openmeet.webservice.services;
 
 import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.data.meeter.MeeterDAO;
+import com.openmeet.shared.helpers.ResponseHelper;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PasswordRecoveryService extends HttpServlet {
 
-    private static final String senderEmail = "staff.openmeet@gmail.com";
+    private static final HashMap<String, String> tokens = new HashMap<>();
+    private static final String from = "staff.openmeet@gmail.com";
     private static final Logger logger = Logger.getLogger(PasswordRecoveryService.class.getName());
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String token = request.getParameter("pwdTkn");
+
+        if (token == null || token.length() < 32 || token.length() > 64 || !tokens.containsKey(token)) {
+            response.sendError(404, "Page Not Found");
+        }
+
+        MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        String receiverEmail = tokens.get(token);
+
+        try {
+            List<Meeter> meeterList = meeterDAO.doRetrieveByCondition(String.format("%s = '%s'", Meeter.MEETER_EMAIL, receiverEmail));
+
+            if (meeterList.isEmpty()) {
+                logger.log(Level.INFO, "PasswordRecoveryService:doPost() - INFO: No Meeter with email '" + receiverEmail + "' found");
+                return;
+            }
+
+            Meeter meeter = meeterList.get(0);
+
+            String newPassword = this.generatePasswordOrToken(8, 16, false);
+
+            meeter.setPwd(newPassword);
+
+            HashMap<String, String> values = new HashMap<>();
+            values.put("pwd", meeter.getPwd());
+
+            if (!meeterDAO.doUpdate(values, String.format("%s = %d", Meeter.MEETER_ID, meeter.getId()))) {
+                response.sendError(505, "Internal Server Error");
+                return;
+            }
+
+            this.sendEmail(tokens.get(token), "OpenMeet | Your password has been reset",
+                    String.format("Hi %s %s. This is your new password: <b>%s</b>", meeter.getMeeterName(),
+                            meeter.getMeeterSurname(), newPassword));
+
+            tokens.remove(token);
+
+            request.getRequestDispatcher("WEB-INF/passwordRecovered.jsp").forward(request, response);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "PasswordRecoveryService:doPost() - Error: " + e.getMessage());
+            response.sendError(505, "Internal Server Error");
+        }
+
+    }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) {
 
         String receiverEmail = request.getParameter("email");
+        String action = request.getParameter("action");
 
-        if (receiverEmail == null || receiverEmail.length() == 0) return;
+        if (!ResponseHelper.checkStringFields(receiverEmail, action)) return;
 
         MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
@@ -40,44 +91,39 @@ public class PasswordRecoveryService extends HttpServlet {
             }
 
             Meeter meeter = meeterList.get(0);
-            String newPassword = this.generatePassword();
 
-            meeter.setPwd(newPassword);
-
-            HashMap<String, String> values = new HashMap<>();
-            values.put("pwd", meeter.getPwd());
-            if (!meeterDAO.doUpdate(values, String.format("%s = %d", Meeter.MEETER_ID, meeter.getId()))) {
+            if (!action.equals("send-recovery-link")) {
                 return;
             }
 
-            Properties properties = System.getProperties();
-            properties.put("mail.smtp.host", "smtp.gmail.com");
-            properties.put("mail.smtp.port", "587");
-            properties.put("mail.smtp.auth", "true");
-            properties.put("mail.smtp.starttls.enable", "true");
+            String tokenToRemove = null;
 
-            Session session = Session.getInstance(
-                    properties,
-                    new javax.mail.Authenticator() {
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication("staff.openmeet@gmail.com", "tohybegjuqpwbzji");
-                        }
-                    });
-
-            try {
-                MimeMessage message = new MimeMessage(session);
-
-                message.setFrom(new InternetAddress(senderEmail));
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));
-                message.setSubject("OpenMeet | Password Recovery");
-                message.setText(String.format("Hi %s %s. This is your new password: %s", meeter.getMeeterName(),
-                        meeter.getMeeterSurname(), newPassword));
-
-                Transport.send(message);
-
-            } catch (MessagingException mex) {
-                logger.log(Level.SEVERE, "PasswordRecoveryService:doPost() - Error: " + mex.getMessage());
+            for (Map.Entry<String, String> entry : tokens.entrySet()) {
+                if (entry.getValue().equals(receiverEmail)) {
+                    tokenToRemove = entry.getKey();
+                }
             }
+
+            if (tokenToRemove != null) {
+                tokens.remove(tokenToRemove);
+            }
+
+            String token = this.generatePasswordOrToken(32, 64, true);
+
+            while (tokens.containsKey(token)) {
+                token = this.generatePasswordOrToken(32, 64, true);
+            }
+
+            tokens.put(token, meeter.getEmail());
+
+            String link = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath()
+                    + "/PasswordRecoveryService?pwdTkn=" + token;
+
+            this.sendEmail(meeter.getEmail(), "OpenMeet | Password Recovery", String.format("Hi %s %s.<br>You have requested a new password. " +
+                            "Follow this link to reset your password: <a named=\"%s\" id=\"%s\" href=\"%s\">here</a>.<br>" +
+                            "If you did not request a new password, ignore this email.", meeter.getMeeterName(), meeter.getMeeterSurname()
+                    , token, token, link));
+
 
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "PasswordRecoveryService:doPost() - Error: " + e.getMessage());
@@ -85,18 +131,61 @@ public class PasswordRecoveryService extends HttpServlet {
 
     }
 
-    private String generatePassword() {
-        String characters = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        StringBuilder password = new StringBuilder();
-        int minLength = 8;
-        int maxLength = 17; // 17 because bound in nextInt is exclusive
-        Random random = new Random();
-        int passwordLength = random.nextInt(minLength, maxLength);
+    private void sendEmail(String to, String subject, String body) {
+        Properties properties = System.getProperties();
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
 
-        for (int i = 0; i < passwordLength; i++) {
-            password.append(characters.charAt(random.nextInt(characters.length())));
+        Session session = Session.getInstance(
+                properties,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(from, "tohybegjuqpwbzji");
+                    }
+                });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+
+            message.addHeader("Content-type", "text/HTML; charset=UTF-8");
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject(subject);
+
+            Multipart multipart = new MimeMultipart();
+
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent(body, "text/html");
+
+            multipart.addBodyPart(messageBodyPart);
+
+            message.setContent(multipart);
+
+            Transport.send(message);
+
+        } catch (MessagingException mex) {
+            logger.log(Level.SEVERE, "PasswordRecoveryService:doPost() - Error: " + mex.getMessage());
+        }
+    }
+
+    private String generatePasswordOrToken(int minLength, int maxLength, boolean isToken) {
+        // password only
+        String characters = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        if (isToken) {
+            characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#@!$&'()*+,;=";
         }
 
-        return password.toString();
+        StringBuilder token = new StringBuilder();
+        Random random = new Random();
+        int tokenLength = random.nextInt(minLength, maxLength);
+
+        for (int i = 0; i < tokenLength; i++) {
+            token.append(characters.charAt(random.nextInt(characters.length())));
+        }
+
+        return token.toString();
     }
 }

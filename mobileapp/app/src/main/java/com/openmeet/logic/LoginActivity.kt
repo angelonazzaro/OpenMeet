@@ -125,6 +125,7 @@ class LoginActivity : AppCompatActivity() {
                 "http://" + getString(R.string.request_server_address) + "PasswordRecoveryService",
                 hashMapOf(
                     "email" to email,
+                    "action" to "send-recovery-link"
                 ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
