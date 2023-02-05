@@ -62,19 +62,28 @@
 <%@ include file="templates/footer.jsp" %>
 
 <% if (!view.contains("login.jsp")) { %>
-    <%-- everytime it's not possibile loading the user profile pic, load the default one--%>
-    <script>
-        const defaultPic = getBaseURL() + "assets/imgs/special/userplaceholder.png";
-        document.querySelectorAll(".show-on-error-imgs").forEach(item => {
-            item.addEventListener('error', function () {
-                // keeping it from going into an infinite loop
-                if (this.getAttribute("src") === defaultPic) {
-                    return;
-                }
-                this.src = defaultPic;
-            })
+<%-- everytime it's not possibile loading the user profile pic, load the default one--%>
+<script>
+    const defaultPic = getBaseURL() + "assets/imgs/special/userplaceholder.png";
+    document.querySelectorAll(".show-on-error-imgs").forEach(item => {
+        item.addEventListener('error', function () {
+            // keeping it from going into an infinite loop
+            if (this.getAttribute("src") === defaultPic) {
+                return;
+            }
+
+            <%-- Since this event isn't always registered. Once it gets registered I am gonna set the profile pic
+            in the session as the default one--%>
+            <% String moderatorProfilePic = request.getContextPath() + File.separator + "assets" + File.separator + "imgs" + File.separator
+            + "special" + File.separator + "userplaceholder.png"; %>
+            <% Moderator moderator = (Moderator) request.getSession().getAttribute("user"); %>
+            <% moderator.setProfilePic(moderatorProfilePic); %>
+            <% request.getSession().setAttribute("user", moderator); %>
+
+            this.src = defaultPic;
         })
-    </script>
+    })
+</script>
 <% } %>
 
 <% if (!view.contains("settings") && !view.contains("dashboard") && !view.contains("login")) { %>

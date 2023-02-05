@@ -4,6 +4,7 @@ import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.ban.BanDAO;
 import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.data.report.Report;
+import com.openmeet.shared.helpers.ResponseHelper;
 import com.openmeet.shared.utils.MultiMapList;
 import com.openmeet.shared.utils.QueryJoinExecutor;
 import com.openmeet.webapp.dataLayer.moderator.Moderator;
@@ -14,8 +15,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.List;
 
 public class BanServlet extends HttpServlet {
     @Override
@@ -29,19 +33,13 @@ public class BanServlet extends HttpServlet {
         MultiMapList<String, String> data = new MultiMapList<>();
 
         try {
-            /*
-            SELECT Report.*, CONCAT(Meeter.meeterName, ' ', Meeter.meeterSurname) AS meeterfullName, Meeter.email
-            FROM Report JOIN Meeter ON Meeter.id = Report.meeterReported
-            WHERE Report.isArchived = FALSE
-            */
             data = qjx.doRetrivedByJoin(
                     String.format(
                             "SELECT %s.*, CONCAT(%s, ' ', %s) AS meeterfullName, %s " +
                                     "FROM %s JOIN %s ON %s = %s " +
-                                    "WHERE %s = FALSE",
-                            Report.REPORT, Meeter.MEETER_MEETER_NAME, Meeter.MEETER_MEETER_SURNAME, Meeter.MEETER_EMAIL,
-                            Report.REPORT, Meeter.MEETER, Meeter.MEETER_ID, Report.REPORT_MEETER_REPORTED,
-                            Report.REPORT_IS_ARCHIVED));
+                                    "ORDER BY %s DESC",
+                            Ban.BAN, Meeter.MEETER_MEETER_NAME, Meeter.MEETER_MEETER_SURNAME, Meeter.MEETER_EMAIL,
+                            Ban.BAN, Meeter.MEETER, Meeter.MEETER_ID, Ban.BAN_MEETER_ID, Ban.BAN_START_TIME));
 
         } catch (SQLException e) {
             resp.sendError(500, "Internal Server Error");
@@ -64,7 +62,30 @@ public class BanServlet extends HttpServlet {
             endTime = Timestamp.valueOf(strEndTime);
         }
 
+        PrintWriter out = resp.getWriter();
+
         BanDAO banDAO = new BanDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        // Check if the metter already has a ban in the same period or has been permanently banned
+        try {
+            List<Ban> meeterBans = banDAO.doRetrieveByCondition(String.format("%s = %d AND (%s IS NULL)",
+                    Ban.BAN_MEETER_ID, meeterId, Ban.BAN_END_TIME));
+
+            // user is already banned
+            if (!meeterBans.isEmpty()) {
+                HashMap<String, String> values = new HashMap<>();
+
+                values.put("status", "error");
+                values.put("msg", "The meeter is already banned!");
+
+                ResponseHelper.sendGenericResponse(out, values);
+                return;
+            }
+
+        } catch (SQLException e) {
+            ResponseHelper.sendGenericError(out);
+            return;
+        }
+
         Moderator user = (Moderator) req.getSession(false).getAttribute("user");
         Ban ban = new Ban();
 
@@ -80,8 +101,7 @@ public class BanServlet extends HttpServlet {
                 resp.sendRedirect(String.valueOf(req.getRequestURL()));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            ResponseHelper.sendGenericError(out);
         }
-
     }
 }
