@@ -26,10 +26,14 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.31'
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.google.guava:guava:31.1-jre'
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+    implementation group: 'javax.activation', name: 'javax.activation-api', version: '1.2.0'
+
     compileOnly('jakarta.servlet:jakarta.servlet-api:5.0.0')
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
 }
 
 test {

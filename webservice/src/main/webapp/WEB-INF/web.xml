@@ -76,4 +76,13 @@
         <url-pattern>/RatingService</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PasswordRecoveryService</servlet-name>
+        <servlet-class>com.openmeet.webservice.services.PasswordRecoveryService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PasswordRecoveryService</servlet-name>
+        <url-pattern>/PasswordRecoveryService</url-pattern>
+    </servlet-mapping>
+
 </web-app>
