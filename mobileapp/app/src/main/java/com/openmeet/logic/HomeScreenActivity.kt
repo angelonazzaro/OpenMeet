@@ -117,12 +117,10 @@ class HomeScreenActivity : AppCompatActivity() {
                 .setView(view)
                 .setTitle(R.string.report_dialog_title)
                 .setPositiveButton(resources.getString(R.string.report_positive_dialog)) { dialog, which ->
-
-
                     //Toast.makeText(this, intent.getStringExtra("ID").toString(), Toast.LENGTH_SHORT).show()
                     doReportMeeter(view.findViewById<RadioGroup>(R.id.radioReportGroup).checkedRadioButtonId, Integer.parseInt(intent.getStringExtra("ID")), meeterList[listIndex].id)
-
                 }
+                .setNegativeButton(resources.getString(R.string.cancel_dialog)) { dialog, which -> }
                 .show()
         }
 

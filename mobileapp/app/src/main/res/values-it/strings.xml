@@ -73,4 +73,5 @@
     <string name="banned_dialog_message">Hai scoperto il martello del ban, complimenti.</string>
     <string name="banned_dialog_description">Motivo:</string>
     <string name="banned_dialog_expiry">Scade il:</string>
+    <string name="cancel_dialog">Annulla</string>
 </resources>
