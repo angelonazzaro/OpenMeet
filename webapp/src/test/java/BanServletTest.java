@@ -1,29 +1,27 @@
 import com.google.gson.Gson;
+import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.ban.BanDAO;
 import com.openmeet.shared.helpers.JSONResponse;
 import com.openmeet.webapp.dataLayer.moderator.Moderator;
 import com.openmeet.webapp.logicLayer.BanServlet;
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.apache.catalina.Context;
-import org.apache.catalina.LifecycleException;
-import org.apache.catalina.startup.Tomcat;
-import org.junit.jupiter.api.AfterAll;
+import org.apache.commons.dbcp.BasicDataSource;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,45 +31,45 @@ import static org.mockito.Mockito.when;
  */
 public final class BanServletTest {
 
-    static Tomcat tomcat;
-
-    HttpURLConnection connection;
-    BanServlet banServlet;
-    HttpServletRequest request;
-    HttpServletResponse response;
-    HttpSession session;
-    BanDAO banDAO;
-    Moderator moderator;
-    StringWriter stringWriter;
-    PrintWriter writer;
-    JSONResponse jsonResponse;
-    Gson gson;
+     BasicDataSource dataSource;
+     BanServlet banServlet;
+     HttpServletRequest request;
+     HttpServletResponse response;
+     HttpSession session;
+     BanDAO banDAO;
+     Moderator moderator;
+     StringWriter stringWriter;
+     PrintWriter writer;
+     JSONResponse jsonResponse;
+     Gson gson;
 
     @BeforeEach
-    public void setUpServletContext() throws LifecycleException, IOException {
-        tomcat = new Tomcat();
-        tomcat.setPort(8080);
-        tomcat.start();
+    public void setUp() throws ServletException {
+        dataSource = new BasicDataSource();
 
-        Context context = tomcat.addContext("/", System.getProperty("java.io.tmpdir"));
-        Tomcat.addServlet(context, "BanServlet", "com.openmeet.webapp.logicLayer.BanServlet");
-        context.addServletMappingDecoded("/ban", "BanServlet");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeet");
+        dataSource.setUsername("remote_usr");
+        dataSource.setPassword("cicciobello123");
 
-        URL url = new URL("http://localhost:8080/Gradle___com_openmeet___openmeet_webapp_1_0_SNAPSHOT_war__exploded_/ban");
-        connection = (HttpURLConnection) url.openConnection();
-
-        connection.setRequestMethod("POST");
-        connection.setDoOutput(true);
-    }
-
-    @BeforeEach
-    public void setUp() {
         banServlet = new BanServlet();
+        ServletContext servletContext = mock(ServletContext.class);
+        ServletConfig servletConfig = mock(ServletConfig.class);
+
+        when(servletContext.getAttribute("DataSource")).thenReturn(dataSource);
+        when(servletConfig.getServletContext()).thenReturn(servletContext);
+
+        banServlet.init(servletConfig);
+
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
         session = mock(HttpSession.class);
         banDAO = mock(BanDAO.class);
-        moderator = mock(Moderator.class);
+        moderator = new Moderator();
+
+        moderator.setEmail("prova@email.com");
+        moderator.setId(1);
+
         stringWriter = new StringWriter();
         writer = new PrintWriter(stringWriter);
         jsonResponse = new JSONResponse();
@@ -84,12 +82,13 @@ public final class BanServletTest {
         when(session.getAttribute("user")).thenReturn(moderator);
     }
 
-    @AfterAll
-    public static void tearDown() throws LifecycleException {
-        tomcat.stop();
+    @AfterEach
+    public void clear() throws SQLException {
+        banDAO = new BanDAO(dataSource);
+        banDAO.doDelete(String.format("%s = 1", Ban.BAN_MEETER_ID));
     }
 
-    @Test
+    @Test @Order(1)
     public void testInvalidDescriptionLengthInferior() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn(null);
@@ -106,7 +105,7 @@ public final class BanServletTest {
         assertEquals(gson.toJson(jsonResponse.getResponse()), stringWriter.toString());
     }
 
-    @Test
+    @Test @Order(2)
     public void testInvalidDescriptionLengthSuperior() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn(null);
@@ -128,40 +127,53 @@ public final class BanServletTest {
         assertEquals(gson.toJson(jsonResponse.getResponse()), stringWriter.toString());
     }
 
-    @Test
+    @Test @Order(3)
     public void testValidDescriptionLength() throws IOException {
 
-        String requestBody = "meeterId=1&endTime=&description=Too many reports for spam";
-        OutputStream outputStream = connection.getOutputStream();
-        outputStream.write(requestBody.getBytes(StandardCharsets.UTF_8));
-        outputStream.flush();
+        when(request.getParameter("meeterId")).thenReturn("1");
+        when(request.getParameter("endTime")).thenReturn(null);
+        when(request.getParameter("description")).thenReturn("Too many reports for spam");
 
-        assertTrue(connection.getHeaderField("Content-type").contains("text/html"));
-        assertEquals(200, connection.getResponseCode());
+        when(response.getWriter()).thenReturn(writer);
+
+        banServlet.doPost(request, response);
+        writer.flush();
+
+        assertEquals("Ban Saved", stringWriter.toString());
     }
 
-    @Test
+    @Test @Order(4)
     public void testInvalidEndTime() throws IOException {
-        String requestBody = "meeterId=1&endTime=2022-11-24T13:02&description=Too many reports for spam";
-        connection.setRequestProperty("Content-type", "application/json");
+        when(request.getParameter("meeterId")).thenReturn("1");
+        when(request.getParameter("endTime")).thenReturn("2022-11-24T13:02");
+        when(request.getParameter("description")).thenReturn("Too many reports for spam");
 
-        OutputStream outputStream = connection.getOutputStream();
-        outputStream.write(requestBody.getBytes(StandardCharsets.UTF_8));
-        outputStream.flush();
+        when(response.getWriter()).thenReturn(writer);
 
-        assertTrue(connection.getHeaderField("Content-type").contains("text/html"));
-        assertEquals(200, connection.getResponseCode());
+        banServlet.doPost(request, response);
+        writer.flush();
+
+        jsonResponse.addPair("status", "error");
+        jsonResponse.addPair("message", "An error occurred, please try again later.");
+
+        assertEquals(gson.toJson(jsonResponse.getResponse()), stringWriter.toString());
     }
 
-    @Test
+    @Test @Order(5)
     public void testCorrectBan() throws IOException {
-        String requestBody = "meeterId=1&endTime=2024-06-02T12:39&description=Too many reports for spam";
-        OutputStream outputStream = connection.getOutputStream();
-        outputStream.write(requestBody.getBytes(StandardCharsets.UTF_8));
-        outputStream.flush();
+        when(request.getParameter("meeterId")).thenReturn("1");
+        when(request.getParameter("endTime")).thenReturn("2024-11-24T13:02");
+        when(request.getParameter("description")).thenReturn("Too many reports for spam");
 
-        assertTrue(connection.getHeaderField("Content-type").contains("text/html"));
-        assertEquals(200, connection.getResponseCode());
+        when(response.getWriter()).thenReturn(writer);
+
+        banServlet.doPost(request, response);
+        writer.flush();
+
+        jsonResponse.addPair("status", "error");
+        jsonResponse.addPair("message", "An error occurred, please try again later.");
+
+        assertEquals("Ban Saved", stringWriter.toString());
     }
 
 }
