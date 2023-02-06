@@ -86,9 +86,7 @@ public class ResponseHelper {
      * */
     public static void sendGenericResponse(PrintWriter out, HashMap<String, String> pairs) {
 
-        pairs.entrySet().forEach(entry -> {
-            jsonResponse.addPair(entry.getKey(), entry.getValue());
-        });
+        pairs.forEach(jsonResponse::addPair);
 
         writeResponse(out);
     }
