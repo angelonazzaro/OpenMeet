@@ -14,8 +14,8 @@ ext {
     junitVersion = '5.8.2'
 }
 
-sourceCompatibility = "1.9"
-targetCompatibility = "1.9"
+sourceCompatibility = "11"
+targetCompatibility = "11"
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -30,7 +30,6 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.31'
     implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.google.guava:guava:31.1-jre'
-//    implementation 'org.jacoco:jacoco-maven-plugin:0.8.8'
 
     testImplementation 'org.apache.tomcat:tomcat-catalina:9.0.70'
     testImplementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'

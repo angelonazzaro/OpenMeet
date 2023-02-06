@@ -17,10 +17,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 public class BanServlet extends HttpServlet {
+
+    private static DataSource ds;
+
+    @Override
+    public void init() {
+        ds = (DataSource) getServletContext().getAttribute("DataSource");
+        System.out.println(ds);
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("view", "bans");
@@ -63,24 +75,37 @@ public class BanServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String description = req.getParameter("description");
         String strEndTime = req.getParameter("endTime");
         int meeterId = Integer.parseInt(req.getParameter("meeterId"));
 
+        PrintWriter out = resp.getWriter();
+
+        if (description.length() < 1 || description.length() > 255) {
+            ResponseHelper.sendGenericError(out);
+            return;
+        }
+
         Timestamp endTime = null;
 
         if (strEndTime != null && strEndTime.length() > 0) {
-            endTime = Timestamp.valueOf(strEndTime);
+            SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            try {
+                Date date = sf.parse(strEndTime);
+                endTime = new Timestamp(date.getTime());
+            } catch (ParseException e) {
+                resp.setContentType("application/json");
+                ResponseHelper.sendGenericError(out);
+                return;
+            }
         }
-
-        PrintWriter out = resp.getWriter();
 
         BanDAO banDAO = new BanDAO((DataSource) getServletContext().getAttribute("DataSource"));
 
         // if banId is set, modify the ban associated
         if (req.getParameter("banId") != null) {
-            int banId = Integer.parseInt((String) req.getParameter("banId"));
+            int banId = Integer.parseInt(req.getParameter("banId"));
 
             try {
                 List<Ban> bans = banDAO.doRetrieveByCondition(String.format("%s = %d", Ban.BAN_ID, banId));
@@ -89,6 +114,7 @@ public class BanServlet extends HttpServlet {
                     Ban ban = bans.get(0);
 
                     if (endTime != null && ban.getStartTime().after(endTime)) {
+                        resp.setContentType("application/json");
                         ResponseHelper.sendGenericError(out);
                         return;
                     }
@@ -103,13 +129,14 @@ public class BanServlet extends HttpServlet {
                 }
 
             } catch (SQLException e) {
+                resp.setContentType("application/json");
                 ResponseHelper.sendGenericError(out);
                 return;
             }
 
         }
 
-        // Check if the metter already has a ban in the same period or has been permanently banned
+        // Check if the meeter has a ban already in the same period or has been permanently banned
         try {
             List<Ban> meeterBans = banDAO.doRetrieveByCondition(String.format("%s = %d AND (%s IS NULL)",
                     Ban.BAN_MEETER_ID, meeterId, Ban.BAN_END_TIME));
@@ -121,30 +148,43 @@ public class BanServlet extends HttpServlet {
                 values.put("status", "error");
                 values.put("msg", "The meeter is already banned!");
 
+                resp.setContentType("application/json");
                 ResponseHelper.sendGenericResponse(out, values);
                 return;
             }
 
         } catch (SQLException e) {
+            resp.setContentType("application/json");
             ResponseHelper.sendGenericError(out);
             return;
         }
 
         Moderator user = (Moderator) req.getSession(false).getAttribute("user");
         Ban ban = new Ban();
+        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
         ban.setModeratorId(user.getId());
         ban.setDescription(description);
         ban.setMeeterId(meeterId);
-        ban.setStartTime(new Timestamp(System.currentTimeMillis()));
+        ban.setStartTime(currentTime);
 
-        if (endTime != null) ban.setEndTime(endTime);
+        if (endTime != null) {
+
+            if (endTime.before(currentTime)) {
+                resp.setContentType("application/json");
+                ResponseHelper.sendGenericError(out);
+                return;
+            }
+
+            ban.setEndTime(endTime);
+        }
 
         try {
             if (banDAO.doSave(ban)) {
                 resp.sendRedirect(String.valueOf(req.getRequestURL()));
             }
         } catch (SQLException e) {
+            resp.setContentType("application/json");
             ResponseHelper.sendGenericError(out);
         }
     }
