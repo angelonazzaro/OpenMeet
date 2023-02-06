@@ -63,6 +63,7 @@
 
     <string name="positive_dialog">Ok</string>
     <string name="negative_dialog">No</string>
+    <string name="cancel_dialog">Cancel</string>
     <string name="retry_dialog">"Retry"</string>
 
     <string name="homescreen_chat_title">Chats</string>

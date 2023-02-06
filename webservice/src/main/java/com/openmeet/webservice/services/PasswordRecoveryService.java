@@ -32,6 +32,7 @@ public class PasswordRecoveryService extends HttpServlet {
 
         if (token == null || token.length() < 32 || token.length() > 64 || !tokens.containsKey(token)) {
             response.sendError(404, "Page Not Found");
+            return;
         }
 
         MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
@@ -108,11 +109,11 @@ public class PasswordRecoveryService extends HttpServlet {
                 tokens.remove(tokenToRemove);
             }
 
-            String token = this.generatePasswordOrToken(32, 64, true);
+            String token;
 
-            while (tokens.containsKey(token)) {
+            do{
                 token = this.generatePasswordOrToken(32, 64, true);
-            }
+            } while (tokens.containsKey(token));
 
             tokens.put(token, meeter.getEmail());
 
@@ -170,12 +171,13 @@ public class PasswordRecoveryService extends HttpServlet {
         }
     }
 
+    //CRIMINALE
     private String generatePasswordOrToken(int minLength, int maxLength, boolean isToken) {
         // password only
         String characters = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
         if (isToken) {
-            characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~:/?#@!$&'()*+,;=";
+            characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@$~-_"; /*&'-._~:/?#@!$()*+,;=*/
         }
 
         StringBuilder token = new StringBuilder();
