@@ -26,7 +26,7 @@
                         Leave it blank to make it a permanent ban.
                     </div>
                     <input type="hidden" name="meeterId" id="meeter-to-ban">
-                    <input type="hidden" name="banId" id="ban-id">
+                    <input type="hidden" name="banId" id="ban-id" disabled>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

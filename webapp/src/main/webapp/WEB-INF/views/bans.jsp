@@ -63,7 +63,11 @@
             endTime.value = this.getAttribute("data-ban-end-time");
         }
 
-       banId.value = this.getAttribute("data-ban-id");
+        banId.value = this.getAttribute("data-ban-id");
+        if (banId.hasAttribute("disabled")) {
+            banId.removeAttribute("disabled");
+        }
+
     });
 </script>
 <% } %>
