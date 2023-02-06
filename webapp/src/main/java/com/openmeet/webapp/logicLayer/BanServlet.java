@@ -27,11 +27,11 @@ public class BanServlet extends HttpServlet {
 
     private static DataSource ds;
 
-    @Override
-    public void init() {
-        ds = (DataSource) getServletContext().getAttribute("DataSource");
-        System.out.println(ds);
-    }
+//    @Override
+//    public void init() {
+//        ds = (DataSource) getServletContext().getAttribute("DataSource");
+//        System.out.println(ds);
+//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -160,13 +160,13 @@ public class BanServlet extends HttpServlet {
         }
 
         Moderator user = (Moderator) req.getSession(false).getAttribute("user");
-        Ban ban = new Ban();
+        HashMap<String, String> ban = new HashMap<>();
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
-        ban.setModeratorId(user.getId());
-        ban.setDescription(description);
-        ban.setMeeterId(meeterId);
-        ban.setStartTime(currentTime);
+        ban.put(Ban.BAN_MODERATOR_ID, String.valueOf(user.getId()));
+        ban.put(Ban.BAN_DESCRIPTION, description);
+        ban.put(Ban.BAN_MEETER_ID, String.valueOf(meeterId));
+        ban.put(Ban.BAN_START_TIME, String.valueOf(currentTime));
 
         if (endTime != null) {
 
@@ -176,11 +176,12 @@ public class BanServlet extends HttpServlet {
                 return;
             }
 
-            ban.setEndTime(endTime);
+            ban.put(Ban.BAN_END_TIME, String.valueOf(endTime));
         }
 
         try {
             if (banDAO.doSave(ban)) {
+                out.write("Ban Saved");
                 resp.sendRedirect(String.valueOf(req.getRequestURL()));
             }
         } catch (SQLException e) {
