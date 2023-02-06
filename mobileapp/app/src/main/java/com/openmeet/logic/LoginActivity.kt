@@ -18,7 +18,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.data.ban.BanProxyDAO
 import com.openmeet.data.meeter.MeeterProxyDAO
+import com.openmeet.shared.data.ban.Ban
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.storage.DAO
 import com.openmeet.shared.utils.PasswordEncrypter
@@ -53,10 +55,11 @@ class LoginActivity : AppCompatActivity() {
         /*
             roberto.st@gmail.com; test
          */
-        val email = emailFld.editText?.text.toString()
+
 
         loginBtn.setOnClickListener {
 
+            val email = emailFld.editText?.text.toString()
             val pwd = pswFld.editText?.text.toString()
 
 
@@ -73,13 +76,31 @@ class LoginActivity : AppCompatActivity() {
                     if(ret.size == 0)
                         Snackbar.make(snackbarView, R.string.login_failed, Snackbar.LENGTH_SHORT).show()
                     else{
-                        //Saving credentials to remember the user.
-                        UserEncryptedData(this).storeCredentials(email, pwd)
-                        //Aggiungere verifica registrazione pt.2
-                        startActivity(
-                            Intent(this, HomeScreenActivity::class.java).putExtra("ID", ret[0].id.toString())
-                        )
-                        overridePendingTransition(0, 0)
+                        val meeterID = ret[0].id.toString()
+                        val ban = checkBan(meeterID)
+                        if(ban == null){
+                            //Saving credentials to remember the user.
+                            UserEncryptedData(this).storeCredentials(email, pwd)
+                            //Aggiungere verifica registrazione pt.2
+                            startActivity(
+                                Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)
+                            )
+                            overridePendingTransition(0, 0)
+                        }
+                        else{
+                            runOnUiThread {
+                                MaterialAlertDialogBuilder(this)
+                                    .setTitle(R.string.banned_dialog_title)
+                                    .setMessage(
+                                        "${getString(R.string.banned_dialog_message)}\n\n" +
+                                                "${getString(R.string.banned_dialog_description)} ${ban.description}\n" +
+                                                "${getString(R.string.banned_dialog_expiry)} ${ban.endTime}"
+                                    )
+                                    .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                                    .show()
+                            }
+                        }
+
                     }
 
                runOnUiThread {
@@ -90,6 +111,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         registrationTxt.setOnClickListener {
+            val email = emailFld.editText?.text.toString()
             startActivity(
                 Intent(this, RegistrationActivity::class.java).putExtra("email", email)
             )
@@ -97,8 +119,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         recoverPassTxt.setOnClickListener {
+            val email = emailFld.editText?.text.toString()
             MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.recovery_dialog_title)
+                .setTitle("${getString(R.string.recovery_dialog_title)} $email")
                 .setMessage(R.string.recovery_dialog_message)
                 .setNegativeButton(R.string.negative_dialog){ dialog, which -> }
                 .setPositiveButton(R.string.positive_dialog){ dialog, which ->
@@ -145,5 +168,15 @@ class LoginActivity : AppCompatActivity() {
 
                 }
             )
+    }
+
+    fun checkBan(meeterID: String): Ban?{
+        val ret = BanProxyDAO(this).doRetrieveByCondition(
+            "${Ban.BAN_MEETER_ID} = $meeterID AND ${Ban.BAN_END_TIME} > CURDATE()")
+
+        Log.d("Existing bans", ret.toString())
+        if(ret != null && ret.size > 0)
+            return ret[0]
+        return null
     }
 }

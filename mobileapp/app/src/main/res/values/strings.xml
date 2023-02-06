@@ -50,6 +50,11 @@
     <string name="login_failed_email">Check your email.</string>
     <string name="login_failed_password">Check your password.</string>
 
+    <string name="banned_dialog_title">You\'ve been a bad kid! 🔨</string>
+    <string name="banned_dialog_message">You\'ve been banned.</string>
+    <string name="banned_dialog_description">Reason:</string>
+    <string name="banned_dialog_expiry">Expires on:</string>
+
     <string name="warn_title">Something went wrong…</string>
     <string name="GPS_disabled_message">Your GPS seems to be disabled, please activate it to continue.</string>
 
@@ -64,7 +69,7 @@
     <string name="homescreen_discover_title">Discover</string>
     <string name="homescreen_user_title">User</string>
 
-    <string name="recovery_dialog_title">An email with a new password will be sent to</string>
+    <string name="recovery_dialog_title">An email with recovery instructions will be sent to</string>
     <string name="recovery_dialog_message">Do you wish to continue?</string>
 
     <string name="completed_recovery_dialog_title">Email sent! 📬</string>
