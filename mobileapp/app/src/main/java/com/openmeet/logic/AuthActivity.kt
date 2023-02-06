@@ -3,6 +3,7 @@ package com.openmeet.logic
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -15,16 +16,20 @@ import com.facebook.login.LoginBehavior
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.data.ban.BanProxyDAO
 import com.openmeet.data.meeter.MeeterProxyDAO
+import com.openmeet.shared.data.ban.Ban
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.meeter.MeeterDAO
 import com.openmeet.shared.utils.PasswordEncrypter
 import com.openmeet.utils.UserEncryptedData
 import org.json.JSONObject
 import java.security.InvalidParameterException
+import java.sql.Timestamp
 
 
 class AuthActivity : AppCompatActivity() {
@@ -153,10 +158,27 @@ class AuthActivity : AppCompatActivity() {
                             .show()
                     else {
                         //Go To HomePage
-                        startActivity(
-                            Intent(this, HomeScreenActivity::class.java).putExtra("ID", ret[0].id.toString())
-                        )
-                        overridePendingTransition(0, 0)
+                        val meeterID = ret[0].id.toString()
+                        val ban = checkBan(meeterID)
+                        if(ban == null){
+                            startActivity(
+                                Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)
+                            )
+                            overridePendingTransition(0, 0)
+                        }
+                        else{
+                            runOnUiThread {
+                                MaterialAlertDialogBuilder(this)
+                                    .setTitle(R.string.banned_dialog_title)
+                                    .setMessage(
+                                        "${getString(R.string.banned_dialog_message)}\n\n" +
+                                        "${getString(R.string.banned_dialog_description)} ${ban.description}\n" +
+                                        "${getString(R.string.banned_dialog_expiry)} ${ban.endTime}"
+                                    )
+                                    .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                                    .show()
+                            }
+                        }
                     }
             }.start()
         }
@@ -173,5 +195,15 @@ class AuthActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun checkBan(meeterID: String): Ban?{
+        val ret = BanProxyDAO(this).doRetrieveByCondition(
+            "${Ban.BAN_MEETER_ID} = $meeterID AND ${Ban.BAN_END_TIME} > CURDATE()")
+
+        Log.d("Existing bans", ret.toString())
+        if(ret != null && ret.size > 0)
+            return ret[0]
+        return null
     }
 }
