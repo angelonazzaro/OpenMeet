@@ -153,7 +153,78 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/filterLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Filtri"
+                    android:textSize="22sp" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:id="@+id/LimitAgeLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Età"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/ageLimitSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="18.0"
+                    android:valueTo="100.0"
+                    app:values="@array/age_slider_values"
+                    android:stepSize="1.0"
+                    app:labelBehavior = "visible"/>
+
+                <TextView
+                    android:id="@+id/LimitDistanceLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Distanza (km)"
+                    android:textSize="18sp" />
+
+                <com.google.android.material.slider.RangeSlider
+                    android:id="@+id/distanceLimitSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stepSize="1.0"
+                    android:valueFrom="1.0"
+                    android:valueTo="1000.0"
+                    app:values="@array/distance_slider_values"
+                    app:labelBehavior = "visible"/>
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/logoutBtn"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:text="Logout" />
+
         </LinearLayout>
+
+
     </ScrollView>
 
     <LinearLayout
