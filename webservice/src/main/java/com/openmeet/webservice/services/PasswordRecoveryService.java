@@ -15,6 +15,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
@@ -74,7 +75,7 @@ public class PasswordRecoveryService extends HttpServlet {
 
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String receiverEmail = request.getParameter("email");
         String action = request.getParameter("action");
@@ -82,11 +83,13 @@ public class PasswordRecoveryService extends HttpServlet {
         if (!ResponseHelper.checkStringFields(receiverEmail, action)) return;
 
         MeeterDAO meeterDAO = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"));
+        PrintWriter out = response.getWriter();
 
         try {
             List<Meeter> meeterList = meeterDAO.doRetrieveByCondition(String.format("%s = '%s'", Meeter.MEETER_EMAIL, receiverEmail));
 
             if (meeterList.isEmpty()) {
+                out.write("Email not found");
                 logger.log(Level.INFO, "PasswordRecoveryService:doPost() - INFO: No Meeter with email '" + receiverEmail + "' found");
                 return;
             }
@@ -125,8 +128,8 @@ public class PasswordRecoveryService extends HttpServlet {
                             "If you did not request a new password, ignore this email.", meeter.getMeeterName(), meeter.getMeeterSurname()
                     , token, token, link));
 
-
-        } catch (SQLException e) {
+            out.write("Link Sent");
+        } catch (Exception e) {
             logger.log(Level.SEVERE, "PasswordRecoveryService:doPost() - Error: " + e.getMessage());
         }
 
