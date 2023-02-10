@@ -137,7 +137,13 @@ class HomeScreenActivity : AppCompatActivity() {
                 }
 
                 R.id.user_Tab -> {
-
+                    startActivity(
+                        Intent(this, HomeUserScreenActivity::class.java).putExtra(
+                            "ID",
+                            intent.getStringExtra("ID").toString()
+                        )
+                    )
+                    overridePendingTransition(0, 0)
                 }
             }
             true

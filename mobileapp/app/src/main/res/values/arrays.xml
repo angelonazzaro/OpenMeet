@@ -13,4 +13,12 @@
         <item>Non-Binary\'s</item>
         <item>Everybody</item>
     </string-array>
+    <array name="age_slider_values">
+        <item>18.0</item>
+        <item>100.0</item>
+    </array>
+    <array name="distance_slider_values">
+        <item>1.0</item>
+        <item>1000.0</item>
+    </array>
 </resources>
