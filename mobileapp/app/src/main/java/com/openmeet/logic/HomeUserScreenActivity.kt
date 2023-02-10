@@ -2,11 +2,15 @@ package com.openmeet.logic
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
@@ -25,13 +29,8 @@ class HomeUserScreenActivity: AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.selectedItemId = R.id.user_Tab
 
-
-
         val id = intent.getStringExtra("ID").toString()
         retrieveMeeter(id)
-
-
-
 
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -102,7 +101,42 @@ class HomeUserScreenActivity: AppCompatActivity() {
             runOnUiThread {
                 progressionIndicator.visibility = View.GONE
             }
+
+            updateUI()
+
         }.start()
+
+    }
+
+    fun updateUI() {
+
+        val nameField = findViewById<TextView>(R.id.nameField)
+        val surnameField = findViewById<TextView>(R.id.surnameField)
+        val ageField = findViewById<TextView>(R.id.ageField)
+        val biography = findViewById<TextInputLayout>(R.id.biographyField)
+        val gender = findViewById<TextInputLayout>(R.id.genderIdentityInput)
+        val searchingGender = findViewById<TextInputLayout>(R.id.genderOrientationInput)
+
+        nameField.text = meeter.meeterName
+        surnameField.text = meeter.meeterSurname
+        ageField.text = getAge(meeter.birthdate).toString()
+        if (meeter.biography == null)
+            biography.editText?.setText("test")
+        else
+            biography.editText?.setText(meeter.biography)
+//        when(meeter.gender) {
+//            'M' -> gender.editText?.setText("Male")
+//            'F' -> gender.editText?.setText("Female")
+//            'N' -> gender.editText?.setText("Non-Binary")
+//        }
+//        when(meeter.searchingGender) {
+//            'M' -> searchingGender.editText?.setText("Male")
+//            'F' -> searchingGender.editText?.setText("Female")
+//            'N' -> searchingGender.editText?.setText("Non-Binary")
+//            'B' -> searchingGender.editText?.setText("Both (Males & Females)")
+//            'A' -> searchingGender.editText?.setText("Everybody")
+//        }
+
 
     }
 
