@@ -174,6 +174,10 @@ public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
         Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         obj = builder.fromJson(request.getParameter("report"), Report.class);
 
+        if (obj.getReason().length() < 1 || obj.getReason().length() > 255) {
+            throw new InvalidParameterException("Invalid parameter length - reason");
+        }
+
         logger.log(Level.INFO, "ReportProxyDAO:doSave() - obj: " + obj);
 
         boolean isSuccessful = GenericProxyDAO.genericProxyDoSave(obj, dao, out);
@@ -189,6 +193,12 @@ public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
 
         Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         values = builder.fromJson(request.getParameter("values"), HashMap.class);
+
+        String reason = (String) values.get("reason");
+
+        if (reason.length() < 1 || reason.length() > 255) {
+            throw new InvalidParameterException("Invalid parameter length - reason");
+        }
 
         logger.log(Level.INFO, "ReportProxyDAO:doSave() - values: " + values);
 
