@@ -190,8 +190,7 @@
                     android:valueFrom="18.0"
                     android:valueTo="100.0"
                     app:values="@array/age_slider_values"
-                    android:stepSize="1.0"
-                    app:labelBehavior = "visible"/>
+                    android:stepSize="1.0"/>
 
                 <TextView
                     android:id="@+id/LimitDistanceLabel"
@@ -207,15 +206,75 @@
                     android:stepSize="1.0"
                     android:valueFrom="1.0"
                     android:valueTo="1000.0"
-                    app:values="@array/distance_slider_values"
-                    app:labelBehavior = "visible"/>
+                    app:values="@array/distance_slider_values"/>
 
+
+                <TextView
+                    android:id="@+id/genderLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textSize="18sp" />
+
+
+                <LinearLayout
+                    android:id="@+id/sexualPrefsLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    android:weightSum="19"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/instructionTxt">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/genderIdentityInput"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="9"
+                        android:hint="@string/genderIndentity_hint">
+
+                        <AutoCompleteTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            app:simpleItems="@array/gender_identity_items" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <android.widget.Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/genderOrientationInput"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="9"
+                        android:hint="@string/genderOrientation_hint">
+
+                        <AutoCompleteTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none"
+                            app:simpleItems="@array/gender_orientation_items" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <Button
                 android:id="@+id/logoutBtn"
                 style="?attr/materialButtonOutlinedStyle"
+                android:layout_marginTop="10dp"
                 android:layout_width="104dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -239,7 +298,8 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/homescreen_bottom_navigation" />
+            app:menu="@menu/homescreen_bottom_navigation"
+            />
 
     </LinearLayout>
 
