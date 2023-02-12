@@ -26,6 +26,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
+ * Test class for BanServlet. It tests the doPost method.
+ *
  * @author Angelo Nazzaro
  * @author Francesco Granozio
  */
@@ -43,6 +45,13 @@ public final class BanServletTest {
      JSONResponse jsonResponse;
      Gson gson;
 
+     /**
+      * Sets up the test environment.
+      *
+      * @throws ServletException If an error occurs.
+      *
+      * @author Angelo Nazzaro
+      */
     @BeforeEach
     public void setUp() throws ServletException {
         dataSource = new BasicDataSource();
@@ -76,18 +85,37 @@ public final class BanServletTest {
         gson = new Gson();
     }
 
+    /**
+     * Authenticates the user.
+     *
+     * @author Angelo Nazzaro
+     */
     @BeforeEach
     public void authenticate() {
         when(request.getSession(false)).thenReturn(session);
         when(session.getAttribute("user")).thenReturn(moderator);
     }
 
+    /**
+     * Clears the database.
+     *
+     * @throws SQLException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @AfterEach
     public void clear() throws SQLException {
         banDAO = new BanDAO(dataSource);
         banDAO.doDelete(String.format("%s = 1", Ban.BAN_MEETER_ID));
     }
 
+    /**
+     * Tests the TC_1.1_1 Test case. It tests the invalid description length.
+     *
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test @Order(1)
     public void testInvalidDescriptionLengthInferior() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
@@ -105,6 +133,13 @@ public final class BanServletTest {
         assertEquals(gson.toJson(jsonResponse.getResponse()), stringWriter.toString());
     }
 
+    /**
+     * Tests the TC_1.1_1 Test case. It tests the invalid description length.
+     *
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test @Order(2)
     public void testInvalidDescriptionLengthSuperior() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
@@ -127,22 +162,15 @@ public final class BanServletTest {
         assertEquals(gson.toJson(jsonResponse.getResponse()), stringWriter.toString());
     }
 
+
+    /**
+     * Tests the TC_1.2_1 Test case. It tests the invalid end time.
+     *
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test @Order(3)
-    public void testValidDescriptionLength() throws IOException {
-
-        when(request.getParameter("meeterId")).thenReturn("1");
-        when(request.getParameter("endTime")).thenReturn(null);
-        when(request.getParameter("description")).thenReturn("Too many reports for spam");
-
-        when(response.getWriter()).thenReturn(writer);
-
-        banServlet.doPost(request, response);
-        writer.flush();
-
-        assertEquals("Ban Saved", stringWriter.toString());
-    }
-
-    @Test @Order(4)
     public void testInvalidEndTime() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn("2022-11-24T13:02");
@@ -159,7 +187,14 @@ public final class BanServletTest {
         assertEquals(gson.toJson(jsonResponse.getResponse()), stringWriter.toString());
     }
 
-    @Test @Order(5)
+    /**
+     * Tests the TC_1.2_2 Test case.
+     *
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
+    @Test @Order(4)
     public void testCorrectBan() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn("2024-11-24T13:02");

@@ -1,6 +1,5 @@
 package com.openmeet.webapp.logicLayer;
 
-import com.google.gson.Gson;
 import com.openmeet.shared.data.meeter.Meeter;
 import com.openmeet.shared.data.report.Report;
 import com.openmeet.shared.data.report.ReportDAO;
@@ -13,11 +12,25 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import javax.sql.DataSource;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+/**
+ * Servlet that handles the archived reports functionality.
+ *
+ * @author Angelo Nazzaro
+ */
 public class ArchivedReportsServlet extends HttpServlet {
+    /**
+     * Get the archived reports and displays them.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws ServletException If an error occurs.
+     * @throws IOException      If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("view", "archivedReports");
@@ -29,11 +42,6 @@ public class ArchivedReportsServlet extends HttpServlet {
         MultiMapList<String, String> data = new MultiMapList<>();
 
         try {
-            /*
-            SELECT Report.*, CONCAT(Meeter.meeterName, ' ', Meeter.meeterSurname) AS meeterfullName, Meeter.email
-            FROM Report JOIN Meeter ON Meeter.id = Report.meeterReported
-            WHERE Report.isArchived = TRUE
-            */
             data = qjx.doRetrivedByJoin(
                     String.format(
                             "SELECT %s.*, CONCAT(%s, ' ', %s) AS meeterfullName, %s " +
@@ -52,6 +60,15 @@ public class ArchivedReportsServlet extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
 
+    /**
+     * Archives a report.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         int reportId = Integer.parseInt(req.getParameter("reportId"));

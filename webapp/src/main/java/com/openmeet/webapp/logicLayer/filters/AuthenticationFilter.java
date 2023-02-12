@@ -25,6 +25,9 @@ public class AuthenticationFilter implements Filter {
      * Checks if the user is authenticated.
      * If not, the user will be redirected to the login page.
      *
+     * @param req the request. It is used to get the session and the request URI.
+     * @param resp the response. It is used to redirect the user to the login page.
+     *
      * @author Angelo Nazzaro
      */
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
