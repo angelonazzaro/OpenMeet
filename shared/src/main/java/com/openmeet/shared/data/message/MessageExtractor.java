@@ -5,8 +5,25 @@ import com.openmeet.shared.data.storage.ResultSetExtractor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The extractor is used to convert the ResultSet returned by the database query into a Message object.
+ *
+ * @see ResultSetExtractor
+ *
+ * @author Angelo Nazzaro
+ * @author Francesco Granozio
+ */
 public class MessageExtractor implements ResultSetExtractor<Message> {
 
+    /**
+     * Returns a Message object from the result set.
+     *
+     * @param resultSet the result set deriving from the query statement.
+     * @return the Message object contained in the resultSet.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
+     */
     @Override
     public Message extract(ResultSet resultSet) throws SQLException {
 

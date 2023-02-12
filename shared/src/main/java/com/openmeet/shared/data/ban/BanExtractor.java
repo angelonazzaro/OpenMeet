@@ -5,7 +5,26 @@ import com.openmeet.shared.data.storage.ResultSetExtractor;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+/**
+ * The extractor is used to convert the ResultSet returned by the database query into a Ban object.
+ *
+ * @see ResultSetExtractor
+ *
+ * @author Angelo Nazzaro
+ * @author Francesco Granozio
+ */
 public class BanExtractor implements ResultSetExtractor<Ban> {
+
+    /**
+     * Returns a Ban object from the result set.
+     *
+     * @param resultSet the result set deriving from the query statement.
+     * @return the Ban object contained in the resultSet.
+     *
+     * @author Francesco Granozio
+     * @author Angelo Nazzaro
+     */
     @Override
     public Ban extract(ResultSet resultSet) throws SQLException {
 

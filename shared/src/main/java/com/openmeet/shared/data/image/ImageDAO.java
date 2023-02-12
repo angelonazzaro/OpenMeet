@@ -6,12 +6,7 @@ import com.openmeet.shared.data.storage.GenericDAO;
 import com.openmeet.shared.data.storage.SQLDAO;
 import com.openmeet.shared.exceptions.InvalidPrimaryKeyException;
 
-import javax.imageio.ImageIO;
 import javax.sql.DataSource;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;

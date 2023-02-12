@@ -24,6 +24,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
+ * Test class for ReportProxyDAO. It tests the doSave method.
+ *
  * @author Angelo Nazzaro
  */
 public class ReportProxyDAOTest {
@@ -41,6 +43,13 @@ public class ReportProxyDAOTest {
 
     Gson gson;
 
+    /**
+     * Sets up the test environment.
+     *
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @BeforeEach
     public void setUp() throws IOException {
         dataSource = new BasicDataSource();
@@ -63,12 +72,24 @@ public class ReportProxyDAOTest {
         reportProxyDAO = new ReportProxyDAO(new ReportDAO(dataSource), request, writer);
     }
 
+    /**
+     * Clears the test environment.
+     *
+     * @throws SQLException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @AfterEach
     public void clear() throws SQLException {
         when(request.getParameter("condition")).thenReturn(String.format("%s = 1", Report.REPORT_MEETER_REPORTED));
         reportProxyDAO.doDelete(null);
     }
 
+    /**
+     * Tests the TC_2.1_1 Test case. It tests the invalid description length.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test
     @Order(1)
     public void testInvalidReasonLength() {
@@ -88,6 +109,11 @@ public class ReportProxyDAOTest {
         assertEquals("Invalid parameter length - reason", exception.getMessage());
     }
 
+    /**
+     * Tests the TC_2.1_2 Test case.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test
     @Order(2)
     public void testValidReasonLength() throws SQLException {
@@ -103,6 +129,11 @@ public class ReportProxyDAOTest {
         assertTrue(reportProxyDAO.doSave(new Report()));
     }
 
+    /**
+     * Tests the TC_2.1_1 Test case. It tests the invalid description length with doSave hashmap variant.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test
     @Order(3)
     public void testInvalidReasonLengthHashMap() {
@@ -122,6 +153,11 @@ public class ReportProxyDAOTest {
         assertEquals("Invalid parameter length - reason", exception.getMessage());
     }
 
+    /**
+     * Tests the TC_2.1_2 Test case with doSave hashmap variant.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test
     @Order(3)
     public void testValidReasonLengthHashMap() throws SQLException {

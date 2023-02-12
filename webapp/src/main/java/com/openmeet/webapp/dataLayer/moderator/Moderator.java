@@ -6,6 +6,13 @@ import com.openmeet.shared.utils.PasswordEncrypter;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
+/**
+ * This class represents the Moderator Entity.
+ *
+ * @see IEntity
+ *
+ * @author Angelo Nazzaro
+ * */
 public class Moderator implements IEntity {
 
     public static final String MODERATOR = "Moderator";
@@ -26,6 +33,15 @@ public class Moderator implements IEntity {
 
     }
 
+    /**
+     * Returns the Moderator as an hashMap.
+     *
+     * @see IEntity
+     *
+     * @return the Moderator as an hashMap.
+     *
+     * @author Angelo Nazzaro
+     * */
     @Override
     public HashMap<String, ?> toHashMap() {
 
@@ -44,6 +60,16 @@ public class Moderator implements IEntity {
         };
     }
 
+    /**
+     * Returns the Moderator as an hashMap.
+     *
+     * @see IEntity
+     *
+     * @param fields the fields to be returned.
+     * @return the Moderator as an hashMap.
+     *
+     * @author Angelo Nazzaro
+     * */
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
@@ -89,42 +115,112 @@ public class Moderator implements IEntity {
                 '}';
     }
 
+    /**
+     * Returns the Moderator id.
+     *
+     * @return the Moderator id.
+     *
+     * @author Angelo Nazarro
+     * */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the Moderator id.
+     *
+     * @param id the Moderator id.
+     *
+     * @author Angelo Nazarro
+     * */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the Moderator email.
+     *
+     * @return the Moderator email.
+     *
+     * @author Angelo Nazarro
+     * */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets the Moderator email.
+     *
+     * @param email the Moderator email.
+     *
+     * @author Angelo Nazarro
+     * */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Returns the Moderator name.
+     *
+     * @return the Moderator name.
+     *
+     * @author Angelo Nazarro
+     * */
     public String getModeratorName() {
         return moderatorName;
     }
 
+    /**
+     * Sets the Moderator name.
+     *
+     * @param moderatorName the Moderator name.
+     *
+     * @author Angelo Nazarro
+     * */
     public void setModeratorName(String moderatorName) {
         this.moderatorName = moderatorName;
     }
 
+    /**
+     * Returns the Moderator surname.
+     *
+     * @return the Moderator surname.
+     *
+     * @author Angelo Nazarro
+     * */
     public String getModeratorSurname() {
         return moderatorSurname;
     }
 
+    /**
+     * Sets the Moderator surname.
+     *
+     * @param moderatorSurname the Moderator surname.
+     *
+     * @author Angelo Nazarro
+     * */
     public void setModeratorSurname(String moderatorSurname) {
         this.moderatorSurname = moderatorSurname;
     }
 
+    /**
+     * Returns the Moderator password encrypted with SHA1.
+     *
+     * @return the Moderator password.
+     *
+     * @author Angelo Nazarro
+     * */
     public String getPwd() {
         return pwd;
     }
 
+    /**
+     * Sets the Moderator password encrypted with SHA1.
+     *
+     * @param pwd the Moderator password.
+     *
+     * @author Angelo Nazarro
+     * */
     public void setPwd(String pwd) {
         try {
 
@@ -136,10 +232,24 @@ public class Moderator implements IEntity {
         }
     }
 
+    /**
+     * Returns the Moderator profile picture path.
+     *
+     * @return the Moderator profile picture path.
+     *
+     * @author Angelo Nazarro
+     * */
     public String getProfilePic() {
         return profilePic;
     }
 
+    /**
+     * Sets the Moderator profile picture path.
+     *
+     * @param profilePic the Moderator profile picture path.
+     *
+     * @author Angelo Nazarro
+     * */
     public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }

@@ -23,16 +23,23 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Servlet that handles the ban functionality.
+ *
+ * @author Angelo Nazzaro
+ */
 public class BanServlet extends HttpServlet {
 
-    private static DataSource ds;
-
-//    @Override
-//    public void init() {
-//        ds = (DataSource) getServletContext().getAttribute("DataSource");
-//        System.out.println(ds);
-//    }
-
+    /**
+     * Get the bans and displays them.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws ServletException If an error occurs.
+     * @throws IOException      If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("view", "bans");
@@ -74,6 +81,15 @@ public class BanServlet extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
 
+    /**
+     * Creates a new ban if the Meeter is not already banned.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String description = req.getParameter("description");

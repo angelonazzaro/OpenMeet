@@ -1,0 +1,5 @@
+com.openmeet.webapp
+com.openmeet.webapp.dataLayer.moderator
+com.openmeet.webapp.logicLayer
+com.openmeet.webapp.logicLayer.filters
+com.openmeet.webapp.test

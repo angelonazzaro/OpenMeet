@@ -20,6 +20,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
+ * Test class for PasswordRecoveryService
+ *
  * @author Angelo Nazzaro
  */
 public class PasswordRecoveryServiceTest {
@@ -35,6 +37,14 @@ public class PasswordRecoveryServiceTest {
 
     Gson gson;
 
+    /**
+     * Sets up the test environment.
+     *
+     * @throws IOException      If an error occurs.
+     * @throws ServletException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @BeforeEach
     public void setUp() throws IOException, ServletException {
         BasicDataSource dataSource = new BasicDataSource();
@@ -64,6 +74,11 @@ public class PasswordRecoveryServiceTest {
         when(response.getWriter()).thenReturn(writer);
     }
 
+    /**
+     * Tests the TC_3.1_1 Test case. It tests the presence of the email in the database.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test
     @Order(1)
     public void emailIsNotPresent() throws IOException {
@@ -75,6 +90,11 @@ public class PasswordRecoveryServiceTest {
         assertEquals("Email not found", stringWriter.toString());
     }
 
+    /**
+     * Tests the TC_3.1_2 Test case.
+     *
+     * @author Angelo Nazzaro
+     */
     @Test
     @Order(2)
     public void passwordRecovered() throws IOException {

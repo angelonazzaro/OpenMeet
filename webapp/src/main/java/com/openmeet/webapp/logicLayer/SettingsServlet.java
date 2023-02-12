@@ -18,12 +18,28 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Servlet that handles the settings functionality.
+ *
+ * @author Angelo Nazzaro
+ */
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1 MB
         maxFileSize = 1024 * 1024,      // 1 MB
         maxRequestSize = 1024 * 1024 * 5   // 5 MB
 )
 public class SettingsServlet extends HttpServlet {
+
+    /**
+     * Gets the settings values and displays them on the settings page.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws ServletException If an error occurs.
+     * @throws IOException      If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("view", "settings");
@@ -33,6 +49,15 @@ public class SettingsServlet extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
 
+    /**
+     * Updates the settings of the Moderator.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String name = req.getParameter("name");

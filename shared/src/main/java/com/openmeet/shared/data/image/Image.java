@@ -4,6 +4,14 @@ import com.openmeet.shared.data.storage.IEntity;
 
 import java.util.HashMap;
 
+/**
+ * This class represents the Image Entity.
+ *
+ * @see IEntity
+ *
+ * @author Angelo Nazzaro
+ * @author Francesco Granozio
+ * */
 public class Image implements IEntity {
 
     public static final String IMAGE = "Image";
@@ -18,6 +26,16 @@ public class Image implements IEntity {
 
     }
 
+    /**
+     * Returns the Image as an hashMap.
+     *
+     * @see IEntity
+     *
+     * @return the Image as an hashMap.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     @Override
     public HashMap<String, ?> toHashMap() {
 
@@ -28,6 +46,17 @@ public class Image implements IEntity {
         }};
     }
 
+    /**
+     * Returns the Image as an hashMap.
+     *
+     * @see IEntity
+     *
+     * @param fields the fields to be returned.
+     * @return the Image as an hashMap.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
@@ -57,26 +86,74 @@ public class Image implements IEntity {
                 '}';
     }
 
+    /**
+     * Returns the id of the Image.
+     *
+     * @return the id of the Image.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the id of the Image.
+     *
+     * @param id the id of the Image.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the path of the Image.
+     *
+     * @return the path of the Image.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public String getPath() {
         return path;
     }
 
+    /**
+     * Sets the path of the Image.
+     *
+     * @param path the path of the Image.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public void setPath(String path) {
         this.path = path;
     }
 
+    /**
+     * Returns the meeterId of the Image.
+     *
+     * @return the meeterId of the Image.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public int getMeeterId() {
         return meeterId;
     }
 
+    /**
+     * Sets the meeterId of the Image.
+     *
+     * @param meeterId the meeterId of the Image.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public void setMeeterId(int meeterId) {
         this.meeterId = meeterId;
     }

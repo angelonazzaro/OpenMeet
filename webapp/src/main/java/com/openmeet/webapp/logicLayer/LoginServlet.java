@@ -17,9 +17,23 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
-
+/**
+ * Servlet that handles the login functionality.
+ *
+ * @author Angelo Nazzaro
+ */
 public class LoginServlet extends HttpServlet {
 
+    /**
+     * Gets the login page.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws ServletException If an error occurs.
+     * @throws IOException      If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -35,6 +49,15 @@ public class LoginServlet extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/index.jsp").forward(req, resp);
     }
 
+    /**
+     * Handles the login functionality.
+     *
+     * @param req  The request object.
+     * @param resp The response object.
+     * @throws IOException If an error occurs.
+     *
+     * @author Angelo Nazzaro
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
@@ -87,6 +110,16 @@ public class LoginServlet extends HttpServlet {
         ResponseHelper.sendGenericResponse(out, values);
     }
 
+    /**
+     * Checks if the user is logged in.
+     *
+     * @see com.openmeet.webapp.logicLayer.filters.AuthenticationFilter
+     *
+     * @param req The request object.
+     * @return True if the user is logged in, false otherwise.
+     *
+     * @author Angelo
+     */
     private boolean isLogged(HttpServletRequest req) {
         HttpSession currentUserSession = req.getSession(false);
 
