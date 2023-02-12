@@ -8,6 +8,8 @@ import java.sql.SQLException;
 /**
  * The extractor is used to convert the ResultSet returned by the database query into a Message object.
  *
+ * @see ResultSetExtractor
+ *
  * @author Angelo Nazzaro
  * @author Francesco Granozio
  */

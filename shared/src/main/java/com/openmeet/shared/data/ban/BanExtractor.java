@@ -9,6 +9,8 @@ import java.sql.SQLException;
 /**
  * The extractor is used to convert the ResultSet returned by the database query into a Ban object.
  *
+ * @see ResultSetExtractor
+ *
  * @author Angelo Nazzaro
  * @author Francesco Granozio
  */

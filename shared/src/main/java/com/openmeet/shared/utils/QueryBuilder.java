@@ -366,7 +366,6 @@ public class QueryBuilder {
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
-
     public static QueryBuilder UPDATE(String table) {
 
         if (table == null) {
@@ -391,7 +390,6 @@ public class QueryBuilder {
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
-
     public QueryBuilder SET(Map<String, ?> values) {
 
         if (values == null) {
