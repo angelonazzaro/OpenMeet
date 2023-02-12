@@ -1,0 +1,12 @@
+com.openmeet.shared.data.ban
+com.openmeet.shared.data.image
+com.openmeet.shared.data.interest
+com.openmeet.shared.data.meeter
+com.openmeet.shared.data.meeter_interest
+com.openmeet.shared.data.message
+com.openmeet.shared.data.rating
+com.openmeet.shared.data.report
+com.openmeet.shared.data.storage
+com.openmeet.shared.exceptions
+com.openmeet.shared.helpers
+com.openmeet.shared.utils
