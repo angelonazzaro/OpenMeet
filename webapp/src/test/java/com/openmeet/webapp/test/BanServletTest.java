@@ -1,3 +1,5 @@
+package com.openmeet.webapp.test;
+
 import com.google.gson.Gson;
 import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.ban.BanDAO;
