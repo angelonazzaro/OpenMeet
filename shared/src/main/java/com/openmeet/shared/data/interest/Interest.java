@@ -4,6 +4,14 @@ import com.openmeet.shared.data.storage.IEntity;
 
 import java.util.HashMap;
 
+/**
+ * This class represents the Interest Entity.
+ *
+ * @see IEntity
+ *
+ * @author Angelo Nazzaro
+ * @author Francesco Granozio
+ * */
 public class Interest implements IEntity {
     public static final String INTEREST = "Interest";
     public static final String INTEREST_ID = INTEREST + ".id";
@@ -14,6 +22,16 @@ public class Interest implements IEntity {
     public Interest() {
     }
 
+    /**
+     * Returns the Interest as an hashMap.
+     *
+     * @see IEntity
+     *
+     * @return the Interest as an hashMap.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     @Override
     public HashMap<String, Object> toHashMap() {
 
@@ -23,6 +41,17 @@ public class Interest implements IEntity {
         }};
     }
 
+    /**
+     * Returns the Interest as an hashMap.
+     *
+     * @see IEntity
+     *
+     * @param fields the fields to be returned.
+     * @return the Interest as an hashMap.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     @Override
     public HashMap<String, Object> toHashMap(String... fields) {
 
@@ -48,18 +77,50 @@ public class Interest implements IEntity {
                 '}';
     }
 
+    /**
+     * Returns the id of the Interest.
+     *
+     * @return the id of the Interest.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the id of the Interest.
+     *
+     * @param id the id of the Interest.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Returns the description of the Interest.
+     *
+     * @return the description of the Interest.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Sets the description of the Interest.
+     *
+     * @param description the description of the Interest.
+     *
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     * */
     public void setDescription(String description) {
         this.description = description;
     }
