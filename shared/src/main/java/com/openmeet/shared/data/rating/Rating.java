@@ -176,9 +176,7 @@ public class Rating implements IEntity {
     /**
      * Returns the type of the Rating.
      *
-     * @return the type of the Rating.
-     *
-     * @apiNote true if the meeter is liked, false otherwise.
+     * @return the type of the Rating, true if the meeter is liked, false otherwise.
      *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
@@ -190,9 +188,7 @@ public class Rating implements IEntity {
     /**
      * Sets the type of the Rating.
      *
-     * @param type the type of the Rating.
-     *
-     * @apiNote true if the meeter is liked, false otherwise.
+     * @param type the type of the Rating, true if the meeter is liked, false otherwise.
      *
      * @author Angelo Nazzaro
      * @author Francesco Granozio

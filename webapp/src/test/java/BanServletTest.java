@@ -51,6 +51,7 @@ public final class BanServletTest {
       * @throws ServletException If an error occurs.
       *
       * @author Angelo Nazzaro
+      * @author Francesco Granozio
       */
     @BeforeEach
     public void setUp() throws ServletException {
