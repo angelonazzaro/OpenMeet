@@ -3,7 +3,7 @@ package com.openmeet.shared.data.storage;
 import javax.sql.DataSource;
 
 /**
- * Class used to share the same instance of DataSource
+ * Class used for sharing the same instance of DataSource
  * among the DAOs.
  *
  * @author Francesco Granozio

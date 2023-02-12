@@ -110,16 +110,12 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
     fun updateUI() {
 
-        val nameField = findViewById<TextView>(R.id.nameField)
-        val surnameField = findViewById<TextView>(R.id.surnameField)
-        val ageField = findViewById<TextView>(R.id.ageField)
+        val infoField = findViewById<TextView>(R.id.personalInfoField)
         val biography = findViewById<TextInputLayout>(R.id.biographyField)
         val gender = findViewById<TextInputLayout>(R.id.genderIdentityInput)
         val searchingGender = findViewById<TextInputLayout>(R.id.genderOrientationInput)
 
-        nameField.text = meeter.meeterName
-        surnameField.text = meeter.meeterSurname
-        ageField.text = getAge(meeter.birthdate).toString()
+        infoField.text = "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
         if (meeter.biography == null)
             biography.editText?.setText("test")
         else
