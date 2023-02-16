@@ -1,11 +1,11 @@
 package com.openmeet.webservice.exceptions;
 
 /**
- *  Exception for invalid paramaters sended from requests
+ *  Exception for invalid paramaters sent from requests
  */
 public class InvalidParameterException extends RuntimeException {
     /**
-     * @param s describe exception
+     * @param s describes exception
      */
     public InvalidParameterException(String s) {
         super(s);
