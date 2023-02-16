@@ -18,10 +18,22 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Servlet that handles all invocations for the Meeter object.
+ *
+ * @author Francesco Granozio
+ */
 public class MeeterService extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(MeeterService.class.getName());
 
+    /**
+     * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet. In specific contain "operation" parameter that contains the name of operation requested and invokes the corresponding proxy method.
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     * @throws IOException
+     * 
+     * @author Francesco Granozio
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String operation = request.getParameter("operation");

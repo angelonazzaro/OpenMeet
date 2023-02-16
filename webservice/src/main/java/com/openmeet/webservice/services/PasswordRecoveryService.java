@@ -21,12 +21,25 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Servlet that handles password recovery activity.
+ *
+ * @author Angelo Nazzaro
+ */
 public class PasswordRecoveryService extends HttpServlet {
 
     private static final HashMap<String, String> tokens = new HashMap<>();
     private static final String from = "staff.openmeet@gmail.com";
     private static final Logger logger = Logger.getLogger(PasswordRecoveryService.class.getName());
 
+    /**
+     * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     * @throws ServletException
+     * @throws IOException
+     * 
+     * @author Angelo Nazzaro
+     */
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String token = request.getParameter("pwdTkn");
@@ -75,6 +88,13 @@ public class PasswordRecoveryService extends HttpServlet {
 
     }
 
+    /**
+     * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     * @throws IOException 
+     * 
+     * @author Angelo Nazzaro
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String receiverEmail = request.getParameter("email");
@@ -135,6 +155,13 @@ public class PasswordRecoveryService extends HttpServlet {
 
     }
 
+    /**
+     * @param to is email address of the Meeter who requested the activity
+     * @param subject of email to send
+     * @param body of email to send
+     * 
+     * @author Angelo Nazzaro
+     */
     private void sendEmail(String to, String subject, String body) {
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host", "smtp.gmail.com");

@@ -18,10 +18,22 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Servlet that handles all invocations for the Report object.
+ *
+ * @author Roberto Della Rocca
+ */
 public class ReportService extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(ReportService.class.getName());
 
+    /**
+     * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet. In specific contain "operation" parameter that contains the name of operation requested and invokes the corresponding proxy method.
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     * @throws IOException
+     *
+     * @author Roberto Della Rocca
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String operation = request.getParameter("operation");
