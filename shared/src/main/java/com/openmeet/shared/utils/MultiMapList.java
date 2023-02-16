@@ -51,6 +51,8 @@ public class MultiMapList<K, V> {
      * @param row an integer representing the row number in which we are looking for the values.
      * @return a Collection of V objects representing the values
      *
+     * @throws IndexOutOfBoundsException if the row number is out of bounds
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -66,7 +68,9 @@ public class MultiMapList<K, V> {
      * Returns all the values of a specific row.
      *
      * @param row an integer representing the row number in which we are looking for the values.
-     * @return a Collection of V objects representing the values of the specified row
+     * @return a Collection of V objects representing the values of the specified row.
+     *
+     * @throws IndexOutOfBoundsException if the row number is out of bounds
      *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
@@ -97,6 +101,9 @@ public class MultiMapList<K, V> {
      * The addCurrentRow method should be called after adding
      * the entries to the bufferMap using the addEntryInCurrentRow method,
      * this will add the entries to the MultiMapList as a new row.
+     *
+     * @throws NullPointerException if the bufferMap is null
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
