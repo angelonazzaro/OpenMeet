@@ -18,6 +18,11 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Servlet that handles all invocations for the Message object.
+ *
+ * @author robertodellarocca
+ */
 public class MessageService extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(MessageService.class.getName());
