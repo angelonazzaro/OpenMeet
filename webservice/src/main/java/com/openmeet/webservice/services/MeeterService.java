@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Servlet that handles all invocations for the Ban object.
+ * Servlet that handles all invocations for the Meeter object.
  *
  * @author Francesco45
  */
