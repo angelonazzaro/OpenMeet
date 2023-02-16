@@ -17,6 +17,8 @@ public class PasswordEncrypter {
      * @param password The password to encrypt.
      * @return the encrypted password.
      *
+     * @throws NoSuchAlgorithmException if the algorithm is not found.
+     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      * */
