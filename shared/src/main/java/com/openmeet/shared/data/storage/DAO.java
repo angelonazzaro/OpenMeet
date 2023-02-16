@@ -72,7 +72,7 @@ public interface DAO<T> {
     List<T> doRetrieveByCondition(String condition, int offset, int row_count) throws SQLException;
 
     /**
-     * Returns an object from the database that match a given condition.
+     * Returns an object from the database that match a given key.
      *
      * @param key the primary key of the object to be retrieved.
      * @return the query result as a single object
