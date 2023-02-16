@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 /**
  * Servlet that handles all invocations for the Message object.
  *
- * @author robertodellarocca
+ * @author Roberto Della Rocca
  */
 public class MessageService extends HttpServlet {
 
@@ -31,6 +31,8 @@ public class MessageService extends HttpServlet {
      * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet. In specific contain "operation" parameter that contains the name of operation requested and invokes the corresponding proxy method.
      * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
      * @throws IOException
+     * 
+     * @author Roberto della Rocca
      */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
