@@ -27,6 +27,11 @@ public class MessageService extends HttpServlet {
 
     private static final Logger logger = Logger.getLogger(MessageService.class.getName());
 
+    /**
+     * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet. In specific contain "operation" parameter that contains the name of operation requested and invokes the corresponding proxy method.
+     * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
+     * @throws IOException
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String operation = request.getParameter("operation");
