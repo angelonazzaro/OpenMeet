@@ -254,22 +254,6 @@ public class QueryBuilder {
     }
 
     /**
-     * Appends a "for update" clause to a query.
-     *
-     * @return The {@link QueryBuilder} instance.
-     *
-     * @author Francesco Granozio
-     * @author Angelo Nazzaro
-     */
-
-    public QueryBuilder FOR_UPDATE() {
-
-        sqlBuilder.append(" for update");
-
-        return this;
-    }
-
-    /**
      * Appends a "union" clause to a query.
      *
      * @param queryBuilder The query builder to append.
