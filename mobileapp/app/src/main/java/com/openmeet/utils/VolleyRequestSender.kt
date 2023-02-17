@@ -6,6 +6,11 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 
+/**
+ * This class is used to send HTTP requests to the server
+ *
+ * @author Yuri Brandi
+ */
 class VolleyRequestSender private constructor(context: Context) {
     /*
         A key concept is that the RequestQueue must be instantiated with the Application context,

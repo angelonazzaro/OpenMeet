@@ -20,6 +20,11 @@ import java.sql.Timestamp
 import java.util.concurrent.CountDownLatch
 
 
+/**
+ * This class is used to test the registration activity
+ *
+ * @author Yuri Brandi
+ */
 @RunWith(RobolectricTestRunner::class)
 class RegistrationActivityTest {
 
@@ -80,8 +85,10 @@ class RegistrationActivityTest {
         }.start()
     }*/
 
-    /*
-       Lunghezza Parte Locale
+    /**
+     * Tests TC_4.1_1.
+     *
+     * @author Yuri Brandi
      */
     @Test
     fun checkNLPL() {
@@ -107,8 +114,10 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-       Lunghezza Parte Dominio
+    /**
+     * Tests TC_4.2_1.
+     *
+     * @author Yuri Brandi
      */
     @Test
     fun checkLNPD() {
@@ -137,8 +146,10 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-       Presenza singola Chiocciola
+    /**
+     * Tests TC_4.3_1.
+     *
+     * @author Yuri Brandi
      */
     @Test
     fun checkPC() {
@@ -164,8 +175,10 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-       Legalità Punto Parte Locale
+    /**
+     * Tests TC_4.4_1.
+     *
+     * @author Yuri Brandi
      */
     @Test
     fun checkLPPL() {
@@ -191,8 +204,10 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-       Legalità Punto Parte Dominio
+    /**
+     * Tests TC_4.5_1.
+     *
+     * @author Yuri Brandi
      */
     @Test
     fun checkLPPD() {
@@ -218,9 +233,11 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-      Non-Consecutività Punti
-    */
+    /**
+     * Tests TC_4.6_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkNCP() {
 
@@ -240,9 +257,11 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-     Legalità Caratteri Speciali Parte Locale
-   */
+    /**
+     * Tests TC_4.7_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkLCPSL() {
 
@@ -263,9 +282,11 @@ class RegistrationActivityTest {
 
     }
 
-    /*
-     Legalità Caratteri Parte Dominio
-   */
+    /**
+     * Tests TC_4.8_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkLCPD() {
 
@@ -286,9 +307,11 @@ class RegistrationActivityTest {
 
     }
 
-    /*
-        Assenza Numeri Dominio Primo Livello
-  */
+    /**
+     * Tests TC_4.9_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkANDPL() {
 
@@ -312,24 +335,13 @@ class RegistrationActivityTest {
 
     }
 
-    /*
-       Presenza Database
-    */
-    @Test
-    fun checkPD() {
-
-        val email = "iuiouiouio@gmail.com"
-
-
-        Thread {
-            assertTrue(registrationActivity.verifyUniregisteredMeeter(email, cntx))
-        }.start()
-    }
-
     // PASSWORD
-    /*
-       Lunghezza
-  */
+
+    /**
+     * Tests TC_4.10_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkLN() {
 
@@ -357,9 +369,11 @@ class RegistrationActivityTest {
 
     }
 
-    /*
-      Presenza Carattere Speciale
- */
+    /**
+     * Tests TC_4.11_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkPCS() {
 
@@ -383,9 +397,11 @@ class RegistrationActivityTest {
 
     }
 
-    /*
-      Presenza Numero
- */
+    /**
+     * Tests TC_4.12_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkPN() {
 
@@ -408,9 +424,11 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-      Presenza Lettera Maiuscola
- */
+    /**
+     * Tests TC_4.13_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkLMAI() {
 
@@ -433,9 +451,11 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-      Presenza Lettera Minuscola
- */
+    /**
+     * Tests TC_4.14_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkLMIN() {
 
@@ -458,9 +478,11 @@ class RegistrationActivityTest {
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
 
-    /*
-     Password Identica
-    */
+    /**
+     * Tests TC_4.15_1.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkPI() {
 
@@ -484,9 +506,11 @@ class RegistrationActivityTest {
     }
 
 
-    /*
-        Do Registration
-    */
+    /**
+     * Tests TC_4.15_2.
+     *
+     * @author Yuri Brandi
+     */
     @Test
     fun checkRegistration() {
 

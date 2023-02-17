@@ -13,6 +13,13 @@ import java.util.HashMap
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
+/**
+ * This class is used to make request to the ReportService and manage the response.
+ *
+ * @see DAO
+ *
+ * @author Yuri Brandi
+ */
 class ReportProxyDAO(context: Context) : ContextDAO(context), DAO<Report> {
 
     override fun doRetrieveByCondition(condition: String): MutableList<Report>? {

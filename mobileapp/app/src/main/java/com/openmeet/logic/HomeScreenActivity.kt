@@ -28,7 +28,11 @@ import java.sql.Timestamp
 import java.util.*
 import kotlin.system.exitProcess
 
-
+/**
+ * This class is used display the Meeters information that are suggested by the app.
+ *
+ * @author Yuri Brandi
+ */
 class HomeScreenActivity : AppCompatActivity() {
 
     private var backBtnLastPress = 0L
@@ -168,6 +172,13 @@ class HomeScreenActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This method is used to update the card view with the new Meeter information.
+     *
+     * @see updateCardView
+     *
+     * @author Yuri Brandi
+     */
     fun getDiscoverFlow() {
         val snackbarView = findViewById<View>(R.id.home_generalContainer)
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
@@ -177,6 +188,7 @@ class HomeScreenActivity : AppCompatActivity() {
         Thread {
             runOnUiThread {
                 progressionIndicator.visibility = View.VISIBLE
+
             }
 
             //Snackbar.make(snackbarView, "Reload", Snackbar.LENGTH_SHORT).show()
@@ -213,6 +225,11 @@ class HomeScreenActivity : AppCompatActivity() {
         }.start()
     }
 
+    /**
+     * This method is used to update the card view with the new Meeter information.
+     *
+     * @author Yuri Brandi
+     */
     fun updateCardView(meeter: Meeter) {
         Log.d("Updating card", meeter.toString())
 
@@ -242,6 +259,13 @@ class HomeScreenActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This method is used to add a new interest to the interest layout.
+     *
+     * @param interest The interest to add.
+     *
+     * @author Yuri Brandi
+     */
     fun addToInterestLayout(interest: String) {
         val interestLayout = findViewById<LinearLayout>(R.id.interestLayout)
 
@@ -259,6 +283,11 @@ class HomeScreenActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This method is used to reset the interest layout.
+     *
+     * @author Yuri Brandi
+     */
     fun resetInterestLayout() {
         val interestLayout = findViewById<LinearLayout>(R.id.interestLayout)
         runOnUiThread {
@@ -266,10 +295,27 @@ class HomeScreenActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This method is used to get rate another Meeter.
+     *
+     * @param rating The rating given by the user.
+     * @param meetereRaterID The ID of the Meeter that is rating.
+     * @param meeterRatedID The ID of the Meeter that is being rated.
+     * @author Yuri Brandi
+     */
     fun doRegisterRating(rating: Boolean, meetereRaterID: String, meeterRatedID: String) {
 
     }
 
+    /**
+     * This method is used to report a Meeter.
+     *
+     * @param selectedRadio The radio button selected by the user.
+     * @param reporterMeeter The ID of the user that is reporting the Meeter.
+     * @param reportedMeeter The ID of the Meeter that is being reported.
+     *
+     * @author Yuri Brandi
+     */
     fun doReportMeeter(selectedRadio: Int, reporterMeeter: Int, reportedMeeter: Int){
 
         val snackbarView = findViewById<View>(R.id.home_generalContainer)
@@ -308,6 +354,13 @@ class HomeScreenActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Get the Meeter's age from the birthdate
+     *
+     * @param birthdate the Meeter's birthdate
+     *
+     * @author Yuri Brandi
+     */
     fun getAge(birthday: Date): Int {
         val now = Calendar.getInstance().timeInMillis
         val diff = Calendar.getInstance()

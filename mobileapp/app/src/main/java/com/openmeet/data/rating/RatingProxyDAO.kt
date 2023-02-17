@@ -13,6 +13,13 @@ import org.json.JSONObject
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
+/**
+ * This class is used to make request to the RatingService and manage the response.
+ *
+ * @see DAO
+ *
+ * @author Yuri Brandi
+ */
 class RatingProxyDAO(context: Context) : ContextDAO(context), DAO<Rating> {
 
     fun doRetrieveMatches(meeterID: String): MutableList<Meeter>? {

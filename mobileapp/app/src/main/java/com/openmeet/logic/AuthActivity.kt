@@ -33,6 +33,11 @@ import java.security.InvalidParameterException
 import java.sql.Timestamp
 
 
+/**
+ * A login screen that offers login via email/password.
+ *
+ * @author Yuri Brandi
+ */
 class AuthActivity : AppCompatActivity() {
 
     private var backBtnLastPress = 0L
@@ -139,6 +144,11 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Checks if there are stored credentials and tries to login.
+     *
+     * @author Yuri Brandi
+     */
     fun tryStoredLogin() {
 
         val sharedPrefs =
@@ -213,6 +223,14 @@ class AuthActivity : AppCompatActivity() {
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 
+    /**
+     * Checks if the user is banned.
+     *
+     * @param meeterID The ID of the user to check.
+     * @return The ban object if the user is banned, null otherwise.
+     *
+     * @author Yuri Brandi
+     */
     fun checkBan(meeterID: String): Ban?{
         val ret = BanProxyDAO(this).doRetrieveByCondition(
             "${Ban.BAN_MEETER_ID} = $meeterID AND ${Ban.BAN_END_TIME} > CURDATE()")

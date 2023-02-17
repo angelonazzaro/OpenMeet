@@ -21,6 +21,11 @@ import java.util.*
 import kotlin.system.exitProcess
 
 
+/**
+ * This class is used to display the chats preview.
+ *
+ * @author Yuri Brandi
+ */
 class HomeChatScreenActivity : AppCompatActivity() {
     private var backBtnLastPress = 0L
 
@@ -79,6 +84,13 @@ class HomeChatScreenActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * This method is used to retrieve the chats preview.
+     *
+     * @param meeterID the meeter ID
+     *
+     * @author Yuri Brandi
+     */
     fun retrieveChats(meeterID: String){
 
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
@@ -112,6 +124,14 @@ class HomeChatScreenActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * This method is used to display the chats preview.
+     *
+     * @param matchedList the matched list
+     * @param chatList the chat list
+     *
+     * @author Yuri
+     */
     fun displayChatsPreview(matchedList: MutableList<Meeter>, chatList: MutableList<Message>){
 
         val chatsView = findViewById<LinearLayout>(R.id.chatsLayout)

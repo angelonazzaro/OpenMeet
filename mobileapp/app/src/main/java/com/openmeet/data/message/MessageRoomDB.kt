@@ -5,6 +5,11 @@ import com.openmeet.shared.data.message.Message
 import com.openmeet.shared.data.storage.DAO
 import java.sql.Timestamp
 
+/**
+ * This class is used to store the messages in the local database
+ *
+ * @author Yuri Brandi
+ */
 class MessageRoomDB {
     @Entity
     data class LocalMessage(

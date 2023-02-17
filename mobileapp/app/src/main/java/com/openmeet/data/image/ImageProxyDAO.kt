@@ -15,6 +15,13 @@ import java.util.HashMap
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
+/**
+ * This class is used to make request to the ImageService and manage the response.
+ *
+ * @see DAO
+ *
+ * @author Yuri Brandi
+ */
 class ImageProxyDAO(context: Context) : ContextDAO(context), DAO<Image> {
 
     override fun doRetrieveByCondition(condition: String): MutableList<Image>? {

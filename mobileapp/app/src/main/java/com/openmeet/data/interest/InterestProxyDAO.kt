@@ -14,6 +14,13 @@ import java.util.HashMap
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
+/**
+ * This class is used to make request to the InterestService and manage the response.
+ *
+ * @see DAO
+ *
+ * @author Yuri Brandi
+ */
 class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {
 
     override fun doRetrieveByCondition(condition: String): MutableList<Interest>? {

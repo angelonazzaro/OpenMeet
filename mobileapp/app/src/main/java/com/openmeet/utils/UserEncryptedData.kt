@@ -5,6 +5,11 @@ import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
+/**
+ * This class is used to store the user credentials in an encrypted way
+ *
+ * @author Yuri Brandi
+ */
 class UserEncryptedData(context: Context) {
 
     private val sharedPreferences: SharedPreferences
