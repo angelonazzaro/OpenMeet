@@ -16,6 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Proxy class for ReportDAO.
+ *
+ * @see ProxyDAO
+ * @see DAO
+ * @see GenericProxyDAO
+ *
+ * @author Francesco Granozio
+ */
 public class ReportProxyDAO extends ProxyDAO<Report> implements DAO<Report> {
 
     public ReportProxyDAO(DAO<Report> dao, HttpServletRequest request, PrintWriter out) {

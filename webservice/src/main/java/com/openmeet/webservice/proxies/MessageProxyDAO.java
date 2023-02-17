@@ -16,6 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Proxy class for MessageDAO.
+ *
+ * @see ProxyDAO
+ * @see DAO
+ * @see GenericProxyDAO
+ *
+ * @author Francesco Granozio
+ */
 public class MessageProxyDAO extends ProxyDAO<Message> implements DAO<Message> {
 
     public MessageProxyDAO(DAO<Message> dao, HttpServletRequest request, PrintWriter out) {

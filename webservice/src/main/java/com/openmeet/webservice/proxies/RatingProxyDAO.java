@@ -16,6 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Proxy class for RatingDAO.
+ *
+ * @see ProxyDAO
+ * @see DAO
+ * @see GenericProxyDAO
+ *
+ * @author Francesco Granozio
+ */
 public class RatingProxyDAO extends ProxyDAO<Rating> implements DAO<Rating> {
 
     public RatingProxyDAO(DAO<Rating> dao, HttpServletRequest request, PrintWriter out) {
