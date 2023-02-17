@@ -303,7 +303,7 @@ class Registration2Activity : AppCompatActivity() {
                         imageView.setPadding(40, 30, 40, 16)
 
                         Thread {
-
+                            //add compressor
                             val inputStream = contentResolver.openInputStream(uri)
                             if(inputStream != null){
                                 val hashMap : HashMap<String, String> = HashMap()
