@@ -8,18 +8,19 @@
     android:layout_marginEnd="8dp"
     android:orientation="horizontal">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/profilePicture"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="8dp"
-        android:layout_weight="1"
-        android:clickable="false"
-        android:foregroundGravity="center"
-        android:src="@drawable/ic_launcher_foreground"
-        app:maxImageSize="68dp"
-        app:useCompatPadding="false" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profileCard"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="160dp">
+
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@color/blue_purple" />
+    </androidx.cardview.widget.CardView>
 
 
     <TextView

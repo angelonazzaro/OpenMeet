@@ -75,6 +75,10 @@
     <string name="homescreen_discover_title">Discover</string>
     <string name="homescreen_user_title">User</string>
 
+    <string name="delete_account">DELETE ACCOUNT</string>
+
+    <string name="message_hint">Write your message...</string>
+
     <string name="recovery_dialog_title">An email with recovery instructions will be sent to</string>
     <string name="recovery_dialog_message">Do you wish to continue?</string>
 

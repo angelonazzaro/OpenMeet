@@ -73,6 +73,10 @@
             android:name=".logic.HomeUserScreenActivity"
             android:exported="true"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".logic.SingleChatActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

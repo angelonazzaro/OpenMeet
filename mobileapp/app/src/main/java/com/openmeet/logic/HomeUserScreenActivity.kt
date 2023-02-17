@@ -1,19 +1,25 @@
 package com.openmeet.logic
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View.OnTouchListener
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
+import com.openmeet.data.interest.InterestProxyDAO
 import com.openmeet.data.meeter.MeeterProxyDAO
+import com.openmeet.data.meeter_interest.Meeter_InterestProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
+import com.openmeet.shared.data.meeter_interest.Meeter_Interest
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -22,6 +28,7 @@ import kotlin.system.exitProcess
  *
  * @author Yuri Brandi
  */
+
 class HomeUserScreenActivity: AppCompatActivity() {
 
     private var backBtnLastPress = 0L
@@ -31,11 +38,17 @@ class HomeUserScreenActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_user_screen)
 
+        val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
+        val snackbarView = findViewById<View>(R.id.home_generalContainer)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.selectedItemId = R.id.user_Tab
 
+        val biography = findViewById<TextInputLayout>(R.id.biographyField)
+        val genderInput = findViewById<TextInputLayout>(R.id.genderIdentityInput)
+        val searchingGenderInput = findViewById<TextInputLayout>(R.id.genderOrientationInput)
+        val saveButton = findViewById<Button>(R.id.saveButton)
+
         val id = intent.getStringExtra("ID").toString()
-        retrieveMeeter(id)
 
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -61,6 +74,28 @@ class HomeUserScreenActivity: AppCompatActivity() {
             }
             true
         }
+
+        retrieveMeeter(id)
+
+        saveButton.setOnClickListener {
+            meeter.biography = biography.editText?.text.toString()
+
+            Thread {
+                if(!MeeterProxyDAO(this).doSaveOrUpdate(meeter))
+                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
+            }.start()
+
+        }
+
+
+        /*genderInput.editText?.addTextChangedListener {
+            meeter.gender = it.toString()
+
+            Thread {
+                if(!MeeterProxyDAO(this).doSaveOrUpdate(meeter))
+                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
+            }.start()
+        }*/
 
 
     }
@@ -89,6 +124,8 @@ class HomeUserScreenActivity: AppCompatActivity() {
     fun retrieveMeeter(id: String) {
 
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
+        val snackbarView = findViewById<View>(R.id.home_generalContainer)
+
         Log.d("Meeter id", id)
 
 
@@ -108,14 +145,17 @@ class HomeUserScreenActivity: AppCompatActivity() {
                 meeter.searchingGender = temp.searchingGender
                 meeter.birthdate = temp.birthdate
                 meeter.email = temp.email
+                meeter.pwd = temp.pwd
+                meeter.publicKey = temp.publicKey
             }
+            else
+                Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
 
             runOnUiThread {
                 progressionIndicator.visibility = View.GONE
             }
 
             updateUI()
-
         }.start()
 
     }
@@ -127,24 +167,40 @@ class HomeUserScreenActivity: AppCompatActivity() {
         val gender = findViewById<TextInputLayout>(R.id.genderIdentityInput)
         val searchingGender = findViewById<TextInputLayout>(R.id.genderOrientationInput)
 
-        infoField.text = "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
-        if (meeter.biography == null)
-            biography.editText?.setText("test")
-        else
+        runOnUiThread {
+            infoField.text = "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
             biography.editText?.setText(meeter.biography)
-//        when(meeter.gender) {
-//            'M' -> gender.editText?.setText("Male")
-//            'F' -> gender.editText?.setText("Female")
-//            'N' -> gender.editText?.setText("Non-Binary")
-//        }
-//        when(meeter.searchingGender) {
-//            'M' -> searchingGender.editText?.setText("Male")
-//            'F' -> searchingGender.editText?.setText("Female")
-//            'N' -> searchingGender.editText?.setText("Non-Binary")
-//            'B' -> searchingGender.editText?.setText("Both (Males & Females)")
-//            'A' -> searchingGender.editText?.setText("Everybody")
-//        }
 
+            //Da rivedere
+            when(meeter.gender) {
+                "M" -> gender.editText?.setText("Male")
+                "F" -> gender.editText?.setText("Female")
+                "N" -> gender.editText?.setText("Non-Binary")
+            }
+            when(meeter.searchingGender) {
+                "M" -> searchingGender.editText?.setText("Male")
+                "F" -> searchingGender.editText?.setText("Female")
+                "N" -> searchingGender.editText?.setText("Non-Binary")
+                "B" -> searchingGender.editText?.setText("Both (Males & Females)")
+                "A" -> searchingGender.editText?.setText("Everybody")
+            }
+
+        }
+
+        val meeter_interestList =
+            Meeter_InterestProxyDAO(this).doRetrieveByCondition("${Meeter_Interest.MEETER_INTEREST_MEETER_ID} = ${meeter.id}")
+
+        val interestDAO = InterestProxyDAO(this)
+        if (meeter_interestList != null) {
+            for (meeter_interest in meeter_interestList) {
+                val interest = interestDAO.doRetrieveByKey(meeter_interest.id.toString())
+                if (interest != null) {
+                    addToInterestLayout(interest.description)
+                }
+            }
+        }
+
+        addToInterestLayout("+")
 
     }
 
@@ -161,5 +217,41 @@ class HomeUserScreenActivity: AppCompatActivity() {
         diff.timeInMillis = now - birthday.time
         return (diff.get(Calendar.YEAR) - 1970)
     }
+
+    fun addToInterestLayout(interest: String) {
+        val interestLayout = findViewById<LinearLayout>(R.id.interestLayout)
+
+        val intTxt = MaterialButton(this)
+        intTxt.text = interest
+        intTxt.backgroundTintList = this.getColorStateList(R.color.mid_purple)
+        intTxt.setTextColor(Color.WHITE)
+
+        val space = Space(this)
+
+        runOnUiThread {
+            interestLayout.addView(intTxt)
+            interestLayout.addView(space)
+            space.layoutParams.width = 16
+
+            intTxt.setOnClickListener {
+                if(intTxt.text == "+"){
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle("Add interest?")
+                        .setMessage("")
+                        .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                        .show()
+                }
+                else
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle(R.string.report_done_title)
+                        .setMessage(R.string.report_done_message)
+                        .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                        .show()
+            }
+        }
+
+    }
+
+
 
 }

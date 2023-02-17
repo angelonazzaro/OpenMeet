@@ -335,6 +335,19 @@ class RegistrationActivityTest {
 
     }
 
+
+    /*
+       Presenza Database
+    */
+    @Test
+    fun checkPD() {
+        val email = "iuiouiouio@gmail.com"
+
+        Thread {
+            assertTrue(registrationActivity.verifyUniregisteredMeeter(email, cntx))
+        }.start()
+    }
+
     // PASSWORD
 
     /**

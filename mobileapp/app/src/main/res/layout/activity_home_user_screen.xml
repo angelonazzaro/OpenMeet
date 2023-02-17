@@ -61,12 +61,26 @@
                 android:textAlignment="center"
                 android:textSize="22sp" />
 
+            <android.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="80dp" />
+
+            <TextView
+                android:id="@+id/interestLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Interessi"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp" />
+
             <HorizontalScrollView
                 android:id="@+id/horizontalScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
 
                 app:layout_constraintEnd_toEndOf="parent"
@@ -238,6 +252,11 @@
 
             </LinearLayout>
 
+
+            <android.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+
             <Button
                 android:id="@+id/logoutBtn"
                 style="?attr/materialButtonOutlinedStyle"
@@ -247,6 +266,17 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:text="Logout" />
+
+            <Button
+                android:id="@+id/deleteAccountBtn"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/delete_account"
+                android:textColor="@android:color/holo_red_dark" />
 
         </LinearLayout>
 
