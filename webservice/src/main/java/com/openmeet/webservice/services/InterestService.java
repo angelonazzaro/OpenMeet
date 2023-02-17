@@ -28,7 +28,9 @@ public class InterestService extends HttpServlet {
     private static final Logger logger = Logger.getLogger(InterestService.class.getName());
 
     /**
-     * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet. In specific contain "operation" parameter that contains the name of operation requested and invokes the corresponding proxy method.
+     * On POST request, the method gets the name of operation from "operation" paramater and then invoke the following proxy method.
+     *
+     * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet.
      * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
      * @throws IOException
      * 
