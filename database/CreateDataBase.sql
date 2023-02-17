@@ -7,10 +7,12 @@ SET GLOBAL sql_mode = "";*/
 
 /* Meeter Section */
 
+Select * from Meeter;
+
 CREATE TABLE Meeter (
  
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
-    `email` VARCHAR(320) UNIQUE, 
+    `email` VARCHAR(320) UNIQUE NOT NULL, 
     `meeterName` VARCHAR(35) NOT NULL, 
     `meeterSurname` VARCHAR(35) NOT NULL, 
     `gender` CHAR(1),
@@ -25,8 +27,8 @@ CREATE TABLE Meeter (
 CREATE TABLE Rating (
 
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
-	`meeterRater` INT,
-    `meeterRated` INT,
+	`meeterRater` INT NOT NULL,
+    `meeterRated` INT NOT NULL,
 	`type` BOOL NOT NULL, 
     `creationDate` DATETIME NOT NULL, 
     
@@ -37,8 +39,8 @@ CREATE TABLE Rating (
 CREATE TABLE Report (
 
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
-	`meeterReporter` INT,
-    `meeterReported` INT,
+	`meeterReporter` INT NOT NULL,
+    `meeterReported` INT NOT NULL,
 	`reason` VARCHAR(50) NOT NULL, 
     `isArchived` BOOL NOT NULL DEFAULT FALSE,
     `creationDate` DATETIME NOT NULL, 
@@ -68,7 +70,7 @@ CREATE TABLE Image (
 
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
     `path` VARCHAR(2048) NOT NULL, 
-    `meeterid` INT, 
+    `meeterid` INT NOT NULL, 
 
     FOREIGN KEY (`meeterid`) REFERENCES Meeter (`id`) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -80,8 +82,8 @@ CREATE TABLE Message (
     `sentTime` DATETIME NOT NULL, 
     `deliveredTime` DATETIME, 
     `readTime` DATETIME, 
-    `meeterSender` INT, 
-    `meeterReceiver` INT, 
+    `meeterSender` INT NOT NULL, 
+    `meeterReceiver` INT NOT NULL, 
 
     FOREIGN KEY (`meeterSender`) REFERENCES Meeter (`id`) ON UPDATE CASCADE ON DELETE NO ACTION, 
     FOREIGN KEY (`meeterReceiver`) REFERENCES Meeter (`id`) ON UPDATE CASCADE ON DELETE NO ACTION
@@ -92,7 +94,7 @@ CREATE TABLE Message (
 CREATE TABLE Moderator (
 
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
-    `email` VARCHAR(320) UNIQUE, 
+    `email` VARCHAR(320) UNIQUE NOT NULL, 
     `moderatorName` VARCHAR(35) NOT NULL, 
     `moderatorSurname` VARCHAR(35) NOT NULL, 
 	`pwd` CHAR(40) NOT NULL, /* SHA1(pwd) = 160 bits / 4 = 40 chars*/
@@ -102,11 +104,11 @@ CREATE TABLE Moderator (
 CREATE TABLE Ban (
 
     `id` INT PRIMARY KEY AUTO_INCREMENT, 
-    `moderatorId` INT, 
+    `moderatorId` INT NOT NULL, 
     `description` VARCHAR(255) NOT NULL,
     `startTime` DATETIME NOT NULL, 
     `endTime` DATETIME, 
-    `meeterId` INT, 
+    `meeterId` INT NOT NULL, 
 
     FOREIGN KEY (`moderatorId`) REFERENCES Moderator (`id`) ON UPDATE CASCADE ON DELETE NO ACTION,
     FOREIGN KEY (`meeterId`) REFERENCES Meeter (`id`) ON UPDATE CASCADE ON DELETE NO ACTION

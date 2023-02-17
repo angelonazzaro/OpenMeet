@@ -30,8 +30,8 @@ public class Meeter implements IEntity {
     private String meeterSurname;
     private String pwd;
 
-    private char gender;
-    private char searchingGender;
+    private String gender;
+    private String searchingGender;
     private String city;
     private String biography;
     private Date birthdate;
@@ -287,7 +287,7 @@ public class Meeter implements IEntity {
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
@@ -299,7 +299,7 @@ public class Meeter implements IEntity {
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -311,7 +311,7 @@ public class Meeter implements IEntity {
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
-    public char getSearchingGender() {
+    public String getSearchingGender() {
         return searchingGender;
     }
 
@@ -323,7 +323,7 @@ public class Meeter implements IEntity {
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
-    public void setSearchingGender(char searchingGender) {
+    public void setSearchingGender(String searchingGender) {
         this.searchingGender = searchingGender;
     }
 

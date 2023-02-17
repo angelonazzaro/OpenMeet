@@ -22,15 +22,6 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 
-/**
- * Proxy class for ImageDAO.
- *
- * @see ProxyDAO
- * @see DAO
- * @see GenericProxyDAO
- *
- * @author Francesco Granozio
- */
 public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
 
     public ImageProxyDAO(DAO<Image> dao, HttpServletRequest request, PrintWriter out) {
@@ -206,13 +197,16 @@ public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
 
         logger.log(Level.INFO, "ImageProxyDAO:doSave() - values: " + values);
 
-        byte[] meeterData = Base64.getDecoder().decode((String) values.get("meeterId"));
+        /*byte[] meeterData = Base64.getDecoder().decode((String) values.get("meeterId"));
         int meeterId = 0;
 
         for (byte b: meeterData) {
             meeterId = (meeterId << 8) + (b & 0xFF);
-        }
+        }*/
 
+        int meeterId = Integer.parseInt((String) values.get("meeterId"));
+
+        logger.log(Level.INFO, "ImageProxyDAO:doSave() - meeterId: " + meeterId);
         String basePath = request.getServletContext().getRealPath("/");
         String meeterUploadPath = "uploads" + File.separator + "meeters" + File.separator +  meeterId;
         File uploadPath = new File(basePath + File.separator + meeterUploadPath);
@@ -224,7 +218,7 @@ public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
             }
         }
 
-        String filename = meeterUploadPath + File.separator + String.valueOf(System.currentTimeMillis()) + ".png";
+        String filename = meeterUploadPath + File.separator + System.currentTimeMillis() + ".png";
 
         Image image = new Image();
         byte[] photoData = Base64.getDecoder().decode((String) values.get("photoByteArray"));
