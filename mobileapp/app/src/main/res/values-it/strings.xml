@@ -74,4 +74,9 @@
     <string name="banned_dialog_description">Motivo:</string>
     <string name="banned_dialog_expiry">Scade il:</string>
     <string name="cancel_dialog">Annulla</string>
+    <string name="password_length_error">La password deve essere lunga almeno 8 caratteri e massimo 16.</string>
+    <string name="password_special_char_error">La password deve contenere almeno un carattere speciale.</string>
+    <string name="password_number_error">La password deve contenere almeno un numero</string>
+    <string name="password_uppercase_error">La password deve contenere almeno una lettera minuscola.</string>
+    <string name="password_lowercase_error">La password deve contenere almeno una lettera maiuscola.</string>
 </resources>

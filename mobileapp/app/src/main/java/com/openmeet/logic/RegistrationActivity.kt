@@ -1,5 +1,6 @@
 package com.openmeet.logic
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -52,8 +53,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         confirmButton.setOnClickListener {
 
-            val result = true
-               // checkForm(nameFld, surnameFld, datePicker.selection, birthdayFld, emailFld, passwordFld, confirmPasswordFld)
+            val result = checkForm(nameFld, surnameFld, datePicker.selection, birthdayFld, emailFld, passwordFld, confirmPasswordFld, true)
 
 
             if (result){
@@ -64,38 +64,35 @@ class RegistrationActivity : AppCompatActivity() {
                 meeter.pwd = passwordFld.editText?.text.toString()
                 meeter.birthdate = java.sql.Date(datePicker.selection!!)
 
-                startActivity(
+               /* startActivity(
                     Intent(this, Registration2Activity::class.java).putExtra("email", meeter.email)
                 )
-                overridePendingTransition(0, 0)
+                overridePendingTransition(0, 0)*/
                 // Uncomment below and remove above
-                /*Thread {
+                Thread {
                   runOnUiThread {
                    progressionIndicator.visibility = View.VISIBLE
-               }
-                    val retrieveMail = MeeterProxyDAO(this).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '${meeter.email}'")
-                    if(retrieveMail == null)
-                        Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
-                    else
-                        if(retrieveMail.size == 0){
-                            if(!MeeterProxyDAO(this).doSave(meeter))
-                                Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
-                            else{
-                                startActivity(
-                                    Intent(this, RegistrationActivity::class.java).putExtra("email", meeter.email)
-                                )
-                                overridePendingTransition(0, 0)
-                            }
+                    }
 
+                    if(verifyUniregisteredMeeter(meeter.email, this)){
+                        if(!doRegisterMeeter(meeter, this))
+                            Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                        else{
+                            startActivity(
+                                Intent(this, Registration2Activity::class.java).putExtra("email", meeter.email)
+                            )
+                            overridePendingTransition(0, 0)
                         }
-                        else
-                            Snackbar.make(snackbarView, R.string.duplicate_mail, Snackbar.LENGTH_SHORT).show()
+                    }
+                    else
+                        Snackbar.make(snackbarView, R.string.duplicate_mail, Snackbar.LENGTH_SHORT).show()
 
-                              runOnUiThread {
-                   progressionIndicator.visibility = View.GONE
-               }
 
-                }.start()*/
+                    runOnUiThread {
+                        progressionIndicator.visibility = View.GONE
+                    }
+
+                }.start()
 
             }
         }
@@ -123,7 +120,8 @@ class RegistrationActivity : AppCompatActivity() {
         return formatter.format(millis)
     }
 
-    //this function if all values are correct
+
+    //this function checks if all values are correct (TESTED)
     fun checkForm(
         name: TextInputLayout,
         surname: TextInputLayout,
@@ -131,7 +129,8 @@ class RegistrationActivity : AppCompatActivity() {
         birthday: TextInputLayout,
         email: TextInputLayout,
         password: TextInputLayout,
-        confirmPassword: TextInputLayout
+        confirmPassword: TextInputLayout,
+        displayErrors: Boolean
     ): Boolean {
 
         name.error = ""
@@ -151,18 +150,21 @@ class RegistrationActivity : AppCompatActivity() {
 
         //check if name is blanck or empty
         if (nameText.isBlank() || nameText.isEmpty()) {
-            name.error = getString(R.string.name_null_error)
+            if(displayErrors)
+                name.error = getString(R.string.name_null_error)
             flag = false
         }
         //check if name is blanck or empty
         if (surnameText.isBlank() || surnameText.isEmpty()) {
-            surname.error = getString(R.string.surname_null_error)
+            if(displayErrors)
+                surname.error = getString(R.string.surname_null_error)
             flag = false
         }
         //check if birthday date inserted has more 18 years old
         if (birthdayMillis != null) {
             if (getAge(birthdayMillis) < 18){
-                birthday.error = getString(R.string.underage_error)
+                if(displayErrors)
+                    birthday.error = getString(R.string.underage_error)
                 flag = false
             }
 
@@ -171,34 +173,73 @@ class RegistrationActivity : AppCompatActivity() {
         if (!(emailText.isEmpty() || emailText.isBlank())) {
 
             if (!emailText.matches(Regex("^[a-z0-9!#$%&'*+=?^_`{|}~/-]+([.][a-z0-9!#$%&'*+=?^_`{|}~/-]+)*@([a-z0-9-]+[.])+[a-z]+$"))) {
-                email.error = getString(R.string.email_format_error)
+                if(displayErrors)
+                    email.error = getString(R.string.email_format_error)
                 flag = false
             } else {
                 val splittedEmail = splitEmail(emailText)
                 if (splittedEmail.first.length > 64) {
-                    email.error = getString(R.string.email_local_toolong_error)
+                    if(displayErrors)
+                        email.error = getString(R.string.email_local_toolong_error)
                     flag = false
                 } else if (splittedEmail.second.length > 255) {
-                    email.error = getString(R.string.email_domain_toolong_error)
+                    if(displayErrors)
+                        email.error = getString(R.string.email_domain_toolong_error)
                     flag = false
                 }
             }
         } else {
-            email.error = getString(R.string.email_null_error)
+            if(displayErrors)
+                email.error = getString(R.string.email_null_error)
             flag = false
         }
         if (passText.isEmpty() || passText.isBlank()) {
-            password.error = getString(R.string.password_null_error)
+            if(displayErrors)
+                password.error = getString(R.string.password_null_error)
             flag = false
+        }else{
+            if (passText.length < 8 || passText.length > 16) {
+                if(displayErrors)
+                    password.error = getString(R.string.password_length_error)
+                flag = false
+            }
+            else
+            if (!Regex("[!?@#\$£¢~€()+={|}^&*;,._-]+").containsMatchIn(passText)) {
+                if(displayErrors)
+                    password.error = getString(R.string.password_special_char_error)
+                flag = false
+            }
+            else
+            if (!Regex("[0-9]+").containsMatchIn(passText)) {
+                if(displayErrors)
+                    password.error = getString(R.string.password_number_error)
+                flag = false
+            }else
+            if (!Regex("[A-Z]+").containsMatchIn(passText)) {
+                if(displayErrors)
+                    password.error = getString(R.string.password_uppercase_error)
+                flag = false
+            }
+            else
+            if (!Regex("[a-z]+").containsMatchIn(passText)) {
+                if(displayErrors)
+                    password.error = getString(R.string.password_lowercase_error)
+                flag = false
+            }
+
+
         }
+
         if (confPassText.isEmpty() || confPassText.isBlank()) {
-            confirmPassword.error = getString(R.string.password_conf_null_error)
+            if(displayErrors)
+                confirmPassword.error = getString(R.string.password_conf_null_error)
             flag = false
-        }
-        if (confPassText != passText) {
-            confirmPassword.error = getString(R.string.password_unmatch_error)
-            flag = false
-        }
+        }else
+            if (confPassText != passText) {
+                if(displayErrors)
+                    confirmPassword.error = getString(R.string.password_unmatch_error)
+                flag = false
+            }
 
         return flag
 
@@ -206,7 +247,6 @@ class RegistrationActivity : AppCompatActivity() {
 
     fun splitEmail(email: String): Pair<String, String> {
         val str = email.split('@').toTypedArray()
-
         if (str.size != 2)
             throw InvalidParameterException("Probably invalid mail")
         return Pair(str[0], str[1])
@@ -217,6 +257,23 @@ class RegistrationActivity : AppCompatActivity() {
         val diff = Calendar.getInstance()
         diff.timeInMillis = now - birthdayMillis
         return (diff.get(Calendar.YEAR) - 1970)
+    }
+
+    //Returns true if not present
+    fun verifyUniregisteredMeeter(email: String, cntx: Context): Boolean{
+
+        val retrieveMail = MeeterProxyDAO(cntx).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email'")
+        if(retrieveMail == null)
+            return false
+        else
+            if(retrieveMail.size == 1)
+                return true
+
+        return false
+    }
+
+    fun doRegisterMeeter(meeter: Meeter, cntx: Context): Boolean{
+        return MeeterProxyDAO(cntx).doSave(meeter)
     }
 
 
