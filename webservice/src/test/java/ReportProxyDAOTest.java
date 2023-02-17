@@ -26,7 +26,7 @@ import static org.mockito.Mockito.when;
 /**
  * Test class for ReportProxyDAO. It tests the doSave method.
  *
- * @author Angelo Nazzaro
+ * @author Francesco Granozio
  */
 public class ReportProxyDAOTest {
     BasicDataSource dataSource;
@@ -48,7 +48,7 @@ public class ReportProxyDAOTest {
      *
      * @throws IOException If an error occurs.
      *
-     * @author Angelo Nazzaro
+     * @author Francesco Granozio
      */
     @BeforeEach
     public void setUp() throws IOException {
@@ -77,7 +77,7 @@ public class ReportProxyDAOTest {
      *
      * @throws SQLException If an error occurs.
      *
-     * @author Angelo Nazzaro
+     * @author Francesco Granozio
      */
     @AfterEach
     public void clear() throws SQLException {
@@ -88,7 +88,7 @@ public class ReportProxyDAOTest {
     /**
      * Tests the TC_2.1_1 Test case. It tests the invalid description length.
      *
-     * @author Angelo Nazzaro
+     * @author Francesco Granozio
      */
     @Test
     @Order(1)
@@ -112,7 +112,7 @@ public class ReportProxyDAOTest {
     /**
      * Tests the TC_2.1_2 Test case.
      *
-     * @author Angelo Nazzaro
+     * @author Francesco Granozio
      */
     @Test
     @Order(2)
@@ -132,7 +132,7 @@ public class ReportProxyDAOTest {
     /**
      * Tests the TC_2.1_1 Test case. It tests the invalid description length with doSave hashmap variant.
      *
-     * @author Angelo Nazzaro
+     * @author Francesco Granozio
      */
     @Test
     @Order(3)
@@ -141,7 +141,7 @@ public class ReportProxyDAOTest {
         values.put("meeterReported", "1");
         values.put("meeterReporter", "2");
         values.put("reason", "");
-        values.put("isArchived", "0");
+        values.put("isArchived", String.valueOf(false));
         values.put("creationDate", new Timestamp(System.currentTimeMillis()).toString());
 
         when(request.getParameter("values")).thenReturn(gson.toJson(values));
@@ -156,7 +156,7 @@ public class ReportProxyDAOTest {
     /**
      * Tests the TC_2.1_2 Test case with doSave hashmap variant.
      *
-     * @author Angelo Nazzaro
+     * @author Francesco Granozio
      */
     @Test
     @Order(3)
@@ -165,7 +165,7 @@ public class ReportProxyDAOTest {
         values.put("meeterReported", "1");
         values.put("meeterReporter", "2");
         values.put("reason", "Spam");
-        values.put("isArchived", "0`");
+        values.put("isArchived", String.valueOf(false));
         values.put("creationDate", new Timestamp(System.currentTimeMillis()).toString());
 
         when(request.getParameter("values")).thenReturn(gson.toJson(values));
