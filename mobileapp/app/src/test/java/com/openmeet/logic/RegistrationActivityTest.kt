@@ -21,7 +21,7 @@ import java.util.concurrent.CountDownLatch
 
 
 /**
- * This class is used to test the registration activity
+ * This class is used to test the registration activity.
  *
  * @author Yuri Brandi
  */
@@ -504,7 +504,6 @@ class RegistrationActivityTest {
 
         assertFalse(registrationActivity.checkForm(nameField, surnameField, birthdateTime, birthdateField, emailField, passwordField, confirmPasswordField, false))
     }
-
 
     /**
      * Tests TC_4.15_2.

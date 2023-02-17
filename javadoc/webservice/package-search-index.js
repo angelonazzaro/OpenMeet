@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.openmeet.webservice"},{"l":"com.openmeet.webservice.exceptions"},{"l":"com.openmeet.webservice.proxies"},{"l":"com.openmeet.webservice.services"}];updateSearchResults();
