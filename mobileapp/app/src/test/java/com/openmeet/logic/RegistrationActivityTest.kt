@@ -317,9 +317,7 @@ class RegistrationActivityTest {
     */
     @Test
     fun checkPD() {
-
         val email = "iuiouiouio@gmail.com"
-
 
         Thread {
             assertTrue(registrationActivity.verifyUniregisteredMeeter(email, cntx))
