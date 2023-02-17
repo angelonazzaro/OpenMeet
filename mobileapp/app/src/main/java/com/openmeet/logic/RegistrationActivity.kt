@@ -20,6 +20,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 import com.google.android.material.datepicker.MaterialDatePicker as DatepickerMaterialDatePicker
 
+/**
+ * This activity is used to register a new meeter. It is the first step of the registration process.
+ * It asks for the meeter's name, surname, email, password and birthdate.
+ *
+ * @author Yuri Brandi
+ */
 class RegistrationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,6 +128,24 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
 
+    /**
+     * This function checks if the meeter inputs are valid (e.g. email is valid, password is long enough, etc.).
+     * If they are not, it displays the error message.
+     *
+     * @param name the name of the meeter
+     * @param surname the surname of the meeter
+     * @param birthdayMillis the birthdate of the meeter in milliseconds
+     * @param birthday the birthdate of the meeter
+     * @param email the email of the meeter
+     * @param password the password of the meeter
+     * @param confirmPassword the confirmation of the password
+     * @param displayErrors if true, it displays the error messages. Used for test purposes.
+     * @param email the email of the meeter
+     *
+     * @return true if the meeter is already registered, false otherwise
+     *
+     * @author Yuri Brandi
+     */
     //this function checks if all values are correct (TESTED)
     fun checkForm(
         name: TextInputLayout,
@@ -246,6 +270,14 @@ class RegistrationActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * This function splits the email in two parts: the local part and the domain part.
+     * @param email the email to split
+     *
+     * @return a pair of strings containing the local and the domain part of the email
+     *
+     * @author Yuri Brandi
+     */
     fun splitEmail(email: String): Pair<String, String> {
         val str = email.split('@').toTypedArray()
         if (str.size != 2)
@@ -253,6 +285,15 @@ class RegistrationActivity : AppCompatActivity() {
         return Pair(str[0], str[1])
     }
 
+    /**
+     * This function calculates the age of a person given his birthday.
+     *
+     * @param birthdayMillis the birthday of the person in milliseconds
+     *
+     * @return the age of the person
+     *
+     * @author Yuri Brandi
+     */
     fun getAge(birthdayMillis: Long): Int{
         val now = Calendar.getInstance().timeInMillis
         val diff = Calendar.getInstance()
@@ -260,7 +301,16 @@ class RegistrationActivity : AppCompatActivity() {
         return (diff.get(Calendar.YEAR) - 1970)
     }
 
-    //Returns true if not present
+    /**
+     * This function checks if the email is already registered in the database.
+     *
+     * @param email the email to check
+     * @param cntx the context of the activity
+     *
+     * @return true if the email is already registered, false otherwise
+     *
+     * @author Yuri Brandi
+     */
     fun verifyUniregisteredMeeter(email: String, cntx: Context): Boolean{
 
         val retrieveMail = MeeterProxyDAO(cntx).doRetrieveByCondition("${Meeter.MEETER_EMAIL} = '$email'")

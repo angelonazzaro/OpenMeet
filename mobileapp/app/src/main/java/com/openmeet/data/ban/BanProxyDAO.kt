@@ -13,6 +13,13 @@ import java.util.HashMap
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
+/**
+ * This class is used to make request to the BanService and manage the response.
+ *
+ * @see DAO
+ *
+ * @author Yuri Brandi
+ */
 class BanProxyDAO(context: Context) : ContextDAO(context), DAO<Ban> {
 
     override fun doRetrieveByCondition(condition: String): MutableList<Ban>? {

@@ -34,7 +34,13 @@ import com.openmeet.data.interest.InterestProxyDAO
 import java.io.InputStream
 import java.util.*
 
-
+/**
+ * This activity is used to register the user's sexual preferences, interests and biography.
+ * It also allows the user to upload profile images.
+ * It is the second step of the registration process.
+ *
+ * @author Yuri Brandi
+ */
 class Registration2Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -169,6 +175,13 @@ class Registration2Activity : AppCompatActivity() {
 
     }
 
+    /**
+     * This function is used get to the next phase of the registration process.
+     *
+     * @param stage the current stage of the registration process.
+     *
+     * @author Yuri Brandi
+     */
     fun doNextPhase(stage: Int) {
         val instrTxt = findViewById<TextView>(R.id.instructionTxt)
         val sexualPrefsLayout = findViewById<LinearLayout>(R.id.sexualPrefsLayout)
@@ -266,6 +279,11 @@ class Registration2Activity : AppCompatActivity() {
     }
 
 
+    /**
+     * This function is used to prepare the image upload phase.
+     *
+     * @author Yuri Brandi
+     */
     fun prepareImageUploadPhase(): ActivityResultLauncher<PickVisualMediaRequest> {
 
         val sharedPrefs =
@@ -331,6 +349,11 @@ class Registration2Activity : AppCompatActivity() {
     }
 
 
+    /**
+     * This function is used to get the user's position.
+     *
+     * @author Yuri Brandi
+     */
     //Da spostare in home. Per ora qui per fare test.
     fun doGetPosition(): String? {
 
@@ -398,6 +421,13 @@ class Registration2Activity : AppCompatActivity() {
         return "wow"
     }
 
+    /**
+     * This function is used to check if the GPS is enabled.
+     *
+     * @param lm The LocationManager object.
+     *
+     * @author Yuri Brandi
+     */
     fun checkGPSEnabled(lm: LocationManager): Boolean {
 
         var gpsEnabled = false

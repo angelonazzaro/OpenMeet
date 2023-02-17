@@ -12,6 +12,13 @@ import org.json.JSONObject
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
+/**
+ * This class is used to make request to the MessageService and manage the response.
+ *
+ * @see DAO
+ *
+ * @author Yuri Brandi
+ */
 class MessageProxyDAO(context: Context) : ContextDAO(context), DAO<Message> {
 
     override fun doRetrieveByCondition(condition: String): MutableList<Message>? {

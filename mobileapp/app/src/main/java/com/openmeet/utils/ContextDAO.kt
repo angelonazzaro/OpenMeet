@@ -4,6 +4,11 @@ import android.content.Context
 import com.openmeet.R
 
 
+/**
+ * Sets the context for the DAOs
+ *
+ * @author Yuri Brandi
+ */
 abstract class ContextDAO(context: Context) {
 
     protected val context = context

@@ -1,0 +1,5 @@
+unnamed package
+com.openmeet.webservice
+com.openmeet.webservice.exceptions
+com.openmeet.webservice.proxies
+com.openmeet.webservice.services

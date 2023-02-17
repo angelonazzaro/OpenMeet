@@ -13,6 +13,13 @@ import java.util.HashMap
 import java.util.concurrent.CountDownLatch
 import java.util.logging.Level
 
+/**
+ * This class is used to make request to the Meeter_InterestService and manage the response.
+ *
+ * @see DAO
+ *
+ * @author Yuri Brandi
+ */
 class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter_Interest> {
 
     override fun doRetrieveByCondition(condition: String): MutableList<Meeter_Interest>? {

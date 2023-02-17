@@ -31,6 +31,11 @@ import com.openmeet.utils.VolleyRequestSender
 import com.openmeet.utils.VolleyResponseCallback
 
 
+/**
+ * A login screen that offers login via email/password.
+ *
+ * @author Yuri Brandi
+ */
 class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -153,6 +158,13 @@ class LoginActivity : AppCompatActivity() {
         overridePendingTransition(0, 0)
     }
 
+    /**
+     * Sends a request to the server to send a recovery link to the user.
+     *
+     * @param email The email of the user.
+     *
+     * @author Yuri Brandi
+     */
     fun sendRecoveryHTTPRequest(email: String){
 
         val snackbarView = findViewById<View>(R.id.auth_login_container)
@@ -184,6 +196,15 @@ class LoginActivity : AppCompatActivity() {
             )
     }
 
+    /**
+     * Checks if the user is banned.
+     *
+     * @param meeterID The ID of the user.
+     *
+     * @return The ban object if the user is banned, null otherwise.
+     *
+     * @author Yuri Brandi
+     */
     fun checkBan(meeterID: String): Ban?{
         val ret = BanProxyDAO(this).doRetrieveByCondition(
             "${Ban.BAN_MEETER_ID} = $meeterID AND ${Ban.BAN_END_TIME} > CURDATE()")

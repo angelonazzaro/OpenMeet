@@ -23,6 +23,11 @@ import com.openmeet.shared.data.meeter_interest.Meeter_Interest
 import java.util.*
 import kotlin.system.exitProcess
 
+/**
+ * This class is used to update the Meeter's settings.
+ *
+ * @author Yuri Brandi
+ */
 
 class HomeUserScreenActivity: AppCompatActivity() {
 
@@ -109,6 +114,13 @@ class HomeUserScreenActivity: AppCompatActivity() {
     }
 
 
+    /**
+     * Retrieve the Meeter's data from the database
+     *
+     * @param id the Meeter's id
+     *
+     * @author Yuri Brandi
+     */
     fun retrieveMeeter(id: String) {
 
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
@@ -192,6 +204,13 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
     }
 
+    /**
+     * Get the Meeter's age from the birthdate
+     *
+     * @param birthdate the Meeter's birthdate
+     *
+     * @author Yuri Brandi
+     */
     fun getAge(birthday: Date): Int {
         val now = Calendar.getInstance().timeInMillis
         val diff = Calendar.getInstance()
