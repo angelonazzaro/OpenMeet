@@ -41,6 +41,11 @@
     <string name="surname_null_error">Empty surname!</string>
     <string name="underage_error">Hey, you\'re too little, let your mom sign-up instead.</string>
     <string name="password_null_error">Empty password!</string>
+    <string name="password_length_error">Password must be at least 8 characters long and up to 16.</string>
+    <string name="password_special_char_error">Password must contain at least one special character.</string>
+    <string name="password_number_error">Password must contain at least one number.</string>
+    <string name="password_lowercase_error">Password must contain at least one lowercase character.</string>
+    <string name="password_uppercase_error">Password must contain at least one uppercase character.</string>
     <string name="password_conf_null_error">You have to confirm your password!</string>
     <string name="password_unmatch_error">Passwords must match!</string>
     <string name="checkbox_error">You must select at least 3 and up to 6 interests!</string>
