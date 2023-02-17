@@ -17,7 +17,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
-
+/**
+ * Proxy class for MeeterDAO.
+ *
+ * @see ProxyDAO
+ * @see DAO
+ * @see GenericProxyDAO
+ *
+ * @author Francesco Granozio
+ */
 public class MeeterProxyDAO extends ProxyDAO<Meeter> implements DAO<Meeter> {
 
     public MeeterProxyDAO(MeeterDAO dao, HttpServletRequest request, PrintWriter out) {

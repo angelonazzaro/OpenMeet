@@ -22,6 +22,15 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 
+/**
+ * Proxy class for ImageDAO.
+ *
+ * @see ProxyDAO
+ * @see DAO
+ * @see GenericProxyDAO
+ *
+ * @author Francesco Granozio
+ */
 public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
 
     public ImageProxyDAO(DAO<Image> dao, HttpServletRequest request, PrintWriter out) {

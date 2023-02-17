@@ -16,6 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Proxy class for InterestDAO.
+ *
+ * @see ProxyDAO
+ * @see DAO
+ * @see GenericProxyDAO
+ *
+ * @author Francesco Granozio
+ */
 public class InterestProxyDAO extends ProxyDAO<Interest> implements DAO<Interest> {
 
     public InterestProxyDAO(DAO<Interest> dao, HttpServletRequest request, PrintWriter out) {

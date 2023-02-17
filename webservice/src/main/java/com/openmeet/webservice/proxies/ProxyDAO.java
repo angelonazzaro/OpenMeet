@@ -6,6 +6,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
 
 
+/**
+ * Proxy class for DAO. It is used to check parameters before calling the DAO methods.
+ *
+ * @param <T> Generic type.
+ *
+ * @author Francesco Granozio
+ */
 public abstract class ProxyDAO<T> {
 
     protected final DAO<T> dao;

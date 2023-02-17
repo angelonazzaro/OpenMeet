@@ -16,6 +16,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Proxy class for BanDAO.
+ *
+ * @see ProxyDAO
+ * @see DAO
+ * @see GenericProxyDAO
+ *
+ * @author Francesco Granozio
+ */
 public class BanProxyDAO extends ProxyDAO<Ban> implements DAO<Ban> {
 
     public BanProxyDAO(DAO<Ban> dao, HttpServletRequest request, PrintWriter out) {
