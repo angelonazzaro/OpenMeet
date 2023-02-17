@@ -65,6 +65,8 @@
     <string name="report_done_title">Segnalazione inviate! 📬</string>
     <string name="report_done_message">La tua segnalazione sarà revisionata da un moderatore il prima possibile.\n\nGrazie per il tuo contributo.</string>
     <string name="recover_password_TextView">Hai dimenticato la password? <u>Recuperala qui</u></string>
+    <string name="delete_account">ELIMINA ACCOUNT</string>
+    <string name="message_hint">Scrivi un messaggio...</string>
     <string name="recovery_dialog_title">Verrà inviata un\'email con le istruzioni di recupero all\'indirizzo</string>
     <string name="negative_dialog">No</string>
     <string name="recovery_dialog_message">Vuoi continuare?</string>

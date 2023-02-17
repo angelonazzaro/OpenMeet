@@ -126,6 +126,15 @@ class HomeChatScreenActivity : AppCompatActivity() {
 
                 val view: LinearLayout =
                     LayoutInflater.from(this).inflate(R.layout.chat_view, null) as LinearLayout
+
+                view.setOnClickListener {
+                    val intent = Intent(this, SingleChatActivity::class.java)
+                    intent.putExtra("ID", intent.getStringExtra("ID").toString())
+                    intent.putExtra("RECEIVER_ID", matchedMeeter.id.toString())
+
+                    startActivity(intent)
+                    overridePendingTransition(0, 0)
+                }
                 val divider = MaterialDivider(this)
                 divider.dividerInsetStart = 24
                 divider.dividerInsetEnd = 24
