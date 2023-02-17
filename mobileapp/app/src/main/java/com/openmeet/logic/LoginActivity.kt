@@ -1,6 +1,7 @@
 package com.openmeet.logic
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -55,7 +56,8 @@ class LoginActivity : AppCompatActivity() {
         /*
             roberto.st@gmail.com; test
          */
-
+        val sharedPrefs =
+            this.getSharedPreferences(getString(R.string.STD_PREFS), Context.MODE_PRIVATE)
 
         loginBtn.setOnClickListener {
 
@@ -82,10 +84,22 @@ class LoginActivity : AppCompatActivity() {
                             //Saving credentials to remember the user.
                             UserEncryptedData(this).storeCredentials(email, pwd)
                             //Aggiungere verifica registrazione pt.2
-                            startActivity(
-                                Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)
-                            )
-                            overridePendingTransition(0, 0)
+
+                            Snackbar.make(snackbarView, sharedPrefs.getInt("registration_stage", 0), Snackbar.LENGTH_SHORT).show()
+                            if(sharedPrefs.getInt("registration_stage", -1) == -1){
+
+                                startActivity(
+                                    Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)
+                                )
+                                overridePendingTransition(0, 0)
+                            }
+                            else{
+                                startActivity(
+                                    Intent(this, Registration2Activity::class.java).putExtra("ID", meeterID)
+                                )
+                                overridePendingTransition(0, 0)
+                            }
+
                         }
                         else{
                             runOnUiThread {

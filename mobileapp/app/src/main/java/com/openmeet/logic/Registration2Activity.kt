@@ -1,28 +1,26 @@
 package com.openmeet.logic
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.opengl.ETC1.encodeImage
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
-import java.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.children
@@ -33,7 +31,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.openmeet.R
 import com.openmeet.data.image.ImageProxyDAO
 import com.openmeet.data.interest.InterestProxyDAO
-import java.io.ByteArrayOutputStream
+import java.io.InputStream
+import java.util.*
 
 
 class Registration2Activity : AppCompatActivity() {
@@ -56,9 +55,12 @@ class Registration2Activity : AppCompatActivity() {
 
         sexualPrefsLayout.visibility = View.GONE //Programmatically hidden for an Android studio bug
 
+
         val sharedPrefs =
             this.getSharedPreferences(getString(R.string.STD_PREFS), Context.MODE_PRIVATE)
-        sharedPrefs.edit().putInt("registration_stage", 0).apply() //To remove
+
+        if(sharedPrefs.getInt("registration_stage", -1) == -1)
+            sharedPrefs.edit().putInt("registration_stage", 0).apply()
 
         doNextPhase(sharedPrefs.getInt("registration_stage", 0))
 
@@ -142,13 +144,13 @@ class Registration2Activity : AppCompatActivity() {
                 }
 
                 4 -> { /* FINAL STAGE */
-                    startActivity(
+                    /*startActivity(
                         Intent(this, Registration2Activity::class.java).putExtra(
                             "ID",
                             intent.getStringExtra("ID").toString()
                         )
                     )
-                    overridePendingTransition(0, 0)
+                    overridePendingTransition(0, 0)*/
                 }
             }
 
@@ -293,31 +295,27 @@ class Registration2Activity : AppCompatActivity() {
                             )
                         }
 
-                        val stream = ByteArrayOutputStream()
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                        val photoByteArray: ByteArray = stream.toByteArray()
-
-                        val hashMap : HashMap<String, String> = HashMap()
-                        hashMap["meeterId"] = Base64.getEncoder().encodeToString(byteArrayOf(1))
-                        hashMap["photoByteArray"] = Base64.getEncoder().encodeToString(photoByteArray);
-
-                        Thread {
-                            ImageProxyDAO(this).doSave(hashMap)
-                        }.start()
 
                         val imageView = ImageView(this)
                         imageView.setImageURI(uri)
                         imageLayout.addView(imageView)
                         imageView.layoutParams.height = 500
                         imageView.setPadding(40, 30, 40, 16)
+
+                        Thread {
+
+                            val inputStream = contentResolver.openInputStream(uri)
+                            if(inputStream != null){
+                                val hashMap : HashMap<String, String> = HashMap()
+                                hashMap["meeterId"] = "1"
+                                hashMap["photoByteArray"] =  Base64.getEncoder().encodeToString(inputStream.readBytes())
+                                ImageProxyDAO(this).doSave(hashMap)
+
+                                inputStream.close()
+                            }
+                        }.start()
                     }
 
-
-
-                    sharedPrefs.edit().putInt(
-                        "registration_stage",
-                        sharedPrefs.getInt("registration_stage", 0) + 1
-                    ).apply()
                 } else {
                     Log.d("PhotoPicker", "No media selected")
                     Snackbar.make(

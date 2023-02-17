@@ -1,6 +1,7 @@
 package com.openmeet.logic
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -51,12 +52,14 @@ class AuthActivity : AppCompatActivity() {
         val emailFld = findViewById<TextInputLayout>(R.id.emailField)
         emailFld.editText?.setText("roberto.st@gmail.com")
 
+
         tryStoredLogin()
 
         /*
             mike.st@gmail.com; test
             roberto.st@gmail.com; test
          */
+
         loginBtn.setOnClickListener {
 
             val email = emailFld.editText?.text.toString().lowercase()
@@ -138,6 +141,9 @@ class AuthActivity : AppCompatActivity() {
 
     fun tryStoredLogin() {
 
+        val sharedPrefs =
+            this.getSharedPreferences(getString(R.string.STD_PREFS), Context.MODE_PRIVATE)
+
         val snackbarView = findViewById<View>(R.id.auth_container)
         val sharedStoredValues = UserEncryptedData(this).getAllAsHashMap()
 
@@ -159,12 +165,22 @@ class AuthActivity : AppCompatActivity() {
                     else {
                         //Go To HomePage
                         val meeterID = ret[0].id.toString()
+
                         val ban = checkBan(meeterID)
                         if(ban == null){
-                            startActivity(
-                                Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)
-                            )
-                            overridePendingTransition(0, 0)
+                            //Snackbar.make(snackbarView, sharedPrefs.getInt("registration_stage", 0), Snackbar.LENGTH_SHORT).show()
+                            if(sharedPrefs.getInt("registration_stage", -1) == -1){
+                                startActivity(
+                                    Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)
+                                )
+                                overridePendingTransition(0, 0)
+                            }
+                            else{
+                                startActivity(
+                                    Intent(this, Registration2Activity::class.java).putExtra("ID", meeterID)
+                                )
+                                overridePendingTransition(0, 0)
+                            }
                         }
                         else{
                             runOnUiThread {

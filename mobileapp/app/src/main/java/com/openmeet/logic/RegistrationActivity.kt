@@ -64,17 +64,18 @@ class RegistrationActivity : AppCompatActivity() {
                 meeter.pwd = passwordFld.editText?.text.toString()
                 meeter.birthdate = java.sql.Date(datePicker.selection!!)
 
+
                /* startActivity(
                     Intent(this, Registration2Activity::class.java).putExtra("email", meeter.email)
                 )
                 overridePendingTransition(0, 0)*/
                 // Uncomment below and remove above
                 Thread {
-                  runOnUiThread {
-                   progressionIndicator.visibility = View.VISIBLE
+                    runOnUiThread {
+                        progressionIndicator.visibility = View.VISIBLE
                     }
 
-                    if(verifyUniregisteredMeeter(meeter.email, this)){
+                    if(!verifyUniregisteredMeeter(meeter.email, this)){
                         if(!doRegisterMeeter(meeter, this))
                             Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
                         else{
@@ -266,7 +267,7 @@ class RegistrationActivity : AppCompatActivity() {
         if(retrieveMail == null)
             return false
         else
-            if(retrieveMail.size == 1)
+            if(retrieveMail.size > 0)
                 return true
 
         return false
