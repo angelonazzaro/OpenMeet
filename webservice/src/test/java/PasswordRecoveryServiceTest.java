@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 /**
  * Test class for PasswordRecoveryService
  *
- * @author Angelo Nazzaro
+ * @author Roberto Della Rocca
  */
 public class PasswordRecoveryServiceTest {
 
@@ -43,7 +43,7 @@ public class PasswordRecoveryServiceTest {
      * @throws IOException      If an error occurs.
      * @throws ServletException If an error occurs.
      *
-     * @author Angelo Nazzaro
+     * @author Roberto Della Rocca
      */
     @BeforeEach
     public void setUp() throws IOException, ServletException {
@@ -77,7 +77,7 @@ public class PasswordRecoveryServiceTest {
     /**
      * Tests the TC_3.1_1 Test case. It tests the presence of the email in the database.
      *
-     * @author Angelo Nazzaro
+     * @author Roberto Della Rocca
      */
     @Test
     @Order(1)
@@ -93,7 +93,7 @@ public class PasswordRecoveryServiceTest {
     /**
      * Tests the TC_3.1_2 Test case.
      *
-     * @author Angelo Nazzaro
+     * @author Roberto Della Rocca
      */
     @Test
     @Order(2)
