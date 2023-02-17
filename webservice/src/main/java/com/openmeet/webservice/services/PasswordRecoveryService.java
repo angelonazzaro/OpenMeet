@@ -33,6 +33,8 @@ public class PasswordRecoveryService extends HttpServlet {
     private static final Logger logger = Logger.getLogger(PasswordRecoveryService.class.getName());
 
     /**
+     * On GET request, the method changes Meeter's password and then sends an email with the new password
+     *
      * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet
      * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
      * @throws ServletException
@@ -89,6 +91,8 @@ public class PasswordRecoveryService extends HttpServlet {
     }
 
     /**
+     * On POST request, the method checks if Meeter's email exists. If it exists, it will send an email with recovery link.
+     *
      * @param request  an {@link HttpServletRequest} object that contains the request the client has made of the servlet
      * @param response an {@link HttpServletResponse} object that contains the response the servlet sends to the client
      * @throws IOException 
@@ -156,6 +160,8 @@ public class PasswordRecoveryService extends HttpServlet {
     }
 
     /**
+     * This method creates and sends an email.
+     *
      * @param to is email address of the Meeter who requested the activity
      * @param subject of email to send
      * @param body of email to send
@@ -201,7 +207,14 @@ public class PasswordRecoveryService extends HttpServlet {
         }
     }
 
-    //CRIMINALE
+    /**
+     * This method creates new password or a token.
+     *
+     * @param minLength of token
+     * @param maxLength of token
+     * @param isToken if token is setted
+     * @return string token
+     */
     private String generatePasswordOrToken(int minLength, int maxLength, boolean isToken) {
         // password only
         String characters = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
