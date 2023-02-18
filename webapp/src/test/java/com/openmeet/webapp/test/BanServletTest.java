@@ -60,9 +60,9 @@ public final class BanServletTest {
         dataSource = new BasicDataSource();
 
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeet");
-        dataSource.setUsername("remote_usr");
-        dataSource.setPassword("cicciobello123");
+        dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeetTests");
+        dataSource.setUsername("test_remote_usr");
+        dataSource.setPassword("Testmargherita0!");
 
         banServlet = new BanServlet();
         ServletContext servletContext = mock(ServletContext.class);
