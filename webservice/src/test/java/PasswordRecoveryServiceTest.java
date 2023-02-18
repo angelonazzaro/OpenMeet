@@ -52,7 +52,7 @@ public class PasswordRecoveryServiceTest {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeet");
         dataSource.setUsername("remote_usr");
-        dataSource.setPassword("cicciobello123");
+        dataSource.setPassword("db_password");
 
         passwordRecoveryService = new PasswordRecoveryService();
         ServletContext servletContext = mock(ServletContext.class);
