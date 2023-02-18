@@ -6,6 +6,6 @@
               driverClassName="com.mysql.cj.jdbc.Driver"
               type="javax.sql.DataSource"
               username="remote_usr"
-              password="Windowsmerda123!"
+              password="db_password"
               url="jdbc:mysql://185.229.236.190:3306/OpenMeet?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;autoReconnect=true&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"/>
 </Context>
