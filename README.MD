@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
- The <b>open-source</b> dating app you were looking for. 🤙🏻❤️
+ The <b>open-source</b> dating app you were looking for. 🤙🏻❤️🍆
 </p>
 
 <p align="center">
