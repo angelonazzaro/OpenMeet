@@ -55,9 +55,9 @@ public class ReportProxyDAOTest {
         dataSource = new BasicDataSource();
 
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeet");
-        dataSource.setUsername("remote_usr");
-        dataSource.setPassword("db_password");
+        dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeetTests");
+        dataSource.setUsername("test_remote_usr");
+        dataSource.setPassword("Testmargherita0!");
 
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
