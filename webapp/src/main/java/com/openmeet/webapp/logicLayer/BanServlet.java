@@ -3,6 +3,7 @@ package com.openmeet.webapp.logicLayer;
 import com.openmeet.shared.data.ban.Ban;
 import com.openmeet.shared.data.ban.BanDAO;
 import com.openmeet.shared.data.meeter.Meeter;
+import com.openmeet.shared.data.meeter.MeeterDAO;
 import com.openmeet.shared.helpers.ResponseHelper;
 import com.openmeet.shared.utils.MultiMapList;
 import com.openmeet.shared.utils.QueryJoinExecutor;
@@ -12,6 +13,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +28,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
 
 /**
  * Servlet that handles the ban functionality.
@@ -29,6 +37,8 @@ import java.util.List;
  * @author Angelo Nazzaro
  */
 public class BanServlet extends HttpServlet {
+
+    private static final String from = "staff.openmeet@gmail.com";
 
     /**
      * Get the bans and displays them.
@@ -198,6 +208,50 @@ public class BanServlet extends HttpServlet {
         try {
             if (banDAO.doSave(ban)) {
                 out.write("Ban Saved");
+
+                // Send email
+                Properties properties = System.getProperties();
+                properties.put("mail.smtp.host", "smtp.gmail.com");
+                properties.put("mail.smtp.port", "587");
+                properties.put("mail.smtp.auth", "true");
+                properties.put("mail.smtp.starttls.enable", "true");
+
+                Session session = Session.getInstance(
+                        properties,
+                        new javax.mail.Authenticator() {
+                            protected PasswordAuthentication getPasswordAuthentication() {
+                                return new PasswordAuthentication(from, "tohybegjuqpwbzji");
+                            }
+                        });
+
+                try {
+                    Meeter meeter = new MeeterDAO((DataSource) getServletContext().getAttribute("DataSource"))
+                            .doRetrieveByKey(String.valueOf(meeterId));
+
+                    MimeMessage message = new MimeMessage(session);
+
+                    message.addHeader("Content-type", "text/HTML; charset=UTF-8");
+                    message.setFrom(new InternetAddress(from));
+                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(meeter.getEmail()));
+                    message.setSubject("Your account has been suspended");
+
+                    Multipart multipart = new MimeMultipart();
+
+                    BodyPart messageBodyPart = new MimeBodyPart();
+                    messageBodyPart.setContent(String.format("Hi %s %s. \n We are sorry to inform you that " +
+                            "your account has been suspended for <b>%s</b>.",
+                            meeter.getMeeterName(), meeter.getMeeterSurname(), ban.get(Ban.BAN_DESCRIPTION)), "text/html");
+
+                    multipart.addBodyPart(messageBodyPart);
+
+                    message.setContent(multipart);
+
+                    Transport.send(message);
+
+                } catch (MessagingException | SQLException e) {
+                    ResponseHelper.sendGenericError(out);
+                }
+
                 resp.sendRedirect(String.valueOf(req.getRequestURL()));
             }
         } catch (SQLException e) {
