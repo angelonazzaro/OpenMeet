@@ -31,6 +31,8 @@
                aria-expanded="false"></i>
             <ul class="dropdown-menu">
                 <li style="cursor: pointer"><a class="dropdown-item"
+                                                data-report-id="<%= data.get("id", i).toArray()[0] %>"
+                                                data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
                                                data-report-id="<%= data.get("id", i).toArray()[0] %>"
                                                data-bs-toggle="modal" data-bs-target="#view-report-modal">View</a></li>
                 <li style="cursor: pointer"><a class="dropdown-item"
@@ -111,6 +113,21 @@
 <% if (rows > 0) { %>
 <script>
 
+
+   function addFunctionality(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute) {
+
+       document.querySelectorAll(modalBtnToggleSelector).forEach(el => {
+           el.addEventListener("click", function () {
+               inputElement.value = this.getAttribute(attribute);
+               console.log(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute);
+         });
+       });
+
+       document.querySelectorAll(modalBtnDismissSelector).forEach(el => {
+           el.addEventListener("click", () => inputElement.value = "");
+       });
+   }
+
     document.querySelectorAll("a[data-bs-target='#view-report-modal']").forEach(el => {
         el.addEventListener("click", function () {
             const reportId = this.getAttribute("data-report-id");
@@ -137,6 +154,7 @@
             el.addEventListener("click", () => inputElement.value = "");
         });
     }
+
 
     const reportId = document.getElementById("report-to-archive");
     const meeterId = document.getElementById("meeter-to-ban");
