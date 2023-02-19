@@ -263,19 +263,21 @@ public class Meeter implements IEntity {
      * Sets the password of the Meeter using SHA1 encryption .
      *
      * @param pwd the password of the Meeter.
+     * @param encrypt true if the password must be encrypted, false otherwise.
      *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      * */
-    public void setPwd(String pwd) {
+    public void setPwd(String pwd, boolean encrypt) {
 
-        try {
-
-            this.pwd = PasswordEncrypter.sha1(pwd);
-
-        } catch (NoSuchAlgorithmException e) {
-
-            e.printStackTrace();
+        if (encrypt) {
+            try {
+                this.pwd = PasswordEncrypter.sha1(pwd);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+        } else {
+            this.pwd = pwd;
         }
     }
 
