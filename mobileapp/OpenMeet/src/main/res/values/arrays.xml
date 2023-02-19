@@ -13,6 +13,21 @@
         <item>Non-Binary\'s</item>
         <item>Everybody</item>
     </string-array>
+
+    <string-array name="gender_identity_labels">
+        <item>M</item>
+        <item>F</item>
+        <item>N</item>
+    </string-array>
+
+    <string-array name="gender_orientation_labels">
+        <item>M</item>
+        <item>F</item>
+        <item>B</item>
+        <item>N</item>
+        <item>E</item>
+    </string-array>
+
     <array name="age_slider_values">
         <item>18.0</item>
         <item>100.0</item>

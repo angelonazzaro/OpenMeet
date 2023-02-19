@@ -178,7 +178,6 @@ class AuthActivity : AppCompatActivity() {
 
                         val ban = checkBan(meeterID)
                         if(ban == null){
-                            //Snackbar.make(snackbarView, sharedPrefs.getInt("registration_stage", 0), Snackbar.LENGTH_SHORT).show()
                             if(sharedPrefs.getInt("registration_stage", -1) == -1){
                                 startActivity(
                                     Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)

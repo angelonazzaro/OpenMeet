@@ -90,7 +90,6 @@ class LoginActivity : AppCompatActivity() {
                             UserEncryptedData(this).storeCredentials(email, pwd)
                             //Aggiungere verifica registrazione pt.2
 
-                            Snackbar.make(snackbarView, sharedPrefs.getInt("registration_stage", 0), Snackbar.LENGTH_SHORT).show()
                             if(sharedPrefs.getInt("registration_stage", -1) == -1){
 
                                 startActivity(
