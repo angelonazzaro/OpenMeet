@@ -67,7 +67,7 @@ class RegistrationActivity : AppCompatActivity() {
                 meeter.meeterName = nameFld.editText?.text.toString()
                 meeter.meeterSurname = surnameFld.editText?.text.toString()
                 meeter.email = emailFld.editText?.text.toString()
-                meeter.pwd = passwordFld.editText?.text.toString()
+                meeter.setPwd(passwordFld.editText?.text.toString(), true)
                 meeter.birthdate = java.sql.Date(datePicker.selection!!)
 
 

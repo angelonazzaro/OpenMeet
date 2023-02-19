@@ -145,7 +145,7 @@ class HomeUserScreenActivity: AppCompatActivity() {
                 meeter.searchingGender = temp.searchingGender
                 meeter.birthdate = temp.birthdate
                 meeter.email = temp.email
-                meeter.pwd = temp.pwd
+                meeter.setPwd(temp.pwd, false)
                 meeter.publicKey = temp.publicKey
             }
             else
