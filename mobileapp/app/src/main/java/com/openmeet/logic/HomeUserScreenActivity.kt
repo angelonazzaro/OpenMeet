@@ -20,6 +20,7 @@ import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.data.meeter_interest.Meeter_InterestProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.meeter_interest.Meeter_Interest
+import com.openmeet.utils.UserEncryptedData
 import java.util.*
 import kotlin.system.exitProcess
 
@@ -45,8 +46,11 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
         val biography = findViewById<TextInputLayout>(R.id.biographyField)
         val genderInput = findViewById<TextInputLayout>(R.id.genderIdentityInput)
+        val genderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderAutoComplete)
         val searchingGenderInput = findViewById<TextInputLayout>(R.id.genderOrientationInput)
+        val searGenderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderOrientationAutoComplete)
         val saveButton = findViewById<Button>(R.id.saveButton)
+        val logoutButton = findViewById<Button>(R.id.logoutBtn)
 
         val id = intent.getStringExtra("ID").toString()
 
@@ -79,12 +83,35 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
         saveButton.setOnClickListener {
             meeter.biography = biography.editText?.text.toString()
+            updateMeeterInfo(meeter)
+        }
 
-            Thread {
-                if(!MeeterProxyDAO(this).doSaveOrUpdate(meeter))
-                    Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
-            }.start()
+        logoutButton.setOnClickListener {
 
+            MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.logout_dialog)
+                .setNegativeButton(R.string.negative_dialog){ dialog, which -> }
+                .setPositiveButton(R.string.positive_dialog2){ dialog, which ->
+
+                    UserEncryptedData(this).deleteAllValues()
+                    startActivity(
+                        Intent(this, AuthActivity::class.java)
+                    )
+                    overridePendingTransition(0, 0)
+                }
+                .show()
+        }
+
+        genderAutoComplete.setOnItemClickListener { adapterView, view, i, l ->
+            val genderLabels: MutableList<String> = resources.getStringArray(R.array.gender_identity_labels).toMutableList()
+            meeter.gender = genderLabels[i]
+            updateMeeterInfo(meeter)
+        }
+
+        searGenderAutoComplete.setOnItemClickListener { adapterView, view, i, l ->
+            val genderOrientLabels: MutableList<String> = resources.getStringArray(R.array.gender_orientation_labels).toMutableList()
+            meeter.searchingGender = genderOrientLabels[i]
+            updateMeeterInfo(meeter)
         }
 
 
@@ -164,8 +191,11 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
         val infoField = findViewById<TextView>(R.id.personalInfoField)
         val biography = findViewById<TextInputLayout>(R.id.biographyField)
-        val gender = findViewById<TextInputLayout>(R.id.genderIdentityInput)
-        val searchingGender = findViewById<TextInputLayout>(R.id.genderOrientationInput)
+        val genderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderAutoComplete)
+        val searGenderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderOrientationAutoComplete)
+
+        val genderList: MutableList<String> = resources.getStringArray(R.array.gender_identity_items).toMutableList()
+        val genderOrList: MutableList<String> = resources.getStringArray(R.array.gender_orientation_items).toMutableList()
 
         runOnUiThread {
             infoField.text = "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
@@ -173,16 +203,16 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
             //Da rivedere
             when(meeter.gender) {
-                "M" -> gender.editText?.setText("Male")
-                "F" -> gender.editText?.setText("Female")
-                "N" -> gender.editText?.setText("Non-Binary")
+                "M" -> genderAutoComplete.setText(genderList[0], false)
+                "F" -> genderAutoComplete.setText(genderList[1], false)
+                "N" -> genderAutoComplete.setText(genderList[2], false)
             }
             when(meeter.searchingGender) {
-                "M" -> searchingGender.editText?.setText("Male")
-                "F" -> searchingGender.editText?.setText("Female")
-                "N" -> searchingGender.editText?.setText("Non-Binary")
-                "B" -> searchingGender.editText?.setText("Both (Males & Females)")
-                "A" -> searchingGender.editText?.setText("Everybody")
+                "M" -> searGenderAutoComplete.setText(genderOrList[0], false)
+                "F" -> searGenderAutoComplete.setText(genderOrList[1], false)
+                "N" -> searGenderAutoComplete.setText(genderOrList[2], false)
+                "B" -> searGenderAutoComplete.setText(genderOrList[3], false)
+                "A" -> searGenderAutoComplete.setText(genderOrList[4], false)
             }
 
         }
@@ -252,6 +282,14 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
     }
 
+    fun updateMeeterInfo(m: Meeter){
+        val snackbarView = findViewById<View>(R.id.home_generalContainer)
+
+        Thread {
+            if(!MeeterProxyDAO(this).doSaveOrUpdate(meeter))
+                Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
+        }.start()
+    }
 
 
 }

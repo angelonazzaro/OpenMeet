@@ -46,4 +46,8 @@ class UserEncryptedData(context: Context) {
         retValues["PK"] = sharedPreferences.getString("PK", null)
         return retValues
     }
+
+    fun deleteAllValues(){
+        sharedPreferences.edit().clear().apply()
+    }
 }
