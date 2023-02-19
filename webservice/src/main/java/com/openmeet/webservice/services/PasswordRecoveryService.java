@@ -66,7 +66,7 @@ public class PasswordRecoveryService extends HttpServlet {
 
             String newPassword = this.generatePasswordOrToken(8, 16, false);
 
-            meeter.setPwd(newPassword);
+            meeter.setPwd(newPassword, true);
 
             HashMap<String, String> values = new HashMap<>();
             values.put("pwd", meeter.getPwd());
