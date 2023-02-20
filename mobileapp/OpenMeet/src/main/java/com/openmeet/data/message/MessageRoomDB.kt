@@ -26,7 +26,7 @@ class MessageRoomDB {
     @Entity
     data class LocalMessage (
 
-        @PrimaryKey val id: Int,
+        @PrimaryKey(autoGenerate = true) val id: Int,
         @Embedded(prefix = "rmt_") val message: Message
     )
 
@@ -51,7 +51,7 @@ class MessageRoomDB {
     @Database(entities = [LocalMessage::class], version = 1, exportSchema = false)
     abstract class AppDatabase : RoomDatabase() {
 
-        abstract fun userDao(): LocalMessageDao
+        abstract fun msgDao(): LocalMessageDao
 
         //Singleton DI
 
