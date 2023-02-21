@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.*
 import com.openmeet.shared.data.message.Message
 import com.openmeet.shared.data.storage.DAO
+import kotlinx.coroutines.flow.Flow
 import java.sql.Timestamp
 
 /**
@@ -48,29 +49,34 @@ class MessageRoomDB {
         fun delete(msg: LocalMessage)
     }
 
+    // Annotates class to be a Room Database with a table (entity) of the LocalMessage class
     @Database(entities = [LocalMessage::class], version = 1, exportSchema = false)
     abstract class AppDatabase : RoomDatabase() {
 
         abstract fun msgDao(): LocalMessageDao
 
-        //Singleton DI
-
         companion object {
+
+            // Singleton prevents multiple instances of database opening at the
+            // same time.
 
             @Volatile private var INSTANCE: AppDatabase? = null
 
             fun getDatabase(context: Context): AppDatabase {
-                val tmp = INSTANCE
-                if (tmp != null)
-                    return tmp
-                synchronized(this) {
+
+                // if the INSTANCE is not null, then return it,
+                // if it is, then create the database
+
+                return INSTANCE ?: synchronized(this) {
                     val instance = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,
                         "app_db"
                     ).build()
                     INSTANCE = instance
-                    return instance
+
+                    // return instance
+                    instance
                 }
 
             }
