@@ -31,10 +31,10 @@
                aria-expanded="false"></i>
             <ul class="dropdown-menu">
                 <li style="cursor: pointer"><a class="dropdown-item"
-                                                data-report-id="<%= data.get("id", i).toArray()[0] %>"
-                                                data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
                                                data-report-id="<%= data.get("id", i).toArray()[0] %>"
-                                               data-bs-toggle="modal" data-bs-target="#view-report-modal">View</a></li>
+                                               data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
+                data-report-id="<%= data.get("id", i).toArray()[0] %>"
+                data-bs-toggle="modal" data-bs-target="#view-report-modal">View</a></li>
                 <li style="cursor: pointer"><a class="dropdown-item"
                                                data-report-id="<%= data.get("id", i).toArray()[0] %>"
                                                data-bs-toggle="modal" data-bs-target="#archive-modal">Archive</a></li>
@@ -80,26 +80,26 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                    <div class="row mb-4">
-                        <label for="meeterReportedFullName">Meeter Full Name</label>
-                        <input type="text" id="meeterReportedFullName"
-                               class="form-control" disabled aria-label="meeterReportedFullName"/>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="meeterEmail">Meeter Email</label>
-                        <input type="email" id="meeterEmail"
-                               class="form-control" disabled aria-label="meeterEmail"/>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="reportReason">Reason</label>
-                        <input type="text" id="reportReason"
-                               class="form-control" disabled aria-label="reportReason"/>
-                    </div>
-                    <div class="row mb-4">
-                        <label for="reportDate">Date</label>
-                        <input type="text" id="reportDate"
-                               class="form-control" disabled aria-label="reportDate"/>
-                    </div>
+                <div class="row mb-4">
+                    <label for="meeterReportedFullName">Meeter Full Name</label>
+                    <input type="text" id="meeterReportedFullName"
+                           class="form-control" disabled aria-label="meeterReportedFullName"/>
+                </div>
+                <div class="row mb-4">
+                    <label for="meeterEmail">Meeter Email</label>
+                    <input type="email" id="meeterEmail"
+                           class="form-control" disabled aria-label="meeterEmail"/>
+                </div>
+                <div class="row mb-4">
+                    <label for="reportReason">Reason</label>
+                    <input type="text" id="reportReason"
+                           class="form-control" disabled aria-label="reportReason"/>
+                </div>
+                <div class="row mb-4">
+                    <label for="reportDate">Date</label>
+                    <input type="text" id="reportDate"
+                           class="form-control" disabled aria-label="reportDate"/>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -114,19 +114,19 @@
 <script>
 
 
-   function addFunctionality(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute) {
+    function addFunctionality(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute) {
 
-       document.querySelectorAll(modalBtnToggleSelector).forEach(el => {
-           el.addEventListener("click", function () {
-               inputElement.value = this.getAttribute(attribute);
-               console.log(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute);
-         });
-       });
+        document.querySelectorAll(modalBtnToggleSelector).forEach(el => {
+            el.addEventListener("click", function () {
+                inputElement.value = this.getAttribute(attribute);
+                console.log(inputElement, modalBtnToggleSelector, modalBtnDismissSelector, attribute);
+            });
+        });
 
-       document.querySelectorAll(modalBtnDismissSelector).forEach(el => {
-           el.addEventListener("click", () => inputElement.value = "");
-       });
-   }
+        document.querySelectorAll(modalBtnDismissSelector).forEach(el => {
+            el.addEventListener("click", () => inputElement.value = "");
+        });
+    }
 
     document.querySelectorAll("a[data-bs-target='#view-report-modal']").forEach(el => {
         el.addEventListener("click", function () {

@@ -9,10 +9,10 @@
 <% String basePath = request.getContextPath() + File.separator + "assets" + File.separator; %>
 
 <% if (profilePic == null || profilePic.length() == 0) { %>
-    <% profilePic = basePath + "imgs" + File.separator
-            + "special" + File.separator + "userplaceholder.png"; %>
+<% profilePic = basePath + "imgs" + File.separator
+        + "special" + File.separator + "userplaceholder.png"; %>
 <% } else { %>
-    <% profilePic = basePath + "uploads" + File.separator + "moderators" + File.separator + user.getId() + File.separator
+<% profilePic = basePath + "uploads" + File.separator + "moderators" + File.separator + user.getId() + File.separator
         + user.getProfilePic(); %>
 <% } %>
 

@@ -34,7 +34,8 @@
                     <div class="card-body d-flex flex-column align-items-center">
                         <div class="col-md-8 col-sm-12 mb-4">
                             <div class="form-group d-flex flex-column align-items-center">
-                                <img src="<%= profilePic %>" alt="profile pic preview" class="mb-1 show-on-error-imgs" id="preview">
+                                <img src="<%= profilePic %>" alt="profile pic preview" class="mb-1 show-on-error-imgs"
+                                     id="preview">
                                 <div style="flex-basis: 100%; width: 100%">
                                     <label for="profile-pic" class="form-label">Profile Picture</label>
                                     <input type="file" name="profilePic" id="profile-pic" class="form-control">
