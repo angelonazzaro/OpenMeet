@@ -12,11 +12,10 @@ import java.util.List;
  * which is a collection that maps keys to values, similar to a Map,
  * but in which each key may be associated with multiple values.
  *
- * @see java.util.Map
- *
  * @author Francesco Granozio
  * @author Angelo Nazzaro
- * */
+ * @see java.util.Map
+ */
 public class MultiMapList<K, V> {
 
     private List<Multimap<K, V>> data;
@@ -36,7 +35,6 @@ public class MultiMapList<K, V> {
      * Returns the number of rows in the MultiMapList.
      *
      * @return an integer representing the number of rows in the MultiMapList.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -50,9 +48,7 @@ public class MultiMapList<K, V> {
      * @param key the key for which we want to get the values
      * @param row an integer representing the row number in which we are looking for the values.
      * @return a Collection of V objects representing the values
-     *
      * @throws IndexOutOfBoundsException if the row number is out of bounds
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -69,9 +65,7 @@ public class MultiMapList<K, V> {
      *
      * @param row an integer representing the row number in which we are looking for the values.
      * @return a Collection of V objects representing the values of the specified row.
-     *
      * @throws IndexOutOfBoundsException if the row number is out of bounds
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -86,9 +80,8 @@ public class MultiMapList<K, V> {
     /**
      * Adds an entry to the bufferMap
      *
-     * @param key the key for which we want to add the value
+     * @param key   the key for which we want to add the value
      * @param value the value that will be added to the bufferMap for the key
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -103,7 +96,6 @@ public class MultiMapList<K, V> {
      * this will add the entries to the MultiMapList as a new row.
      *
      * @throws NullPointerException if the bufferMap is null
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */

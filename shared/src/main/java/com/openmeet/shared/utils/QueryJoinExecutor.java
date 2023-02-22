@@ -10,15 +10,17 @@ import java.util.logging.Logger;
  * This class is used to execute JOIN Queries.
  * It uses the MultiMapList class.
  *
- * @see MultiMapList
- *
  * @author Francesco Granozio
  * @author Angelo Nazzaro
- * */
+ * @see MultiMapList
+ */
 public class QueryJoinExecutor extends SQLDAO {
 
     Logger logger = Logger.getLogger(QueryJoinExecutor.class.getName());
-    public QueryJoinExecutor(DataSource source) { super(source); }
+
+    public QueryJoinExecutor(DataSource source) {
+        super(source);
+    }
 
     /**
      * Returns a MultiMapList object that can be used to handle Result Set objects
@@ -26,13 +28,11 @@ public class QueryJoinExecutor extends SQLDAO {
      *
      * @param query the query join to be executed.
      * @return the query results as a MultiMapList.
-     *
-     * @see ResultSet
-     * @see MultiMapList
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
-     * */
+     * @see ResultSet
+     * @see MultiMapList
+     */
     public MultiMapList<String, String> doRetrivedByJoin(String query) throws SQLException {
         MultiMapList<String, String> data = new MultiMapList<>();
 

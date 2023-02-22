@@ -24,7 +24,6 @@ public class QueryBuilder {
      *
      * @param columns The column names.
      * @return The new {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -49,7 +48,6 @@ public class QueryBuilder {
      *
      * @param tables The table names.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -72,7 +70,6 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -95,7 +92,6 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -118,7 +114,6 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -141,7 +136,6 @@ public class QueryBuilder {
      *
      * @param predicate The predicate.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -164,7 +158,6 @@ public class QueryBuilder {
      *
      * @param predicate The predicate.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -187,7 +180,6 @@ public class QueryBuilder {
      *
      * @param columns The column names.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -210,7 +202,6 @@ public class QueryBuilder {
      *
      * @param row_count The limit count.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -234,7 +225,6 @@ public class QueryBuilder {
      * @param offset    Starting offset
      * @param row_count Ending offset
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -258,7 +248,6 @@ public class QueryBuilder {
      *
      * @param queryBuilder The query builder to append.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -277,7 +266,6 @@ public class QueryBuilder {
      * @param table  The table name.
      * @param values The values to insert.
      * @return The new {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -346,7 +334,6 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The new {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -370,7 +357,6 @@ public class QueryBuilder {
      *
      * @param values The values to update.
      * @return The {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -418,7 +404,6 @@ public class QueryBuilder {
      *
      * @param table The table name.
      * @return The new {@link QueryBuilder} instance.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
