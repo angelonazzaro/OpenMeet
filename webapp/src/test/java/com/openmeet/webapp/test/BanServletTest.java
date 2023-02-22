@@ -35,26 +35,25 @@ import static org.mockito.Mockito.when;
  */
 public final class BanServletTest {
 
-     BasicDataSource dataSource;
-     BanServlet banServlet;
-     HttpServletRequest request;
-     HttpServletResponse response;
-     HttpSession session;
-     BanDAO banDAO;
-     Moderator moderator;
-     StringWriter stringWriter;
-     PrintWriter writer;
-     JSONResponse jsonResponse;
-     Gson gson;
+    BasicDataSource dataSource;
+    BanServlet banServlet;
+    HttpServletRequest request;
+    HttpServletResponse response;
+    HttpSession session;
+    BanDAO banDAO;
+    Moderator moderator;
+    StringWriter stringWriter;
+    PrintWriter writer;
+    JSONResponse jsonResponse;
+    Gson gson;
 
-     /**
-      * Sets up the test environment.
-      *
-      * @throws ServletException If an error occurs.
-      *
-      * @author Angelo Nazzaro
-      * @author Francesco Granozio
-      */
+    /**
+     * Sets up the test environment.
+     *
+     * @throws ServletException If an error occurs.
+     * @author Angelo Nazzaro
+     * @author Francesco Granozio
+     */
     @BeforeEach
     public void setUp() throws ServletException {
         dataSource = new BasicDataSource();
@@ -103,7 +102,6 @@ public final class BanServletTest {
      * Clears the database.
      *
      * @throws SQLException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @AfterEach
@@ -116,10 +114,10 @@ public final class BanServletTest {
      * Tests the TC_1.1_1 Test case. It tests the invalid description length.
      *
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
-    @Test @Order(1)
+    @Test
+    @Order(1)
     public void testInvalidDescriptionLengthInferior() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn(null);
@@ -140,10 +138,10 @@ public final class BanServletTest {
      * Tests the TC_1.1_1 Test case. It tests the invalid description length.
      *
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
-    @Test @Order(2)
+    @Test
+    @Order(2)
     public void testInvalidDescriptionLengthSuperior() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn(null);
@@ -170,10 +168,10 @@ public final class BanServletTest {
      * Tests the TC_1.2_1 Test case. It tests the invalid end time.
      *
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
-    @Test @Order(3)
+    @Test
+    @Order(3)
     public void testInvalidEndTime() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn("2022-11-24T13:02");
@@ -194,10 +192,10 @@ public final class BanServletTest {
      * Tests the TC_1.2_2 Test case.
      *
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
-    @Test @Order(4)
+    @Test
+    @Order(4)
     public void testCorrectBan() throws IOException {
         when(request.getParameter("meeterId")).thenReturn("1");
         when(request.getParameter("endTime")).thenReturn("2024-11-24T13:02");
