@@ -8,9 +8,8 @@ import java.sql.SQLException;
 /**
  * The extractor is used to convert the ResultSet returned by the database query into a Moderator object.
  *
- * @see ResultSetExtractor
- *
  * @author Angelo Nazzaro
+ * @see ResultSetExtractor
  */
 public class ModeratorExtractor implements ResultSetExtractor<Moderator> {
 
@@ -19,7 +18,6 @@ public class ModeratorExtractor implements ResultSetExtractor<Moderator> {
      *
      * @param resultSet the result set deriving from the query statement.
      * @return the Moderator object contained in the resultSet.
-     *
      * @author Angelo Nazzaro
      */
     @Override
