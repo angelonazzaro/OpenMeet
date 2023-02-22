@@ -47,7 +47,6 @@ public class ReportProxyDAOTest {
      * Sets up the test environment.
      *
      * @throws IOException If an error occurs.
-     *
      * @author Francesco Granozio
      */
     @BeforeEach
@@ -76,7 +75,6 @@ public class ReportProxyDAOTest {
      * Clears the test environment.
      *
      * @throws SQLException If an error occurs.
-     *
      * @author Francesco Granozio
      */
     @AfterEach

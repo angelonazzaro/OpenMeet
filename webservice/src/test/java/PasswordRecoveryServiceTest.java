@@ -42,7 +42,6 @@ public class PasswordRecoveryServiceTest {
      *
      * @throws IOException      If an error occurs.
      * @throws ServletException If an error occurs.
-     *
      * @author Roberto Della Rocca
      */
     @BeforeEach
