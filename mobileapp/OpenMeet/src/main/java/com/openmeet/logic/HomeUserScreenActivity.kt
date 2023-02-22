@@ -30,7 +30,7 @@ import kotlin.system.exitProcess
  * @author Yuri Brandi
  */
 
-class HomeUserScreenActivity: AppCompatActivity() {
+class HomeUserScreenActivity : AppCompatActivity() {
 
     private var backBtnLastPress = 0L
     private var meeter = Meeter()
@@ -48,7 +48,8 @@ class HomeUserScreenActivity: AppCompatActivity() {
         val genderInput = findViewById<TextInputLayout>(R.id.genderIdentityInput)
         val genderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderAutoComplete)
         val searchingGenderInput = findViewById<TextInputLayout>(R.id.genderOrientationInput)
-        val searGenderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderOrientationAutoComplete)
+        val searGenderAutoComplete =
+            findViewById<AutoCompleteTextView>(R.id.genderOrientationAutoComplete)
         val saveButton = findViewById<Button>(R.id.saveButton)
         val logoutButton = findViewById<Button>(R.id.logoutBtn)
 
@@ -90,8 +91,8 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
             MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.logout_dialog)
-                .setNegativeButton(R.string.negative_dialog){ dialog, which -> }
-                .setPositiveButton(R.string.positive_dialog2){ dialog, which ->
+                .setNegativeButton(R.string.negative_dialog) { dialog, which -> }
+                .setPositiveButton(R.string.positive_dialog2) { dialog, which ->
 
                     UserEncryptedData(this).deleteAllValues()
                     startActivity(
@@ -103,13 +104,15 @@ class HomeUserScreenActivity: AppCompatActivity() {
         }
 
         genderAutoComplete.setOnItemClickListener { adapterView, view, i, l ->
-            val genderLabels: MutableList<String> = resources.getStringArray(R.array.gender_identity_labels).toMutableList()
+            val genderLabels: MutableList<String> =
+                resources.getStringArray(R.array.gender_identity_labels).toMutableList()
             meeter.gender = genderLabels[i]
             updateMeeterInfo(meeter)
         }
 
         searGenderAutoComplete.setOnItemClickListener { adapterView, view, i, l ->
-            val genderOrientLabels: MutableList<String> = resources.getStringArray(R.array.gender_orientation_labels).toMutableList()
+            val genderOrientLabels: MutableList<String> =
+                resources.getStringArray(R.array.gender_orientation_labels).toMutableList()
             meeter.searchingGender = genderOrientLabels[i]
             updateMeeterInfo(meeter)
         }
@@ -164,8 +167,7 @@ class HomeUserScreenActivity: AppCompatActivity() {
                 meeter.email = temp.email
                 meeter.setPwd(temp.pwd, false)
                 meeter.publicKey = temp.publicKey
-            }
-            else
+            } else
                 Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
 
             runOnUiThread {
@@ -182,21 +184,25 @@ class HomeUserScreenActivity: AppCompatActivity() {
         val infoField = findViewById<TextView>(R.id.personalInfoField)
         val biography = findViewById<TextInputLayout>(R.id.biographyField)
         val genderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderAutoComplete)
-        val searGenderAutoComplete = findViewById<AutoCompleteTextView>(R.id.genderOrientationAutoComplete)
+        val searGenderAutoComplete =
+            findViewById<AutoCompleteTextView>(R.id.genderOrientationAutoComplete)
 
-        val genderList: MutableList<String> = resources.getStringArray(R.array.gender_identity_items).toMutableList()
-        val genderOrList: MutableList<String> = resources.getStringArray(R.array.gender_orientation_items).toMutableList()
+        val genderList: MutableList<String> =
+            resources.getStringArray(R.array.gender_identity_items).toMutableList()
+        val genderOrList: MutableList<String> =
+            resources.getStringArray(R.array.gender_orientation_items).toMutableList()
 
         runOnUiThread {
-            infoField.text = "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
+            infoField.text =
+                "${meeter.meeterName} ${meeter.meeterSurname}, ${getAge(meeter.birthdate)}"
             biography.editText?.setText(meeter.biography)
 
-            when(meeter.gender) {
+            when (meeter.gender) {
                 "M" -> genderAutoComplete.setText(genderList[0], false)
                 "F" -> genderAutoComplete.setText(genderList[1], false)
                 "N" -> genderAutoComplete.setText(genderList[2], false)
             }
-            when(meeter.searchingGender) {
+            when (meeter.searchingGender) {
                 "M" -> searGenderAutoComplete.setText(genderOrList[0], false)
                 "F" -> searGenderAutoComplete.setText(genderOrList[1], false)
                 "N" -> searGenderAutoComplete.setText(genderOrList[2], false)
@@ -253,29 +259,28 @@ class HomeUserScreenActivity: AppCompatActivity() {
             space.layoutParams.width = 16
 
             intTxt.setOnClickListener {
-                if(intTxt.text == "+"){
+                if (intTxt.text == "+") {
                     MaterialAlertDialogBuilder(this)
                         .setTitle("Add interest?")
                         .setMessage("")
-                        .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                        .setPositiveButton(R.string.positive_dialog) { dialog, which -> }
                         .show()
-                }
-                else
+                } else
                     MaterialAlertDialogBuilder(this)
                         .setTitle(R.string.report_done_title)
                         .setMessage(R.string.report_done_message)
-                        .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                        .setPositiveButton(R.string.positive_dialog) { dialog, which -> }
                         .show()
             }
         }
 
     }
 
-    fun updateMeeterInfo(m: Meeter){
+    fun updateMeeterInfo(m: Meeter) {
         val snackbarView = findViewById<View>(R.id.home_generalContainer)
 
         Thread {
-            if(!MeeterProxyDAO(this).doSaveOrUpdate(m))
+            if (!MeeterProxyDAO(this).doSaveOrUpdate(m))
                 Snackbar.make(snackbarView, R.string.connection_error, Snackbar.LENGTH_LONG).show()
         }.start()
     }

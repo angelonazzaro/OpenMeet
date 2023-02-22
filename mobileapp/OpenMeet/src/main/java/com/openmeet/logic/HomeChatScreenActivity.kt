@@ -44,11 +44,14 @@ class HomeChatScreenActivity : AppCompatActivity() {
 
 
 
-        bottomNav.setOnItemSelectedListener{ item ->
-            when(item.itemId){
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.discover_Tab -> {
                     startActivity(
-                        Intent(this, HomeScreenActivity::class.java).putExtra("ID", intent.getStringExtra("ID").toString())
+                        Intent(this, HomeScreenActivity::class.java).putExtra(
+                            "ID",
+                            intent.getStringExtra("ID").toString()
+                        )
                     )
                     overridePendingTransition(0, 0)
                 }
@@ -73,11 +76,10 @@ class HomeChatScreenActivity : AppCompatActivity() {
     //Override del comportamento del back Button che passa alla schermata precedente/esce
     override fun onBackPressed() {
 
-        if (backBtnLastPress + 2000 > System.currentTimeMillis()){
+        if (backBtnLastPress + 2000 > System.currentTimeMillis()) {
             this.finish()
             exitProcess(0)
-        }
-        else {
+        } else {
             Toast.makeText(this, getString(R.string.double_back_prompt), Toast.LENGTH_SHORT)
                 .show()
             backBtnLastPress = System.currentTimeMillis()
@@ -91,7 +93,7 @@ class HomeChatScreenActivity : AppCompatActivity() {
      *
      * @author Yuri Brandi
      */
-    fun retrieveChats(meeterID: String){
+    fun retrieveChats(meeterID: String) {
 
         val progressionIndicator = findViewById<View>(R.id.linearProgressIndicator)
         val snackbarView = findViewById<View>(R.id.home_generalContainer)
@@ -106,18 +108,25 @@ class HomeChatScreenActivity : AppCompatActivity() {
             val MatchedList = RatingProxyDAO(this).doRetrieveMatches(meeterID)
             println(MatchedList)
             if (MatchedList != null)
-                if(MatchedList.size > 0){
-                    val ChatList = MessageProxyDAO(this).doRetrieveByCondition("${Message.MESSAGE_MEETER_SENDER} = $meeterID OR ${Message.MESSAGE_MEETER_RECEIVER} = $meeterID")
+                if (MatchedList.size > 0) {
+                    val ChatList =
+                        MessageProxyDAO(this).doRetrieveByCondition("${Message.MESSAGE_MEETER_SENDER} = $meeterID OR ${Message.MESSAGE_MEETER_RECEIVER} = $meeterID")
                     if (ChatList != null) {
                         displayChatsPreview(MatchedList, ChatList)
-                    }
-                    else
-                        Snackbar.make(snackbarView, getString(R.string.connection_error) + "1", Snackbar.LENGTH_SHORT).show()
-                }
-                else
+                    } else
+                        Snackbar.make(
+                            snackbarView,
+                            getString(R.string.connection_error) + "1",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                } else
                     runOnUiThread { emptyChatTxt.visibility = View.VISIBLE }
             else
-                Snackbar.make(snackbarView, getString(R.string.connection_error)+ "2", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(
+                    snackbarView,
+                    getString(R.string.connection_error) + "2",
+                    Snackbar.LENGTH_SHORT
+                ).show()
 
             runOnUiThread { progressionIndicator.visibility = View.GONE }
         }.start()
@@ -132,17 +141,17 @@ class HomeChatScreenActivity : AppCompatActivity() {
      *
      * @author Yuri
      */
-    fun displayChatsPreview(matchedList: MutableList<Meeter>, chatList: MutableList<Message>){
+    fun displayChatsPreview(matchedList: MutableList<Meeter>, chatList: MutableList<Message>) {
 
         val chatsView = findViewById<LinearLayout>(R.id.chatsLayout)
         val snackbarView = findViewById<View>(R.id.home_generalContainer)
 
-        for(matchedMeeter in matchedList){
+        for (matchedMeeter in matchedList) {
             val messageView = LinearLayout(this)
             messageView.orientation = LinearLayout.HORIZONTAL
 
             val meeter = MeeterProxyDAO(this).doRetrieveByKey(matchedMeeter.id.toString())
-            if(meeter != null){
+            if (meeter != null) {
 
                 val view: LinearLayout =
                     LayoutInflater.from(this).inflate(R.layout.chat_view, null) as LinearLayout
@@ -162,16 +171,19 @@ class HomeChatScreenActivity : AppCompatActivity() {
                 runOnUiThread {
 
 
-                    for(v in view.children){
+                    for (v in view.children) {
                         if (v is TextView && v.id == R.id.textValues)
                             v.text = "${meeter.meeterName} ${meeter.meeterSurname} "
                     }
                     chatsView.addView(view)
                     chatsView.addView(divider)
                 }
-            }
-            else
-                Snackbar.make(snackbarView, getString(R.string.connection_error), Snackbar.LENGTH_SHORT).show()
+            } else
+                Snackbar.make(
+                    snackbarView,
+                    getString(R.string.connection_error),
+                    Snackbar.LENGTH_SHORT
+                ).show()
 
         }
 

@@ -97,13 +97,16 @@ class AuthActivity : AppCompatActivity() {
         fbLoginBtn.setOnClickListener {
             val loginManager = LoginManager.getInstance()
             loginManager.setLoginBehavior(LoginBehavior.KATANA_ONLY)
-            loginManager.logInWithReadPermissions(this, listOf("email", "public_profile"
-                , "user_gender", "user_birthday"));
+            loginManager.logInWithReadPermissions(
+                this, listOf(
+                    "email", "public_profile", "user_gender", "user_birthday"
+                )
+            );
         }
 
         fbLoginBtn.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult) {
-                val graphRequest = GraphRequest.newMeRequest(result?.accessToken){ _, response ->
+                val graphRequest = GraphRequest.newMeRequest(result?.accessToken) { _, response ->
                     getFacebookData(response?.getJSONObject())
                 }
 
@@ -177,30 +180,34 @@ class AuthActivity : AppCompatActivity() {
                         val meeterID = ret[0].id.toString()
 
                         val ban = checkBan(meeterID)
-                        if(ban == null){
-                            if(sharedPrefs.getInt("registration_stage", -1) == -1){
+                        if (ban == null) {
+                            if (sharedPrefs.getInt("registration_stage", -1) == -1) {
                                 startActivity(
-                                    Intent(this, HomeScreenActivity::class.java).putExtra("ID", meeterID)
+                                    Intent(this, HomeScreenActivity::class.java).putExtra(
+                                        "ID",
+                                        meeterID
+                                    )
+                                )
+                                overridePendingTransition(0, 0)
+                            } else {
+                                startActivity(
+                                    Intent(this, Registration2Activity::class.java).putExtra(
+                                        "ID",
+                                        meeterID
+                                    )
                                 )
                                 overridePendingTransition(0, 0)
                             }
-                            else{
-                                startActivity(
-                                    Intent(this, Registration2Activity::class.java).putExtra("ID", meeterID)
-                                )
-                                overridePendingTransition(0, 0)
-                            }
-                        }
-                        else{
+                        } else {
                             runOnUiThread {
                                 MaterialAlertDialogBuilder(this)
                                     .setTitle(R.string.banned_dialog_title)
                                     .setMessage(
                                         "${getString(R.string.banned_dialog_message)}\n\n" +
-                                        "${getString(R.string.banned_dialog_description)} ${ban.description}\n" +
-                                        "${getString(R.string.banned_dialog_expiry)} ${ban.endTime}"
+                                                "${getString(R.string.banned_dialog_description)} ${ban.description}\n" +
+                                                "${getString(R.string.banned_dialog_expiry)} ${ban.endTime}"
                                     )
-                                    .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                                    .setPositiveButton(R.string.positive_dialog) { dialog, which -> }
                                     .show()
                             }
                         }
@@ -230,12 +237,13 @@ class AuthActivity : AppCompatActivity() {
      *
      * @author Yuri Brandi
      */
-    fun checkBan(meeterID: String): Ban?{
+    fun checkBan(meeterID: String): Ban? {
         val ret = BanProxyDAO(this).doRetrieveByCondition(
-            "${Ban.BAN_MEETER_ID} = $meeterID AND ${Ban.BAN_END_TIME} > CURDATE()")
+            "${Ban.BAN_MEETER_ID} = $meeterID AND ${Ban.BAN_END_TIME} > CURDATE()"
+        )
 
         Log.d("Existing bans", ret.toString())
-        if(ret != null && ret.size > 0)
+        if (ret != null && ret.size > 0)
             return ret[0]
         return null
     }

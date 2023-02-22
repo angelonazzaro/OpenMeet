@@ -122,7 +122,11 @@ class HomeScreenActivity : AppCompatActivity() {
                 .setTitle(R.string.report_dialog_title)
                 .setPositiveButton(resources.getString(R.string.report_positive_dialog)) { dialog, which ->
                     //Toast.makeText(this, intent.getStringExtra("ID").toString(), Toast.LENGTH_SHORT).show()
-                    doReportMeeter(view.findViewById<RadioGroup>(R.id.radioReportGroup).checkedRadioButtonId, Integer.parseInt(intent.getStringExtra("ID")), meeterList[listIndex].id)
+                    doReportMeeter(
+                        view.findViewById<RadioGroup>(R.id.radioReportGroup).checkedRadioButtonId,
+                        Integer.parseInt(intent.getStringExtra("ID")),
+                        meeterList[listIndex].id
+                    )
                 }
                 .setNegativeButton(resources.getString(R.string.cancel_dialog)) { dialog, which -> }
                 .show()
@@ -316,7 +320,7 @@ class HomeScreenActivity : AppCompatActivity() {
      *
      * @author Yuri Brandi
      */
-    fun doReportMeeter(selectedRadio: Int, reporterMeeter: Int, reportedMeeter: Int){
+    fun doReportMeeter(selectedRadio: Int, reporterMeeter: Int, reportedMeeter: Int) {
 
         val snackbarView = findViewById<View>(R.id.home_generalContainer)
 
@@ -324,7 +328,7 @@ class HomeScreenActivity : AppCompatActivity() {
         rep.meeterReporter = reporterMeeter
         rep.meeterReported = reportedMeeter
         rep.creationDate = Timestamp(System.currentTimeMillis())
-        rep.reason = when(selectedRadio){
+        rep.reason = when (selectedRadio) {
             R.id.radio_report_spam -> "Spam"
 
             R.id.radio_report_inappropriate -> "Inappropriate content"
@@ -338,17 +342,20 @@ class HomeScreenActivity : AppCompatActivity() {
 
         Thread {
 
-            if(ReportProxyDAO(this).doSave(rep)){
+            if (ReportProxyDAO(this).doSave(rep)) {
                 runOnUiThread {
                     MaterialAlertDialogBuilder(this)
                         .setTitle(R.string.report_done_title)
                         .setMessage(R.string.report_done_message)
-                        .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                        .setPositiveButton(R.string.positive_dialog) { dialog, which -> }
                         .show()
                 }
-            }
-            else
-                Snackbar.make(snackbarView, getString(R.string.connection_error), Snackbar.LENGTH_SHORT).show()
+            } else
+                Snackbar.make(
+                    snackbarView,
+                    getString(R.string.connection_error),
+                    Snackbar.LENGTH_SHORT
+                ).show()
 
         }.start()
 

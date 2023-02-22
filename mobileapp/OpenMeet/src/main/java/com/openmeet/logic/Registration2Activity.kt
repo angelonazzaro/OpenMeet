@@ -65,7 +65,7 @@ class Registration2Activity : AppCompatActivity() {
         val sharedPrefs =
             this.getSharedPreferences(getString(R.string.STD_PREFS), Context.MODE_PRIVATE)
 
-        if(sharedPrefs.getInt("registration_stage", -1) == -1)
+        if (sharedPrefs.getInt("registration_stage", -1) == -1)
             sharedPrefs.edit().putInt("registration_stage", 0).apply()
 
         doNextPhase(sharedPrefs.getInt("registration_stage", 0))
@@ -323,10 +323,11 @@ class Registration2Activity : AppCompatActivity() {
                         Thread {
                             //add compressor
                             val inputStream = contentResolver.openInputStream(uri)
-                            if(inputStream != null){
-                                val hashMap : HashMap<String, String> = HashMap()
+                            if (inputStream != null) {
+                                val hashMap: HashMap<String, String> = HashMap()
                                 hashMap["meeterId"] = "1"
-                                hashMap["photoByteArray"] =  Base64.getEncoder().encodeToString(inputStream.readBytes())
+                                hashMap["photoByteArray"] =
+                                    Base64.getEncoder().encodeToString(inputStream.readBytes())
                                 ImageProxyDAO(this).doSave(hashMap)
 
                                 inputStream.close()
