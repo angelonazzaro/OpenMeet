@@ -20,7 +20,7 @@ import java.util.logging.Level
  *
  * @author Yuri Brandi
  */
-class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter_Interest> {
+class Meeter_InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Meeter_Interest> {
 
     override fun doRetrieveByCondition(condition: String): MutableList<Meeter_Interest>? {
         DAO.logger.log(Level.INFO, "doRetrieveByCondition: $condition")
@@ -63,7 +63,10 @@ class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter
         return gson.fromJson(meeter_interests, Array<Meeter_Interest>::class.java).toMutableList()
     }
 
-    override fun doRetrieveByCondition(condition: String,rows_count: Int): MutableList<Meeter_Interest>? {
+    override fun doRetrieveByCondition(
+        condition: String,
+        rows_count: Int
+    ): MutableList<Meeter_Interest>? {
 
         DAO.logger.log(Level.INFO, "doRetrieveByCondition: $condition")
 
@@ -72,7 +75,11 @@ class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "Meeter_InterestService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT, "condition" to condition,  "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT,
+                    "condition" to condition,
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
@@ -106,7 +113,11 @@ class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter
 
     }
 
-    override fun doRetrieveByCondition(condition: String, offset: Int, rows_count: Int): MutableList<Meeter_Interest>? {
+    override fun doRetrieveByCondition(
+        condition: String,
+        offset: Int,
+        rows_count: Int
+    ): MutableList<Meeter_Interest>? {
 
         DAO.logger.log(Level.INFO, "doRetrieveByCondition: $condition")
 
@@ -115,7 +126,12 @@ class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "Meeter_InterestService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET, "condition" to condition, "offset" to offset.toString(), "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET,
+                    "condition" to condition,
+                    "offset" to offset.toString(),
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
@@ -340,7 +356,8 @@ class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter
             .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_SAVE,
-                    "meeter_interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
+                    "meeter_interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create()
+                        .toJson(obj)
                 ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
@@ -471,7 +488,8 @@ class Meeter_InterestProxyDAO(context: Context): ContextDAO(context), DAO<Meeter
             .doHttpPostRequest(getUrl() + "Meeter_InterestService",
                 hashMapOf(
                     "operation" to DAO.DO_SAVE_OR_UPDATE,
-                    "meeter_interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create().toJson(obj)
+                    "meeter_interest" to GsonBuilder().setDateFormat("yyyy-MM-dd").create()
+                        .toJson(obj)
                 ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
