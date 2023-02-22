@@ -8,10 +8,9 @@ import java.sql.SQLException;
 /**
  * The extractor is used to convert the ResultSet returned by the database query into an Image object.
  *
- * @see ResultSetExtractor
- *
  * @author Angelo Nazzaro
  * @author Francesco Granozio
+ * @see ResultSetExtractor
  */
 public class ImageExtractor implements ResultSetExtractor<Image> {
     /**
@@ -19,7 +18,6 @@ public class ImageExtractor implements ResultSetExtractor<Image> {
      *
      * @param resultSet the result set deriving from the query statement.
      * @return the Image object contained in the resultSet.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
