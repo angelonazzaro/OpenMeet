@@ -20,7 +20,6 @@ public class ResponseHelper {
      *
      * @param parameters The parameters to control.
      * @return The result of the check.
-     *
      * @author Angelo Nazzaro
      **/
     public static boolean checkStringFields(String... parameters) {
@@ -36,9 +35,8 @@ public class ResponseHelper {
      * Sends a generic error message to the client.
      *
      * @param out The Writer with which the response will be sent.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     public static void sendGenericError(PrintWriter out) {
 
         jsonResponse.addPair("status", "error");
@@ -51,9 +49,8 @@ public class ResponseHelper {
      * Sends a custom error message to the client.
      *
      * @param out The Writer with which the response will be sent.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     public static void sendCustomError(PrintWriter out, String value) {
 
         jsonResponse.addPair("status", "error");
@@ -66,9 +63,8 @@ public class ResponseHelper {
      * Sends a generic success message to the client.
      *
      * @param out The Writer with which the response will be sent.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     public static void sendCustomSuccess(PrintWriter out, String value) {
 
         jsonResponse.addPair("status", "success");
@@ -81,9 +77,8 @@ public class ResponseHelper {
      * Sends a generic response message to the client.
      *
      * @param out The Writer with which the response will be sent.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     public static void sendGenericResponse(PrintWriter out, HashMap<String, String> pairs) {
 
         pairs.forEach(jsonResponse::addPair);
@@ -95,9 +90,8 @@ public class ResponseHelper {
      * Sends the response to the client and clear the jsonResponse.
      *
      * @param out The Writer with which the response will be sent.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     private static void writeResponse(PrintWriter out) {
         out.write(gson.toJson(jsonResponse.getResponse()));
         out.flush();

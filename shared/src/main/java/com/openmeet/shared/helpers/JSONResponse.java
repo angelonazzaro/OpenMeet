@@ -18,9 +18,8 @@ public class JSONResponse {
      * Returns the response.
      *
      * @return the response.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     public HashMap<String, String> getResponse() {
         return this.response;
     }
@@ -28,11 +27,10 @@ public class JSONResponse {
     /**
      * Adds a pair to the response.
      *
-     * @param key The key of the pair.
+     * @param key   The key of the pair.
      * @param value The value of the pair.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     public void addPair(String key, String value) {
         response.put(key, value);
     }
@@ -43,9 +41,8 @@ public class JSONResponse {
      *
      * @param key The JSON object key.
      * @return The value of the key.
-     *
      * @author Angelo Nazzaro
-     * */
+     */
     public String getValue(String key) {
         if (!response.containsKey(key)) return null;
 
@@ -56,7 +53,7 @@ public class JSONResponse {
      * Clears the response.
      *
      * @author Angelo Nazzaro
-     * */
+     */
     public void clear() {
         response.clear();
     }
@@ -65,7 +62,6 @@ public class JSONResponse {
      * Returns the response as a JSON string.
      *
      * @return this object in a JSON-like format.
-     *
      * @author Angelo Nazzaro
      */
     @Override
