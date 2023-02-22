@@ -8,11 +8,10 @@ import java.util.HashMap;
 /**
  * This class represents the Message Entity.
  *
- * @see IEntity
- *
  * @author Angelo Nazzaro
  * @author Francesco Granozio
- * */
+ * @see IEntity
+ */
 public class Message implements IEntity {
     public static final String MESSAGE = "Message";
     public static final String MESSAGE_ID = MESSAGE + ".id";
@@ -37,13 +36,11 @@ public class Message implements IEntity {
     /**
      * Returns the Message as an hashMap.
      *
-     * @see IEntity
-     *
      * @return the Message as an hashMap.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     * @see IEntity
+     */
     @Override
     public HashMap<String, Object> toHashMap() {
         return new HashMap<>() {{
@@ -60,14 +57,12 @@ public class Message implements IEntity {
     /**
      * Returns the Message as an hashMap.
      *
-     * @see IEntity
-     *
      * @param fields the fields to be returned.
      * @return the Message as an hashMap.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     * @see IEntity
+     */
     @Override
     public HashMap<String, Object> toHashMap(String... fields) {
         return new HashMap<>() {{
@@ -116,10 +111,9 @@ public class Message implements IEntity {
      * Returns the id of the Message.
      *
      * @return the id of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public int getId() {
         return id;
     }
@@ -128,10 +122,9 @@ public class Message implements IEntity {
      * Sets the id of the Message.
      *
      * @param id the id of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setId(int id) {
         this.id = id;
     }
@@ -140,10 +133,9 @@ public class Message implements IEntity {
      * Returns the text of the Message.
      *
      * @return the text of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public String getText() {
         return text;
     }
@@ -152,10 +144,9 @@ public class Message implements IEntity {
      * Sets the text of the Message.
      *
      * @param text the text of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setText(String text) {
         this.text = text;
     }
@@ -164,10 +155,9 @@ public class Message implements IEntity {
      * Returns the sentTime of the Message.
      *
      * @return the sentTime of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public Timestamp getSentTime() {
         return sentTime;
     }
@@ -176,10 +166,9 @@ public class Message implements IEntity {
      * Sets the sentTime of the Message.
      *
      * @param sentTime the sentTime of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setSentTime(Timestamp sentTime) {
         this.sentTime = sentTime;
     }
@@ -188,10 +177,9 @@ public class Message implements IEntity {
      * Returns the deliveredTime of the Message.
      *
      * @return the deliveredTime of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public Timestamp getDeliveredTime() {
         return deliveredTime;
     }
@@ -200,10 +188,9 @@ public class Message implements IEntity {
      * Sets the deliveredTime of the Message.
      *
      * @param deliveredTime the deliveredTime of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setDeliveredTime(Timestamp deliveredTime) {
         this.deliveredTime = deliveredTime;
     }
@@ -212,10 +199,9 @@ public class Message implements IEntity {
      * Returns the readTime of the Message.
      *
      * @return the readTime of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public Timestamp getReadTime() {
         return readTime;
     }
@@ -224,10 +210,9 @@ public class Message implements IEntity {
      * Sets the readTime of the Message.
      *
      * @param readTime the readTime of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setReadTime(Timestamp readTime) {
         this.readTime = readTime;
     }
@@ -236,10 +221,9 @@ public class Message implements IEntity {
      * Returns the meeter id of the sender of the Message.
      *
      * @return the meeter id of the sender of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public int getMeeterSender() {
         return meeterSender;
     }
@@ -248,10 +232,9 @@ public class Message implements IEntity {
      * Sets the meeter id of the sender of the Message.
      *
      * @param meeterSender the meeter id of the sender of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setMeeterSender(int meeterSender) {
         this.meeterSender = meeterSender;
     }
@@ -260,10 +243,9 @@ public class Message implements IEntity {
      * Returns the meeter id of the receiver of the Message.
      *
      * @return the meeter id of the receiver of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public int getMeeterReceiver() {
         return meeterReceiver;
     }
@@ -272,10 +254,9 @@ public class Message implements IEntity {
      * Sets the meeter id of the receiver of the Message.
      *
      * @param meeterReceiver the meeter id of the receiver of the Message.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setMeeterReceiver(int meeterReceiver) {
         this.meeterReceiver = meeterReceiver;
     }
