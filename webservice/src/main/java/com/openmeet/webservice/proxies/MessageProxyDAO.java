@@ -19,11 +19,10 @@ import java.util.logging.Level;
 /**
  * Proxy class for MessageDAO.
  *
+ * @author Francesco Granozio
  * @see ProxyDAO
  * @see DAO
  * @see GenericProxyDAO
- *
- * @author Francesco Granozio
  */
 public class MessageProxyDAO extends ProxyDAO<Message> implements DAO<Message> {
 

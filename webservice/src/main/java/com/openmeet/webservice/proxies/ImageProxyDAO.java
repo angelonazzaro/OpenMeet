@@ -208,7 +208,7 @@ public class ImageProxyDAO extends ProxyDAO<Image> implements DAO<Image> {
 
         logger.log(Level.INFO, "ImageProxyDAO:doSave() - meeterId: " + meeterId);
         String basePath = request.getServletContext().getRealPath("/");
-        String meeterUploadPath = "uploads" + File.separator + "meeters" + File.separator +  meeterId;
+        String meeterUploadPath = "uploads" + File.separator + "meeters" + File.separator + meeterId;
         File uploadPath = new File(basePath + File.separator + meeterUploadPath);
 
         if (!uploadPath.exists()) {

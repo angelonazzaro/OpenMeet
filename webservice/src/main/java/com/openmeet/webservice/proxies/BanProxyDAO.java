@@ -19,11 +19,10 @@ import java.util.logging.Level;
 /**
  * Proxy class for BanDAO.
  *
+ * @author Francesco Granozio
  * @see ProxyDAO
  * @see DAO
  * @see GenericProxyDAO
- *
- * @author Francesco Granozio
  */
 public class BanProxyDAO extends ProxyDAO<Ban> implements DAO<Ban> {
 

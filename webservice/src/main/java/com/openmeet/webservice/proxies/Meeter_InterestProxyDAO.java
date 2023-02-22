@@ -20,11 +20,10 @@ import java.util.logging.Level;
 /**
  * Proxy class for Meeter_InterestDAO.
  *
+ * @author Francesco Granozio
  * @see ProxyDAO
  * @see DAO
  * @see GenericProxyDAO
- *
- * @author Francesco Granozio
  */
 public class Meeter_InterestProxyDAO extends ProxyDAO<Meeter_Interest> implements DAO<Meeter_Interest> {
 

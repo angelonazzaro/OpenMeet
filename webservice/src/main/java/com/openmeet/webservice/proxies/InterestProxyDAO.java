@@ -19,11 +19,10 @@ import java.util.logging.Level;
 /**
  * Proxy class for InterestDAO.
  *
+ * @author Francesco Granozio
  * @see ProxyDAO
  * @see DAO
  * @see GenericProxyDAO
- *
- * @author Francesco Granozio
  */
 public class InterestProxyDAO extends ProxyDAO<Interest> implements DAO<Interest> {
 

@@ -19,11 +19,10 @@ import java.util.logging.Level;
 /**
  * Proxy class for RatingDAO.
  *
+ * @author Francesco Granozio
  * @see ProxyDAO
  * @see DAO
  * @see GenericProxyDAO
- *
- * @author Francesco Granozio
  */
 public class RatingProxyDAO extends ProxyDAO<Rating> implements DAO<Rating> {
 
