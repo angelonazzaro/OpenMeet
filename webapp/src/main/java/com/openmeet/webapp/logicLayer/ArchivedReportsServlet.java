@@ -28,7 +28,6 @@ public class ArchivedReportsServlet extends HttpServlet {
      * @param resp The response object.
      * @throws ServletException If an error occurs.
      * @throws IOException      If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override
@@ -66,7 +65,6 @@ public class ArchivedReportsServlet extends HttpServlet {
      * @param req  The request object.
      * @param resp The response object.
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override

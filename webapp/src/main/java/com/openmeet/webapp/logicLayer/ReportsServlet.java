@@ -27,7 +27,6 @@ public class ReportsServlet extends HttpServlet {
      * @param resp The response object.
      * @throws ServletException If an error occurs.
      * @throws IOException      If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override

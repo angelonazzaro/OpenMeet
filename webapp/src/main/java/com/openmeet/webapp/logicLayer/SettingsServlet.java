@@ -37,7 +37,6 @@ public class SettingsServlet extends HttpServlet {
      * @param resp The response object.
      * @throws ServletException If an error occurs.
      * @throws IOException      If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override
@@ -55,7 +54,6 @@ public class SettingsServlet extends HttpServlet {
      * @param req  The request object.
      * @param resp The response object.
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override
@@ -121,7 +119,7 @@ public class SettingsServlet extends HttpServlet {
 
                 String newFilename = "profilePic." + fileExtension;
                 String appPath = req.getServletContext().getRealPath("/");
-                String basePath = appPath + "assets" + File.separator + "uploads" + File.separator + "moderators" +  File.separator + user.getId();
+                String basePath = appPath + "assets" + File.separator + "uploads" + File.separator + "moderators" + File.separator + user.getId();
                 String uploadPath = basePath + File.separator + newFilename;
                 File userProfilePicFolder = new File(basePath);
 

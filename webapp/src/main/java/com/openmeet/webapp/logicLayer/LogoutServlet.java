@@ -20,7 +20,6 @@ public class LogoutServlet extends HttpServlet {
      * @param req  The request object.
      * @param resp The response object.
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override

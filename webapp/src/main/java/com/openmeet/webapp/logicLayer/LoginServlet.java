@@ -31,7 +31,6 @@ public class LoginServlet extends HttpServlet {
      * @param resp The response object.
      * @throws ServletException If an error occurs.
      * @throws IOException      If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override
@@ -55,7 +54,6 @@ public class LoginServlet extends HttpServlet {
      * @param req  The request object.
      * @param resp The response object.
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override
@@ -87,7 +85,7 @@ public class LoginServlet extends HttpServlet {
                     .doRetrieveByCondition(
                             String.format(
                                     "%s = '%s' AND %s=SHA1('%s')",
-                            Moderator.MODERATOR_EMAIL, email, Moderator.MODERATOR_PWD, password));
+                                    Moderator.MODERATOR_EMAIL, email, Moderator.MODERATOR_PWD, password));
 
             if (moderators.isEmpty()) {
                 ResponseHelper.sendCustomError(out, "The email or the password are incorrect. Please try again.");
@@ -113,12 +111,10 @@ public class LoginServlet extends HttpServlet {
     /**
      * Checks if the user is logged in.
      *
-     * @see com.openmeet.webapp.logicLayer.filters.AuthenticationFilter
-     *
      * @param req The request object.
      * @return True if the user is logged in, false otherwise.
-     *
      * @author Angelo
+     * @see com.openmeet.webapp.logicLayer.filters.AuthenticationFilter
      */
     private boolean isLogged(HttpServletRequest req) {
         HttpSession currentUserSession = req.getSession(false);

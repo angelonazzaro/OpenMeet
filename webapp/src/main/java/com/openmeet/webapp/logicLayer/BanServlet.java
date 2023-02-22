@@ -47,7 +47,6 @@ public class BanServlet extends HttpServlet {
      * @param resp The response object.
      * @throws ServletException If an error occurs.
      * @throws IOException      If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override
@@ -97,7 +96,6 @@ public class BanServlet extends HttpServlet {
      * @param req  The request object.
      * @param resp The response object.
      * @throws IOException If an error occurs.
-     *
      * @author Angelo Nazzaro
      */
     @Override
@@ -239,7 +237,7 @@ public class BanServlet extends HttpServlet {
 
                     BodyPart messageBodyPart = new MimeBodyPart();
                     messageBodyPart.setContent(String.format("Hi %s %s. \n We are sorry to inform you that " +
-                            "your account has been suspended for <b>%s</b>.",
+                                    "your account has been suspended for <b>%s</b>.",
                             meeter.getMeeterName(), meeter.getMeeterSurname(), ban.get(Ban.BAN_DESCRIPTION)), "text/html");
 
                     multipart.addBodyPart(messageBodyPart);
