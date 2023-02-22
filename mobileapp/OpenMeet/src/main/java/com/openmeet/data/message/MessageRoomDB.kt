@@ -25,7 +25,7 @@ class MessageRoomDB {
 //    )
 
     @Entity
-    data class LocalMessage (
+    data class LocalMessage(
 
         @PrimaryKey(autoGenerate = true) val id: Int,
         @Embedded(prefix = "rmt_") val message: Message
@@ -60,7 +60,8 @@ class MessageRoomDB {
             // Singleton prevents multiple instances of database opening at the
             // same time.
 
-            @Volatile private var INSTANCE: AppDatabase? = null
+            @Volatile
+            private var INSTANCE: AppDatabase? = null
 
             fun getDatabase(context: Context): AppDatabase {
 

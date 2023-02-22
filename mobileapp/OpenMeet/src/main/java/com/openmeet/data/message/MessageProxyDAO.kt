@@ -72,7 +72,11 @@ class MessageProxyDAO(context: Context) : ContextDAO(context), DAO<Message> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MessageService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT, "condition" to condition, "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT,
+                    "condition" to condition,
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
@@ -105,7 +109,11 @@ class MessageProxyDAO(context: Context) : ContextDAO(context), DAO<Message> {
         return gson.fromJson(messages, Array<Message>::class.java).toMutableList()
     }
 
-    override fun doRetrieveByCondition(condition: String, offset: Int, rows_count: Int): MutableList<Message>? {
+    override fun doRetrieveByCondition(
+        condition: String,
+        offset: Int,
+        rows_count: Int
+    ): MutableList<Message>? {
 
         DAO.logger.log(Level.INFO, "doRetrieveByCondition: $condition")
 
@@ -114,7 +122,12 @@ class MessageProxyDAO(context: Context) : ContextDAO(context), DAO<Message> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "MessageService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET, "condition" to condition, "offset" to offset.toString(), "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET,
+                    "condition" to condition,
+                    "offset" to offset.toString(),
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
