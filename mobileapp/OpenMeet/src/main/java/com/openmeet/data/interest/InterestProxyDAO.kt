@@ -19,6 +19,7 @@ import java.util.logging.Level
  *
  * @see DAO
  *
+ * @author Francesco Granozio
  * @author Yuri Brandi
  */
 class InterestProxyDAO(context: Context) : ContextDAO(context), DAO<Interest> {

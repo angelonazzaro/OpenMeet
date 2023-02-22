@@ -17,6 +17,7 @@ import java.util.logging.Level
  *
  * @see DAO
  *
+ * @author Francesco Granozio
  * @author Yuri Brandi
  */
 class MessageProxyDAO(context: Context) : ContextDAO(context), DAO<Message> {
