@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/singleChatLayout"
-    android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp"
-    android:orientation="horizontal">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/singleChatLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/profileCard"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="160dp">
+            android:id="@+id/profileCard"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="160dp">
 
         <ImageView
-            android:id="@+id/profileImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/blue_purple" />
+                android:id="@+id/profileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/blue_purple" />
     </androidx.cardview.widget.CardView>
 
 
     <TextView
-        android:id="@+id/textValues"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        android:fontFamily="sans-serif"
-        android:lineSpacingExtra="8sp"
-        android:text="Nome Cognome\nLorem Ipsum"
-        android:textSize="18sp" />
+            android:id="@+id/textValues"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="8sp"
+            android:text="Nome Cognome\nLorem Ipsum"
+            android:textSize="18sp" />
 
 
 </LinearLayout>

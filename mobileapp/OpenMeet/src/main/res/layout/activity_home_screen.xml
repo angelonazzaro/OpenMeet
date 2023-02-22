@@ -1,111 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_generalContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".logic.HomeScreenActivity">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/home_generalContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".logic.HomeScreenActivity">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/linearProgressIndicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/linearProgressIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:checkable="false"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardBackgroundColor="@android:color/holo_blue_light"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/MaterialCardView_noBottomRadius"
-        app:strokeColor="@android:color/transparent"
-        app:strokeWidth="0dp">
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:checkable="false"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@android:color/holo_blue_light"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/MaterialCardView_noBottomRadius"
+            app:strokeColor="@android:color/transparent"
+            app:strokeWidth="0dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/meeterInfoLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:animateLayoutChanges="true"
-            android:paddingTop="16dp">
+                android:id="@+id/meeterInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:paddingTop="16dp">
 
             <ImageButton
-                android:id="@+id/compressBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:contentDescription="Compress description"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/meeterName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_baseline_expand_more_24" />
+                    android:id="@+id/compressBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:contentDescription="Compress description"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/meeterName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_expand_more_24" />
 
             <ImageButton
-                android:id="@+id/expandBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@android:color/transparent"
-                android:contentDescription="Expand description"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_baseline_expand_less_24" />
+                    android:id="@+id/expandBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/transparent"
+                    android:contentDescription="Expand description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_expand_less_24" />
 
             <TextView
-                android:id="@+id/meeterName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:text="Nome Cognome, 00"
-                android:textSize="24sp"
-                app:layout_constraintBottom_toTopOf="@+id/meeterLocation"
-                app:layout_constraintStart_toStartOf="parent" />
+                    android:id="@+id/meeterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Nome Cognome, 00"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toTopOf="@+id/meeterLocation"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/meeterLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="sans-serif-light"
-                android:text="Città (PR) - 00 Km."
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
-                app:layout_constraintStart_toStartOf="parent" />
+                    android:id="@+id/meeterLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Città (PR) - 00 Km."
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/horizontalScrollView"
+                    app:layout_constraintStart_toStartOf="parent" />
 
             <HorizontalScrollView
-                android:id="@+id/horizontalScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="16dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/biographyView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                    android:id="@+id/horizontalScrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/biographyView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
 
                 <LinearLayout
-                    android:id="@+id/interestLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp">
+                        android:id="@+id/interestLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingBottom="8dp">
 
                     <!-- Interests GO HERE -->
 
@@ -114,110 +114,110 @@
             </HorizontalScrollView>
 
             <TextView
-                android:id="@+id/biographyView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:singleLine="false"
-                android:text="This is my biography"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/expandBtn"
-                app:layout_constraintStart_toStartOf="parent" />
+                    android:id="@+id/biographyView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:singleLine="false"
+                    android:text="This is my biography"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/expandBtn"
+                    app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout2"
-        app:layout_constraintEnd_toEndOf="parent">
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout2"
+            app:layout_constraintEnd_toEndOf="parent">
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_dislike_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:contentDescription="Dislike"
-            app:srcCompat="@drawable/ic_baseline_skip_next_24" />
+                android:id="@+id/floating_dislike_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:contentDescription="Dislike"
+                app:srcCompat="@drawable/ic_baseline_skip_next_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent">
+            android:id="@+id/coordinatorLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent">
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_like_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:contentDescription="Like"
-            app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
+                android:id="@+id/floating_like_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:contentDescription="Like"
+                app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:animateLayoutChanges="true"
-        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
-        app:layout_constraintEnd_toEndOf="parent">
+            android:id="@+id/coordinatorLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+            app:layout_constraintEnd_toEndOf="parent">
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floating_undo_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:contentDescription="Undo"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/baseline_undo_24" />
+                android:id="@+id/floating_undo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="16dp"
+                android:contentDescription="Undo"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/baseline_undo_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <TextView
-        android:id="@+id/reportText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/report_btn_text"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="16sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/reportText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/report_btn_text"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+            app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/homescreen_bottom_navigation" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/homescreen_bottom_navigation" />
 
     </LinearLayout>
 

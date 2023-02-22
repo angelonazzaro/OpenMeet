@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/home_generalContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".logic.HomeUserScreenActivity">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/home_generalContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".logic.HomeUserScreenActivity">
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/linearProgressIndicator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/linearProgressIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+            android:id="@+id/scrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:id="@+id/scrollContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:id="@+id/scrollContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/profileCard"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_gravity="center"
-                app:cardCornerRadius="160dp">
+                    android:id="@+id/profileCard"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="160dp">
 
                 <ImageView
-                    android:id="@+id/profileImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@color/blue_purple" />
+                        android:id="@+id/profileImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@color/blue_purple" />
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/personalInfoField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Gianvaleria Palomba, 30"
-                android:textAlignment="center"
-                android:textSize="22sp" />
+                    android:id="@+id/personalInfoField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gianvaleria Palomba, 30"
+                    android:textAlignment="center"
+                    android:textSize="22sp" />
 
             <android.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="80dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp" />
 
             <TextView
-                android:id="@+id/interestLabel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Interessi"
-                android:layout_marginLeft="10dp"
-                android:textSize="18sp" />
+                    android:id="@+id/interestLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Interessi"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp" />
 
             <HorizontalScrollView
-                android:id="@+id/horizontalScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <LinearLayout
-                    android:id="@+id/interestLayout"
+                    android:id="@+id/horizontalScrollView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingBottom="8dp">
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                        android:id="@+id/interestLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingBottom="8dp">
 
                     <!-- Interests GO HERE -->
 
@@ -100,153 +100,153 @@
             </HorizontalScrollView>
 
             <LinearLayout
-                android:id="@+id/biographyLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                    android:id="@+id/biographyLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/biographyField"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:hint="@string/biography_hint"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="255">
-
-                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/biographyField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text|textMultiLine"
-                        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:hint="@string/biography_hint"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="255">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text|textMultiLine"
+                            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/saveButton"
-                    style="?attr/materialButtonOutlinedStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginRight="10dp"
-                    android:text="Salva" />
+                        android:id="@+id/saveButton"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:text="Salva" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/filterLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:orientation="vertical">
+                    android:id="@+id/filterLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
 
 
                 <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Filtri"
-                    android:textSize="22sp" />
+                        android:id="@+id/textView11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Filtri"
+                        android:textSize="22sp" />
 
                 <View
-                    android:id="@+id/divider3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="?android:attr/listDivider" />
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="?android:attr/listDivider" />
 
                 <TextView
-                    android:id="@+id/LimitAgeLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Età"
-                    android:textSize="18sp" />
+                        android:id="@+id/LimitAgeLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Età"
+                        android:textSize="18sp" />
 
                 <com.google.android.material.slider.RangeSlider
-                    android:id="@+id/ageLimitSlider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:valueFrom="18.0"
-                    android:valueTo="100.0"
-                    app:values="@array/age_slider_values"
-                    android:stepSize="1.0"/>
+                        android:id="@+id/ageLimitSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:valueFrom="18.0"
+                        android:valueTo="100.0"
+                        app:values="@array/age_slider_values"
+                        android:stepSize="1.0" />
 
                 <TextView
-                    android:id="@+id/LimitDistanceLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Distanza (km)"
-                    android:textSize="18sp" />
+                        android:id="@+id/LimitDistanceLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Distanza (km)"
+                        android:textSize="18sp" />
 
                 <com.google.android.material.slider.RangeSlider
-                    android:id="@+id/distanceLimitSlider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:stepSize="1.0"
-                    android:valueFrom="1.0"
-                    android:valueTo="1000.0"
-                    app:values="@array/distance_slider_values"/>
+                        android:id="@+id/distanceLimitSlider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stepSize="1.0"
+                        android:valueFrom="1.0"
+                        android:valueTo="1000.0"
+                        app:values="@array/distance_slider_values" />
 
 
                 <TextView
-                    android:id="@+id/genderLabel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Gender"
-                    android:textSize="18sp" />
+                        android:id="@+id/genderLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:textSize="18sp" />
 
 
                 <LinearLayout
-                    android:id="@+id/sexualPrefsLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:visibility="visible"
-                    android:weightSum="19"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/instructionTxt">
+                        android:id="@+id/sexualPrefsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
+                        android:weightSum="19"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/instructionTxt">
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/genderIdentityInput"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="9"
-                        android:hint="@string/genderIndentity_hint">
+                            android:id="@+id/genderIdentityInput"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="9"
+                            android:hint="@string/genderIndentity_hint">
 
                         <AutoCompleteTextView
-                            android:id="@+id/genderAutoComplete"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none"
-                            app:simpleItems="@array/gender_identity_items" />
+                                android:id="@+id/genderAutoComplete"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                app:simpleItems="@array/gender_identity_items" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <android.widget.Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/genderOrientationInput"
-                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="9"
-                        android:hint="@string/genderOrientation_hint">
+                            android:id="@+id/genderOrientationInput"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="9"
+                            android:hint="@string/genderOrientation_hint">
 
                         <AutoCompleteTextView
-                            android:id="@+id/genderOrientationAutoComplete"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="none"
-                            app:simpleItems="@array/gender_orientation_items" />
+                                android:id="@+id/genderOrientationAutoComplete"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="none"
+                                app:simpleItems="@array/gender_orientation_items" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -256,29 +256,29 @@
 
 
             <android.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="50dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
 
             <Button
-                android:id="@+id/logoutBtn"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:text="Logout" />
+                    android:id="@+id/logoutBtn"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Logout" />
 
             <Button
-                android:id="@+id/deleteAccountBtn"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:text="@string/delete_account"
-                android:textColor="@android:color/holo_red_dark" />
+                    android:id="@+id/deleteAccountBtn"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/delete_account"
+                    android:textColor="@android:color/holo_red_dark" />
 
         </LinearLayout>
 
@@ -286,19 +286,18 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:menu="@menu/homescreen_bottom_navigation"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:menu="@menu/homescreen_bottom_navigation" />
 
     </LinearLayout>
 
