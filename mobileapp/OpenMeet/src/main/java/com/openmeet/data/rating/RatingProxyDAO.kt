@@ -25,17 +25,19 @@ class RatingProxyDAO(context: Context) : ContextDAO(context), DAO<Rating> {
     fun doRetrieveMatches(meeterID: String): MutableList<Meeter>? {
         DAO.logger.log(Level.INFO, "doRetrieveMatches Of: $meeterID")
 
-        val positiveRater = doRetrieveByCondition("${Rating.RATING_TYPE} = TRUE AND ${Rating.RATING_MEETER_RATER} = $meeterID")
-        val positiveRated = doRetrieveByCondition("${Rating.RATING_TYPE} = TRUE AND ${Rating.RATING_MEETER_RATED} = $meeterID")
+        val positiveRater =
+            doRetrieveByCondition("${Rating.RATING_TYPE} = TRUE AND ${Rating.RATING_MEETER_RATER} = $meeterID")
+        val positiveRated =
+            doRetrieveByCondition("${Rating.RATING_TYPE} = TRUE AND ${Rating.RATING_MEETER_RATED} = $meeterID")
 
-        if(positiveRater == null || positiveRated == null)
+        if (positiveRater == null || positiveRated == null)
             return null
 
         val matchedMeeters = mutableListOf<Meeter>()
 
-        for(rate in positiveRater){
-            for(rate2 in positiveRated)
-                if(rate.meeterRated == rate2.meeterRater){
+        for (rate in positiveRater) {
+            for (rate2 in positiveRated)
+                if (rate.meeterRated == rate2.meeterRater) {
                     val m = Meeter()
                     m.id = rate.meeterRated
                     matchedMeeters.add(m)
@@ -96,7 +98,11 @@ class RatingProxyDAO(context: Context) : ContextDAO(context), DAO<Rating> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "RatingService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT, "condition" to condition, "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT,
+                    "condition" to condition,
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
@@ -130,7 +136,11 @@ class RatingProxyDAO(context: Context) : ContextDAO(context), DAO<Rating> {
     }
 
 
-    override fun doRetrieveByCondition(condition: String, offset: Int, rows_count: Int): MutableList<Rating>? {
+    override fun doRetrieveByCondition(
+        condition: String,
+        offset: Int,
+        rows_count: Int
+    ): MutableList<Rating>? {
 
         DAO.logger.log(Level.INFO, "doRetrieveByCondition: $condition")
 
@@ -139,7 +149,12 @@ class RatingProxyDAO(context: Context) : ContextDAO(context), DAO<Rating> {
 
         VolleyRequestSender.getInstance(this.context)
             .doHttpPostRequest(getUrl() + "RatingService",
-                hashMapOf("operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET, "condition" to condition, "offset" to offset.toString(), "rows_count" to rows_count.toString()),
+                hashMapOf(
+                    "operation" to DAO.DO_RETRIEVE_BY_CONDITION_LIMIT_OFFSET,
+                    "condition" to condition,
+                    "offset" to offset.toString(),
+                    "rows_count" to rows_count.toString()
+                ),
                 object : VolleyResponseCallback {
                     override fun onError(error: String) {
                         resp = error
