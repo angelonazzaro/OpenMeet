@@ -15,7 +15,7 @@ public class Meeter implements IEntity {
     public static final String MEETER_MEETER_NAME = MEETER + ".meeterName";
     public static final String MEETER_MEETER_SURNAME = MEETER + ".meeterSurname";
 
-    public static final String MEETER_GENDER = MEETER  + ".gender";
+    public static final String MEETER_GENDER = MEETER + ".gender";
 
     public static final String MEETER_SEARCHING_GENDER = MEETER + ".searchingGender";
 
@@ -44,13 +44,11 @@ public class Meeter implements IEntity {
     /**
      * Returns the Meeter as an hashMap.
      *
-     * @see IEntity
-     *
      * @return the Meeter as an hashMap.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     * @see IEntity
+     */
     public HashMap<String, ?> toHashMap() {
 
         return new HashMap<>() {{
@@ -77,14 +75,12 @@ public class Meeter implements IEntity {
     /**
      * Returns the Meeter as an hashMap.
      *
-     * @see IEntity
-     *
      * @param fields the fields to be returned.
      * @return the Meeter as an hashMap.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     * @see IEntity
+     */
     @Override
     public HashMap<String, ?> toHashMap(String... fields) {
 
@@ -155,10 +151,9 @@ public class Meeter implements IEntity {
      * Returns the id of the Meeter.
      *
      * @return the id of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public int getId() {
         return id;
     }
@@ -167,10 +162,9 @@ public class Meeter implements IEntity {
      * Sets the id of the Meeter.
      *
      * @param id the id of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setId(int id) {
         this.id = id;
     }
@@ -179,10 +173,9 @@ public class Meeter implements IEntity {
      * Returns the email of the Meeter.
      *
      * @return the email of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public String getEmail() {
         return email;
     }
@@ -191,10 +184,9 @@ public class Meeter implements IEntity {
      * Sets the email of the Meeter.
      *
      * @param email the email of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setEmail(String email) {
         this.email = email;
     }
@@ -203,10 +195,9 @@ public class Meeter implements IEntity {
      * Returns the name of the Meeter.
      *
      * @return the name of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public String getMeeterName() {
         return meeterName;
     }
@@ -215,10 +206,9 @@ public class Meeter implements IEntity {
      * Sets the name of the Meeter.
      *
      * @param meeterName the name of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setMeeterName(String meeterName) {
         this.meeterName = meeterName;
     }
@@ -227,10 +217,9 @@ public class Meeter implements IEntity {
      * Returns the surname of the Meeter.
      *
      * @return the surname of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public String getMeeterSurname() {
         return meeterSurname;
     }
@@ -239,10 +228,9 @@ public class Meeter implements IEntity {
      * Sets the surname of the Meeter.
      *
      * @param meeterSurname the surname of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setMeeterSurname(String meeterSurname) {
         this.meeterSurname = meeterSurname;
     }
@@ -251,10 +239,9 @@ public class Meeter implements IEntity {
      * Returns the password of the Meeter.
      *
      * @return the password of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public String getPwd() {
         return pwd;
     }
@@ -262,12 +249,11 @@ public class Meeter implements IEntity {
     /**
      * Sets the password of the Meeter using SHA1 encryption .
      *
-     * @param pwd the password of the Meeter.
+     * @param pwd     the password of the Meeter.
      * @param encrypt true if the password must be encrypted, false otherwise.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
-     * */
+     */
     public void setPwd(String pwd, boolean encrypt) {
 
         if (encrypt) {
@@ -285,7 +271,6 @@ public class Meeter implements IEntity {
      * Returns the gender of the Meeter.
      *
      * @return the gender of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -297,7 +282,6 @@ public class Meeter implements IEntity {
      * Sets the gender of the Meeter.
      *
      * @param gender the gender of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -309,7 +293,6 @@ public class Meeter implements IEntity {
      * Returns the searching gender of the Meeter.
      *
      * @return the searching gender of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -321,7 +304,6 @@ public class Meeter implements IEntity {
      * Sets the searching gender of the Meeter.
      *
      * @param searchingGender the searching gender of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -333,7 +315,6 @@ public class Meeter implements IEntity {
      * Returns the city of the Meeter.
      *
      * @return the city of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -345,7 +326,6 @@ public class Meeter implements IEntity {
      * Sets the city of the Meeter.
      *
      * @param city the city of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -357,7 +337,6 @@ public class Meeter implements IEntity {
      * Returns the biography of the Meeter.
      *
      * @return the biography of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -369,7 +348,6 @@ public class Meeter implements IEntity {
      * Sets the biography of the Meeter.
      *
      * @param biography the biography of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -381,7 +359,6 @@ public class Meeter implements IEntity {
      * Returns the birthdate of the Meeter.
      *
      * @return the birthdate of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -393,7 +370,6 @@ public class Meeter implements IEntity {
      * Sets the birthdate of the Meeter.
      *
      * @param birthdate the birthdate of the Meeter.
-     *
      * @author Angelo Nazzaro
      * @author Francesco Granozio
      */
@@ -405,7 +381,6 @@ public class Meeter implements IEntity {
      * Returns the age of the Meeter.
      *
      * @return the age of the Meeter.
-     *
      * @author Angelo
      * @author Francesco
      */
@@ -417,7 +392,6 @@ public class Meeter implements IEntity {
      * Sets the public key of the Meeter.
      *
      * @param publicKey the public key of the Meeter.
-     *
      * @author Angelo
      * @author Francesco
      */

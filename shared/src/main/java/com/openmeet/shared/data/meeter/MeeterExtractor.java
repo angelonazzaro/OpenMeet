@@ -8,10 +8,9 @@ import java.sql.SQLException;
 /**
  * The extractor is used to convert the ResultSet returned by the database query into a Meeter object.
  *
- * @see ResultSetExtractor
- *
  * @author Angelo Nazzaro
  * @author Francesco Granozio
+ * @see ResultSetExtractor
  */
 public class MeeterExtractor implements ResultSetExtractor<Meeter> {
 
@@ -20,7 +19,6 @@ public class MeeterExtractor implements ResultSetExtractor<Meeter> {
      *
      * @param resultSet the result set deriving from the query statement.
      * @return the Meeter object contained in the resultSet.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
