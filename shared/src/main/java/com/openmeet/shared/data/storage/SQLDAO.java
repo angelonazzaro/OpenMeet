@@ -8,7 +8,7 @@ import javax.sql.DataSource;
  *
  * @author Francesco Granozio
  * @author Angelo Nazzaro
- * */
+ */
 public abstract class SQLDAO {
 
     protected final DataSource source;

@@ -23,14 +23,13 @@ public final class GenericDAO {
     /**
      * Returns a list of objects from the database that match a given condition.
      *
-     * @param table the name of the table in the database from which the records are to be retrieved.
+     * @param table     the name of the table in the database from which the records are to be retrieved.
      * @param condition the condition that the records should match in order to be retrieved.
      * @param extractor an instance of a class that implements the ResultSetExtractor interface.
-     * The extractor is used to convert the ResultSet returned by the database query into a
-     * List of objects of the desired type.
-     * @param source an instance of DataSource, an object used to establish a connection to the database.
+     *                  The extractor is used to convert the ResultSet returned by the database query into a
+     *                  List of objects of the desired type.
+     * @param source    an instance of DataSource, an object used to establish a connection to the database.
      * @return the query results as a list of objects.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -58,12 +57,11 @@ public final class GenericDAO {
     /**
      * Saves an object in the database.
      *
-     * @param table the name of the table in the database from which the records are to be retrieved.
-     * @param map a HashMap representing the data to be saved, where the keys are the column
-     * names and the values are the values to be inserted.
+     * @param table  the name of the table in the database from which the records are to be retrieved.
+     * @param map    a HashMap representing the data to be saved, where the keys are the column
+     *               names and the values are the values to be inserted.
      * @param source an instance of DataSource, an object used to establish a connection to the database.
      * @return a boolean value that indicates if the operation was successful or not.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -87,13 +85,12 @@ public final class GenericDAO {
     /**
      * Updates an object in the database.
      *
-     * @param table the name of the table in the database from which the records are to be retrieved.
+     * @param table     the name of the table in the database from which the records are to be retrieved.
      * @param condition the condition that the records should match in order to be retrieved.
-     * @param values a HashMap representing the data to be updated, where the keys are the
-     * column names and the values are the new values to be set.
-     * @param source an instance of DataSource, an object used to establish a connection to the database.
+     * @param values    a HashMap representing the data to be updated, where the keys are the
+     *                  column names and the values are the new values to be set.
+     * @param source    an instance of DataSource, an object used to establish a connection to the database.
      * @return a boolean value that indicates if the operation was successful or not.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */
@@ -118,11 +115,10 @@ public final class GenericDAO {
     /**
      * Deletes an object in the database.
      *
-     * @param table the name of the table in the database from which the records are to be retrieved.
+     * @param table     the name of the table in the database from which the records are to be retrieved.
      * @param condition the condition that the records should match in order to be retrieved.
-     * @param source an instance of DataSource, an object used to establish a connection to the database.
+     * @param source    an instance of DataSource, an object used to establish a connection to the database.
      * @return a boolean value that indicates if the operation was successful or not.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
      */

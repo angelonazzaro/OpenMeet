@@ -10,10 +10,10 @@ import java.util.HashMap;
  *
  * @author Francesco Granozio
  * @author Angelo Nazzaro
- * */
+ */
 public interface IEntity {
 
     HashMap<String, ?> toHashMap();
 
-    HashMap<String, ?> toHashMap(String ...fields);
+    HashMap<String, ?> toHashMap(String... fields);
 }

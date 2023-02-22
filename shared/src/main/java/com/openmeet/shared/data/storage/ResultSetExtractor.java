@@ -6,11 +6,10 @@ import java.sql.SQLException;
 /**
  * Interface for extracting a specific Bean from a ResultSet.
  *
- * @see ResultSet
- *
  * @author Francesco Granozio
  * @author Angelo Nazzaro
- * */
+ * @see ResultSet
+ */
 public interface ResultSetExtractor<B> {
 
     /**
@@ -18,9 +17,8 @@ public interface ResultSetExtractor<B> {
      *
      * @param resultSet the resultSet to extract the bean from.
      * @return the Bean object extracted.
-     *
      * @author Francesco Granozio
      * @author Angelo Nazzaro
-     * */
+     */
     B extract(ResultSet resultSet) throws SQLException;
 }
