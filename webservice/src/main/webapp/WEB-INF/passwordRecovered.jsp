@@ -11,21 +11,21 @@
 
 </head>
 <body>
-    <style>
-        div {
-            width: 75%;
-            
-            position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translate(-50%, -35%);
+<style>
+    div {
+        width: 75%;
 
-            text-align: center;
-        }
-    </style>
-    <div>
-        <h1>Your password has been reset</h1>
-        <p>You will be receiving an email with your new password soon.</p>
-    </div>
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -35%);
+
+        text-align: center;
+    }
+</style>
+<div>
+    <h1>Your password has been reset</h1>
+    <p>You will be receiving an email with your new password soon.</p>
+</div>
 </body>
 </html>
