@@ -36,7 +36,7 @@ class UserEncryptedData(context: Context) {
         sharedPreferencesEditor.apply()
     }
 
-    fun storePrivateKey(){
+    fun storePrivateKey() {
     }
 
     fun getAllAsHashMap(): HashMap<String, String?> {
@@ -47,7 +47,7 @@ class UserEncryptedData(context: Context) {
         return retValues
     }
 
-    fun deleteAllValues(){
+    fun deleteAllValues() {
         sharedPreferences.edit().clear().apply()
     }
 }
