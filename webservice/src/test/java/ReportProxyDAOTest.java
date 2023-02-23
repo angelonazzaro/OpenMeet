@@ -55,9 +55,9 @@ public class ReportProxyDAOTest {
         dataSource = new BasicDataSource();
 
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeetTests");
-        dataSource.setUsername("test_remote_usr");
-        dataSource.setPassword("Testmargherita0!");
+        dataSource.setUrl("jdbc:mysql://185.229.236.190:3306/OpenMeet");
+        dataSource.setUsername("remote_usr");
+        dataSource.setPassword("cicciobello123");
 
         request = mock(HttpServletRequest.class);
         response = mock(HttpServletResponse.class);
@@ -137,11 +137,11 @@ public class ReportProxyDAOTest {
     @Test
     @Order(3)
     public void testInvalidReasonLengthHashMap() {
-        HashMap<String, String> values = new HashMap<>();
+        HashMap<String, Object> values = new HashMap<>();
         values.put("meeterReported", "1");
         values.put("meeterReporter", "2");
         values.put("reason", "");
-        values.put("isArchived", String.valueOf(false));
+        values.put("isArchived", false);
         values.put("creationDate", new Timestamp(System.currentTimeMillis()).toString());
 
         when(request.getParameter("values")).thenReturn(gson.toJson(values));
@@ -161,11 +161,11 @@ public class ReportProxyDAOTest {
     @Test
     @Order(3)
     public void testValidReasonLengthHashMap() throws SQLException {
-        HashMap<String, String> values = new HashMap<>();
+        HashMap<String, Object> values = new HashMap<>();
         values.put("meeterReported", "1");
         values.put("meeterReporter", "2");
         values.put("reason", "Spam");
-        values.put("isArchived", String.valueOf(false));
+        values.put("isArchived", false);
         values.put("creationDate", new Timestamp(System.currentTimeMillis()).toString());
 
         when(request.getParameter("values")).thenReturn(gson.toJson(values));
