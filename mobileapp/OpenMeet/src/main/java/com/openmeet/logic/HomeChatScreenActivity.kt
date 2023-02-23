@@ -4,10 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.*
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.*
+import androidx.core.view.children
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.divider.MaterialDivider
 import com.google.android.material.snackbar.Snackbar
@@ -17,7 +18,6 @@ import com.openmeet.data.message.MessageProxyDAO
 import com.openmeet.data.rating.RatingProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.message.Message
-import java.util.*
 import kotlin.system.exitProcess
 
 
@@ -148,11 +148,13 @@ class HomeChatScreenActivity : AppCompatActivity() {
                     LayoutInflater.from(this).inflate(R.layout.chat_view, null) as LinearLayout
 
                 view.setOnClickListener {
-                    val intent = Intent(this, SingleChatActivity::class.java)
-                    intent.putExtra("ID", intent.getStringExtra("ID").toString())
-                    intent.putExtra("RECEIVER_ID", matchedMeeter.id.toString())
+                    val extras = Bundle()
+                    extras.putString("ID", intent.getStringExtra("ID").toString())
+                    extras.putString("RECEIVER_ID", matchedMeeter.id.toString())
 
-                    startActivity(intent)
+                    startActivity(
+                        Intent(this, SingleChatActivity::class.java).putExtras(extras)
+                    )
                     overridePendingTransition(0, 0)
                 }
                 val divider = MaterialDivider(this)
