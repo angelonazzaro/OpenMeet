@@ -103,7 +103,7 @@ class HomeChatScreenActivity : AppCompatActivity() {
 
             runOnUiThread { progressionIndicator.visibility = View.VISIBLE }
 
-            val MatchedList = RatingProxyDAO(this).doRetrieveMatches(meeterID)
+            val MatchedList = RatingProxyDAO(this@HomeChatScreenActivity).doRetrieveMatches(meeterID)
             println(MatchedList)
             if (MatchedList != null)
                 if(MatchedList.size > 0){
