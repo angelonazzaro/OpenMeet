@@ -18,6 +18,7 @@ import com.openmeet.R
 import com.openmeet.data.interest.InterestProxyDAO
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.data.meeter_interest.Meeter_InterestProxyDAO
+import com.openmeet.shared.data.interest.Interest
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.meeter_interest.Meeter_Interest
 import com.openmeet.utils.UserEncryptedData
@@ -206,20 +207,7 @@ class HomeUserScreenActivity: AppCompatActivity() {
 
         }
 
-        val meeter_interestList =
-            Meeter_InterestProxyDAO(this).doRetrieveByCondition("${Meeter_Interest.MEETER_INTEREST_MEETER_ID} = ${meeter.id}")
-
-        val interestDAO = InterestProxyDAO(this)
-        if (meeter_interestList != null) {
-            for (meeter_interest in meeter_interestList) {
-                val interest = interestDAO.doRetrieveByKey(meeter_interest.id.toString())
-                if (interest != null) {
-                    addToInterestLayout(interest.description)
-                }
-            }
-        }
-
-        addToInterestLayout("+")
+        makeInterestLayout()
 
     }
 
@@ -237,11 +225,29 @@ class HomeUserScreenActivity: AppCompatActivity() {
         return (diff.get(Calendar.YEAR) - 1970)
     }
 
-    fun addToInterestLayout(interest: String) {
+    fun makeInterestLayout(){
+        val meeter_interestList =
+            Meeter_InterestProxyDAO(this).doRetrieveByCondition("${Meeter_Interest.MEETER_INTEREST_MEETER_ID} = ${meeter.id}")
+
+        val interestDAO = InterestProxyDAO(this)
+        if (meeter_interestList != null) {
+            for (meeter_interest in meeter_interestList) {
+                val interest = interestDAO.doRetrieveByKey(meeter_interest.interestId.toString())
+                if (interest != null) {
+                    addToInterestLayout(interest)
+                }
+            }
+        }
+
+        val addInt = Interest()
+        addInt.description = "+"
+        addToInterestLayout(addInt)
+    }
+    fun addToInterestLayout(interest: Interest) {
         val interestLayout = findViewById<LinearLayout>(R.id.interestLayout)
 
         val intTxt = MaterialButton(this)
-        intTxt.text = interest
+        intTxt.text = interest.description
         intTxt.backgroundTintList = this.getColorStateList(R.color.mid_purple)
         intTxt.setTextColor(Color.WHITE)
 
@@ -255,19 +261,35 @@ class HomeUserScreenActivity: AppCompatActivity() {
             intTxt.setOnClickListener {
                 if(intTxt.text == "+"){
                     MaterialAlertDialogBuilder(this)
-                        .setTitle("Add interest?")
-                        .setMessage("")
+                        .setTitle(R.string.add_interest)
                         .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
                         .show()
                 }
                 else
                     MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.report_done_title)
-                        .setMessage(R.string.report_done_message)
-                        .setPositiveButton(R.string.positive_dialog){ dialog, which -> }
+                        .setTitle("${getString(R.string.remove_interest_dialog)} \"${interest.description}?\"")
+                        .setPositiveButton(R.string.positive_dialog2){ dialog, which ->
+                            resetInterestLayout()
+                            print(interest)
+                            Thread{
+                                Meeter_InterestProxyDAO(this).doDelete("${Meeter_Interest.MEETER_INTEREST_INTEREST_ID} = ${interest.id}" +
+                                        " AND ${Meeter_Interest.MEETER_INTEREST_MEETER_ID} = ${meeter.id}")
+                                makeInterestLayout()
+                            }.start()
+
+
+
+
+                        }
                         .show()
             }
         }
+
+    }
+
+    fun resetInterestLayout() {
+        val interestLayout = findViewById<LinearLayout>(R.id.interestLayout)
+        interestLayout.removeAllViewsInLayout()
 
     }
 

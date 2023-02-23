@@ -83,4 +83,11 @@
     <string name="password_lowercase_error">La password deve contenere almeno una lettera maiuscola.</string>
     <string name="logout_dialog">Sei sicuro?</string>
     <string name="positive_dialog2">Sì</string>
+    <string name="remove_interest_dialog">Vuoi rimuovere</string>
+    <string name="add_interest">Seleziona un interesse da aggiungere</string>
+    <string name="interest_label">Interessi</string>
+    <string name="save_label">Salva</string>
+    <string name="filter_label">Filtri</string>
+    <string name="age_label">Età</string>
+    <string name="distance_label">Distanza (Km)</string>
 </resources>

@@ -69,8 +69,8 @@
                 android:id="@+id/interestLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Interessi"
                 android:layout_marginLeft="10dp"
+                android:text="@string/interest_label"
                 android:textSize="18sp" />
 
             <HorizontalScrollView
@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:layout_marginRight="10dp"
-                    android:text="Salva" />
+                    android:text="@string/save_label" />
 
             </LinearLayout>
 
@@ -147,7 +147,7 @@
                     android:id="@+id/textView11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Filtri"
+                    android:text="@string/filter_label"
                     android:textSize="22sp" />
 
                 <View
@@ -161,7 +161,7 @@
                     android:id="@+id/LimitAgeLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Età"
+                    android:text="@string/age_label"
                     android:textSize="18sp" />
 
                 <com.google.android.material.slider.RangeSlider
@@ -177,7 +177,7 @@
                     android:id="@+id/LimitDistanceLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Distanza (km)"
+                    android:text="@string/distance_label"
                     android:textSize="18sp" />
 
                 <com.google.android.material.slider.RangeSlider
