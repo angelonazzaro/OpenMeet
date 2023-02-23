@@ -20,9 +20,11 @@ import com.openmeet.R
 import com.openmeet.data.interest.InterestProxyDAO
 import com.openmeet.data.meeter.MeeterProxyDAO
 import com.openmeet.data.meeter_interest.Meeter_InterestProxyDAO
+import com.openmeet.data.rating.RatingProxyDAO
 import com.openmeet.data.report.ReportProxyDAO
 import com.openmeet.shared.data.meeter.Meeter
 import com.openmeet.shared.data.meeter_interest.Meeter_Interest
+import com.openmeet.shared.data.rating.Rating
 import com.openmeet.shared.data.report.Report
 import java.sql.Timestamp
 import java.util.*
@@ -108,6 +110,42 @@ class HomeScreenActivity : AppCompatActivity() {
 
                 override fun onFinish() {
                     undoBtn.visibility = View.INVISIBLE
+                    Thread {
+                        //RatingProxyDAO(this).
+                    }.start()
+                }
+            }.start()
+
+
+        }
+
+        dislikeBtn.setOnClickListener {
+
+            if (listIndex + 1 == meeterList.size)
+                getDiscoverFlow()
+            else {
+                Thread {
+                    updateCardView(meeterList[++listIndex])
+                }.start()
+            }
+
+            undoBtn.visibility = View.VISIBLE
+
+            object : CountDownTimer(3000, 3000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    Log.d("TickPerformed", millisUntilFinished.toString())
+                }
+
+                override fun onFinish() {
+                    undoBtn.visibility = View.INVISIBLE
+                    val rate = Rating()
+                    rate.creationDate = Timestamp(System.currentTimeMillis())
+                    rate.isType = false
+                    rate.meeterRater = Integer.parseInt(intent.getStringExtra("ID"))
+                    rate.meeterRated = meeterList[listIndex].id
+                    Thread {
+                        //RatingProxyDAO(this).doSave(rate)
+                    }.start()
                 }
             }.start()
 
@@ -251,7 +289,7 @@ class HomeScreenActivity : AppCompatActivity() {
         val interestDAO = InterestProxyDAO(this)
         if (meeter_interestList != null) {
             for (meeter_interest in meeter_interestList) {
-                val interest = interestDAO.doRetrieveByKey(meeter_interest.id.toString())
+                val interest = interestDAO.doRetrieveByKey(meeter_interest.interestId.toString())
                 if (interest != null) {
                     addToInterestLayout(interest.description)
                 }
