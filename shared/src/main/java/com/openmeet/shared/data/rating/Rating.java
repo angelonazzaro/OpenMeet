@@ -50,7 +50,7 @@ public class Rating implements IEntity {
             put("meeterRater", meeterRater);
             put("meeterRated", meeterRated);
             put("type", type);
-            put("creationDate", creationDate);
+            put("creationDate", creationDate.toString());
         }};
     }
 
@@ -83,7 +83,7 @@ public class Rating implements IEntity {
                         put("type", type);
                         break;
                     case RATING_CREATION_DATE:
-                        put("creationDate", creationDate);
+                        put("creationDate", creationDate.toString());
                         break;
                 }
             }
