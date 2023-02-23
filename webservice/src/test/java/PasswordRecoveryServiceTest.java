@@ -83,7 +83,7 @@ public class PasswordRecoveryServiceTest {
     @Order(1)
     public void emailIsNotPresent() throws IOException {
         when(request.getParameter("action")).thenReturn("send-recovery-link");
-        when(request.getParameter("email")).thenReturn("provaDoSave23@gmail.com");
+        when(request.getParameter("email")).thenReturn("provaDoSave2663@gmail.com");
 
         passwordRecoveryService.doPost(request, response);
 
@@ -99,7 +99,7 @@ public class PasswordRecoveryServiceTest {
     @Order(2)
     public void passwordRecovered() throws IOException {
         when(request.getParameter("action")).thenReturn("send-recovery-link");
-        when(request.getParameter("email")).thenReturn("provaDoSave@gmail.com");
+        when(request.getParameter("email")).thenReturn("ovillanueva@gmail.com");
 
         passwordRecoveryService.doPost(request, response);
 
