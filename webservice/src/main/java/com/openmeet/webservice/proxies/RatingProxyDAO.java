@@ -175,7 +175,7 @@ public class RatingProxyDAO extends ProxyDAO<Rating> implements DAO<Rating> {
     public boolean doSave(Rating obj) throws SQLException {
 
         Gson builder = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        obj = builder.fromJson(request.getParameter("rate"), Rating.class);
+        obj = builder.fromJson(request.getParameter("rating"), Rating.class);
 
         logger.log(Level.INFO, "RatingProxyDAO:doSave() - obj: " + obj);
 
