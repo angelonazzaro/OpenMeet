@@ -99,6 +99,15 @@
     <string name="report_done_title">Report sent! 📬</string>
     <string name="report_done_message">Your report will soon be reviewed by a moderator.\n\nThank you for your contribution.</string>
 
+    <string name="remove_interest_dialog">Do you wish to remove</string>
+    <string name="add_interest">Select an interest to add.</string>
+
+    <string name="interest_label">Interests</string>
+    <string name="save_label">Save</string>
+    <string name="filter_label">Filters</string>
+    <string name="age_label">Age</string>
+    <string name="distance_label">Distance (Km)</string>
+
     <string name="STD_PREFS" translatable="false">com.openmeet.user_standard_preferences</string>
     <string name="double_back_prompt">Go back again to quit.</string>
 </resources>
