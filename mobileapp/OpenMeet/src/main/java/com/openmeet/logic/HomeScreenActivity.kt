@@ -40,6 +40,7 @@ class HomeScreenActivity : AppCompatActivity() {
     private var backBtnLastPress = 0L
     private var meeterList = mutableListOf<Meeter>()
     private var listIndex = 0
+    private var meeter = Meeter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
@@ -58,10 +59,18 @@ class HomeScreenActivity : AppCompatActivity() {
         val compressBtn = findViewById<ImageButton>(R.id.compressBtn)
 
         val likeBtn = findViewById<FloatingActionButton>(R.id.floating_like_button)
-        val dislikeBtn = findViewById<FloatingActionButton>(R.id.floating_like_button)
+        val dislikeBtn = findViewById<FloatingActionButton>(R.id.floating_dislike_button)
         val undoBtn = findViewById<FloatingActionButton>(R.id.floating_undo_button)
 
         bottomNav.selectedItemId = R.id.discover_Tab
+
+        Thread{
+            var temp = MeeterProxyDAO(this).doRetrieveByKey(intent.getStringExtra("ID").toString())
+            if(temp == null)
+                Snackbar.make(snackbarView, getString(R.string.connection_error), Snackbar.LENGTH_SHORT).show()
+            else
+                meeter = temp
+        }.start()
 
 
         expandBtn.setOnClickListener {
@@ -110,8 +119,33 @@ class HomeScreenActivity : AppCompatActivity() {
 
                 override fun onFinish() {
                     undoBtn.visibility = View.INVISIBLE
+
                     Thread {
-                        //RatingProxyDAO(this).
+                        val list = RatingProxyDAO(this@HomeScreenActivity).doRetrieveByCondition("${Rating.RATING_MEETER_RATED} = ${meeter.id} AND ${Rating.RATING_MEETER_RATED} = ${meeterList[listIndex].id} AND ${Rating.RATING_TYPE} = TRUE")
+                        if(list == null){
+                            Snackbar.make(
+                                snackbarView,
+                                getString(R.string.connection_error),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                        else{
+                            if(list.size > 0){
+                                MaterialAlertDialogBuilder(this@HomeScreenActivity)
+                                    .setTitle(R.string.matched_dialog)
+                                    .setPositiveButton(R.string.positive_dialog) { dialog, which ->
+                                    }
+                                    .show()
+                            }
+
+                            val rate = Rating()
+                            rate.creationDate = Timestamp(System.currentTimeMillis())
+                            rate.isType = true
+                            rate.meeterRater = meeter.id
+                            rate.meeterRated = meeterList[listIndex].id
+
+                            RatingProxyDAO(this@HomeScreenActivity).doSave(rate)
+                        }
                     }.start()
                 }
             }.start()
@@ -138,13 +172,14 @@ class HomeScreenActivity : AppCompatActivity() {
 
                 override fun onFinish() {
                     undoBtn.visibility = View.INVISIBLE
+
                     val rate = Rating()
                     rate.creationDate = Timestamp(System.currentTimeMillis())
                     rate.isType = false
-                    rate.meeterRater = Integer.parseInt(intent.getStringExtra("ID"))
+                    rate.meeterRater = meeter.id
                     rate.meeterRated = meeterList[listIndex].id
                     Thread {
-                        //RatingProxyDAO(this).doSave(rate)
+                        RatingProxyDAO(this@HomeScreenActivity).doSave(rate)
                     }.start()
                 }
             }.start()
@@ -160,7 +195,7 @@ class HomeScreenActivity : AppCompatActivity() {
                 .setTitle(R.string.report_dialog_title)
                 .setPositiveButton(resources.getString(R.string.report_positive_dialog)) { dialog, which ->
                     //Toast.makeText(this, intent.getStringExtra("ID").toString(), Toast.LENGTH_SHORT).show()
-                    doReportMeeter(view.findViewById<RadioGroup>(R.id.radioReportGroup).checkedRadioButtonId, Integer.parseInt(intent.getStringExtra("ID")), meeterList[listIndex].id)
+                    doReportMeeter(view.findViewById<RadioGroup>(R.id.radioReportGroup).checkedRadioButtonId, meeter.id, meeterList[listIndex].id)
                 }
                 .setNegativeButton(resources.getString(R.string.cancel_dialog)) { dialog, which -> }
                 .show()
