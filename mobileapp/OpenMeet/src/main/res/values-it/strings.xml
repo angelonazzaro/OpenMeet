@@ -90,4 +90,5 @@
     <string name="filter_label">Filtri</string>
     <string name="age_label">Età</string>
     <string name="distance_label">Distanza (Km)</string>
+    <string name="matched_dialog">MATCHATO!!</string>
 </resources>
