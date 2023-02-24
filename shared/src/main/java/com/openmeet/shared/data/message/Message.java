@@ -49,9 +49,9 @@ public class Message implements IEntity {
         return new HashMap<>() {{
             put("id", id);
             put("text", text);
-            put("sentTime", sentTime);
-            put("deliveredTime", deliveredTime);
-            put("readTime", readTime);
+            put("sentTime", sentTime.toString());
+            put("deliveredTime", deliveredTime.toString());
+            put("readTime", readTime.toString());
             put("meeterSender", meeterSender);
             put("meeterReceiver", meeterReceiver);
         }};
@@ -80,13 +80,13 @@ public class Message implements IEntity {
                         put("text", text);
                         break;
                     case MESSAGE_SENT_TIME:
-                        put("sentTime", sentTime);
+                        put("sentTime", sentTime.toString());
                         break;
                     case MESSAGE_DELIVERED_TIME:
-                        put("deliveredTime", deliveredTime);
+                        put("deliveredTime", deliveredTime.toString());
                         break;
                     case MESSAGE_READ_TIME:
-                        put("readTime", readTime);
+                        put("readTime", readTime.toString());
                         break;
                     case MESSAGE_MEETER_SENDER:
                         put("meeterSender", meeterSender);
