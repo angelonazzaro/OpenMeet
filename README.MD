@@ -12,7 +12,7 @@
 </p>
 <p align="center">
 <a href="#"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge" alt="PRs Welcome"/></a>
-<a href="#"><img src="https://img.shields.io/badge/languages-Kotlin-blue?style=for-the-badge" alt="Kotlin"/></a>
+<a href="#"><img src="https://img.shields.io/badge/languages-Kotlin, Java-blue?style=for-the-badge" alt="Kotlin"/></a>
 </p>
 
 <br>
@@ -20,27 +20,47 @@
 # OpenMeet
 <span style="font-size: 15.50px">OpenMeet</span> is a **free** and **open-source** dating app developed with the objective of giving people a platform where they can make new acquaintances and be appreciated for themselves. 
 
+## Table of Contents 
+- [How OpenMeet was born](#how-openmeet-was-born)
+- [Repository Contents](#repository-contents)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [Installation guide](#installation-guide)
+- [License](#license)
+
+## How OpenMeet was born
+OpenMeet was born from the idea of four college students 
+to give a free, open-source, privacy-oriented and inclusive alternative to the online dating market. <br> 
+
+### Founding Members
+ - **Angelo Nazzaro** - [angelonazzaro](https://github.com/angelonazzaro/)
+ - **Yuri Brandi** - [YuriBrandi](https://github.com/YuriBrandi)
+ - **Roberto Della Rocca** - [robertodr01](https://github.com/robertodr01)
+ - **Francesco Granozio**  - [Francesco-Granozio](https://github.com/Francesco-Granozio)
+
+## Repository Contents
+The repository is structured as follows:  
+- `database`: contains scripts to create and initialize the database; 
+- `mobileapp`: contains the code for the mobile app; 
+- `shared`: its the backbone of the entire system; 
+- `webservice`: contains the implementation of the web services which are used by the mobile app to communicate with the server; 
+- `webapp`: contains the web app from which you can moderate the mobile application. 
+
 ## Documentation
 
- Documentation regarding the engineering process can be found in the `deliverables` folder. 
+ Documentation regarding the engineering process can be found in the `deliverables` folder.  <br>
+  Documentation regarding the code can be found in the `javadoc` and `kdoc` folders. 
 
- ## To Compile
+ ## Installation guide
 
-To compile use the following JDK versions:
-
-- For the **Mobile App** use Android Studio default JDK as Gradle JDK.
-- For the `shared` folder compile with the same version as the Mobile App.
-- For the **Web App** you can compile with latest JDK.
-
-## Authors
-
- - **Angelo Nazzaro**   - Developer     - [sl1mSha4dey](https://github.com/sl1mSha4dey/)
- - **Yuri Brandi**      - Developer    - [YuriBrandi](https://github.com/YuriBrandi)
- - **Roberto Della Rocca**  - Developer - [robertodr01](https://github.com/robertodr01)
- - **Francesco Granozio**   - Developer - [Francesco-Granozio](https://github.com/Francesco-Granozio)
+In order to install and run the project on your local environment we recommend to follow the [user manual](https://github.com/angelonazzaro/OpenMeet/blob/main/deliverables/openMeet_MU.pdf). 
 
 ## Contributing
 You can contribute to this software by following the guide lines specified here [Contribute](https://github.com/sl1mSha4dey/openMeet_Classe03/blob/main/contributing/CONTRIBUTING.MD).
+
+<a href="https://github.com/angelonazzaro/OpenMeet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=angelonazzaro/OpenMeet" />
+</a>
 
 
 ## License
