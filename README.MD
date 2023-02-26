@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="200" src="./misc/openMeet_logo.png" alt="OpenMeet logo">
+    <img width="200" src="https://user-images.githubusercontent.com/58223071/221412309-ff3023c0-6d0a-4296-9879-06f8474c8e8e.png" alt="OpenMeet logo">
 </p>
 
 <p align="center">
