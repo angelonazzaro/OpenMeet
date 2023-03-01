@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-<a href="#"><img src="https://img.shields.io/github/contributors/sl1mSha4dey/openMeet_Classe03?style=for-the-badge" alt="Contributors"/></a>
-<img src="https://img.shields.io/github/last-commit/sl1mSha4dey/openMeet_Classe03?style=for-the-badge" alt="last commit">
+<a href="#"><img src="https://img.shields.io/github/contributors/angelonazzaro/OpenMeet?style=for-the-badge" alt="Contributors"/></a>
+<img src="https://img.shields.io/github/last-commit/angelonazzaro/OpenMeet?style=for-the-badge" alt="last commit">
 </p>
 <p align="center">
 <a href="#"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge" alt="PRs Welcome"/></a>
