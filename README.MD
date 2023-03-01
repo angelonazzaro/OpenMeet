@@ -53,7 +53,7 @@ The repository is structured as follows:
 
  ## Installation guide
 
-In order to install and run the project on your local environment we recommend to follow the [user manual](https://github.com/angelonazzaro/OpenMeet/blob/main/deliverables/openMeet_MDI.pdf). 
+In order to install and run the project on your local environment we recommend to follow the [user installation manual](https://github.com/angelonazzaro/OpenMeet/blob/main/deliverables/openMeet_MDI.pdf). 
 
 ## Contributing
 You can contribute to this software by following the guide lines specified here [Contribute](https://github.com/sl1mSha4dey/openMeet_Classe03/blob/main/contributing/CONTRIBUTING.MD).
