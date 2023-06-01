@@ -1,0 +1,92 @@
+<resources>
+    <string name="connection_error">Ошибка подключения. Пожалуйста, проверьте подключение к Интернету или повторите попытку позже.</string>
+
+    <string name="continue_btn">Продолжение</string>
+    <string name="login_btn">Войти</string>
+    <string name="signup_btn">Зарегистрироваться</string>
+
+    <string name="registration_TextView">У вас нет аккаунта? <u>Зарегистрироваться</u></string>
+    <string name="login_TextView">У вас уже есть аккаунт? <u>Войти</u></string>
+
+    <string name="email_null_error">Электронная почта не вставляется!</string>
+    <string name="email_format_error">Неверный формат электронной почты!</string>
+    <string name="email_local_toolong_error">Слишком длинная часть локальной электронной почты!</string>
+    <string name="email_domain_toolong_error">Доменная часть электронной почты слишком длинная!</string>
+
+    <string name="name_null_error">Имя не введено!</string>
+    <string name="surname_null_error">Фамилия не введена!</string>
+    <string name="underage_error">Вы еще слишком молоды, но вы можете уговорить свою маму подписаться.</string>
+    <string name="password_null_error">Пароль не введен!</string>
+    <string name="password_conf_null_error">Вы должны подтвердить пароль!</string>
+    <string name="password_unmatch_error">Пароли должны быть одинаковыми!</string>
+
+    <string name="login_failed">"Доступ невозможен: неверные учетные данные".</string>
+    <string name="login_failed_email">Проверьте правильность электронной почты</string>
+    <string name="login_failed_password">Проверьте правильность пароля.</string>
+
+    <string name="homescreen_chat_title">Сообщения</string>
+    <string name="homescreen_discover_title">Откройте для себя</string>
+    <string name="homescreen_user_title">Пользователь</string>
+    <string name="registration_title">Введите свои личные данные</string>
+    <string name="name_hint">Имя</string>
+    <string name="surname_hint">Фамилия</string>
+    <string name="confirmPass_hint">Подтверждение пароля</string>
+    <string name="birthdate_hint">Дата рождения</string>
+    <string name="biography_hint">Биография</string>
+    <string name="duplicate_mail">Этот адрес электронной почты уже зарегистрирован.</string>
+    <string name="interestFilter_hint">Фильтр интересов</string>
+    <string name="warn_title">Что-то пошло не так…</string>
+    <string name="GPS_disabled_message">Ваш GPS отключен. Вам необходимо включить его, чтобы продолжить.</string>
+    <string name="empty_chat_message">Пока здесь ничего нет…🤕</string>
+    <string name="positive_dialog">Хорошо</string>
+    <string name="retry_dialog">Повторить</string>
+    <string name="registration_sexual_stage_title">Какой пол вас определяет? И кого вы ищете?</string>
+    <string name="registration_interest_stage_title">Есть у вас хобби? (выберите не менее 3 и не более 6)</string>
+    <string name="registration_biography_stage_title">Расскажите о себе.</string>
+    <string name="registration_image_stage_title">Мы хотим узнать, насколько вы красивы, загрузите несколько фотографий!</string>
+    <string name="genderIndentity_hint">Я определяю себя как...</string>
+    <string name="genderOrientation_hint">Я ищу...</string>
+    <string name="generic_null_error">Пустое поле!</string>
+    <string name="checkbox_error">Вы должны выбрать не менее 3 и не более 6 интересов!</string>
+    <string name="image_error">Вы должны установить хотя бы одно профильное изображение, чтобы продолжить.</string>
+    <string name="double_back_prompt">Нажмите еще раз, чтобы выйти.</string>
+    <string name="report_btn_text"><u>Пожаловаться</u></string>
+    <string name="report_dialog_title">По какой причине вы жалуетесь?</string>
+    <string name="report_positive_dialog">Отправить</string>
+    <string name="report_reason_spam">Спам</string>
+    <string name="report_reason_impersonation">Он выдает себя за кого-то другого</string>
+    <string name="report_reason_inappropriate">Содержит неприемлемый материал (например, ненависть, терроризм, самоповреждение...)</string>
+    <string name="report_reason_nudity">Содержит явное обнажение</string>
+    <string name="report_reason_bullying">Осуществляет акты издевательства</string>
+    <string name="report_reason_harrassment">Он меня досаждает</string>
+    <string name="report_reason_selling">Он просит у меня деньги</string>
+    <string name="report_done_title">Жалоба отправлена! 📬</string>
+    <string name="report_done_message">Ваша жалоба будет рассмотрена модератором как можно скорее.\n\nСпасибо за ваше содействие.</string>
+    <string name="recover_password_TextView">Забыли пароль? <u>Восстановите его здесь</u></string>
+    <string name="delete_account">УДАЛИТЬ АККАУНТ</string>
+    <string name="message_hint">Напишите сообщение...</string>
+    <string name="recovery_dialog_title">На указанный адрес будет отправлено письмо с инструкциями по восстановлению</string>
+    <string name="negative_dialog">Нет</string>
+    <string name="recovery_dialog_message">Продолжить?</string>
+    <string name="completed_recovery_dialog_title">Письмо отправлено! 📬</string>
+    <string name="banned_dialog_title">Вы открыли новое оружие! 🔨</string>
+    <string name="banned_dialog_message">Вы нашли молот бана, поздравляю.</string>
+    <string name="banned_dialog_description">Причина:</string>
+    <string name="banned_dialog_expiry">Истекает:</string>
+    <string name="cancel_dialog">Отмена</string>
+    <string name="password_length_error">Пароль должен содержать не менее 8 и не более 16 символов.</string>
+    <string name="password_special_char_error">Пароль должен содержать хотя бы один специальный символ.</string>
+    <string name="password_number_error">Пароль должен содержать хотя бы одну цифру.</string>
+    <string name="password_uppercase_error">Пароль должен содержать хотя бы одну прописную букву.</string>
+    <string name="password_lowercase_error">Пароль должен содержать хотя бы одну строчную букву.</string>
+    <string name="logout_dialog">Вы уверены?</string>
+    <string name="positive_dialog2">Да</string>
+    <string name="remove_interest_dialog">Вы хотите удалить</string>
+    <string name="add_interest">Выберите интерес для добавления</string>
+    <string name="interest_label">Интересы</string>
+    <string name="save_label">Сохранить</string>
+    <string name="filter_label">Фильтры</string>
+    <string name="age_label">Возраст</string>
+    <string name="distance_label">Расстояние (км)</string>
+    <string name="matched_dialog">СОВПАДЕНИЕ!!</string>
+</resources>

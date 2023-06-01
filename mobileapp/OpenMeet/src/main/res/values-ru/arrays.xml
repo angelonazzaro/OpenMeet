@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender_identity_items">
+        <item>Человек</item>
+        <item>Женщины</item>
+        <item>Небинарные</item>
+    </string-array>
+
+    <string-array name="gender_orientation_items">
+        <item>Мужчины</item>
+        <item>Женщины</item>
+        <item>Оба (мужчины и женщины)</item>
+        <item>Небинарные</item>
+        <item>Любой</item>
+    </string-array>
+</resources>

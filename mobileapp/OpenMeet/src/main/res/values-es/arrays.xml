@@ -1,0 +1,15 @@
+<resources>
+    <string-array name="gender_identity_items">
+        <item>Hombre</item>
+        <item>Mujer</item>
+        <item>No binario</item>
+    </string-array>
+
+    <string-array name="gender_orientation_items">
+        <item>Hombres</item>
+        <item>Mujeres</item>
+        <item>Ambos (Hombres y Mujeres)</item>
+        <item>No binarios</item>
+        <item>Cualquiera</item>
+    </string-array>
+</resources>
