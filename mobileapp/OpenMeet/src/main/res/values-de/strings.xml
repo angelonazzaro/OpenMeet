@@ -1,0 +1,96 @@
+<resources>
+    <string name="connection_error">Verbindungsfehler. Überprüfen Sie Ihre Internetverbindung oder versuchen Sie es später erneut.</string>
+
+    <string name="continue_btn">Weiter</string>
+    <string name="login_btn">Anmelden</string>
+    <string name="signup_btn">Registrieren</string>
+
+    <string name="registration_TextView">Sie haben noch kein Konto? <u>Registrieren</u></string>
+    <string name="login_TextView">Sie haben bereits ein Konto? <u>Anmelden</u></string>
+
+    <string name="email_null_error">E-Mail nicht eingegeben!</string>
+    <string name="email_format_error">Ungültiges E-Mail-Format!</string>
+    <string name="email_local_toolong_error">E-Mail-Benutzername ist zu lang!</string>
+    <string name="email_domain_toolong_error">E-Mail-Domain ist zu lang!</string>
+
+    <string name="name_null_error">Name nicht eingegeben!</string>
+    <string name="surname_null_error">Nachname nicht eingegeben!</string>
+    <string name="underage_error">Du bist zu jung, aber deine Mutter kann sich anmelden.</string>
+    <string name="password_null_error">Passwort nicht eingegeben!</string>
+    <string name="password_conf_null_error">Sie müssen das Passwort bestätigen!</string>
+    <string name="password_unmatch_error">Die Passwörter müssen übereinstimmen!</string>
+
+    <string name="login_failed">"Anmeldung fehlgeschlagen: Falsche Anmeldedaten."</string>
+    <string name="login_failed_email">Überprüfen Sie die E-Mail-Adresse.</string>
+    <string name="login_failed_password">Überprüfen Sie das Passwort.</string>
+
+    <string name="homescreen_chat_title">Nachrichten</string>
+    <string name="homescreen_discover_title">Entdecken</string>
+    <string name="homescreen_user_title">Benutzer</string>
+    <string name="registration_title">Geben Sie Ihre persönlichen Daten ein</string>
+    <string name="name_hint">Vorname</string>
+    <string name="surname_hint">Nachname</string>
+    <string name="confirmPass_hint">Passwort bestätigen</string>
+    <string name="birthdate_hint">Geburtsdatum</string>
+    <string name="biography_hint">Biografie</string>
+    <string name="duplicate_mail">Diese E-Mail-Adresse ist bereits registriert.</string>
+    <string name="interestFilter_hint">Interessen filtern</string>
+    <string name="warn_title">Etwas ist schiefgegangen...</string>
+    <string name="GPS_disabled_message">Ihr GPS scheint deaktiviert zu sein. Sie müssen es aktivieren, um fortzufahren.</string>
+    <string name="empty_chat_message">Noch nichts hier...🤕</string>
+    <string name="positive_dialog">In Ordnung</string>
+    <string name="retry_dialog">Erneut versuchen</string>
+    <string name="registration_sexual_stage_title">Wie identifizieren Sie sich geschlechtlich? Und wen suchen Sie?</string>
+    <string name="registration_interest_stage_title">Haben Sie Hobbys? (Wählen Sie mindestens 3 und maximal 6)</string>
+    <string name="registration_biography_stage_title">Sch
+
+        reiben Sie etwas über sich selbst.</string>
+    <string name="registration_image_stage_title">Wir möchten wissen, wie schön Sie sind. Laden Sie einige Fotos hoch!</string>
+
+    <string name="genderIndentity_hint">Ich identifiziere mich als...</string>
+    <string name="genderOrientation_hint">Ich suche...</string>
+    <string name="generic_null_error">Leeres Feld!</string>
+    <string name="checkbox_error">Sie müssen mindestens 3 und maximal 6 Interessen auswählen!</string>
+    <string name="image_error">Sie müssen mindestens ein Profilbild festlegen, um fortzufahren.</string>
+
+    <string name="double_back_prompt">Gehen Sie erneut zurück, um zu beenden.</string>
+    <string name="report_btn_text"><u>Melden</u></string>
+    <string name="report_dialog_title">Was ist der Grund für die Meldung?</string>
+    <string name="report_positive_dialog">Senden</string>
+    <string name="report_reason_spam">Es ist Spam</string>
+    <string name="report_reason_impersonation">Er gibt sich als jemand anderes aus</string>
+    <string name="report_reason_inappropriate">Es enthält unangemessenes Material (z.B. Hass, Terrorismus, Selbstverletzung...)</string>
+    <string name="report_reason_nudity">Es enthält explizite Nacktheit</string>
+    <string name="report_reason_bullying">Er führt Mobbinghandlungen durch</string>
+    <string name="report_reason_harrassment">Er belästigt mich</string>
+    <string name="report_reason_selling">Er fragt nach Geld</string>
+    <string name="report_done_title">Meldung gesendet! 📬</string>
+    <string name="report_done_message">Ihre Meldung wird so schnell wie möglich von einem Moderator überprüft.\n\nVielen Dank für Ihre Mitarbeit.</string>
+    <string name="recover_password_TextView">Passwort vergessen? <u>Hier wiederherstellen</u></string>
+    <string name="delete_account">ACCOUNT LÖSCHEN</string>
+    <string name="message_hint">Eine Nachricht schreiben...</string>
+    <string name="recovery_dialog_title">Eine E-Mail mit Wiederherstellungsinstruktionen wird an folgende Adresse gesendet:</string>
+    <string name="negative_dialog">Nein</string>
+    <string name="recovery_dialog_message">Möchten Sie fortfahren?</string>
+    <string name="completed_recovery_dialog_title">E-Mail gesendet! 📬</string>
+    <string name="banned_dialog_title">Sie haben eine neue Waffe freigeschaltet! 🔨</string>
+    <string name="banned_dialog_message">Sie haben den Bannhammer entdeckt, herzlichen Glückwunsch.</string>
+    <string name="banned_dialog_description">Grund:</string>
+    <string name="banned_dialog_expiry">Läuft ab am:</string>
+    <string name="cancel_dialog">Abbrechen</string>
+    <string name="password_length_error">Das Passwort muss mindestens 8 und maximal 16 Zeichen lang sein.</string>
+    <string name="password_special_char_error">Das Passwort muss mindestens ein Sonderzeichen enthalten.</string>
+    <string name="password_number_error">Das Passwort muss mindestens eine Zahl enthalten.</string>
+    <string name="password_uppercase_error">Das Passwort muss mindestens einen Großbuchstaben enthalten.</string>
+    <string name="password_lowercase_error">Das Passwort muss mindestens einen Kleinbuchstaben enthalten.</string>
+    <string name="logout_dialog">Sind Sie sicher?</string>
+    <string name="positive_dialog2">Ja</string>
+    <string name="remove_interest_dialog">Möchten Sie entfernen</string>
+    <string name="add_interest">Wählen Sie ein Interesse zum Hinzufügen aus</string>
+    <string name="interest_label">Interessen</string>
+    <string name="save_label">Speichern</string>
+    <string name="filter_label">Filter</string>
+    <string name="age_label">Alter</string>
+    <string name="distance_label">Entfernung (km)</string>
+    <string name="matched_dialog">GEMATCHT!!</string>
+</resources>

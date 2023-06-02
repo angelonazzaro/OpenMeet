@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender_identity_items">
+        <item>Homme</item>
+        <item>Femme</item>
+        <item>Non binaire</item>
+    </string-array>
+
+    <string-array name="gender_orientation_items">
+        <item>Hommes</item>
+        <item>Femmes</item>
+        <item>Les deux (Hommes et Femmes)</item>
+        <item>Non binaires</item>
+        <item>Tout le monde</item>
+    </string-array>
+</resources>

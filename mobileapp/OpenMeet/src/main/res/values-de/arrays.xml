@@ -1,0 +1,15 @@
+<resources>
+    <string-array name="gender_identity_items">
+        <item>Mann</item>
+        <item>Frau</item>
+        <item>Nicht-binär</item>
+    </string-array>
+
+    <string-array name="gender_orientation_items">
+        <item>Männer</item>
+        <item>Frauen</item>
+        <item>Beide (Männer und Frauen)</item>
+        <item>Nicht-binär</item>
+        <item>Jeder</item>
+    </string-array>
+</resources>
